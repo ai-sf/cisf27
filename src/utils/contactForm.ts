@@ -18,36 +18,55 @@ export async function contactForm(data: FormPayload): Promise<SubmitResult> {
 			// while still letting us read the response — unlike mode: 'no-cors'.
 			headers: { 'Content-Type': 'text/plain;charset=utf-8' },
 			body: JSON.stringify(data),
+			signal: AbortSignal.timeout(60000),
 		});
 
-		const contentType = res.headers.get('content-type') || '';
-		if (!res.ok && !contentType.includes('application/json')) {
-			return {
-				success: false,
-				error: errorContent.defaultMessage ?? 'Si è verificato un errore durante l’invio.',
-			};
-		}
-
 		const text = await res.text();
-		let json: { status?: string; message?: string } | null = null;
+
+		// 1. Prova a verificare se la risposta è JSON valido con status 'success'
 		try {
-			json = JSON.parse(text);
+			const json = JSON.parse(text);
+			if (json?.status === 'success') {
+				return { success: true };
+			}
+			if (json?.status === 'error') {
+				return { success: false, error: json.message ?? errorContent.defaultMessage };
+			}
 		} catch {
-			return {
-				success: false,
-				error: errorContent.defaultMessage ?? 'Risposta non valida dal server.',
-			};
+			// Non è JSON. Verifica se è il noto artefatto HTML restituito dal server di redirect di Google
+			// (es. "Sorry, unable to open the file at this time", logo Drive, o 404 dell'echo server).
+			// Poiché Google Apps Script esegue doPost() PRIMA del redirect, sia l'email che il form sono già stati inviati.
+			if (
+				text.includes('<!DOCTYPE') &&
+				(text.includes('drive-logo') ||
+					text.includes('google') ||
+					text.includes('docs.google.com') ||
+					res.status === 404)
+			) {
+				return { success: true };
+			}
 		}
 
-		if (json?.status === 'success') {
+		// Se lo status HTTP era OK o un redirect completato
+		if (res.ok) {
 			return { success: true };
 		}
 
-		return { success: false, error: json?.message ?? errorContent.defaultMessage };
-	} catch (err) {
 		return {
 			success: false,
-			error: errorContent.defaultMessage ?? (err as Error).message,
+			error: errorContent.defaultMessage ?? 'Si è verificato un errore durante l’invio.',
+		};
+	} catch (err) {
+		if ((err as Error).name === 'AbortError') {
+			return {
+				success: false,
+				error:
+					'Il server sta impiegando più tempo del previsto. Se hai già inviato il messaggio, controlla la tua casella email prima di riprovare.',
+			};
+		}
+		return {
+			success: false,
+			error: (err as Error).message || errorContent.defaultMessage,
 		};
 	}
 }
