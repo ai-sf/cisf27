@@ -58,8 +58,6 @@ pnpm install
 │   └── Code.js                 # Web App: doPost → Google Form
 │
 ├── public/
-│   ├── download/
-│   │   └── press-kit_cisf27.pdf
 │   ├── favicon.ico
 │   └── robots.txt
 │

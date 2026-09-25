@@ -1189,11 +1189,9 @@ content:
       - name: downloadButton
         type: string
         label: Bottone Download
-      - name: downloadFile
-        type: file
-        label: File Press Kit (PDF)
-        options:
-          media: downloads
+      - name: downloadUrl
+        type: string
+        label: Link Press Kit (Google Drive / URL)
 
   - name: iaps
     label: Sezione IAPS
@@ -1369,10 +1367,4 @@ media:
     input: src/assets/images/committee
     output: ../assets/images/committee
     categories: [image]
-    rename: safe
-  - name: downloads
-    label: Documenti e Download
-    input: public/download
-    output: /download
-    categories: [document]
     rename: safe
