@@ -1,0 +1,33 @@
+{
+  "form": {
+    "heroHeading": "Contattaci",
+    "heroSubtitle": "Sei interessato a sponsorizzare CISF27? Contattaci pure, e saremo lieti di esplorare ogni possibilità con te!",
+    "formHeading": "Inviaci un Messaggio",
+    "nameLabel": "Nome e Cognome *",
+    "namePlaceholder": "Il tuo nome completo",
+    "emailLabel": "Email *",
+    "emailPlaceholder": "la.tua@email.it",
+    "subjectLabel": "Oggetto *",
+    "subjectDefault": "Seleziona un argomento",
+    "subjects": [
+      "Iscrizione",
+      "Sponsorizzazione",
+      "Logistica",
+      "Programma Scientifico",
+      "Altro"
+    ],
+    "messageLabel": "Messaggio *",
+    "messagePlaceholder": "Scrivi il tuo messaggio qui...",
+    "nameValidationHint": "Inserisci un nome valido",
+    "emailValidationHint": "Inserisci un indirizzo email valido",
+    "subjectValidationHint": "Seleziona un argomento",
+    "messageValidationHint": "Il messaggio non può essere vuoto",
+    "successHeading": "Messaggio inviato!",
+    "successMessage": "Ti risponderemo al più presto.",
+    "errorHeading": "Qualcosa è andato storto",
+    "resetButton": "Invia un'altro",
+    "submitButton": "Invia Messaggio",
+    "mapHeading": "Sede CISF27",
+    "mapDept": "Dipartimento di Fisica e Astronomia"
+  }
+}

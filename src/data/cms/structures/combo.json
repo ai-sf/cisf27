@@ -1,0 +1,31 @@
+{
+  "id": "combo",
+  "label": "Combo Bologna",
+  "category": "alloggi",
+  "address": "Via de’ Carracci, 69/14 – 40129 Bologna",
+  "mapUrl": "https://maps.app.goo.gl/pySu5SGHEAxJXuwi7",
+  "mapEmbedUrl": "https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d13603.605889936942!2d11.335373!3d44.511085!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x477fd37d77b4f5df%3A0x9ec86af8b0b45518!2sCombo%2C%20Bologna!5e1!3m2!1sit!2sit!4v1790287966363!5m2!1sit!2sit",
+  "description": "La struttura per il pernottamento dei partecipanti",
+  "distance": "900 m a piedi da FS Centrale (Terminale AV)",
+  "capacity": "150 ospiti",
+  "rooms": "Quadruple (18), Triple (10), e Doppie (24)",
+  "price": "Incluso nella quota partecipativa!",
+  "phone": "+39 0510397900",
+  "whatsapp": "+39 3314015159",
+  "email": "hello.bologna@thisiscombo.com",
+  "features": [
+    "Wi-Fi",
+    "Deposito bagagli",
+    "Cucina comune",
+    "Lavanderia",
+    "Bagni privati",
+    "Palestra",
+    "Reception 24/7",
+    "Colazione buffet",
+    "Set asciugamani",
+    "Aria condizionata",
+    "Giardino",
+    "Bar"
+  ],
+  "image": "../assets/images/structures/combo.jpg"
+}

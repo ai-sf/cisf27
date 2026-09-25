@@ -1,0 +1,6 @@
+---
+import ErrorPageLayout from '../layouts/ErrorPageLayout.astro';
+import { errorContent } from '../data/cms';
+---
+
+<ErrorPageLayout code={404} message={errorContent.error404Message} />

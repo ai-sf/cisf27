@@ -1,0 +1,322 @@
+/* ====== Keyframes ====== */
+
+@keyframes slideDown {
+	from {
+		opacity: 0;
+		transform: translateY(-10px);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+
+@keyframes nav-slide {
+	from {
+		translate: 0 -120%;
+		opacity: 0;
+	}
+	80% {
+		translate: 0 4px;
+	}
+	to {
+		translate: 0 0;
+		opacity: 1;
+	}
+}
+
+@keyframes dock-slide {
+	from {
+		translate: 0 100%;
+	}
+	to {
+		translate: 0 0;
+	}
+}
+
+@keyframes logo-in {
+	from {
+		opacity: 0;
+		scale: 0.9;
+		filter: blur(4px);
+	}
+	to {
+		opacity: 1;
+		scale: 1;
+		filter: blur(0);
+	}
+}
+
+@keyframes char-in {
+	from {
+		opacity: 0;
+		translate: 0 8px;
+		rotate: -5deg;
+	}
+	to {
+		opacity: 1;
+		translate: 0 0;
+		rotate: 0deg;
+	}
+}
+
+@keyframes cursor-pulse {
+	0%,
+	100% {
+		opacity: 1;
+	}
+	50% {
+		opacity: 0.3;
+	}
+}
+
+@keyframes fade-in {
+	from {
+		opacity: 0;
+	}
+	to {
+		opacity: 1;
+	}
+}
+
+@keyframes fade-in-up {
+	from {
+		opacity: 0;
+		transform: translateY(50px) scale(0.95);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0) scale(1);
+	}
+}
+
+@keyframes reveal {
+	from {
+		opacity: 0;
+		translate: 0 50px;
+		scale: 0.95;
+	}
+	to {
+		opacity: 1;
+		translate: 0 0;
+		scale: 1;
+	}
+}
+
+@keyframes stagger-reveal {
+	from {
+		opacity: 0;
+		translate: 0 30px;
+		scale: 0.97;
+	}
+	to {
+		opacity: 1;
+		translate: 0 0;
+		scale: 1;
+	}
+}
+
+@keyframes glow-pulse {
+	0%,
+	100% {
+		box-shadow: 0 0 0 0 color-mix(in srgb, var(--color-primary) 40%, transparent);
+	}
+	50% {
+		box-shadow: 0 0 20px 4px color-mix(in srgb, var(--color-primary) 30%, transparent);
+	}
+}
+
+/* ====== Theme Tokens ====== */
+
+@theme {
+	--animate-fade-in: fade-in 0.8s ease-out forwards;
+	--animate-fade-in-up: fade-in-up 0.8s ease-out forwards;
+	--animate-fade-in-up-d1: fade-in-up 0.8s 0.15s ease-out forwards;
+	--animate-fade-in-up-d2: fade-in-up 0.8s 0.3s ease-out forwards;
+	--animate-fade-in-up-d3: fade-in-up 0.8s 0.45s ease-out forwards;
+	--animate-slide-down: slideDown 0.5s ease-out;
+}
+
+.animate-nav-slide {
+	animation: nav-slide 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+.animate-dock-slide {
+	animation: dock-slide 0.5s ease-out forwards;
+}
+
+.animate-logo-in {
+	animation: logo-in 0.8s ease-out forwards;
+}
+
+/* ====== Scroll Reveal ====== */
+
+.reveal,
+.reveal-fast,
+.reveal-scale {
+	opacity: 0;
+}
+
+.reveal.reveal-visible,
+.reveal-fast.reveal-visible {
+	animation: fade-in-up 0.8s ease-out forwards;
+}
+
+.reveal-scale.reveal-visible {
+	animation: image-reveal 0.9s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Staggered: IntersectionObserver-driven reveal with nth-child delays */
+.reveal-stagger > * {
+	opacity: 0;
+}
+
+.reveal-stagger > *.reveal-visible {
+	animation: stagger-reveal 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.reveal-stagger > *.reveal-visible:nth-child(1) {
+	animation-delay: 0s;
+}
+.reveal-stagger > *.reveal-visible:nth-child(2) {
+	animation-delay: 0.1s;
+}
+.reveal-stagger > *.reveal-visible:nth-child(3) {
+	animation-delay: 0.2s;
+}
+.reveal-stagger > *.reveal-visible:nth-child(4) {
+	animation-delay: 0.3s;
+}
+.reveal-stagger > *.reveal-visible:nth-child(5) {
+	animation-delay: 0.4s;
+}
+.reveal-stagger > *.reveal-visible:nth-child(6) {
+	animation-delay: 0.5s;
+}
+.reveal-stagger > *.reveal-visible:nth-child(7) {
+	animation-delay: 0.6s;
+}
+.reveal-stagger > *.reveal-visible:nth-child(8) {
+	animation-delay: 0.7s;
+}
+.reveal-stagger > *.reveal-visible:nth-child(9) {
+	animation-delay: 0.8s;
+}
+.reveal-stagger > *.reveal-visible:nth-child(10) {
+	animation-delay: 0.9s;
+}
+
+/* ====== Text Effects ====== */
+
+.typewriter-cursor::after {
+	content: '|';
+	animation: cursor-pulse 1.2s ease-in-out infinite;
+}
+
+.typewriter.done .typewriter-cursor::after {
+	display: none;
+}
+
+.char-stagger > span {
+	display: inline-block;
+	white-space: nowrap;
+}
+
+.char-stagger.active > span > span {
+	--delay: 0s;
+	animation: char-in 0.4s ease-out forwards;
+	animation-delay: var(--delay, 0s);
+}
+
+/* ====== Popover Open ====== */
+
+[popover]:popover-open {
+	animation: fade-in 0.2s ease-out;
+}
+
+[popover]::backdrop {
+	animation: fade-in 0.15s ease-out;
+}
+
+/* ====== Scramble Text ====== */
+
+.scramble-char {
+	display: inline-block;
+	transition: color 0.1s ease;
+}
+
+.back-to-top.visible {
+	opacity: 1;
+	translate: 0 0;
+	pointer-events: auto;
+}
+
+@media (max-width: 639px) {
+	.back-to-top {
+		bottom: calc(2rem + 4rem);
+	}
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+	scale: 1.01;
+	transition: scale 0.2s ease;
+}
+
+.glow-hover:hover {
+	animation: glow-pulse 2s ease-in-out infinite;
+}
+
+/* ====== Navbar Logo Glow ====== */
+
+.navbar-start img {
+	transition: filter 0.3s ease;
+}
+
+.navbar-start a:hover img,
+.navbar-start a:focus-visible img {
+	filter: drop-shadow(0 0 8px color-mix(in srgb, var(--color-primary) 40%, transparent));
+}
+
+/* ====== Enhanced Card Interactive ====== */
+
+.card-interactive {
+	transition:
+		transform 0.3s ease,
+		box-shadow 0.3s ease,
+		border-color 0.3s ease;
+}
+
+.card-interactive:hover {
+	transform: translateY(-4px) scale(1.02);
+	box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1);
+	border-color: var(--color-primary);
+}
+
+/* ====== Image Reveal ====== */
+
+@keyframes image-reveal {
+	from {
+		opacity: 0;
+		scale: 0.92;
+		clip-path: inset(0 0 100% 0);
+	}
+	to {
+		opacity: 1;
+		scale: 1;
+		clip-path: none;
+	}
+}
+
+/* ====== Reduced Motion ====== */
+
+@media (prefers-reduced-motion: reduce) {
+	*,
+	*::before,
+	*::after {
+		animation-duration: 0.01ms !important;
+		animation-iteration-count: 1 !important;
+		transition-duration: 0.01ms !important;
+	}
+}

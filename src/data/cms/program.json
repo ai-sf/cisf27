@@ -1,0 +1,157 @@
+{
+  "heroHeading": "Il Programma",
+  "heroSubtitle": "5 giorni di scienza, cultura e socialità a Bologna",
+  "locationBadge": "Location",
+  "locationHeading": "Dove si Svolge la ",
+  "locationGradientWord": "CISF27",
+  "program": [
+    {
+      "id": "lunedi",
+      "day": "Lunedì",
+      "date": "19 Aprile",
+      "sections": [
+        {
+          "time": "09:00 - 15:00",
+          "title": "Accoglienza e Registrazione"
+        },
+        {
+          "time": "15:00 - 16:00",
+          "title": "Cerimonia di Apertura",
+          "description": "CISF27 apre i battenti: presentazione del Comitato Organizzatore, del tema e discorso di un importante professore. Sarà anche la prima occasione per ringraziare i più importanti partner dell'evento."
+        },
+        {
+          "time": "16:00 - 16:30",
+          "title": "Coffee Break"
+        },
+        {
+          "time": "16:30 - 18:30",
+          "title": "Intervento con Ospite"
+        },
+        {
+          "title": "Cena Libera"
+        },
+        {
+          "time": "21:30 - 23:30",
+          "title": "Evento Sociale",
+          "description": "Botta di Coulomb"
+        }
+      ]
+    },
+    {
+      "id": "martedi",
+      "day": "Martedì — Storia",
+      "date": "20 Aprile",
+      "sections": [
+        {
+          "time": "08:00 - 12:00",
+          "title": "Visite ai Laboratori",
+          "description": "I partecipanti si dividono per visitare i laboratori dei principali centri di ricerca della regione: TBA"
+        },
+        {
+          "title": "Viaggio verso San Giovanni in Persiceto"
+        },
+        {
+          "time": "13:00 - 14:00",
+          "title": "Pranzo Libero"
+        },
+        {
+          "time": "15:30 - 17:30",
+          "title": "Sessione Plenaria"
+        },
+        {
+          "time": "18:30 - 20:00",
+          "title": "Pomeriggio Aperto al Pubblico"
+        },
+        {
+          "title": "Serata Libera a Bologna"
+        }
+      ]
+    },
+    {
+      "id": "mercoledi",
+      "day": "Mercoledì — Giorno Associativo",
+      "date": "21 Aprile",
+      "sections": [
+        {
+          "time": "09:00 - 13:00",
+          "title": "Parallel Sessions",
+          "description": "Alcuni partecipanti di CISF27, selezionati dagli organizzatori, presentano i loro lavori di tesi e di ricerca ai loro colleghi: è un'occasione per conoscere gli ultimi orizzonti per giovanə fisicə e farsi un'idea di come sia strutturato il lavoro di tesi triennale o magistrale in fisica, o un lavoro di dottorato."
+        },
+        {
+          "time": "09:00 - 13:00",
+          "title": "Breakfast Workshop"
+        },
+        {
+          "time": "13:00 - 14:00",
+          "title": "Pranzo al Sacco"
+        },
+        {
+          "time": "14:30 - 20:00",
+          "title": "AGA",
+          "description": "Assemblea Generale Annuale, in cui avverrà l'elezione del nuovo Comitato Esecutivo dell'Associazione."
+        },
+        {
+          "title": "Cena Libera"
+        },
+        {
+          "title": "Serata Organizzata"
+        }
+      ]
+    },
+    {
+      "id": "giovedi",
+      "day": "Giovedì — Energia e Innovazione",
+      "date": "22 Aprile",
+      "sections": [
+        {
+          "time": "10:00 - 12:30",
+          "title": "Tavola Rotonda",
+          "description": "Fisicə provenienti da diversi mondi lavorativi si confrontano sulle numerose strade che può intraprendere unə fisicə: Ricerca accademica, Programmazione, Assicurazioni, Divulgazione, Big data, Logistica, Economia..."
+        },
+        {
+          "title": "Momento Foto"
+        },
+        {
+          "time": "13:00 - 14:00",
+          "title": "Pranzo Libero"
+        },
+        {
+          "time": "14:30 - 16:30",
+          "title": "Pomeriggio Aperto al Pubblico",
+          "description": "Intervento ospite premium + sponsor"
+        },
+        {
+          "title": "Cena Libera"
+        },
+        {
+          "title": "Serata Finale"
+        }
+      ]
+    },
+    {
+      "id": "venerdi",
+      "day": "Venerdì — Lavoro",
+      "date": "23 Aprile",
+      "sections": [
+        {
+          "time": "10:00 - 11:30",
+          "title": "Giochi di Società"
+        },
+        {
+          "time": "11:30 - 13:00",
+          "title": "Plenaria (Tema Lavoro)",
+          "description": "Alcuni dei nostri più importanti sponsor avranno la possibilità di un intero spazio dedicato ad un intervento, attraverso cui conoscere e farsi conoscere ad una platea di fisicə."
+        },
+        {
+          "time": "13:00 - 14:00",
+          "title": "Pranzo al Sacco"
+        },
+        {
+          "time": "14:30 - 16:30",
+          "title": "Cerimonia di Chiusura",
+          "description": "Restituzione finale, ripercorrendo i momenti che avranno reso CISF27 indimenticabile. Grande occasione anche per ringraziare tutti coloro che avranno partecipato alla realizzazione dell'evento."
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,22 @@
+---
+import Navbar from '../components/Navbar.astro';
+import Footer from '../components/Footer.astro';
+import BaseLayout from './BaseLayout.astro';
+import type PageProps from '../types/pageProps';
+import { ChevronUp } from '@lucide/astro';
+
+const props = Astro.props as PageProps;
+---
+
+<BaseLayout {...props}>
+	<Navbar />
+	<slot />
+	<Footer />
+	<a
+		href="#"
+		class="back-to-top from-primary to-secondary text-primary-content pointer-events-none fixed right-8 bottom-8 z-50 flex size-12 translate-y-5 items-center justify-center rounded-full bg-linear-to-br text-xl opacity-0 shadow-lg transition-all duration-300 hover:scale-110"
+		aria-label="Torna su"
+	>
+		<ChevronUp class="size-5" />
+	</a>
+</BaseLayout>

@@ -1,0 +1,98 @@
+---
+import '../styles/global.css';
+import '../styles/animations.css';
+import ClientRouter from 'astro/components/ClientRouter.astro';
+import type PageProps from '../types/pageProps';
+import cisfFavicon from '../assets/images/favicon.png';
+import cisfPreviewImage from '../assets/images/preview.png';
+import { conference } from '../data/cms';
+
+const props = Astro.props as PageProps;
+
+const siteLangCode = 'it-IT';
+const siteName = conference.title;
+const title = `${props.title ? props.title + ' - ' : ''}${siteName}`;
+const description = conference.shortDescription;
+const siteLogo = cisfFavicon.src;
+const siteLogoType = 'image/' + cisfFavicon.format;
+const imageUrl = new URL(props.image || cisfPreviewImage.src, Astro.url);
+const imageType = 'image/' + (props.imageType || cisfPreviewImage.format);
+const imageWidth = (props.imageWidth || 1200).toString();
+const imageHeight = (props.imageHeight || 630).toString();
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const sitemapUrl = `${base}/sitemap-index.xml`;
+---
+
+<!doctype html>
+<html lang={siteLangCode} class="bg-base-200 size-full scroll-smooth">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="icon" type={siteLogoType} href={siteLogo} />
+		<link rel="sitemap" href={sitemapUrl} />
+		<meta name="generator" content={Astro.generator} />
+		<ClientRouter fallback="swap" />
+
+		<title>{title}</title>
+		<meta name="description" content={description} />
+
+		<meta property="og:title" content={title} />
+		<meta property="og:site_name" content={siteName} />
+		<meta property="og:url" content={Astro.url} />
+		<meta property="og:description" content={description} />
+		<meta property="og:type" content="object" />
+
+		<meta property="og:image" content={imageUrl} />
+		<meta property="og:image:type" content={imageType} />
+		<meta property="og:image:width" content={imageWidth} />
+		<meta property="og:image:height" content={imageHeight} />
+		<meta property="og:image:alt" content={title} />
+
+		<meta name="twitter:card" content="summary_large_image" />
+		<meta property="twitter:domain" content={Astro.url.hostname} />
+		<meta property="twitter:url" content={Astro.url} />
+		<meta name="twitter:title" content={title} />
+		<meta name="twitter:description" content={description} />
+		<meta name="twitter:image" content={imageUrl} />
+	</head>
+	<body class="bg-base-200 flex size-full flex-col overflow-x-hidden overflow-y-auto">
+		<noscript>
+			<style>
+				.reveal,
+				.reveal-fast,
+				.reveal-scale,
+				.reveal-stagger > * {
+					opacity: 1 !important;
+				}
+				.char-stagger > span {
+					display: inline !important;
+				}
+				.char-stagger > span > span {
+					opacity: 1 !important;
+					display: inline !important;
+					animation: none !important;
+				}
+				.back-to-top {
+					opacity: 1 !important;
+					pointer-events: auto !important;
+				}
+			</style>
+		</noscript>
+		<div
+			class="scroll-progress from-primary to-secondary fixed top-0 left-0 z-[999] h-[3px] w-full origin-left bg-linear-to-r"
+			style="transform:scaleX(0)"
+		>
+		</div>
+		<div class="grow">
+			<slot />
+		</div>
+		<script>
+			import { initAnimations } from '../utils/animations.ts';
+			try {
+				document.addEventListener('astro:page-load', initAnimations);
+			} catch (e) {
+				console.warn('Animations failed to load:', e);
+			}
+		</script>
+	</body>
+</html>

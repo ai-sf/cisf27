@@ -1,0 +1,64 @@
+---
+import { resolveIcon } from '../utils/helpers';
+import SectionBadge from './SectionBadge.astro';
+import GradientSpan from './GradientSpan.astro';
+import { bolognaData } from '../data/cms';
+
+export interface Props {
+	id?: string;
+}
+
+const BolognaIcon = resolveIcon('map-pin');
+
+const { id } = Astro.props;
+
+const eraColors = [
+	'from-warning to-primary',
+	'from-secondary to-primary',
+	'from-primary to-info',
+] as const;
+---
+
+<section {id} class="reveal bg-base-100 py-24">
+	<div class="container mx-auto px-4 lg:px-8">
+		<div class="mb-16 text-center">
+			<SectionBadge icon={BolognaIcon} label={bolognaData.badge} badgeClass="badge-warning" />
+			<h2 class="text-4xl font-bold md:text-5xl">
+				{bolognaData.heading}<GradientSpan gradient="from-warning to-primary" class="char-stagger"
+					>{bolognaData.gradientWord}</GradientSpan
+				>
+			</h2>
+		</div>
+
+		<div class="reveal-stagger mx-auto grid max-w-6xl gap-8 md:grid-cols-3">
+			{
+				(bolognaData.eras ?? []).map((era, i) => {
+					const Icon = resolveIcon(era.icon);
+					return (
+						<div class="relative">
+							{i < (bolognaData.eras ?? []).length - 1 && (
+								<div class="from-primary/20 to-secondary/20 absolute top-16 left-full hidden h-0.5 w-8 bg-linear-to-r md:block" />
+							)}
+							<div class="card card-border border-primary/30 bg-base-200/60 card-interactive relative h-full">
+								<div class="card-body p-6 lg:p-8">
+									<div
+										class={`mb-4 flex h-14 w-14 items-center justify-center rounded-2xl bg-linear-to-br ${eraColors[i]}`}
+									>
+										{Icon && <Icon class="text-primary-content size-7" />}
+									</div>
+									<span class="badge badge-ghost badge-sm mb-3">{era.era}</span>
+									<h3 class="mb-3 text-xl font-bold">{era.title}</h3>
+									<div class="space-y-3">
+										{(era.paragraphs ?? []).map((p) => (
+											<p class="text-base-content/60 text-sm leading-relaxed">{p}</p>
+										))}
+									</div>
+								</div>
+							</div>
+						</div>
+					);
+				})
+			}
+		</div>
+	</div>
+</section>

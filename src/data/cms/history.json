@@ -1,0 +1,89 @@
+[
+  {
+    "year": "2015",
+    "city": "Torino",
+    "edition": "I",
+    "details": "Università di Torino",
+    "link": "https://www.ai-sf.it/cisf/",
+    "current": false
+  },
+  {
+    "year": "2016",
+    "city": "Torino",
+    "edition": "II",
+    "details": "Università di Torino",
+    "link": "https://www.ai-sf.it/cisf2016/",
+    "current": false
+  },
+  {
+    "year": "2017",
+    "city": "Bari",
+    "edition": "III",
+    "details": "Università di Bari",
+    "link": "https://www.ai-sf.it/cisf2017/",
+    "current": false
+  },
+  {
+    "year": "2018",
+    "city": "Pisa",
+    "edition": "IV",
+    "details": "Università di Pisa",
+    "link": "https://ai-sf.it/cisf18/",
+    "current": false
+  },
+  {
+    "year": "2019",
+    "city": "Milano",
+    "edition": "V",
+    "details": "Università di Milano",
+    "link": "https://ai-sf.it/cisf19/",
+    "current": false
+  },
+  {
+    "year": "2020",
+    "city": "Pavia",
+    "edition": "VI",
+    "details": "Università di Pavia",
+    "link": "https://ai-sf.it/cisf20/",
+    "current": false
+  },
+  {
+    "year": "2023",
+    "city": "Palermo",
+    "edition": "VII",
+    "details": "Università di Palermo",
+    "link": "https://ai-sf.it/cisf23/",
+    "current": false
+  },
+  {
+    "year": "2024",
+    "city": "Torino",
+    "edition": "VIII",
+    "details": "Università di Torino",
+    "link": "https://ai-sf.it/cisf24/",
+    "current": false
+  },
+  {
+    "year": "2025",
+    "city": "Milano",
+    "edition": "IX",
+    "details": "Università di Milano-Bicocca",
+    "link": "https://ai-sf.it/cisf25/",
+    "current": false
+  },
+  {
+    "year": "2026",
+    "city": "Roma",
+    "edition": "X",
+    "details": "Università Roma Tre",
+    "link": "https://ai-sf.it/cisf26/",
+    "current": false
+  },
+  {
+    "year": "2027",
+    "city": "Bologna",
+    "edition": "XI",
+    "details": "Alma Mater Studiorum – Università di Bologna",
+    "current": true
+  }
+]

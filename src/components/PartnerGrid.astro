@@ -1,0 +1,58 @@
+---
+import { Image } from 'astro:assets';
+import { partners, partnerCategories } from '../data/partners.ts';
+import type { Partner } from '../data/partners.ts';
+import GradientSpan from './GradientSpan.astro';
+import { gradientMap } from '../utils/helpers.ts';
+
+export interface Props {
+	categories?: Partner['category'][];
+}
+
+const { categories: filterCategories } = Astro.props;
+
+const displayCategories = partnerCategories.filter(
+	(cat) => !filterCategories || filterCategories.includes(cat.id)
+);
+
+const hasPartners = displayCategories.filter((cat) => partners.some((p) => p.category === cat.id));
+---
+
+{
+	hasPartners.map((cat) => {
+		const catPartners = partners.filter((p) => p.category === cat.id);
+		const CatIcon = cat.icon;
+		return (
+			<section class="reveal bg-base-200/50 py-24">
+				<div class="container mx-auto px-4 lg:px-8">
+					<div class="mb-12 text-center">
+						<h2 class="flex items-center justify-center gap-3 text-3xl font-bold">
+							{CatIcon && <CatIcon class="size-6" />}
+							<GradientSpan gradient={gradientMap.get(cat.color)} class="char-stagger">
+								{cat.title}
+							</GradientSpan>
+						</h2>
+					</div>
+
+					<div class="mx-auto flex max-w-4xl flex-row flex-wrap items-center justify-center gap-6">
+						{catPartners.map((partner) => (
+							<a
+								href={partner.link}
+								target="_blank"
+								rel="noopener noreferrer"
+								class="card card-border border-primary/30 bg-base-100/60 group card-interactive flex-col items-center justify-center gap-8 p-6"
+							>
+								<Image
+									class="h-fit w-sm max-w-full"
+									src={partner.logo}
+									alt={`${partner.shortName} Logo`}
+								/>
+								<span class="text-base-content/40 text-center text-sm italic">{partner.name}</span>
+							</a>
+						))}
+					</div>
+				</div>
+			</section>
+		);
+	})
+}

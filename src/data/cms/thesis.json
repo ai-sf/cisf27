@@ -1,0 +1,47 @@
+{
+  "heroHeading": "Tesi & Poster",
+  "heroSubtitle": "I lavori di ricerca presentati durante la CISF27",
+  "sectionBadge": "Thesis Presentations",
+  "sectionHeading": "Presentazioni delle Tesi",
+  "presentationDesc": "La call per la sottomissione di contributi NON è ancora aperta. I contenuti definitivi delle tesi e dei poster saranno annunciati dopo la chiusura delle iscrizioni...",
+  "posterBadge": "Sponsor Session",
+  "posterHeading": "Poster & Stand-Up Sponsor",
+  "posterDesc": "I vari sponsor avranno l'opportunità di presentarsi ai partecipanti durante i breakfast workshop e con stand e poster dedicati. Maggiori dettagli su programma, orari e aziende partecipanti saranno comunicati a breve (TBA).",
+  "posterStepsHeading": "Opportunità per Sponsor",
+  "thesisTopics": [
+    {
+      "title": "Titolo Tesi - Da Definire",
+      "author": "Relatore - Da Definire",
+      "affiliation": "Affiliazione - Da Definire",
+      "abstract": "Abstract in fase di definizione. I dettagli definitivi delle tesi presentate saranno comunicati prossimamente.",
+      "tags": [
+        "Da Definire"
+      ]
+    }
+  ],
+  "posterInfo": [
+    {
+      "text": "Presentazioni durante i breakfast workshop"
+    },
+    {
+      "text": "Stand e sessioni interattive con gli studenti"
+    },
+    {
+      "text": "Dettagli e scaletta: TBA (To Be Announced)"
+    }
+  ],
+  "posterSteps": [
+    {
+      "step": 1,
+      "text": "Presentazione dell'azienda al pubblico"
+    },
+    {
+      "step": 2,
+      "text": "Incontro diretto con oltre 170 studenti di fisica"
+    },
+    {
+      "step": 3,
+      "text": "Workshop e networking dedicato"
+    }
+  ]
+}

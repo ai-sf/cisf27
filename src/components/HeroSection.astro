@@ -1,0 +1,55 @@
+---
+import { Icon as LucideIcon } from '@lucide/astro';
+
+export interface Props {
+	icon?: typeof LucideIcon;
+	label?: string;
+	badgeClass?: string;
+	heading?: string;
+	headingClass?: string;
+	bgClass?: string;
+	subtitle?: string;
+	id?: string;
+}
+
+const {
+	icon: Icon,
+	label,
+	badgeClass = 'badge-primary badge-soft',
+	heading,
+	headingClass = 'from-primary to-secondary',
+	bgClass = '',
+	subtitle,
+	id,
+} = Astro.props;
+---
+
+<section
+	{id}
+	class:list={[
+		'hero bg-base-100 relative overflow-hidden py-32',
+		bgClass,
+		'bg-linear-to-br via-transparent',
+	]}
+>
+	<div class="hero-content relative z-10 text-center">
+		<div class="max-w-full">
+			{
+				Icon && (
+					<div class:list={['badge', badgeClass, 'badge-soft mb-8 gap-2 py-3 pe-5 text-sm']}>
+						<Icon class="size-4" />
+						{label}
+					</div>
+				)
+			}
+			<h1 class="mb-6 text-5xl font-bold md:text-7xl">
+				<span class:list={[headingClass, 'bg-linear-to-r bg-clip-text text-transparent']}>
+					{heading}
+				</span>
+			</h1>
+			<p class="text-base-content/60 mx-auto max-w-2xl text-lg">
+				{subtitle}
+			</p>
+		</div>
+	</div>
+</section>

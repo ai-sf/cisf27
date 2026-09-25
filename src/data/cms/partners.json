@@ -1,0 +1,76 @@
+{
+  "organizzatore": {
+    "aisf": {
+      "name": "Associazione Italiana Studenti di Fisica",
+      "shortName": "AISF",
+      "description": "Associazione Italiana Studenti di Fisica è un'associazione no-profit con finalità culturali nata nel 2014 con l'obiettivo di creare un network nazionale tra studenti di Fisica e promuovere la scienza e, in particolare, la Fisica. I suoi 1400 membri sono divisi in 16 comitati locali di altrettante università italiane.",
+      "category": "organizzatore",
+      "image": "../assets/images/partners/aisf.png",
+      "link": "https://ai-sf.it"
+    },
+    "aisfBolo": {
+      "name": "Associazione Italiana Studenti di Fisica - Bologna",
+      "shortName": "AISF Bologna",
+      "category": "organizzatore",
+      "image": "../assets/images/partners/aisf-bolo.png",
+      "link": "https://ai-sf.it/bo"
+    }
+  },
+  "partners": [
+    {
+      "name": "Dipartimento di Fisica ed Astronomia \"Augusto Righi\" - Università di Bologna",
+      "shortName": "DIFA",
+      "category": "patrocinio",
+      "image": "../assets/images/partners/unibo.png",
+      "link": "https://fisica-astronomia.unibo.it/it/index.html"
+    },
+    {
+      "name": "Città metropolitana di Bologna",
+      "category": "patrocinio",
+      "image": "../assets/images/partners/cittametrobo.png",
+      "link": "https://www.cittametropolitana.bo.it/portale/"
+    },
+    {
+      "name": "Camera di Commercio di Bologna",
+      "category": "patrocinio",
+      "image": "../assets/images/partners/camcom.jpg",
+      "link": "https://www.bo.camcom.gov.it"
+    },
+    {
+      "name": "Regione Emilia-Romagna",
+      "category": "patrocinio",
+      "image": "../assets/images/partners/press-kit-cisf27-aziende.png",
+      "link": "https://www.regione.emilia-romagna.it"
+    },
+    {
+      "name": "PlasticFreER - Regione Emilia-Romagna",
+      "category": "patrocinio",
+      "image": "../assets/images/partners/plasticfreeemiliaromagna.png",
+      "link": "https://ambiente.regione.emilia-romagna.it/it/rifiuti/rifiuti/economia-circolare/strategia-plasticfreer-1"
+    },
+    {
+      "name": "CNR - Area territoriale di Ricerca di Bologna",
+      "category": "patrocinio",
+      "image": "../assets/images/partners/logocnrboaffiancato.png",
+      "link": "https://www.bo.cnr.it"
+    },
+    {
+      "name": "INFN - Istituto Nazionale di Fisica Nucleare",
+      "category": "patrocinio",
+      "image": "../assets/images/partners/2logoinfnconnomeesteso.png",
+      "link": "https://www.infn.it"
+    },
+    {
+      "name": "Museo del Cielo e della Terra",
+      "category": "patrocinio",
+      "image": "../assets/images/partners/museocieloterra.png",
+      "link": "https://museocieloeterra.org"
+    },
+    {
+      "name": "AgenTer",
+      "category": "patrocinio",
+      "image": "../assets/images/partners/logo-agenter-nuovovettoriale.svg",
+      "link": "https://www.agenter.it"
+    }
+  ]
+}

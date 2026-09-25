@@ -1,0 +1,89 @@
+---
+import { Mail, Phone, MessageSquare, User } from '@lucide/astro';
+import PageLayout from '../layouts/PageLayout.astro';
+import HeroSection from '../components/HeroSection.astro';
+import ContactForm from '../components/ContactForm.svelte';
+import { contactPeople } from '../data/people.ts';
+import { contacts, structuresData } from '../data/cms';
+import { contactLink } from '../data/pageLinks.ts';
+---
+
+<PageLayout title={contactLink.name}>
+	<HeroSection
+		icon={MessageSquare}
+		label={contactLink.name}
+		badgeClass="badge-info"
+		heading={contacts.form?.heroHeading}
+		headingClass="from-info to-primary"
+		bgClass="from-info/5 to-primary/5"
+		subtitle={contacts.form?.heroSubtitle}
+	/>
+
+	<!-- Contact Section -->
+	<section class="reveal bg-base-200/50 py-24">
+		<div class="container mx-auto px-4 lg:px-8">
+			<div class="mx-auto grid max-w-6xl gap-12 lg:grid-cols-2">
+				<!-- Contact Form -->
+				<div>
+					<ContactForm client:load />
+				</div>
+
+				<!-- Contact Info -->
+				<div class="reveal-stagger space-y-6">
+					<!-- Contact People -->
+					{
+						contactPeople.map((person) => (
+							<div class="card card-border border-primary/30 bg-base-100/60 card-interactive p-8">
+								<div class="flex items-start gap-5">
+									<div class="from-primary/20 to-secondary/20 flex h-16 w-16 shrink-0 items-center justify-center rounded-2xl bg-linear-to-br">
+										<User class="text-primary size-7" />
+									</div>
+									<div class="min-w-0">
+										<p class="text-lg font-bold">{person.name}</p>
+										<p class="text-secondary text-sm font-medium">{person.role}</p>
+										<p class="text-base-content/60 mt-2 text-sm">{person.roleDescription}</p>
+										<div class="mt-3 flex flex-wrap items-center gap-4">
+											<a
+												href={`mailto:${person.email}`}
+												class="link link-primary flex items-center gap-1.5 text-sm font-medium"
+											>
+												<Mail class="size-4 shrink-0" />
+												{person.email}
+											</a>
+											{person.phone && (
+												<a
+													href={`tel:${person.phone.replace(/\s/g, '')}`}
+													class="link link-hover flex items-center gap-1.5 text-sm"
+												>
+													<Phone class="size-4 shrink-0" />
+													{person.phone}
+												</a>
+											)}
+										</div>
+									</div>
+								</div>
+							</div>
+						))
+					}
+
+					<!-- Map -->
+					<div
+						class="card card-border border-primary/30 from-primary/10 to-secondary/10 bg-linear-to-br p-6"
+					>
+						<h3 class="mb-3 font-bold">{contacts.form?.mapHeading}</h3>
+						<div class="overflow-hidden rounded-xl">
+							<iframe
+								src={structuresData.venue?.embedSrc}
+								class="w-full"
+								style="aspect-ratio: 16/9; border: 0"
+								allowfullscreen=""
+								loading="lazy"
+								referrerpolicy="no-referrer-when-downgrade"
+								title={contacts.form?.mapDept}></iframe>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+</PageLayout>

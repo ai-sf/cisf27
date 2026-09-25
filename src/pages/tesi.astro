@@ -1,0 +1,123 @@
+---
+import { BookOpen, GraduationCap, MicVocal, Image, ArrowRight, FileText } from '@lucide/astro';
+import PageLayout from '../layouts/PageLayout.astro';
+import HeroSection from '../components/HeroSection.astro';
+import SectionBadge from '../components/SectionBadge.astro';
+import { thesisContent } from '../data/cms';
+import { tesiLink } from '../data/pageLinks.ts';
+---
+
+<PageLayout title={tesiLink.name}>
+	<HeroSection
+		icon={BookOpen}
+		label={tesiLink.name}
+		badgeClass="badge-primary"
+		heading={thesisContent.heroHeading}
+		headingClass="from-primary to-info"
+		bgClass="from-primary/5 to-info/5"
+		subtitle={thesisContent.heroSubtitle}
+	/>
+
+	<!-- Poster & Stand-Up Sponsor Section -->
+	<section class="reveal bg-base-200/50 py-24">
+		<div class="container mx-auto px-4 lg:px-8">
+			<div class="mx-auto max-w-4xl">
+				<div
+					class="card card-border border-primary/30 from-info/10 to-primary/10 bg-linear-to-br p-8 lg:p-12"
+				>
+					<div class="mb-6 flex items-center gap-3">
+						<Image class="text-info size-6" />
+						<h2 class="card-title text-2xl">{thesisContent.posterHeading}</h2>
+					</div>
+
+					<div class="grid gap-8 md:grid-cols-2">
+						<div>
+							<p class="text-base-content/70 mb-4 leading-relaxed">
+								{thesisContent.posterDesc}
+							</p>
+							<ul class="flex flex-col gap-3">
+								{
+									(thesisContent.posterInfo ?? []).map(({ text }) => (
+										<li class="text-base-content/60 flex items-center gap-2 text-sm">
+											<ArrowRight class="text-primary size-4" />
+											{text}
+										</li>
+									))
+								}
+							</ul>
+						</div>
+						<div class="card card-border border-primary/30 bg-base-100/60 p-6">
+							<h3 class="mb-3 font-bold">{thesisContent.posterStepsHeading}</h3>
+							<ol class="text-base-content/60 flex flex-col gap-2 text-sm">
+								{
+									(thesisContent.posterSteps ?? []).map(({ step, text }) => (
+										<li class="flex items-start gap-2">
+											<span class="text-primary font-bold">{step}.</span>
+											<span>{text}</span>
+										</li>
+									))
+								}
+							</ol>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- Thesis Section -->
+	<section class="bg-base-100 py-24">
+		<div class="container mx-auto px-4 lg:px-8">
+			<div class="mb-16 text-center">
+				<SectionBadge
+					icon={GraduationCap}
+					label={thesisContent.sectionBadge}
+					badgeClass="badge-secondary"
+				/>
+				<h2 class="mb-4 text-3xl font-bold">{thesisContent.sectionHeading}</h2>
+				<p class="text-base-content/60 mx-auto max-w-xl">
+					{thesisContent.presentationDesc}
+				</p>
+			</div>
+
+			<div class="reveal-stagger mx-auto max-w-4xl space-y-6">
+				{
+					(thesisContent.thesisTopics ?? []).map((thesis, index) => (
+						<div class="card card-border border-primary/30 bg-base-100/60 card-interactive">
+							<div class="card-body p-6 lg:p-8">
+								<div class="flex items-start gap-4">
+									<div class="from-primary/20 to-secondary/20 flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-linear-to-br">
+										<span class="from-primary to-secondary bg-linear-to-r bg-clip-text text-lg font-bold text-transparent">
+											{index + 1}
+										</span>
+									</div>
+
+									<div class="min-w-0 flex-1">
+										<h3 class="text-base-content/90 mb-2 text-lg font-bold">{thesis.title}</h3>
+										<div class="mb-3 flex flex-wrap items-center gap-3">
+											<span class="text-primary text-sm font-medium">
+												<MicVocal class="mr-1 inline size-3" />
+												{thesis.author}
+											</span>
+											<span class="text-secondary text-sm">{thesis.affiliation}</span>
+										</div>
+										<p class="text-base-content/60 mb-4 text-sm">{thesis.abstract}</p>
+
+										<div class="flex flex-wrap gap-2">
+											{(thesis.tags ?? []).map((tag) => (
+												<span class="badge badge-ghost badge-sm gap-1">
+													<FileText class="text-primary size-3" />
+													{tag}
+												</span>
+											))}
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					))
+				}
+			</div>
+		</div>
+	</section>
+</PageLayout>

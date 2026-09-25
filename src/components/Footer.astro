@@ -1,0 +1,72 @@
+---
+import { Image } from 'astro:assets';
+import { contactPeople } from '../data/people.ts';
+import { conference, footer } from '../data/cms';
+import { pageLinks } from '../data/pageLinks.ts';
+import { partners } from '../data/partners.ts';
+import cisfLogo from '../assets/images/logo.png';
+---
+
+<footer
+	class="bg-base-200 text-base-content border-base-300/50 flex flex-col gap-8 border-t px-10 py-10"
+>
+	<div class="footer sm:footer-horizontal">
+		<aside>
+			<Image src={cisfLogo} alt={conference.title + ' Logo'} class="h-12 w-auto" />
+			<p class="text-base-content/60 max-w-xs text-sm leading-relaxed">
+				{conference.shortDescription}
+			</p>
+			<p class="text-base-content/40 mt-1 text-xs">
+				{conference.fullDates} - {conference.location}
+			</p>
+		</aside>
+
+		<nav>
+			<h6 class="footer-title">{footer.links}</h6>
+			{
+				pageLinks.map((link) => {
+					const Icon = link.icon;
+					return (
+						<a href={link.href} class="link link-hover inline-flex items-center gap-2">
+							{Icon && <Icon class="size-3.5 shrink-0" />}
+							{link.name}
+						</a>
+					);
+				})
+			}
+		</nav>
+
+		<nav>
+			<h6 class="footer-title">{footer.contacts}</h6>
+			{
+				contactPeople.map((person) => (
+					<div>
+						<span class="text-base-content/80 text-sm font-semibold">{person.role}</span>
+						<a href={`mailto:${person.email}`} class="link link-hover block text-sm">
+							{person.email}
+						</a>
+					</div>
+				))
+			}
+			<div class="mt-2">
+				<span class="text-base-content/80 text-sm font-semibold">{footer.location}</span>
+				<p class="text-base-content/60 text-sm">{conference.location}</p>
+			</div>
+		</nav>
+
+		<nav>
+			<h6 class="footer-title">{footer.partners}</h6>
+			{
+				partners.map((partner) => (
+					<a href={partner.link} target="_blank" rel="noopener noreferrer" class="link link-hover">
+						{partner.name}
+					</a>
+				))
+			}
+		</nav>
+	</div>
+
+	<div class="footer footer-center">
+		<p>&copy; {new Date().getFullYear()} {conference.title}{footer.rights}</p>
+	</div>
+</footer>

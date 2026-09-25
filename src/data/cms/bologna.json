@@ -1,0 +1,31 @@
+{
+  "badge": "Bologna",
+  "heading": "Il Passato, il Presente, ",
+  "gradientWord": "il Futuro",
+  "eras": [
+    {
+      "era": "Passato",
+      "title": "Il Passato",
+      "icon": "history",
+      "paragraphs": [
+        "La fisica bolognese ha nel suo novero figure del calibro di Laura Bassi, Guglielmo Marconi, Luigi Galvani. Inoltre, proprio nella nostra città sono stati svolti alcuni degli esperimenti più importanti della storia: G. Marconi, nel 1895, riuscì a trasmettere un segnale radio oltre un ostacolo naturale (la collina dei Celestini); nel 1974, Pier Giorgio Merli, Gian Franco Missiroli e Giulio Pozzi realizzarono per la prima volta l'esperimento di interferenza di un singolo elettrone alla volta. Intendiamo dunque diffondere la loro storia, e quella di numerosə altrə fisicə, per ispirare e animare lo spirito scientifico."
+      ]
+    },
+    {
+      "era": "Presente",
+      "title": "Il Presente",
+      "icon": "zap",
+      "paragraphs": [
+        "Bologna è uno dei punti di maggior interesse per la fisica italiana e internazionale: enti di ricerca di primaria importanza, un dipartimento universitario ai vertici delle classifiche e centri di calcolo all'avanguardia formano figure qualificate e offrono opportunità lavorative e di ricerca uniche, cruciali per intraprendere innumerevoli carriere. Il nostro obiettivo è quello di evidenziare le possibilità che il territorio offre, sia dal punto di vista degli studenti che da quello dei nostri partner."
+      ]
+    },
+    {
+      "era": "Futuro",
+      "title": "Il Futuro",
+      "icon": "lightbulb",
+      "paragraphs": [
+        "Il Comitato Organizzatore intende creare le condizioni ottimali affinché la partecipazione di studenti ambiziosi e partner volitivi possa essere il motore di una nuova generazione di figure chiave per il nostro territorio, il nostro ambito scientifico e la nostra società nel suo complesso. Vediamo CISF come il punto di partenza per le traiettorie interconnesse di tutti coloro che saranno coinvolti."
+      ]
+    }
+  ]
+}

@@ -1,0 +1,313 @@
+---
+import { conference, history, about, iaps } from '../data/cms';
+import { committeePeople } from '../data/people.ts';
+import { aisfStats, iapsStats } from '../data/stats.ts';
+import { ExternalLink, Globe, Users, Mail, History, Heart, Star, MapPin } from '@lucide/astro';
+import { resolveIcon } from '../utils/helpers';
+import PageLayout from '../layouts/PageLayout.astro';
+import { contactLink } from '../data/pageLinks.ts';
+import { aisfPartner } from '../data/partners.ts';
+import HeroSection from '../components/HeroSection.astro';
+import SectionBadge from '../components/SectionBadge.astro';
+import GradientSpan from '../components/GradientSpan.astro';
+import InfoSection from '../components/InfoSection.astro';
+import CTASection from '../components/CTASection.astro';
+import ThemeSection from '../components/ThemeSection.astro';
+import { aboutLink, programLink } from '../data/pageLinks.ts';
+import BolognaSection from '../components/BolognaSection.astro';
+import { Image } from 'astro:assets';
+
+const cisfCardEntries = [
+	{
+		Icon: resolveIcon(about.cisfFeatures?.seminari?.icon),
+		title: about.cisfFeatures?.seminari?.title,
+		description: about.cisfFeatures?.seminari?.description,
+	},
+	{
+		Icon: resolveIcon(about.cisfFeatures?.laboratori?.icon),
+		title: about.cisfFeatures?.laboratori?.title,
+		description: about.cisfFeatures?.laboratori?.description,
+	},
+	{
+		Icon: resolveIcon(about.cisfFeatures?.sociali?.icon),
+		title: about.cisfFeatures?.sociali?.title,
+		description: about.cisfFeatures?.sociali?.description,
+	},
+	{
+		Icon: resolveIcon(about.cisfFeatures?.aga?.icon),
+		title: about.cisfFeatures?.aga?.title,
+		description: about.cisfFeatures?.aga?.description,
+	},
+];
+---
+
+<PageLayout title={aboutLink.name}>
+	<HeroSection
+		icon={Users}
+		label={aboutLink.name}
+		badgeClass="badge-primary"
+		heading={aboutLink.name}
+		headingClass="from-primary to-secondary"
+		bgClass="from-primary/5 to-secondary/5"
+		subtitle={about.heroSubtitle}
+	/>
+
+	<!-- AISF + IAPS Sections -->
+	<InfoSection
+		badgeIcon={Heart}
+		badgeLabel={about.aisfBadge}
+		heading={about.aisfHeading}
+		gradientWord={about.aisfGradientWord}
+		paragraphs={[aisfPartner.description ?? '', about.aisfRole ?? '']}
+		stats={aisfStats}
+	/>
+
+	<InfoSection
+		badgeIcon={Globe}
+		badgeLabel={iaps.badge}
+		heading={iaps.heading}
+		gradientWord={iaps.gradientWord}
+		paragraphs={[iaps.description ?? '', iaps.details ?? '']}
+		stats={iapsStats}
+	/>
+
+	<!-- CISF Section -->
+	<section class="reveal bg-base-100 py-24">
+		<div class="container mx-auto px-4 lg:px-8">
+			<div class="grid items-center gap-16 lg:grid-cols-2">
+				<div class="order-2 lg:order-1">
+					<div
+						class="from-secondary/10 to-primary/10 border-base-300/50 rounded-3xl border bg-linear-to-br p-8"
+					>
+						<div class="reveal-stagger space-y-4">
+							{
+								cisfCardEntries.map(({ Icon, title, description }) => (
+									<div class="card card-border border-primary/30 bg-base-100/60 card-interactive flex-row items-center gap-4 p-4">
+										{Icon && <Icon class="text-primary size-6" />}
+										<div>
+											<div class="text-sm font-bold">{title}</div>
+											<div class="text-base-content/50 text-xs">{description}</div>
+										</div>
+									</div>
+								))
+							}
+						</div>
+					</div>
+				</div>
+				<div class="order-1 lg:order-2">
+					<SectionBadge icon={Star} label={about.cisfBadge} badgeClass="badge-secondary" />
+					<h2 class="mb-6 text-4xl leading-tight font-bold">
+						{about.cisfHeading}<GradientSpan
+							gradient="from-secondary to-primary"
+							class="char-stagger">{about.cisfGradientWord}</GradientSpan
+						>
+					</h2>
+					<p class="text-base-content/70 mb-6 text-lg leading-relaxed">
+						{conference.description}
+					</p>
+					<p class="text-base-content/60 leading-relaxed">
+						{about.cisfEditions}
+					</p>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<ThemeSection />
+
+	<BolognaSection />
+
+	<!-- History Timeline -->
+	<section class="reveal bg-base-200/50 py-24">
+		<div class="container mx-auto px-4 lg:px-8">
+			<div class="mb-16 text-center">
+				<SectionBadge icon={History} label={about.historyBadge} badgeClass="badge-warning" />
+				<h2 class="text-4xl font-bold md:text-5xl">
+					{about.historyHeading}<GradientSpan
+						gradient="from-warning to-primary"
+						class="char-stagger">{about.historyGradientWord}</GradientSpan
+					>
+				</h2>
+			</div>
+
+			<div class="-ml-32 max-w-3xl md:mx-auto">
+				<ul class="timeline timeline-vertical timeline-snap-icon">
+					{
+						history.map((item, index) => (
+							<Fragment>
+								<li>
+									{index > 0 && <hr class={item.current ? 'bg-primary' : 'bg-base-300'} />}
+									<div class="timeline-start">
+										<div
+											class={[
+												'flex h-16 w-16 items-center justify-center rounded-full border-4',
+												item.current
+													? 'from-primary to-secondary border-primary/30 shadow-primary/20 bg-linear-to-br shadow-xl'
+													: 'bg-base-100 border-base-300',
+											].join(' ')}
+										>
+											<span
+												class={[
+													'text-lg font-bold',
+													item.current ? 'text-primary-content' : 'text-base-content/60',
+												].join(' ')}
+											>
+												{item.year}
+											</span>
+										</div>
+									</div>
+									<div class="timeline-middle">
+										<div
+											class={[
+												'h-4 w-4 rounded-full',
+												item.current ? 'bg-primary' : 'bg-base-300',
+											].join(' ')}
+										/>
+									</div>
+									<div
+										class={[
+											'timeline-end timeline-box bg-base-100/60 p-6 transition-all',
+											item.current
+												? 'border-primary/30 shadow-primary/5 shadow-lg'
+												: 'hover:border-primary/20',
+										].join(' ')}
+									>
+										{item.link ? (
+											<a href={item.link} target="_blank" rel="noopener noreferrer" class="block">
+												<div class="mb-2 flex items-center gap-2">
+													<span class="text-lg font-bold">{item.city}</span>
+													<ExternalLink class="text-base-content/40 size-4" />
+												</div>
+												<p class="text-base-content/60 text-sm">{item.details}</p>
+											</a>
+										) : item.current ? (
+											<a href={programLink.href} class="block">
+												<div class="mb-2 flex items-center gap-2">
+													<span class="text-lg font-bold">{item.city}</span>
+													<span class="badge badge-primary badge-sm gap-1">
+														<MapPin class="size-3" />
+														{about.currentBadge}
+													</span>
+												</div>
+												<p class="text-base-content/60 text-sm">{item.details}</p>
+											</a>
+										) : (
+											<>
+												<div class="mb-2 flex items-center gap-2">
+													<span class="text-lg font-bold">{item.city}</span>
+												</div>
+												<p class="text-base-content/60 text-sm">{item.details}</p>
+											</>
+										)}
+									</div>
+									{index < history.length - 1 && (
+										<hr class={item.current ? 'bg-primary' : 'bg-base-300'} />
+									)}
+								</li>
+								{item.year === '2020' && (
+									<li class="opacity-80">
+										<hr class="bg-base-300" />
+										<div class="timeline-start">
+											<div class="border-base-300 bg-base-100 flex h-16 w-16 items-center justify-center rounded-full border-4 border-dashed shadow-xs">
+												<span class="text-base-content/40 text-xl font-bold">≈</span>
+											</div>
+										</div>
+										<div class="timeline-middle">
+											<div class="border-base-300 bg-base-100 h-4 w-4 rounded-full border-2 border-dashed" />
+										</div>
+										<div class="timeline-end timeline-box border-base-300/80 bg-base-100/50 border-dashed p-4 shadow-xs">
+											<div class="text-base-content/60 flex items-center gap-2">
+												<span class="font-mono text-xs font-semibold">
+													{about.historyPauseYears || '2021 – 2022'}
+												</span>
+												<span class="text-base-content/30">•</span>
+												<span class="text-xs italic">
+													{about.historyPauseLabel || 'Pausa edizioni'}
+												</span>
+											</div>
+										</div>
+										<hr class="bg-base-300" />
+									</li>
+								)}
+							</Fragment>
+						))
+					}
+				</ul>
+			</div>
+		</div>
+	</section>
+
+	<!-- Committee -->
+	<section class="reveal bg-base-100 py-24">
+		<div class="container mx-auto px-4 lg:px-8">
+			<div class="mb-16 text-center">
+				<SectionBadge icon={Users} label={about.committeeBadge} />
+				<h2 class="mb-4 text-4xl font-bold md:text-5xl">
+					{about.committeeHeading}<GradientSpan
+						gradient="from-primary to-secondary"
+						class="char-stagger">{about.committeeGradientWord}</GradientSpan
+					>
+				</h2>
+				<p class="text-base-content/60 mx-auto max-w-xl text-lg">
+					{about.committeeSubtitle}
+				</p>
+			</div>
+
+			<div
+				class="reveal-stagger mx-auto grid max-w-5xl grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4"
+			>
+				{
+					committeePeople.map((member) => (
+						<div class="card card-border border-primary/30 bg-base-200/60 card-interactive">
+							<div class="card-body items-center p-6 text-center">
+								<div class="from-primary/20 to-secondary/20 mb-3 flex h-20 w-20 items-center justify-center overflow-hidden rounded-full bg-linear-to-br">
+									{member.image ? (
+										<Image
+											src={member.image}
+											alt={`${member.name} foto`}
+											class="size-full object-cover"
+										/>
+									) : (
+										<span class="from-primary to-secondary bg-linear-to-r bg-clip-text text-2xl font-bold text-transparent">
+											{member.name
+												.split(' ')
+												.map((n) => n[0])
+												.join('')}
+										</span>
+									)}
+								</div>
+								<h3 class="text-base-content/90 font-bold">{member.name}</h3>
+								<p class="text-secondary text-sm">{member.role}</p>
+							</div>
+						</div>
+					))
+				}
+			</div>
+		</div>
+	</section>
+
+	<!-- Contact CTA -->
+	<CTASection bgClass="from-primary/10 via-base-100 to-secondary/10">
+		<Fragment slot="heading">
+			<h2 class="mb-6 text-4xl font-bold md:text-5xl">
+				{about.ctaHeading}<GradientSpan gradient="from-primary to-secondary" class="char-stagger"
+					>{about.ctaGradientWord}</GradientSpan
+				>
+			</h2>
+		</Fragment>
+		<Fragment slot="subtitle">
+			<p class="text-base-content/60 mx-auto mb-10 max-w-xl text-lg">
+				{about.ctaText}
+			</p>
+		</Fragment>
+		<Fragment slot="actions">
+			<a
+				href={contactLink.href}
+				class="btn btn-primary btn-lg shadow-primary/25 hover:shadow-primary/40 gap-2 shadow-xl"
+			>
+				<Mail class="size-5" />
+				{about.ctaButton}
+			</a>
+		</Fragment>
+	</CTASection>
+</PageLayout>

@@ -1,0 +1,441 @@
+---
+import { Image } from 'astro:assets';
+import PageLayout from '../layouts/PageLayout.astro';
+import { conference, about, themeData, home, programData, pricing } from '../data/cms';
+import { conferenceStats } from '../data/stats.ts';
+import {
+	CalendarDays,
+	MapPin,
+	ChevronDown,
+	ChevronRight,
+	Sparkles,
+	Star,
+	Info,
+	Check,
+	Handshake,
+	ArrowRight,
+	Mail,
+} from '@lucide/astro';
+import { resolveIcon } from '../utils/helpers';
+import { contactLink, programLink, aboutLink, structuresLink } from '../data/pageLinks.ts';
+import cisfLogo from '../assets/images/logo.png';
+import uniboPhotoImage from '../assets/images/structures/unibo.jpg';
+import SectionBadge from '../components/SectionBadge.astro';
+import GradientSpan from '../components/GradientSpan.astro';
+import Image3D from '../components/Image3D.astro';
+import CTASection from '../components/CTASection.astro';
+import PartnerGrid from '../components/PartnerGrid.astro';
+import { uniboPartner } from '../data/partners.ts';
+
+const { theme, conference: conf } = { theme: themeData, conference };
+
+interface InfoCard {
+	href: string;
+	icon: ReturnType<typeof resolveIcon>;
+	title: string | undefined;
+	description: string | undefined;
+	borderClass: string;
+	circleGradient: string;
+	iconColor: string;
+}
+
+const infoCards: InfoCard[] = [
+	{
+		href: aboutLink.href,
+		icon: resolveIcon('users'),
+		title: home.infoWho,
+		description: home.infoWhoText,
+		borderClass: 'border-info/30',
+		circleGradient: 'from-info/20 to-primary/20',
+		iconColor: 'text-info',
+	},
+	{
+		href: programLink.href,
+		icon: resolveIcon('calendar-days'),
+		title: home.infoWhen,
+		description: home.infoWhenText,
+		borderClass: 'border-success/30',
+		circleGradient: 'from-success/20 to-accent/20',
+		iconColor: 'text-success',
+	},
+	{
+		href: structuresLink.href,
+		icon: resolveIcon('map-pin'),
+		title: home.infoWhere,
+		description: home.infoWhereText,
+		borderClass: 'border-secondary/30',
+		circleGradient: 'from-secondary/20 to-error/20',
+		iconColor: 'text-secondary',
+	},
+];
+
+const aboutCardEntries = [
+	{
+		Icon: resolveIcon(about.cisfFeatures?.seminari?.icon),
+		title: about.cisfFeatures?.seminari?.title,
+		description: about.cisfFeatures?.seminari?.description,
+	},
+	{
+		Icon: resolveIcon(about.cisfFeatures?.laboratori?.icon),
+		title: about.cisfFeatures?.laboratori?.title,
+		description: about.cisfFeatures?.laboratori?.description,
+	},
+	{
+		Icon: resolveIcon(about.cisfFeatures?.sociali?.icon),
+		title: about.cisfFeatures?.sociali?.title,
+		description: about.cisfFeatures?.sociali?.description,
+	},
+	{
+		Icon: resolveIcon(about.cisfFeatures?.aga?.icon),
+		title: about.cisfFeatures?.aga?.title,
+		description: about.cisfFeatures?.aga?.description,
+	},
+];
+---
+
+<PageLayout>
+	<!-- Hero Section -->
+	<section id="top" class="hero bg-base-100 relative min-h-screen">
+		<div class="absolute inset-0">
+			<div class="from-primary/5 to-secondary/5 absolute inset-0 bg-linear-to-br via-transparent">
+			</div>
+			<div
+				class="absolute top-0 left-0 h-full w-full bg-[radial-gradient(ellipse_at_top_left,rgba(var(--p),0.1),transparent_50%)]"
+			>
+			</div>
+			<div
+				class="absolute right-0 bottom-0 h-full w-full bg-[radial-gradient(ellipse_at_bottom_right,rgba(var(--s),0.1),transparent_50%)]"
+			>
+			</div>
+			<canvas id="hero-canvas" class="absolute inset-0 h-full w-full max-w-full"></canvas>
+			<div class="bg-base-100/40 absolute inset-0"></div>
+			<div
+				class="absolute inset-0 opacity-[0.03]"
+				style="background-image: linear-gradient(rgba(0,0,0,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(0,0,0,0.1) 1px, transparent 1px); background-size: 60px 60px;"
+			>
+			</div>
+		</div>
+
+		<div class="hero-content text-center">
+			<div class="max-w-full">
+				<div class="badge badge-primary badge-md sm:badge-lg badge-soft animate-fade-in mb-8">
+					<Star class="size-4" />
+					<span>{conf.edition}{home.editionSuffix}{conf.year}</span>
+				</div>
+
+				<Image
+					src={cisfLogo}
+					alt={conf.title + ' Logo'}
+					class="animate-logo-in mx-auto mb-6 h-fit w-6xl max-w-full"
+				/>
+
+				<div class="animate-fade-in-up mb-4 flex flex-wrap items-center justify-center gap-4">
+					<div class="badge badge-primary badge-md sm:badge-xl badge-soft py-4 sm:px-5 sm:py-6">
+						<MapPin class="size-5" />
+						<span class="text-base-content/90 font-semibold">{conf.location}</span>
+					</div>
+					<div class="badge badge-secondary badge-md sm:badge-xl badge-soft py-4 sm:px-5 sm:py-6">
+						<CalendarDays class="size-5" />
+						<span class="text-base-content/90 font-semibold">{conf.fullDates}</span>
+					</div>
+				</div>
+
+				<div class="animate-fade-in-up-d1 mb-8 flex flex-wrap items-center justify-center gap-2">
+					<div class="badge badge-soft badge-primary badge-md sm:badge-lg gap-1.5 py-3 sm:py-4">
+						<Sparkles class="size-4" />
+						<span class="font-semibold">{theme.name}</span>
+					</div>
+				</div>
+
+				<p
+					class="text-base-content/70 typewriter mx-auto mb-10 max-w-2xl text-lg leading-relaxed sm:text-xl"
+					data-text={conf.shortDescription}
+				>
+					{conf.shortDescription}
+				</p>
+
+				<div
+					class="animate-fade-in-up-d2 mb-16 flex flex-col items-center justify-center gap-4 sm:flex-row"
+				>
+					<a
+						href={programLink.href}
+						class="btn btn-primary btn-lg shadow-primary/25 hover:shadow-primary/40 card-interactive glow-hover gap-2 shadow-xl"
+					>
+						<CalendarDays class="size-5" />
+						{home.programButton}
+						<ChevronRight class="size-5" />
+					</a>
+				</div>
+
+				<div
+					class="animate-fade-in-up-d3 bg-base-200/60 rounded-box mx-auto grid max-w-3xl grid-cols-2 gap-px shadow backdrop-blur-sm sm:grid-cols-4"
+				>
+					{
+						conferenceStats.map((stat) => (
+							<div class="stat card-interactive border-0">
+								<div class="stat-value from-primary to-secondary bg-linear-to-r bg-clip-text text-3xl text-transparent sm:text-4xl">
+									{stat.number}
+								</div>
+								<div class="stat-desc text-base-content/60 text-sm">{stat.label}</div>
+							</div>
+						))
+					}
+				</div>
+
+				<div class="relative h-24 w-full">
+					<a href="#info-rapide" class="absolute bottom-2 left-1/2 -translate-x-1/2 animate-bounce">
+						<ChevronDown class="text-base-content/40 size-6" />
+					</a>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- Chi? Quando? Dove? -->
+	<section id="info-rapide" class="bg-base-100 py-16">
+		<div class="container mx-auto px-4 lg:px-8">
+			<div class="reveal mb-12 text-center">
+				<SectionBadge icon={Info} label={home.infoBadge} badgeClass="badge-info" />
+				<h2 class="text-4xl font-bold md:text-5xl">
+					<GradientSpan gradient="from-info to-primary" class="char-stagger"
+						>{home.infoTitleChi}</GradientSpan
+					>, <GradientSpan gradient="from-success to-accent" class="char-stagger"
+						>{home.infoTitleQuando}</GradientSpan
+					>, <GradientSpan gradient="from-secondary to-error" class="char-stagger"
+						>{home.infoTitleDove}</GradientSpan
+					>
+				</h2>
+			</div>
+
+			<div class="reveal-stagger grid gap-6 md:grid-cols-3">
+				{
+					infoCards.map((card) => (
+						<a
+							href={card.href}
+							class={`card card-border ${card.borderClass} bg-base-200/60 card-interactive no-underline`}
+						>
+							<div class="card-body items-center p-8 text-center">
+								<div
+									class={`${card.circleGradient} mb-4 flex size-16 items-center justify-center rounded-2xl bg-linear-to-br`}
+								>
+									{card.icon && <card.icon class={`${card.iconColor} size-7`} />}
+								</div>
+								<h3 class="card-title mb-2 text-lg">{card.title}</h3>
+								<p class="text-base-content/70 leading-relaxed whitespace-pre-line">
+									{card.description}
+								</p>
+							</div>
+						</a>
+					))
+				}
+			</div>
+		</div>
+	</section>
+
+	<!-- About Section -->
+	<section id="about" class="reveal bg-base-200/50 py-24">
+		<div class="container mx-auto px-4 lg:px-8">
+			<div class="mb-12">
+				<SectionBadge icon={Info} label={home.aboutBadge} />
+				<h2 class="mb-6 text-4xl leading-tight font-bold md:text-5xl">
+					{home.aboutHeading}
+					<GradientSpan gradient="from-primary to-secondary" class="char-stagger"
+						>{home.aboutGradientWord}</GradientSpan
+					>
+				</h2>
+			</div>
+			<div class="grid items-start gap-16 lg:grid-cols-2">
+				<div>
+					<p class="text-base-content/70 mb-6 text-lg leading-relaxed">
+						{conf.description}
+					</p>
+					<p class="text-base-content/60 mb-8 leading-relaxed">
+						{home.participantsParagraph}
+					</p>
+
+					<div class="reveal-stagger grid grid-cols-1 gap-4 sm:grid-cols-2">
+						{
+							aboutCardEntries.map((card) => (
+								<div class="card card-border border-primary/30 bg-base-100/80 card-interactive">
+									<div class="card-body flex-row items-start gap-3 p-4">
+										{card.Icon && <card.Icon class="text-primary mt-0.5 size-5 shrink-0" />}
+										<div>
+											<h4 class="text-sm font-semibold">{card.title}</h4>
+											<p class="text-base-content/60 mt-1 text-xs">{card.description}</p>
+										</div>
+									</div>
+								</div>
+							))
+						}
+					</div>
+				</div>
+
+				<Image3D src={uniboPhotoImage} alt={uniboPartner.name} class="rounded-box reveal-scale" />
+			</div>
+		</div>
+	</section>
+
+	<!-- Program Preview -->
+	<section class="reveal bg-base-200/50 py-24">
+		<div class="container mx-auto px-4 lg:px-8">
+			<div class="flex flex-col items-center">
+				<div class="w-full max-w-2xl">
+					<SectionBadge icon={CalendarDays} label={home.programBadge} />
+					<h2 class="mb-6 text-4xl leading-tight font-bold md:text-5xl">
+						{home.programHeading}<GradientSpan
+							gradient="from-primary to-secondary"
+							class="char-stagger">{home.programGradientWord}</GradientSpan
+						>
+					</h2>
+					<p class="text-base-content/70 mb-8 text-lg leading-relaxed">
+						{home.aprilParagraph}
+					</p>
+
+					<div class="reveal-stagger mb-8 w-full max-w-full min-w-0 space-y-3">
+						{
+							(programData.program ?? []).slice(0, 3).map((day) => (
+								<a
+									href={`${programLink.href}#giorno-${day.id}`}
+									class="card card-border border-primary/30 bg-base-100/80 card-interactive block w-full"
+								>
+									<div class="card-body w-full flex-row items-center gap-2 p-4">
+										<div class="flex shrink-0 flex-row items-baseline gap-1 sm:w-16 sm:flex-col sm:items-center sm:gap-0 sm:text-center">
+											<div class="text-base-content/50 text-xs uppercase sm:block">{day.day}</div>
+											<div class="text-primary text-lg font-bold">
+												{' '}
+												{(day.date ?? '').split(' ')[0]}
+											</div>
+										</div>
+										<div class="bg-base-300 hidden h-8 w-px shrink-0 sm:block" />
+										<div class="min-w-0 flex-1">
+											<div class="truncate text-sm font-semibold">
+												{(day.sections ?? [])[0]?.title}
+											</div>
+										</div>
+										<ChevronRight class="text-base-content/30 size-4 shrink-0" />
+									</div>
+								</a>
+							))
+						}
+					</div>
+
+					<a
+						href={programLink.href}
+						class="btn btn-primary shadow-primary/20 hover:shadow-primary/40 gap-2 shadow-lg"
+					>
+						{home.programButtonFull}
+						<ArrowRight class="size-4" />
+					</a>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- Pricing / Registration -->
+	<section id="registrati" class="reveal bg-base-100 py-24">
+		<div class="container mx-auto px-4 lg:px-8">
+			<div class="mb-16 text-center">
+				<SectionBadge icon={Handshake} label={home.pricingBadge} badgeClass="badge-warning" />
+				<h2 class="mb-4 text-4xl font-bold md:text-5xl">
+					{home.pricingHeading}<GradientSpan gradient="from-warning to-primary" class="char-stagger"
+						>{home.pricingGradientWord}</GradientSpan
+					>
+				</h2>
+				<p class="text-base-content/60 mx-auto max-w-xl text-lg">
+					{home.pricingSubtitle}
+				</p>
+			</div>
+
+			<div class="reveal-stagger mx-auto mb-12 grid max-w-3xl gap-8 md:grid-cols-2">
+				{
+					(pricing ?? []).map((plan) => (
+						<div class="card card-border border-primary/30 bg-base-200/60 card-interactive">
+							<div class="card-body items-center p-8 text-center">
+								<h2 class="card-title text-xl">{plan.plan}</h2>
+								<div class="mt-2 flex items-baseline gap-1">
+									<span class="from-primary to-secondary bg-linear-to-r bg-clip-text text-5xl font-bold text-transparent">
+										{plan.price}
+									</span>
+								</div>
+								<div class="divider my-4" />
+								<ul class="flex flex-col gap-3">
+									{plan.features?.map((feature) => (
+										<li class="text-base-content/70 flex items-center gap-2 text-sm">
+											<Check class="text-primary size-4 shrink-0" />
+											{feature}
+										</li>
+									))}
+								</ul>
+							</div>
+						</div>
+					))
+				}
+			</div>
+
+			<div class="text-center">
+				<a
+					href={`${contactLink.href}?tipo=iscrizione`}
+					class="btn btn-primary btn-lg shadow-primary/25 hover:shadow-primary/40 card-interactive glow-hover gap-3 shadow-xl"
+				>
+					<Handshake class="size-5" />
+					{home.registerButton}
+				</a>
+				<p class="text-base-content/40 mt-4 text-sm">
+					{home.registrationNote}
+				</p>
+			</div>
+		</div>
+	</section>
+
+	<PartnerGrid categories={['patrocinio']} />
+
+	<!-- Footer CTA -->
+	<CTASection bgClass="from-primary/10 via-base-100 to-secondary/10">
+		<Fragment slot="heading">
+			<h2 class="mb-6 text-4xl font-bold md:text-5xl">
+				{home.ctaHeading}<GradientSpan gradient="from-primary to-secondary" class="char-stagger"
+					>{home.ctaGradientWord}</GradientSpan
+				>
+			</h2>
+		</Fragment>
+		<Fragment slot="subtitle">
+			<p class="text-base-content/60 mx-auto mb-10 max-w-xl text-lg">
+				{home.ctaText}
+			</p>
+		</Fragment>
+		<Fragment slot="actions">
+			<a
+				href={`${contactLink.href}?tipo=iscrizione`}
+				class="btn btn-primary btn-lg shadow-primary/25 hover:shadow-primary/40 card-interactive glow-hover gap-2 shadow-xl"
+			>
+				{home.ctaButton}
+				<ArrowRight class="size-5" />
+			</a>
+			<a
+				href={contactLink.href}
+				class="btn btn-outline btn-lg hover:bg-primary/10 hover:border-primary hover:text-primary gap-2"
+			>
+				{home.ctaContact}
+				<Mail class="size-5" />
+			</a>
+		</Fragment>
+	</CTASection>
+</PageLayout>
+
+<script>
+	import { ParticleCanvas } from '../utils/particles.ts';
+
+	let pc: ParticleCanvas | null;
+
+	document.addEventListener('astro:page-load', () => {
+		const canvas = document.getElementById('hero-canvas') as HTMLCanvasElement | null;
+		if (canvas) pc = new ParticleCanvas(canvas);
+	});
+
+	document.addEventListener('astro:before-swap', () => {
+		if (pc) {
+			pc.disconnect();
+			pc = null;
+		}
+	});
+</script>

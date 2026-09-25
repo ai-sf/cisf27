@@ -1,0 +1,340 @@
+---
+import { structuresData } from '../data/cms';
+import {
+	Hotel,
+	MapPin,
+	Clock,
+	Phone,
+	Mail,
+	BedDouble,
+	Utensils,
+	Check,
+	Info,
+	Building2,
+	Car,
+	MessageCircle,
+} from '@lucide/astro';
+import { Image } from 'astro:assets';
+import PageLayout from '../layouts/PageLayout.astro';
+import HeroSection from '../components/HeroSection.astro';
+import SectionBadge from '../components/SectionBadge.astro';
+import GradientSpan from '../components/GradientSpan.astro';
+import { structuresLink } from '../data/pageLinks.ts';
+import { structureCategories, structures } from '../data/structures.ts';
+import { resolveImage, structureImages } from '../utils/helpers';
+import { gradientMap } from '../utils/helpers.ts';
+---
+
+<PageLayout title={structuresLink.name}>
+	<HeroSection
+		icon={Hotel}
+		label={structuresLink.name}
+		badgeClass="badge-success"
+		heading={structuresData.heroHeading}
+		headingClass="from-success to-primary"
+		bgClass="from-success/5 to-primary/5"
+		subtitle={structuresData.heroSubtitle}
+	/>
+
+	<!-- Venue Section -->
+	<section class="reveal bg-base-200/50 py-16 lg:py-24">
+		<div class="container mx-auto px-4 lg:px-8">
+			<div class="mx-auto max-w-6xl">
+				<div class="mb-12 text-center">
+					<SectionBadge
+						icon={Building2}
+						label={structuresData.venue?.badge}
+						badgeClass="badge-info"
+					/>
+					<h2 class="mb-4 text-4xl font-bold">
+						{structuresData.venue?.heading}<GradientSpan
+							gradient="from-info to-primary"
+							class="char-stagger">{structuresData.venue?.gradientWord}</GradientSpan
+						>
+					</h2>
+				</div>
+
+				<div class="card card-border border-primary/30 bg-base-100/60 overflow-hidden">
+					<div class="grid lg:grid-cols-2">
+						<div class="h-72 lg:h-full">
+							<Image
+								src={resolveImage(structureImages, structuresData.venue?.image)}
+								alt={structuresData.venue?.name ?? ''}
+								class="h-full w-full object-cover"
+							/>
+						</div>
+						<div class="flex flex-col justify-center p-8 lg:p-10">
+							<div class="badge badge-info mb-4 gap-1">
+								<Building2 class="size-3" />
+								{structuresData.venue?.note}
+							</div>
+							<h3 class="text-2xl font-bold lg:text-3xl">{structuresData.venue?.name}</h3>
+							<p class="text-base-content/60 mt-2 flex items-center gap-1.5">
+								<MapPin class="size-4 shrink-0" />
+								{structuresData.venue?.address}
+							</p>
+							<p class="text-base-content/60 mt-4 leading-relaxed">
+								{structuresData.venue?.description}
+							</p>
+						</div>
+					</div>
+					<div class="border-base-300/50 border-t p-4">
+						<div class="overflow-hidden rounded-xl">
+							<iframe
+								src={structuresData.venue?.embedSrc}
+								class="h-72 w-full md:h-64"
+								style="border: 0"
+								allowfullscreen=""
+								loading="lazy"
+								referrerpolicy="no-referrer-when-downgrade"
+								title={structuresData.venue?.name}></iframe>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- Structures List -->
+	<section class="bg-base-100 py-16 lg:py-24">
+		<div class="container mx-auto px-4 lg:px-8">
+			<div class="mx-auto max-w-6xl">
+				<div class="reveal-stagger space-y-8">
+					{
+						structureCategories.map((cat) => {
+							const CatIcon = cat.icon;
+							const catStructures = structures.filter((s) => s.category === cat.id);
+							if (catStructures.length === 0) return null;
+							return (
+								<section class="reveal mb-16 last:mb-0">
+									<div class="mb-12 text-center">
+										<h3 class="flex items-center justify-center gap-3 text-3xl font-bold">
+											{CatIcon && <CatIcon class="size-6" />}
+											<GradientSpan
+												gradient={gradientMap.get(cat.color ?? 'secondary')}
+												class="char-stagger"
+											>
+												{cat.title}
+											</GradientSpan>
+										</h3>
+									</div>
+
+									<div class="reveal-stagger space-y-8">
+										{catStructures.map((structure) => (
+											<div
+												id={`struttura-${structure.id}`}
+												class="card card-border border-primary/30 bg-base-100/60 card-interactive overflow-hidden"
+											>
+												<div class="lg:flex">
+													<div class="relative h-56 shrink-0 overflow-hidden lg:h-auto lg:w-80">
+														{structure.image ? (
+															<Image
+																src={resolveImage(structureImages, structure.image)}
+																alt={structure.label ?? ''}
+																class="h-full w-full object-cover"
+															/>
+														) : (
+															<div class="from-success/20 to-primary/20 flex h-full w-full items-center justify-center bg-linear-to-br">
+																<Hotel class="text-success size-12" />
+															</div>
+														)}
+													</div>
+
+													<div class="flex flex-1 flex-col p-6">
+														<h3 class="mb-2 text-xl font-bold">
+															{structure.label ?? structuresData.fallbackName}
+														</h3>
+
+														{structure.description && (
+															<p class="text-base-content/60 mb-4 leading-relaxed">
+																{structure.description}
+															</p>
+														)}
+
+														{structure.address && (
+															<p class="text-base-content/60 mb-5 flex items-center gap-1.5 text-sm">
+																<MapPin class="text-primary size-4 shrink-0" />
+																<a
+																	href={
+																		structure.mapUrl ??
+																		`https://www.google.com/maps?q=${encodeURIComponent(structure.address)}`
+																	}
+																	target="_blank"
+																	rel="noopener noreferrer"
+																	class="hover:text-primary transition-colors"
+																>
+																	{structure.address}
+																</a>
+															</p>
+														)}
+
+														<div class="mb-5 grid grid-cols-2 gap-3 sm:grid-cols-4">
+															<div class="bg-base-200/60 rounded-xl p-3 text-center">
+																<div class="text-base-content/50 mb-1 text-xs">
+																	{structuresData.distanceLabel}
+																</div>
+																<div class="flex items-center justify-center gap-1 text-sm font-semibold">
+																	<MapPin class="text-primary size-3" />
+																	{structure.distance ?? '-'}
+																</div>
+															</div>
+															<div class="bg-base-200/60 rounded-xl p-3 text-center">
+																<div class="text-base-content/50 mb-1 text-xs">
+																	{structuresData.capacityLabel}
+																</div>
+																<div class="text-sm font-semibold">{structure.capacity ?? '-'}</div>
+															</div>
+															<div class="bg-base-200/60 rounded-xl p-3 text-center">
+																<div class="text-base-content/50 mb-1 text-xs">
+																	{structuresData.roomsLabel}
+																</div>
+																<div class="text-sm font-semibold">{structure.rooms ?? '-'}</div>
+															</div>
+															<div class="bg-base-200/60 rounded-xl p-3 text-center">
+																<div class="text-base-content/50 mb-1 text-xs">
+																	{structuresData.priceLabel}
+																</div>
+																<div class="text-success text-sm font-semibold">
+																	{structure.price ?? '-'}
+																</div>
+															</div>
+														</div>
+
+														{structure.features && structure.features.length > 0 && (
+															<div class="mb-4 flex flex-wrap gap-2">
+																{structure.features.map((feature) => (
+																	<span class="badge badge-ghost badge-sm gap-1">
+																		<Check class="text-primary size-3" />
+																		{feature}
+																	</span>
+																))}
+															</div>
+														)}
+
+														{(structure.phone || structure.whatsapp || structure.email) && (
+															<div class="border-base-300/30 mt-auto flex flex-wrap items-center gap-4 border-t pt-4 text-sm">
+																{structure.phone && (
+																	<a
+																		href={`tel:${structure.phone.replace(/\s+/g, '')}`}
+																		class="text-base-content/50 hover:text-primary flex items-center gap-1.5 transition-colors"
+																		title="Telefono"
+																	>
+																		<Phone class="size-4" />
+																		{structure.phone}
+																	</a>
+																)}
+																{structure.whatsapp && (
+																	<a
+																		href={`https://wa.me/${structure.whatsapp.replace(/[^0-9]/g, '')}`}
+																		target="_blank"
+																		rel="noopener noreferrer"
+																		class="text-base-content/50 hover:text-success flex items-center gap-1.5 transition-colors"
+																		title="WhatsApp"
+																	>
+																		<MessageCircle class="text-success size-4" />
+																		<span>WhatsApp {structure.whatsapp}</span>
+																	</a>
+																)}
+																{structure.email && (
+																	<a
+																		href={`mailto:${structure.email}`}
+																		class="text-base-content/50 hover:text-primary flex items-center gap-1.5 transition-colors"
+																	>
+																		<Mail class="size-4" />
+																		{structure.email}
+																	</a>
+																)}
+															</div>
+														)}
+													</div>
+												</div>
+
+												{(structure.mapEmbedUrl || structure.address) && (
+													<div class="border-base-300/30 border-t p-3">
+														<div class="overflow-hidden rounded-xl">
+															<iframe
+																src={
+																	structure.mapEmbedUrl ??
+																	`https://www.google.com/maps?q=${encodeURIComponent(structure.address || '')}&output=embed`
+																}
+																class="h-56 w-full md:h-48"
+																style="border: 0"
+																allowfullscreen=""
+																loading="lazy"
+																referrerpolicy="no-referrer-when-downgrade"
+																title={structure.label ?? ''}
+															/>
+														</div>
+													</div>
+												)}
+											</div>
+										))}
+									</div>
+								</section>
+							);
+						})
+					}
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- Info Box -->
+	<section class="bg-base-200/50 py-16 lg:py-24">
+		<div class="container mx-auto px-4 lg:px-8">
+			<div class="mx-auto max-w-4xl">
+				<div
+					class="card card-border border-primary/30 from-success/10 to-primary/10 bg-linear-to-br p-8 lg:p-12"
+				>
+					<div class="mb-6 flex items-center gap-3">
+						<Info class="text-success size-6" />
+						<h2 class="card-title text-2xl">{structuresData.infoHeading}</h2>
+					</div>
+
+					<div class="grid gap-8 md:grid-cols-2">
+						<div class="space-y-4">
+							<div class="flex items-start gap-3">
+								<Clock class="text-primary mt-0.5 size-5 shrink-0" />
+								<div>
+									<h4 class="text-sm font-semibold">{structuresData.checkInHeading}</h4>
+									<p class="text-base-content/60 mt-1 text-sm">
+										{structuresData.checkInText}
+									</p>
+								</div>
+							</div>
+							<div class="flex items-start gap-3">
+								<BedDouble class="text-secondary mt-0.5 size-5 shrink-0" />
+								<div>
+									<h4 class="text-sm font-semibold">{structuresData.roomTypeHeading}</h4>
+									<p class="text-base-content/60 mt-1 text-sm">
+										{structuresData.roomTypeText}
+									</p>
+								</div>
+							</div>
+						</div>
+						<div class="space-y-4">
+							<div class="flex items-start gap-3">
+								<Utensils class="text-primary mt-0.5 size-5 shrink-0" />
+								<div>
+									<h4 class="text-sm font-semibold">{structuresData.mealsHeading}</h4>
+									<p class="text-base-content/60 mt-1 text-sm">
+										{structuresData.mealsText}
+									</p>
+								</div>
+							</div>
+							<div class="flex items-start gap-3">
+								<Car class="text-secondary mt-0.5 size-5 shrink-0" />
+								<div>
+									<h4 class="text-sm font-semibold">{structuresData.transportHeading}</h4>
+									<p class="text-base-content/60 mt-1 text-sm">
+										{structuresData.transportText}
+									</p>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+</PageLayout>

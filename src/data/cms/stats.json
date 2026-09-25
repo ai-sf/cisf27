@@ -1,0 +1,76 @@
+{
+  "conferenceStats": [
+    {
+      "id": "students",
+      "number": "170",
+      "label": "Studenti"
+    },
+    {
+      "id": "guests",
+      "number": "26",
+      "label": "Ospiti"
+    },
+    {
+      "id": "edition",
+      "number": "XI",
+      "label": "Edizione"
+    },
+    {
+      "id": "days",
+      "number": "5",
+      "label": "Giorni"
+    }
+  ],
+  "aisfStats": [
+    {
+      "id": "members",
+      "number": "1400",
+      "label": "Membri",
+      "icon": "users"
+    },
+    {
+      "id": "localCommittees",
+      "number": "16",
+      "label": "Comitati Locali",
+      "icon": "map"
+    },
+    {
+      "id": "iaps",
+      "number": "1",
+      "label": "IAPS",
+      "icon": "globe"
+    },
+    {
+      "id": "passion",
+      "number": "∞",
+      "label": "Passione",
+      "icon": "heart"
+    }
+  ],
+  "iapsStats": [
+    {
+      "id": "nationalCommittees",
+      "number": "34",
+      "label": "Territorial Committee",
+      "icon": "map"
+    },
+    {
+      "id": "localCommitteesIaps",
+      "number": "13",
+      "label": "Local Committee",
+      "icon": "map"
+    },
+    {
+      "id": "countries",
+      "number": "40+",
+      "label": "Paesi",
+      "icon": "globe"
+    },
+    {
+      "id": "studentsIaps",
+      "number": "60000",
+      "label": "Studenti",
+      "icon": "users"
+    }
+  ]
+}

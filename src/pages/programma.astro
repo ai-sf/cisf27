@@ -1,0 +1,179 @@
+---
+import { programData, structuresData } from '../data/cms';
+import { getStructureById } from '../data/structures.ts';
+import { CalendarDays, Clock, Building2, MapPin, ArrowRight, Hotel } from '@lucide/astro';
+import { Image } from 'astro:assets';
+import PageLayout from '../layouts/PageLayout.astro';
+import HeroSection from '../components/HeroSection.astro';
+import SectionBadge from '../components/SectionBadge.astro';
+import GradientSpan from '../components/GradientSpan.astro';
+import { programLink, structuresLink } from '../data/pageLinks.ts';
+import { resolveImage, structureImages } from '../utils/helpers';
+---
+
+<PageLayout title={programLink.name}>
+	<HeroSection
+		icon={CalendarDays}
+		label={programLink.name}
+		badgeClass="badge-secondary"
+		heading={programData.heroHeading}
+		headingClass="from-secondary to-primary"
+		bgClass="from-secondary/5 to-primary/5"
+		subtitle={programData.heroSubtitle}
+	/>
+
+	<!-- Program Days -->
+	<section class="bg-base-200/50 py-16 lg:py-24">
+		<div class="container mx-auto px-4 lg:px-8">
+			<div class="reveal-stagger mx-auto max-w-4xl space-y-6 lg:space-y-8">
+				{
+					(programData.program ?? []).map((day, dayIndex) => (
+						<div
+							id={`giorno-${day.id}`}
+							class="card card-border border-primary/30 bg-base-100/60 card-interactive relative scroll-mt-28 transition-all"
+						>
+							<a
+								href={`#giorno-${day.id}`}
+								class="absolute inset-0"
+								aria-label={`Vai al giorno ${dayIndex + 1}`}
+							/>
+							<div class="from-secondary/10 to-primary/10 border-base-300/50 border-b bg-linear-to-r p-4 sm:p-6">
+								<div class="flex items-center gap-3 sm:gap-4">
+									<div class="from-secondary to-primary shadow-secondary/20 flex h-10 w-10 items-center justify-center rounded-2xl bg-linear-to-br shadow-lg sm:h-14 sm:w-14">
+										<span class="text-primary-content text-base font-bold sm:text-xl">
+											{dayIndex + 1}
+										</span>
+									</div>
+									<div>
+										<h2 class="text-base-content/90 text-xl font-bold sm:text-2xl">{day.day}</h2>
+										<p class="text-base-content/60">{day.date}</p>
+									</div>
+									<div class="badge badge-secondary ml-auto gap-1">
+										<Clock class="size-3" />
+										{(day.sections ?? []).length} eventi
+									</div>
+								</div>
+							</div>
+
+							<div class="p-4 sm:p-6">
+								<div class="space-y-3 sm:space-y-4">
+									{(day.sections ?? []).map((section) => (
+										<div class="group flex items-start gap-3 sm:gap-4">
+											<div class="hidden w-28 shrink-0 text-right sm:block">
+												<span class="text-secondary font-mono text-sm font-medium">
+													{section.time}
+												</span>
+											</div>
+
+											<div class="hidden shrink-0 pt-1.5 sm:block">
+												<div class="bg-secondary/30 group-hover:bg-secondary/60 h-3 w-3 rounded-full transition-colors" />
+											</div>
+
+											<div class="bg-base-200/40 border-base-300/30 group-hover:border-secondary/20 group-hover:bg-secondary/5 flex-1 rounded-xl border p-3 transition-all sm:p-4">
+												<span class="text-secondary/70 mb-1 block font-mono text-xs font-medium sm:hidden">
+													{section.time}
+												</span>
+												<h3 class="text-base-content/90 mb-1 font-bold">{section.title}</h3>
+												{section.description && (
+													<p class="text-base-content/50 text-sm">{section.description}</p>
+												)}
+												{(() => {
+													const linkedStructure =
+														'structureId' in section && section.structureId
+															? getStructureById(`${section.structureId}`)
+															: undefined;
+													if (!linkedStructure) return null;
+													return (
+														<div class="border-primary/20 bg-base-100/80 hover:border-primary/40 relative mt-3 flex items-center gap-3 rounded-xl border p-2 transition-colors">
+															<a
+																href={`${structuresLink.href}#struttura-${linkedStructure.id}`}
+																class="absolute inset-0 z-10"
+																aria-label={`Vai alla struttura ${linkedStructure.label}`}
+															/>
+															<div class="size-12 shrink-0 overflow-hidden rounded-lg">
+																{linkedStructure.image ? (
+																	<Image
+																		src={resolveImage(structureImages, linkedStructure.image)}
+																		alt={linkedStructure.label ?? linkedStructure.id ?? 'Structure'}
+																		class="h-full w-full object-cover"
+																	/>
+																) : (
+																	<div class="from-primary/20 to-secondary/20 flex h-full w-full items-center justify-center bg-linear-to-br">
+																		<Hotel class="text-primary size-5" />
+																	</div>
+																)}
+															</div>
+															<div class="min-w-0 flex-1">
+																<div class="text-xs font-semibold">{linkedStructure.label}</div>
+																<div class="text-base-content/40 mt-0.5 flex items-center gap-1 text-xs">
+																	<MapPin class="size-3" />
+																	<span class="truncate">{linkedStructure.address}</span>
+																</div>
+															</div>
+															<ArrowRight class="text-base-content/40 size-4 shrink-0" />
+														</div>
+													);
+												})()}
+											</div>
+										</div>
+									))}
+								</div>
+							</div>
+						</div>
+					))
+				}
+			</div>
+		</div>
+
+		<div class="container mx-auto mt-24 px-4 lg:px-8">
+			<div class="mx-auto max-w-4xl">
+				<div class="mb-12 text-center">
+					<SectionBadge
+						icon={Building2}
+						label={programData.locationBadge}
+						badgeClass="badge-info"
+					/>
+					<h2 class="mb-4 text-4xl font-bold">
+						{programData.locationHeading}<GradientSpan
+							gradient="from-info to-primary"
+							class="char-stagger">{programData.locationGradientWord}</GradientSpan
+						>
+					</h2>
+				</div>
+
+				<div
+					class="reveal card card-border border-primary/30 from-info/10 to-primary/10 bg-linear-to-br"
+				>
+					<div class="card-body items-center p-8 text-center lg:p-12">
+						<Building2 class="text-primary mb-4 size-12" />
+						<h3 class="text-3xl font-bold">{structuresData.venue?.name}</h3>
+						<p class="text-base-content/60 mt-2 flex items-center gap-1.5 text-lg">
+							<MapPin class="size-4 shrink-0" />
+							{structuresData.venue?.address}
+						</p>
+						<p class="text-base-content/40 mt-1 text-sm">{structuresData.venue?.note}</p>
+						<p class="text-base-content/60 mt-4 max-w-2xl leading-relaxed">
+							{structuresData.venue?.description}
+						</p>
+						<a
+							href={structuresData.venue?.mapLink}
+							target="_blank"
+							rel="noopener noreferrer"
+							class="btn btn-outline btn-info mt-6 gap-2"
+						>
+							<MapPin class="size-4" />
+							Apri in Google Maps
+						</a>
+
+						<div class="mt-8 text-center">
+							<a href={structuresLink.href} class="btn btn-info gap-2">
+								{structuresLink.name}
+								<ArrowRight class="size-4" />
+							</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+</PageLayout>

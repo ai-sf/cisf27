@@ -1,0 +1,43 @@
+---
+import { resolveIcon } from '../utils/helpers';
+import SectionBadge from './SectionBadge.astro';
+import GradientSpan from './GradientSpan.astro';
+import { themeData } from '../data/cms';
+
+const SectionIcon = resolveIcon('lightbulb');
+---
+
+<section class="reveal bg-base-100 py-24">
+	<div class="container mx-auto px-4 lg:px-8">
+		<div class="mb-16 text-center">
+			<SectionBadge icon={SectionIcon} label={themeData.badge} badgeClass="badge-primary" />
+			<h2 class="mb-4 text-4xl font-bold md:text-5xl">
+				<GradientSpan gradient="from-primary to-secondary" class="char-stagger"
+					>{themeData.name}</GradientSpan
+				>
+			</h2>
+			<p class="text-base-content/60 mx-auto max-w-3xl text-lg leading-relaxed">
+				{themeData.description}
+			</p>
+		</div>
+
+		<div class="reveal-stagger grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+			{
+				(themeData.pillars ?? []).map((pillar) => {
+					const Icon = resolveIcon(pillar.icon);
+					return (
+						<div class="card card-border border-primary/30 bg-base-200/60 card-interactive">
+							<div class="card-body items-center p-6 text-center">
+								<div class="from-primary/20 to-secondary/20 mb-4 flex h-14 w-14 items-center justify-center rounded-2xl bg-linear-to-br">
+									{Icon && <Icon class="text-primary size-7" />}
+								</div>
+								<h3 class="mb-2 text-lg font-bold">{pillar.title}</h3>
+								<p class="text-base-content/60 text-sm leading-relaxed">{pillar.description}</p>
+							</div>
+						</div>
+					);
+				})
+			}
+		</div>
+	</div>
+</section>

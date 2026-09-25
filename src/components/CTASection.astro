@@ -1,0 +1,21 @@
+---
+export interface Props {
+	bgClass: string;
+	id?: string;
+}
+
+const { bgClass, id } = Astro.props;
+---
+
+<section {id} class:list={[bgClass, 'reveal bg-linear-to-br py-24']}>
+	<div class="container mx-auto px-4 text-center lg:px-8">
+		<div class="mx-auto max-w-2xl">
+			<slot name="icon" />
+			<slot name="heading" />
+			<slot name="subtitle" />
+			<div class="flex flex-col items-center justify-center gap-4 sm:flex-row">
+				<slot name="actions" />
+			</div>
+		</div>
+	</div>
+</section>

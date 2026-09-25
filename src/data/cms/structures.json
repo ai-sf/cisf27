@@ -1,0 +1,30 @@
+{
+  "heroHeading": "Strutture",
+  "heroSubtitle": "La struttura per il pernottamento, e le sedi degli eventi della conferenza — TBA",
+  "infoHeading": "Informazioni Utili",
+  "checkInHeading": "Check-in / Check-out",
+  "checkInText": "Check-in dalle 14:00 ⚛︎ Check-out entro le 11:00 ⚛︎ Reception aperta h24 ⚛︎ Deposito bagagli ad uso gratuito",
+  "roomTypeHeading": "Tipologia Camere",
+  "roomTypeText": "Quadruple con letti a castello (72 ospiti), e triple (30 ospiti) e doppie (48 ospiti) con letti singoli ☯ Tutte le camere sono ensuite, con gli asciugamani e la biancheria da letto inclusi",
+  "mealsHeading": "Pasti",
+  "mealsText": "Colazione buffet a €10 per persona per notte, ogni giorno dalle 07:00 alle 10:30 ꩜ Ristorante per pranzo e cena à la carte",
+  "transportHeading": "Trasporti",
+  "transportText": "TBD",
+  "venue": {
+    "name": "Consiglio Nazionale delle Ricerche",
+    "address": "Via Piero Gobetti, 101 - 40129 Bologna",
+    "note": "Area territoriale di Ricerca di Bologna",
+    "description": "La sede principale della Conferenza Italiana degli Studenti di Fisica - CISF27. Vari eventi si svolgeranno in varie location cittadine (TBA).",
+    "embedSrc": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2963.109777957101!2d11.336029126354612!3d44.5236435210742!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x477fd3ffd038af3d%3A0x9f6e1df799105301!2sCNR%20Area%20Territoriale%20di%20Ricerca%20di%20Bologna!5e1!3m2!1sen!2sit!4v1790183696769!5m2!1sen!2sit",
+    "mapLink": "https://maps.app.goo.gl/7nBAf4XpsGtTTJr99",
+    "badge": "Sede della Conferenza",
+    "heading": "La ",
+    "gradientWord": "Location",
+    "image": "../assets/images/structures/cnr.jpg"
+  },
+  "fallbackName": "Struttura",
+  "distanceLabel": "Distanza",
+  "capacityLabel": "Posti",
+  "roomsLabel": "Camere",
+  "priceLabel": "Prezzo"
+}

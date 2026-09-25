@@ -1,0 +1,1378 @@
+settings:
+  commit:
+    identity: user
+
+content:
+  - name: conference
+    label: Conferenza
+    type: file
+    path: src/data/cms/conference.json
+    format: json
+    fields:
+      - name: title
+        type: string
+        label: Titolo
+      - name: location
+        type: string
+        label: Sede
+      - name: fullDates
+        type: string
+        label: Date Complete
+      - name: edition
+        type: string
+        label: Edizione
+      - name: year
+        type: number
+        label: Anno
+      - name: description
+        type: text
+        label: Descrizione
+      - name: shortDescription
+        type: string
+        label: Descrizione Breve
+
+  - name: home
+    label: Homepage
+    type: file
+    path: src/data/cms/home.json
+    format: json
+    fields:
+      - name: aboutBadge
+        type: string
+        label: Badge About
+      - name: aboutHeading
+        type: string
+        label: Titolo About
+      - name: aboutGradientWord
+        type: string
+        label: Parola Gradient About
+      - name: participantsParagraph
+        type: text
+        label: Paragrafo Partecipanti
+      - name: programBadge
+        type: string
+        label: Badge Programma
+      - name: programHeading
+        type: string
+        label: Titolo Programma
+      - name: programGradientWord
+        type: string
+        label: Parola Gradient Programma
+      - name: aprilParagraph
+        type: text
+        label: Paragrafo Aprile
+      - name: programButton
+        type: string
+        label: Bottone Programma
+      - name: programButtonFull
+        type: string
+        label: Bottone Programma Completo
+      - name: pricingBadge
+        type: string
+        label: Badge Prezzi
+      - name: pricingHeading
+        type: string
+        label: Titolo Prezzi
+      - name: pricingGradientWord
+        type: string
+        label: Parola Gradient Prezzi
+      - name: pricingSubtitle
+        type: string
+        label: Sottotitolo Prezzi
+      - name: registerButton
+        type: string
+        label: Bottone Iscrizione
+      - name: registrationNote
+        type: string
+        label: Nota Iscrizione
+      - name: ctaHeading
+        type: string
+        label: Titolo CTA
+      - name: ctaGradientWord
+        type: string
+        label: Parola Gradient CTA
+      - name: ctaText
+        type: text
+        label: Testo CTA
+      - name: ctaButton
+        type: string
+        label: Bottone CTA
+      - name: ctaContact
+        type: string
+        label: Contatto CTA
+      - name: infoBadge
+        type: string
+        label: Badge Info Rapide
+      - name: infoTitleChi
+        type: string
+        label: Titolo Chi
+      - name: infoWho
+        type: string
+        label: Info Chi
+      - name: infoWhoText
+        type: text
+        label: Testo Chi
+      - name: infoTitleQuando
+        type: string
+        label: Titolo Quando
+      - name: infoWhen
+        type: string
+        label: Info Quando
+      - name: infoWhenText
+        type: text
+        label: Testo Quando
+      - name: infoTitleDove
+        type: string
+        label: Titolo Dove
+      - name: infoWhere
+        type: string
+        label: Info Dove
+      - name: infoWhereText
+        type: text
+        label: Testo Dove
+      - name: editionSuffix
+        type: string
+        label: Suffisso Edizione
+
+  - name: about
+    label: Pagina About
+    type: file
+    path: src/data/cms/about.json
+    format: json
+    fields:
+      - name: heroSubtitle
+        type: string
+        label: Sottotitolo Hero
+      - name: aisfBadge
+        type: string
+        label: Badge AISF
+      - name: aisfHeading
+        type: string
+        label: Titolo AISF
+      - name: aisfGradientWord
+        type: string
+        label: Parola Gradient AISF
+      - name: aisfRole
+        type: text
+        label: Ruolo AISF
+      - name: cisfBadge
+        type: string
+        label: Badge CISF
+      - name: cisfHeading
+        type: string
+        label: Titolo CISF
+      - name: cisfGradientWord
+        type: string
+        label: Parola Gradient CISF
+      - name: cisfEditions
+        type: text
+        label: Edizioni CISF
+      - name: historyBadge
+        type: string
+        label: Badge Storia
+      - name: historyHeading
+        type: string
+        label: Titolo Storia
+      - name: historyGradientWord
+        type: string
+        label: Parola Gradient Storia
+      - name: currentBadge
+        type: string
+        label: Badge Corrente
+      - name: historyPauseYears
+        type: string
+        label: Anni Pausa Edizioni
+      - name: historyPauseLabel
+        type: string
+        label: Etichetta Pausa Edizioni
+      - name: committeeBadge
+        type: string
+        label: Badge Comitato
+      - name: committeeHeading
+        type: string
+        label: Titolo Comitato
+      - name: committeeGradientWord
+        type: string
+        label: Parola Gradient Comitato
+      - name: committeeSubtitle
+        type: string
+        label: Sottotitolo Comitato
+      - name: ctaHeading
+        type: string
+        label: Titolo CTA
+      - name: ctaGradientWord
+        type: string
+        label: Parola Gradient CTA
+      - name: ctaText
+        type: text
+        label: Testo CTA
+      - name: ctaButton
+        type: string
+        label: Bottone CTA
+      - name: cisfFeatures
+        type: object
+        label: Caratteristiche CISF
+        fields:
+          - name: seminari
+            type: object
+            label: Seminari
+            fields:
+              - name: title
+                type: string
+                label: Titolo
+              - name: description
+                type: text
+                label: Descrizione
+              - name: icon
+                type: reference
+                label: Icona
+                options:
+                  collection: icon-options
+                  value: '{lucideId}'
+                  label: '{label}'
+          - name: laboratori
+            type: object
+            label: Laboratori
+            fields:
+              - name: title
+                type: string
+                label: Titolo
+              - name: description
+                type: text
+                label: Descrizione
+              - name: icon
+                type: reference
+                label: Icona
+                options:
+                  collection: icon-options
+                  value: '{lucideId}'
+                  label: '{label}'
+          - name: sociali
+            type: object
+            label: Sociali
+            fields:
+              - name: title
+                type: string
+                label: Titolo
+              - name: description
+                type: text
+                label: Descrizione
+              - name: icon
+                type: reference
+                label: Icona
+                options:
+                  collection: icon-options
+                  value: '{lucideId}'
+                  label: '{label}'
+          - name: aga
+            type: object
+            label: AGA
+            fields:
+              - name: title
+                type: string
+                label: Titolo
+              - name: description
+                type: text
+                label: Descrizione
+              - name: icon
+                type: reference
+                label: Icona
+                options:
+                  collection: icon-options
+                  value: '{lucideId}'
+                  label: '{label}'
+
+  - name: people
+    label: Persone
+    type: file
+    path: src/data/cms/people.json
+    format: json
+    list: true
+    fields:
+      - name: name
+        type: string
+        label: Nome
+      - name: role
+        type: reference
+        label: Ruolo
+        options:
+          collection: people-roles
+          value: '{id}'
+          label: '{label}'
+      - name: image
+        type: image
+        label: Immagine
+        options:
+          media: committee-images
+      - name: email
+        type: string
+        label: Email
+      - name: phone
+        type: string
+        label: Telefono
+      - name: isCommittee
+        type: boolean
+        label: Mostra nel Comitato
+      - name: isContact
+        type: boolean
+        label: Mostra nei Contatti
+
+  - name: people-roles
+    label: Ruoli Persone
+    type: collection
+    path: src/data/cms/people-roles
+    format: json
+    filename: '{id}.json'
+    fields:
+      - name: id
+        type: string
+        label: ID
+      - name: label
+        type: string
+        label: Etichetta
+      - name: description
+        type: string
+        label: Descrizione Ruolo
+    view:
+      primary: label
+
+  - name: history
+    label: Storia Edizioni
+    type: file
+    path: src/data/cms/history.json
+    format: json
+    list: true
+    fields:
+      - name: year
+        type: string
+        label: Anno
+      - name: city
+        type: string
+        label: Città
+      - name: edition
+        type: string
+        label: Edizione
+      - name: details
+        type: string
+        label: Dettagli
+      - name: link
+        type: string
+        label: Collegamento
+      - name: current
+        type: boolean
+        label: Corrente
+
+  - name: stats
+    label: Statistiche
+    type: file
+    path: src/data/cms/stats.json
+    format: json
+    fields:
+      - name: conferenceStats
+        type: object
+        label: Statistiche Conferenza
+        list: true
+        fields:
+          - name: id
+            type: string
+            label: ID
+          - name: number
+            type: string
+            label: Numero
+          - name: label
+            type: string
+            label: Etichetta
+      - name: aisfStats
+        type: object
+        label: Statistiche AISF
+        list: true
+        fields:
+          - name: id
+            type: string
+            label: ID
+          - name: number
+            type: string
+            label: Numero
+          - name: label
+            type: string
+            label: Etichetta
+          - name: icon
+            type: reference
+            label: Icona
+            options:
+              collection: icon-options
+              value: '{lucideId}'
+              label: '{label}'
+
+      - name: iapsStats
+        type: object
+        label: Statistiche IAPS
+        list: true
+        fields:
+          - name: id
+            type: string
+            label: ID
+          - name: number
+            type: string
+            label: Numero
+          - name: label
+            type: string
+            label: Etichetta
+          - name: icon
+            type: reference
+            label: Icona
+            options:
+              collection: icon-options
+              value: '{lucideId}'
+              label: '{label}'
+
+  - name: program
+    label: Programma
+    type: file
+    path: src/data/cms/program.json
+    format: json
+    fields:
+      - name: heroHeading
+        type: string
+        label: Titolo Hero
+      - name: heroSubtitle
+        type: string
+        label: Sottotitolo Hero
+      - name: locationBadge
+        type: string
+        label: Badge Location
+      - name: locationHeading
+        type: string
+        label: Titolo Location
+      - name: locationGradientWord
+        type: string
+        label: Parola Gradient Location
+      - name: program
+        type: object
+        label: Giornate
+        list: true
+        fields:
+          - name: id
+            type: string
+            label: ID
+          - name: day
+            type: string
+            label: Giorno
+          - name: date
+            type: string
+            label: Data
+          - name: sections
+            type: object
+            label: Sezioni
+            list: true
+            fields:
+              - name: time
+                type: string
+                label: Orario
+              - name: title
+                type: string
+                label: Titolo
+              - name: description
+                type: text
+                label: Descrizione
+              - name: structureId
+                type: reference
+                label: Struttura Collegata
+                options:
+                  collection: structure-entries
+                  value: '{id}'
+                  label: '{label}'
+
+  - name: structures
+    label: Strutture
+    type: file
+    path: src/data/cms/structures.json
+    format: json
+    fields:
+      - name: heroHeading
+        type: string
+        label: Titolo Hero
+      - name: heroSubtitle
+        type: string
+        label: Sottotitolo Hero
+      - name: infoHeading
+        type: string
+        label: Titolo Info
+      - name: checkInHeading
+        type: string
+        label: Titolo Check-in
+      - name: checkInText
+        type: text
+        label: Testo Check-in
+      - name: roomTypeHeading
+        type: string
+        label: Titolo Camere
+      - name: roomTypeText
+        type: text
+        label: Testo Camere
+      - name: mealsHeading
+        type: string
+        label: Titolo Pasti
+      - name: mealsText
+        type: text
+        label: Testo Pasti
+      - name: transportHeading
+        type: string
+        label: Titolo Trasporti
+      - name: transportText
+        type: text
+        label: Testo Trasporti
+      - name: venue
+        type: object
+        label: Sede
+        fields:
+          - name: name
+            type: string
+            label: Nome
+          - name: address
+            type: string
+            label: Indirizzo
+          - name: note
+            type: string
+            label: Nota
+          - name: description
+            type: text
+            label: Descrizione
+          - name: embedSrc
+            type: string
+            label: Embed Src
+          - name: mapLink
+            type: string
+            label: Link Mappa
+          - name: badge
+            type: string
+            label: Badge
+          - name: heading
+            type: string
+            label: Titolo
+          - name: gradientWord
+            type: string
+            label: Parola Gradient
+          - name: image
+            type: image
+            label: Immagine Sede
+            options:
+              media: structure-images
+      - name: fallbackName
+        type: string
+        label: Nome Fallback
+      - name: distanceLabel
+        type: string
+        label: Etichetta Distanza
+      - name: capacityLabel
+        type: string
+        label: Etichetta Posti
+      - name: roomsLabel
+        type: string
+        label: Etichetta Camere
+      - name: priceLabel
+        type: string
+        label: Etichetta Prezzo
+
+  - name: structure-entries
+    label: Voci Strutture
+    type: collection
+    path: src/data/cms/structures
+    format: json
+    filename: '{id}.json'
+    fields:
+      - name: id
+        type: string
+        label: ID
+      - name: label
+        type: string
+        label: Nome
+      - name: category
+        type: reference
+        label: Categoria
+        options:
+          collection: structure-categories
+          value: '{id}'
+          label: '{label}'
+      - name: address
+        type: string
+        label: Indirizzo
+      - name: mapUrl
+        type: string
+        label: Link Google Maps
+      - name: mapEmbedUrl
+        type: string
+        label: URL Embed Mappa (opzionale)
+      - name: description
+        type: text
+        label: Descrizione
+      - name: distance
+        type: string
+        label: Distanza
+      - name: capacity
+        type: string
+        label: Capacità
+      - name: rooms
+        type: string
+        label: Camere
+      - name: price
+        type: string
+        label: Prezzo
+      - name: phone
+        type: string
+        label: Telefono
+      - name: whatsapp
+        type: string
+        label: WhatsApp
+      - name: email
+        type: string
+        label: Email
+      - name: features
+        type: string
+        label: Caratteristiche
+        list: true
+      - name: image
+        type: image
+        label: Immagine
+        options:
+          media: structure-images
+    view:
+      primary: label
+      sort: [label]
+      default:
+        sort: label
+        order: asc
+
+  - name: color-options
+    label: Colori
+    type: collection
+    path: src/data/cms/colors
+    format: json
+    filename: '{tailwindId}.json'
+    fields:
+      - name: tailwindId
+        type: string
+        label: Tailwind ID
+      - name: label
+        type: string
+        label: Nome
+    view:
+      primary: label
+
+  - name: icon-options
+    label: Icone
+    type: collection
+    path: src/data/cms/icons
+    format: json
+    filename: '{lucideId}.json'
+    fields:
+      - name: lucideId
+        type: string
+        label: Lucide ID
+      - name: label
+        type: string
+        label: Nome
+    view:
+      primary: label
+
+  - name: partner-categories
+    label: Categorie Partner
+    type: collection
+    path: src/data/cms/partner-categories
+    format: json
+    filename: '{id}.json'
+    fields:
+      - name: id
+        type: string
+        label: ID
+      - name: label
+        type: string
+        label: Etichetta
+      - name: icon
+        type: reference
+        label: Icona
+        options:
+          collection: icon-options
+          value: '{lucideId}'
+          label: '{label}'
+      - name: color
+        type: reference
+        label: Colore
+        options:
+          collection: color-options
+          value: '{tailwindId}'
+          label: '{label}'
+    view:
+      primary: label
+
+  - name: structure-categories
+    label: Categorie Strutture
+    type: collection
+    path: src/data/cms/structure-categories
+    format: json
+    filename: '{id}.json'
+    fields:
+      - name: id
+        type: string
+        label: ID
+      - name: label
+        type: string
+        label: Etichetta
+      - name: icon
+        type: reference
+        label: Icona
+        options:
+          collection: icon-options
+          value: '{lucideId}'
+          label: '{label}'
+      - name: color
+        type: reference
+        label: Colore
+        options:
+          collection: color-options
+          value: '{tailwindId}'
+          label: '{label}'
+    view:
+      primary: label
+
+  - name: thesis
+    label: Tesi e Poster
+    type: file
+    path: src/data/cms/thesis.json
+    format: json
+    fields:
+      - name: heroHeading
+        type: string
+        label: Titolo Hero
+      - name: heroSubtitle
+        type: string
+        label: Sottotitolo Hero
+      - name: sectionBadge
+        type: string
+        label: Badge Sezione
+      - name: sectionHeading
+        type: string
+        label: Titolo Sezione
+      - name: presentationDesc
+        type: text
+        label: Descrizione Presentazioni
+      - name: posterBadge
+        type: string
+        label: Badge Poster
+      - name: posterHeading
+        type: string
+        label: Titolo Poster
+      - name: posterDesc
+        type: text
+        label: Descrizione Poster
+      - name: posterStepsHeading
+        type: string
+        label: Titolo Passaggi Poster
+      - name: thesisTopics
+        type: object
+        label: Argomenti Tesi
+        list: true
+        fields:
+          - name: title
+            type: string
+            label: Titolo
+          - name: author
+            type: string
+            label: Autore
+          - name: affiliation
+            type: string
+            label: Affiliazione
+          - name: abstract
+            type: text
+            label: Abstract
+          - name: tags
+            type: string
+            label: Tag
+            list: true
+      - name: posterInfo
+        type: object
+        label: Info Poster
+        list: true
+        fields:
+          - name: text
+            type: string
+            label: Testo
+      - name: posterSteps
+        type: object
+        label: Passaggi Poster
+        list: true
+        fields:
+          - name: step
+            type: number
+            label: Passo
+          - name: text
+            type: string
+            label: Testo
+
+  - name: contacts
+    label: Pagina Contatti
+    type: file
+    path: src/data/cms/contacts.json
+    format: json
+    fields:
+      - name: form
+        type: object
+        label: Modulo
+        fields:
+          - name: heroHeading
+            type: string
+            label: Titolo Hero
+          - name: heroSubtitle
+            type: string
+            label: Sottotitolo Hero
+          - name: formHeading
+            type: string
+            label: Titolo Modulo
+          - name: nameLabel
+            type: string
+            label: Etichetta Nome
+          - name: namePlaceholder
+            type: string
+            label: Placeholder Nome
+          - name: emailLabel
+            type: string
+            label: Etichetta Email
+          - name: emailPlaceholder
+            type: string
+            label: Placeholder Email
+          - name: subjectLabel
+            type: string
+            label: Etichetta Oggetto
+          - name: subjectDefault
+            type: string
+            label: Default Oggetto
+          - name: subjects
+            type: string
+            label: Opzioni Oggetto
+            list: true
+            readonly: true
+          - name: messageLabel
+            type: string
+            label: Etichetta Messaggio
+          - name: messagePlaceholder
+            type: string
+            label: Placeholder Messaggio
+          - name: nameValidationHint
+            type: string
+            label: Suggerimento Validazione Nome
+          - name: emailValidationHint
+            type: string
+            label: Suggerimento Validazione Email
+          - name: subjectValidationHint
+            type: string
+            label: Suggerimento Validazione Oggetto
+          - name: messageValidationHint
+            type: string
+            label: Suggerimento Validazione Messaggio
+          - name: successHeading
+            type: string
+            label: Titolo Successo
+          - name: successMessage
+            type: string
+            label: Messaggio Successo
+          - name: errorHeading
+            type: string
+            label: Titolo Errore
+          - name: resetButton
+            type: string
+            label: Bottone Reset
+          - name: submitButton
+            type: string
+            label: Bottone Invio
+          - name: mapHeading
+            type: string
+            label: Titolo Mappa
+          - name: mapDept
+            type: string
+            label: Dipartimento
+
+  - name: partners
+    label: Partner
+    type: file
+    path: src/data/cms/partners.json
+    format: json
+    fields:
+      - name: organizzatore
+        type: object
+        label: Organizzatore
+        fields:
+          - name: aisf
+            type: object
+            label: AISF
+            fields:
+              - name: name
+                type: string
+                label: Nome
+              - name: shortName
+                type: string
+                label: Nome Breve
+              - name: description
+                type: text
+                label: Descrizione
+              - name: category
+                type: reference
+                label: Categoria
+                options:
+                  collection: partner-categories
+                  value: '{id}'
+                  label: '{label}'
+              - name: image
+                type: image
+                label: Immagine
+                options:
+                  media: partner-images
+              - name: link
+                type: string
+                label: Collegamento
+          - name: aisfBolo
+            type: object
+            label: AISF Bologna
+            fields:
+              - name: name
+                type: string
+                label: Nome
+              - name: shortName
+                type: string
+                label: Nome Breve
+              - name: category
+                type: reference
+                label: Categoria
+                options:
+                  collection: partner-categories
+                  value: '{id}'
+                  label: '{label}'
+              - name: image
+                type: image
+                label: Immagine
+                options:
+                  media: partner-images
+              - name: link
+                type: string
+                label: Collegamento
+      - name: partners
+        type: object
+        label: Partner
+        list: true
+        fields:
+          - name: name
+            type: string
+            label: Nome
+          - name: shortName
+            type: string
+            label: Nome Breve
+          - name: description
+            type: text
+            label: Descrizione
+          - name: category
+            type: reference
+            label: Categoria
+            options:
+              collection: partner-categories
+              value: '{id}'
+              label: '{label}'
+          - name: image
+            type: image
+            label: Immagine
+            options:
+              media: partner-images
+          - name: link
+            type: string
+            label: Collegamento
+
+  - name: pageLinks
+    label: Link Pagine
+    type: file
+    path: src/data/cms/pageLinks.json
+    format: json
+    fields:
+      - name: home
+        type: object
+        label: Home
+        fields:
+          - name: name
+            type: string
+            label: Nome
+          - name: icon
+            type: reference
+            label: Icona
+            options:
+              collection: icon-options
+              value: '{lucideId}'
+              label: '{label}'
+          - name: href
+            type: string
+            label: Collegamento
+            readonly: true
+      - name: about
+        type: object
+        label: Chi Siamo
+        fields:
+          - name: name
+            type: string
+            label: Nome
+          - name: icon
+            type: reference
+            label: Icona
+            options:
+              collection: icon-options
+              value: '{lucideId}'
+              label: '{label}'
+          - name: href
+            type: string
+            label: Collegamento
+            readonly: true
+      - name: program
+        type: object
+        label: Programma
+        fields:
+          - name: name
+            type: string
+            label: Nome
+          - name: icon
+            type: reference
+            label: Icona
+            options:
+              collection: icon-options
+              value: '{lucideId}'
+              label: '{label}'
+          - name: href
+            type: string
+            label: Collegamento
+            readonly: true
+      - name: structures
+        type: object
+        label: Strutture
+        fields:
+          - name: name
+            type: string
+            label: Nome
+          - name: icon
+            type: reference
+            label: Icona
+            options:
+              collection: icon-options
+              value: '{lucideId}'
+              label: '{label}'
+          - name: href
+            type: string
+            label: Collegamento
+            readonly: true
+      - name: sponsor
+        type: object
+        label: Sponsor
+        fields:
+          - name: name
+            type: string
+            label: Nome
+          - name: icon
+            type: reference
+            label: Icona
+            options:
+              collection: icon-options
+              value: '{lucideId}'
+              label: '{label}'
+          - name: href
+            type: string
+            label: Collegamento
+            readonly: true
+      - name: tesi
+        type: object
+        label: Tesi
+        fields:
+          - name: name
+            type: string
+            label: Nome
+          - name: icon
+            type: reference
+            label: Icona
+            options:
+              collection: icon-options
+              value: '{lucideId}'
+              label: '{label}'
+          - name: href
+            type: string
+            label: Collegamento
+            readonly: true
+      - name: contact
+        type: object
+        label: Contatto
+        fields:
+          - name: name
+            type: string
+            label: Nome
+          - name: icon
+            type: reference
+            label: Icona
+            options:
+              collection: icon-options
+              value: '{lucideId}'
+              label: '{label}'
+          - name: href
+            type: string
+            label: Collegamento
+            readonly: true
+
+  - name: nav
+    label: Navigazione
+    type: file
+    path: src/data/cms/nav.json
+    format: json
+    fields:
+      - name: more
+        type: string
+        label: Etichetta Altro
+      - name: sponsor
+        type: string
+        label: Etichetta Sponsor
+      - name: sponsorIcon
+        type: reference
+        label: Icona Sponsor
+        options:
+          collection: icon-options
+          value: '{lucideId}'
+          label: '{label}'
+      - name: register
+        type: string
+        label: Bottone Iscriviti
+      - name: registerIcon
+        type: reference
+        label: Icona Iscriviti
+        options:
+          collection: icon-options
+          value: '{lucideId}'
+          label: '{label}'
+
+  - name: sponsor
+    label: Pagina Sponsor
+    type: file
+    path: src/data/cms/sponsor.json
+    format: json
+    fields:
+      - name: heroHeading
+        type: string
+        label: Titolo Hero
+      - name: heroSubtitle
+        type: string
+        label: Sottotitolo Hero
+      - name: ctaHeading
+        type: string
+        label: Titolo CTA
+      - name: ctaGradientWord
+        type: string
+        label: Parola Gradient CTA
+      - name: ctaSupport
+        type: text
+        label: Testo Supporto CTA
+      - name: ctaDossier
+        type: text
+        label: Testo Dossier CTA
+      - name: ctaButton
+        type: string
+        label: Bottone CTA
+      - name: ctaContact
+        type: string
+        label: Contatto CTA
+      - name: downloadBadge
+        type: string
+        label: Badge Download
+      - name: downloadHeading
+        type: string
+        label: Titolo Download
+      - name: downloadDescription
+        type: text
+        label: Descrizione Download
+      - name: downloadButton
+        type: string
+        label: Bottone Download
+      - name: downloadFile
+        type: file
+        label: File Press Kit (PDF)
+        options:
+          media: downloads
+
+  - name: iaps
+    label: Sezione IAPS
+    type: file
+    path: src/data/cms/iaps.json
+    format: json
+    fields:
+      - name: badge
+        type: string
+        label: Badge
+      - name: heading
+        type: string
+        label: Titolo
+      - name: gradientWord
+        type: string
+        label: Parola Gradient
+      - name: description
+        type: text
+        label: Descrizione
+      - name: details
+        type: text
+        label: Dettagli
+
+  - name: bologna
+    label: Sezione Bologna
+    type: file
+    path: src/data/cms/bologna.json
+    format: json
+    fields:
+      - name: badge
+        type: string
+        label: Badge
+      - name: heading
+        type: string
+        label: Titolo
+      - name: gradientWord
+        type: string
+        label: Parola Gradient
+      - name: eras
+        type: object
+        label: Ere
+        list: true
+        fields:
+          - name: era
+            type: string
+            label: Era
+          - name: title
+            type: string
+            label: Titolo
+          - name: paragraphs
+            type: text
+            label: Paragrafi
+            list: true
+          - name: icon
+            type: reference
+            label: Icona
+            options:
+              collection: icon-options
+              value: '{lucideId}'
+              label: '{label}'
+
+  - name: theme
+    label: Sezione Tema
+    type: file
+    path: src/data/cms/theme.json
+    format: json
+    fields:
+      - name: badge
+        type: string
+        label: Badge
+      - name: name
+        type: string
+        label: Nome
+      - name: description
+        type: text
+        label: Descrizione
+      - name: pillars
+        type: object
+        label: Pilastri
+        list: true
+        fields:
+          - name: title
+            type: string
+            label: Titolo
+          - name: description
+            type: text
+            label: Descrizione
+          - name: icon
+            type: reference
+            label: Icona
+            options:
+              collection: icon-options
+              value: '{lucideId}'
+              label: '{label}'
+
+  - name: pricing
+    label: Prezzi
+    type: file
+    path: src/data/cms/pricing.json
+    format: json
+    list: true
+    fields:
+      - name: plan
+        type: string
+        label: Piano
+      - name: price
+        type: string
+        label: Prezzo
+      - name: features
+        type: string
+        label: Caratteristiche
+        list: true
+
+  - name: footer
+    label: Footer
+    type: file
+    path: src/data/cms/footer.json
+    format: json
+    fields:
+      - name: rights
+        type: string
+        label: Diritti
+      - name: links
+        type: string
+        label: Link
+      - name: contacts
+        type: string
+        label: Contatti
+      - name: location
+        type: string
+        label: Sede
+      - name: partners
+        type: string
+        label: Partner
+
+  - name: error
+    label: Pagina Errore
+    type: file
+    path: src/data/cms/error.json
+    format: json
+    fields:
+      - name: error404Message
+        type: string
+        label: Messaggio 404
+      - name: label
+        type: string
+        label: Etichetta
+      - name: button
+        type: string
+        label: Bottone
+      - name: errorPageTitlePrefix
+        type: string
+        label: Prefisso Titolo Pagina
+      - name: defaultMessage
+        type: string
+        label: Messaggio Predefinito
+
+media:
+  - name: partner-images
+    label: Immagini Partner
+    input: src/assets/images/partners
+    output: ../assets/images/partners
+    categories: [image]
+    rename: safe
+  - name: structure-images
+    label: Immagini Strutture
+    input: src/assets/images/structures
+    output: ../assets/images/structures
+    categories: [image]
+    rename: safe
+  - name: committee-images
+    label: Immagini Comitato
+    input: src/assets/images/committee
+    output: ../assets/images/committee
+    categories: [image]
+    rename: safe
+  - name: downloads
+    label: Documenti e Download
+    input: public/download
+    output: /download
+    categories: [document]
+    rename: safe

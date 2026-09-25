@@ -1,0 +1,27 @@
+{
+  "badge": "Tema",
+  "name": "Le Traiettorie della Fisica",
+  "description": "In un panorama scientifico sempre più iperspecializzato, dove i confini tra le discipline si fanno sfumati, la sfida per le nuove generazioni di fisicə non è solo studiare il mondo, ma trovare il proprio posto in esso. CISF27 nasce con l'obiettivo di colmare il vuoto tra l'aula universitaria e le infinite traiettorie professionali possibili. Durante la settimana di CISF27, l'Associazione Italiana degli Studenti di Fisica intende offrire una bussola a chi cerca orientamento, esplorando la fisica oltre i confini accademici. Attraverso quattro pilastri fondamentali — Storia, Energia, Ricerca e Innovazione — verrà tracciata una mappa delle carriere del futuro, a dimostrazione di come una laurea in fisica rappresenti il punto di partenza per infinite direzioni.",
+  "pillars": [
+    {
+      "title": "Storia",
+      "description": "Le grandi figure della fisica bolognese — Laura Bassi, Guglielmo Marconi, Luigi Galvani — e gli esperimenti che hanno segnato la storia della scienza, per ispirare e animare lo spirito scientifico.",
+      "icon": "book-open"
+    },
+    {
+      "title": "Energia",
+      "description": "Una tavola rotonda per esplorare le molteplici strade che può intraprendere unə fisicə: dalla ricerca accademica alla programmazione, dalla divulgazione all'economia.",
+      "icon": "zap"
+    },
+    {
+      "title": "Ricerca",
+      "description": "Visite ai laboratori dei principali centri di ricerca del territorio: INFN, INGV, INAF, Cineca ecc.",
+      "icon": "flask-conical"
+    },
+    {
+      "title": "Innovazione",
+      "description": "Il futuro della fisica e le opportunità lavorative e di ricerca che il territorio offre, per formare una nuova generazione di figure chiave per la società.",
+      "icon": "lightbulb"
+    }
+  ]
+}

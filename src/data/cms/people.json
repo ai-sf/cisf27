@@ -1,0 +1,117 @@
+[
+  {
+    "name": "CISF27",
+    "role": "contatto-principale",
+    "email": "cisf27@ai-sf.it",
+    "isCommittee": false,
+    "isContact": true
+  },
+  {
+    "name": "Francesco Isgrò",
+    "role": "coordinatore-fra",
+    "image": "../assets/images/committee/whatsapp-image-2026-09-14-at-213145.jpeg",
+    "email": "francesco.isgrò@ai-sf.it",
+    "phone": "+39 3345243386",
+    "isCommittee": true,
+    "isContact": true
+  },
+  {
+    "name": "Alessandro D'Agostino",
+    "role": "coordinatore-ale",
+    "image": "../assets/images/committee/alessandro.png",
+    "email": "alessandro.dagostino@ai-sf.it",
+    "phone": "+39 3287727112",
+    "isCommittee": true,
+    "isContact": true
+  },
+  {
+    "name": "Maria Rosaria Sivo",
+    "role": "responsabile-sponsor",
+    "email": "mariarosaria.sivo@ai-sf.it",
+    "phone": "+39 3930602223",
+    "isCommittee": true,
+    "isContact": true
+  },
+  {
+    "name": "Diego Ficarra",
+    "role": "responsabile-sponsor",
+    "image": "../assets/images/committee/immagine2026-07-17175353408.png",
+    "email": "diego.ficarra@ai-sf.it",
+    "phone": "+39 3393492622",
+    "isCommittee": true,
+    "isContact": true
+  },
+  {
+    "name": "Giulia Provenzale",
+    "role": "responsabile-spazi",
+    "email": "giulia.provenzale@ai-sf.it",
+    "isCommittee": true,
+    "isContact": false
+  },
+  {
+    "name": "Tomislav Vojvodić",
+    "role": "responsabile-logistica",
+    "email": "tomislav.vojvodic@ai-sf.it",
+    "phone": "+39 3513112448",
+    "isCommittee": true,
+    "isContact": false
+  },
+  {
+    "name": "Chiara Luppino",
+    "role": "responsabile-laboratori",
+    "email": "chiara.luppino@ai-sf.it",
+    "isCommittee": true,
+    "isContact": false
+  },
+  {
+    "name": "Marco Carbone",
+    "role": "responsabile-tesoreria",
+    "email": "marco.carbone@ai-sf.it",
+    "isCommittee": true,
+    "isContact": false
+  },
+  {
+    "name": "Gaia Gamberini",
+    "role": "responsabile-grafico",
+    "isCommittee": true,
+    "isContact": false
+  },
+  {
+    "name": "Marta Grenno",
+    "role": "responsabile-programma",
+    "email": "marta.grenno@ai-sf.it",
+    "isCommittee": true,
+    "isContact": false
+  },
+  {
+    "name": "Ludovica Rainero",
+    "role": "responsabile-tema",
+    "image": "../assets/images/committee/ludovica-1.jpeg",
+    "email": "ludovica.rainero@ai-sf.it",
+    "phone": "+39 3289144795",
+    "isCommittee": true,
+    "isContact": false
+  },
+  {
+    "name": "Francesca Torelli",
+    "role": "responsabile-pasti",
+    "email": "francescateresa.torelli@ai-sf.it",
+    "isCommittee": true,
+    "isContact": false
+  },
+  {
+    "name": "Tommaso Contadini",
+    "role": "responsabile-eventi-sociali",
+    "isCommittee": true,
+    "isContact": false
+  },
+  {
+    "name": "Alessandro Amalfitani",
+    "role": "collaboratore-organizzativo",
+    "image": "../assets/images/committee/immagine2026-07-17182811419.png",
+    "email": "alessandro.amalfitani@ai-sf.it",
+    "phone": "+39 3917587874",
+    "isCommittee": true,
+    "isContact": false
+  }
+]

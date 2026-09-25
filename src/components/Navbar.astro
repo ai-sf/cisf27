@@ -1,0 +1,201 @@
+---
+import { Image } from 'astro:assets';
+import { EllipsisVertical, Ellipsis } from '@lucide/astro';
+import { resolveIcon } from '../utils/helpers';
+import { contactLink, homeLink, pageLinks } from '../data/pageLinks.ts';
+import { conference, nav } from '../data/cms';
+import cisfLogo from '../assets/images/logo.png';
+
+const { pathname } = Astro.url;
+const currentPage = pathname || '/';
+
+const normalize = (path: string): string => {
+	const p = path.split('?')[0].split('#')[0];
+	return p.length > 1 ? p.replace(/\/+$/, '') : p;
+};
+
+const baseNormalized = normalize(import.meta.env.BASE_URL || '/');
+
+const isActive = (page: string): boolean => {
+	const current = normalize(currentPage);
+	const target = normalize(page);
+	if (target === '/' || target === baseNormalized) {
+		return current === '/' || current === baseNormalized;
+	}
+	return current === target || current.startsWith(target + '/');
+};
+
+const SponsorIcon = resolveIcon(nav.sponsorIcon);
+const RegisterIcon = resolveIcon(nav.registerIcon);
+---
+
+<!-- Desktop navigation -->
+<nav
+	class="navbar animate-nav-slide bg-base-100/80 sticky top-0 z-50 hidden backdrop-blur-md transition-all duration-300 sm:flex"
+>
+	<div class="navbar-start">
+		<!-- Logo -->
+		<a href={homeLink.href}>
+			<Image src={cisfLogo} alt={conference.title + ' Logo'} class="h-10 w-auto" />
+		</a>
+	</div>
+
+	<!-- Navigation -->
+	<div class="navbar-center flex">
+		<ul class="menu menu-horizontal">
+			{
+				pageLinks.map((link, i) => {
+					const Icon = link.icon;
+					return (
+						<li>
+							<a
+								href={link.href}
+								class={[
+									'btn',
+									isActive(link.href) ? 'btn-primary btn-soft' : 'btn-ghost',
+									i > 3
+										? 'hidden xl:inline-flex'
+										: i > 1
+											? 'hidden lg:inline-flex'
+											: i > 0
+												? 'hidden md:inline-flex'
+												: '',
+								].join(' ')}
+							>
+								{Icon && <Icon class="size-4" />}
+								{link.name}
+							</a>
+						</li>
+					);
+				})
+			}
+
+			<li>
+				<button
+					class="btn btn-ghost xl:hidden"
+					popovertarget="desktop-nav-popover"
+					style="anchor-name:--desktop-nav-anchor"
+				>
+					<EllipsisVertical class="size-4" />
+					{nav.more}
+				</button>
+			</li>
+		</ul>
+	</div>
+
+	<!-- CTA button -->
+	<div class="navbar-end gap-2">
+		<a
+			href={`${contactLink.href}?tipo=sponsor`}
+			class="btn btn-primary btn-sm sm:btn-md shadow-primary/20 hover:shadow-primary/40 card-interactive glow-hover shadow-lg"
+		>
+			{SponsorIcon && <SponsorIcon class="size-4" />}
+			{nav.sponsor}
+		</a>
+		<a
+			href={`${homeLink.href}#registrati`}
+			class="btn btn-primary btn-outline btn-sm sm:btn-md shadow-primary/20 hover:shadow-primary/40 card-interactive shadow-lg"
+		>
+			{RegisterIcon && <RegisterIcon class="size-4" />}
+			{nav.register}
+		</a>
+	</div>
+</nav>
+
+<ul
+	class="dropdown menu rounded-box bg-base-100 dropdown-bottom dropdown-center w-52 shadow-sm"
+	popover
+	id="desktop-nav-popover"
+	style="position-anchor:--desktop-nav-anchor"
+>
+	{
+		pageLinks.map((link, i) => {
+			const Icon = link.icon;
+			return (
+				<li>
+					<a
+						href={link.href}
+						class={[
+							'btn',
+							isActive(link.href) ? 'btn-primary btn-soft' : 'btn-ghost',
+							i > 3
+								? 'xl:hidden'
+								: i > 1
+									? 'lg:hidden'
+									: i > 0
+										? 'md:hidden'
+										: i === 0
+											? 'hidden'
+											: '',
+						].join(' ')}
+					>
+						{Icon && <Icon class="size-4" />}
+						{link.name}
+					</a>
+				</li>
+			);
+		})
+	}
+</ul>
+
+<!-- Mobile navigation -->
+<div class="dock animate-dock-slide z-50 sm:hidden">
+	{
+		pageLinks.slice(0, 4).map((link) => {
+			const Icon = link.icon;
+			return (
+				<a href={link.href} class={isActive(link.href) ? 'dock-active' : ''}>
+					{Icon && <Icon class="size-[1.2em]" />}
+					<span class="dock-label">{link.name}</span>
+				</a>
+			);
+		})
+	}
+
+	<button popovertarget="mobile-nav-popover" style="anchor-name:--mobile-nav-anchor">
+		<Ellipsis class="size-[1.2em]" />
+		<span class="dock-label">{nav.more}</span>
+	</button>
+</div>
+
+<ul
+	class="dropdown menu rounded-box bg-base-100 dropdown-top dropdown-start w-52 shadow-sm"
+	popover
+	id="mobile-nav-popover"
+	style="position-anchor:--mobile-nav-anchor"
+>
+	{
+		pageLinks.slice(4).map((link) => {
+			const Icon = link.icon;
+			return (
+				<li>
+					<a href={link.href} class={isActive(link.href) ? 'dock-active' : ''}>
+						{Icon && <Icon class="size-4" />}
+						{link.name}
+					</a>
+				</li>
+			);
+		})
+	}
+	<li class="menu-title">
+		<span class="text-base-content/40 text-xs font-semibold uppercase">Azioni</span>
+	</li>
+	<li class="mb-2">
+		<a
+			href={`${contactLink.href}?tipo=sponsor`}
+			class="btn btn-primary btn-sm shadow-primary/20 glow-hover mx-2 shadow-lg"
+		>
+			{SponsorIcon && <SponsorIcon class="size-4" />}
+			{nav.sponsor}
+		</a>
+	</li>
+	<li>
+		<a
+			href={`${homeLink.href}#registrati`}
+			class="btn btn-primary btn-outline btn-sm shadow-primary/20 mx-2 shadow-lg"
+		>
+			{RegisterIcon && <RegisterIcon class="size-4" />}
+			{nav.register}
+		</a>
+	</li>
+</ul>

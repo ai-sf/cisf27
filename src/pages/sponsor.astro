@@ -1,0 +1,106 @@
+---
+import { Download, Handshake, Heart, ArrowRight, ExternalLink } from '@lucide/astro';
+import PageLayout from '../layouts/PageLayout.astro';
+import HeroSection from '../components/HeroSection.astro';
+import CTASection from '../components/CTASection.astro';
+import PartnerGrid from '../components/PartnerGrid.astro';
+import SectionBadge from '../components/SectionBadge.astro';
+import GradientSpan from '../components/GradientSpan.astro';
+import { sponsor } from '../data/cms';
+import { contactLink, sponsorLink } from '../data/pageLinks.ts';
+
+const rawDownloadUrl =
+	sponsor.downloadFile || sponsor.downloadUrl || '/download/press-kit_cisf27.pdf';
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const downloadHref = rawDownloadUrl.startsWith(base)
+	? rawDownloadUrl
+	: `${base}${rawDownloadUrl.startsWith('/') ? '' : '/'}${rawDownloadUrl}`;
+---
+
+<PageLayout title={sponsorLink.name}>
+	<HeroSection
+		icon={Handshake}
+		label={sponsorLink.name}
+		badgeClass="badge-warning"
+		heading={sponsor.heroHeading}
+		headingClass="from-warning to-primary"
+		bgClass="from-warning/5 to-primary/5"
+		subtitle={sponsor.heroSubtitle}
+	/>
+
+	<PartnerGrid />
+
+	<!-- Download Press Kit -->
+	<section class="reveal bg-base-100 py-24">
+		<div class="container mx-auto px-4 lg:px-8">
+			<div class="mx-auto max-w-2xl">
+				<div
+					class="card card-border border-primary/30 from-warning/10 to-primary/10 bg-linear-to-br p-8 text-center lg:p-12"
+				>
+					<div
+						class="from-warning/20 to-primary/20 mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-2xl bg-linear-to-br"
+					>
+						<Download class="text-warning size-7" />
+					</div>
+					<div class="flex justify-center">
+						<SectionBadge
+							icon={Download}
+							label={sponsor.downloadBadge}
+							badgeClass="badge-warning"
+						/>
+					</div>
+					<h2 class="mt-4 mb-4 text-3xl font-bold">{sponsor.downloadHeading}</h2>
+					<p class="text-base-content/60 mb-8 text-lg leading-relaxed">
+						{sponsor.downloadDescription}
+					</p>
+					<a
+						href={downloadHref}
+						download
+						class="btn btn-warning btn-lg shadow-warning/25 hover:shadow-warning/40 gap-2 shadow-xl"
+					>
+						<Download class="size-5" />
+						{sponsor.downloadButton}
+						<ExternalLink class="size-4" />
+					</a>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<CTASection bgClass="from-warning/10 via-base-100 to-primary/10">
+		<Fragment slot="icon">
+			<Heart class="text-warning mx-auto mb-6 size-16" />
+		</Fragment>
+		<Fragment slot="heading">
+			<h2 class="mb-6 text-4xl font-bold md:text-5xl">
+				{sponsor.ctaHeading}<GradientSpan gradient="from-warning to-primary" class="char-stagger"
+					>{sponsor.ctaGradientWord}</GradientSpan
+				>
+			</h2>
+		</Fragment>
+		<Fragment slot="subtitle">
+			<p class="text-base-content/70 mb-4 text-lg">
+				{sponsor.ctaSupport}
+			</p>
+			<p class="text-base-content/60 mb-10">
+				{sponsor.ctaDossier}
+			</p>
+		</Fragment>
+		<Fragment slot="actions">
+			<a
+				href={`${contactLink.href}?tipo=sponsor`}
+				class="btn btn-warning btn-lg shadow-warning/25 hover:shadow-warning/40 card-interactive glow-hover gap-2 shadow-xl"
+			>
+				<Handshake class="size-5" />
+				{sponsor.ctaButton}
+			</a>
+			<a
+				href={contactLink.href}
+				class="btn btn-outline btn-lg hover:bg-warning/10 hover:border-warning hover:text-warning gap-2"
+			>
+				{sponsor.ctaContact}
+				<ArrowRight class="size-4" />
+			</a>
+		</Fragment>
+	</CTASection>
+</PageLayout>

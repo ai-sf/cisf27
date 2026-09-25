@@ -1,0 +1,57 @@
+{
+  "name": "cisf27",
+  "type": "module",
+  "version": "0.0.1",
+  "homepage": "https://ai-sf.it/cisf27",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ai-sf/cisf27.git"
+  },
+  "engines": {
+    "node": ">=22.12.0"
+  },
+  "scripts": {
+    "typecheck": "astro check && svelte-check --no-tsconfig",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "format": "prettier .",
+    "format:write": "prettier . --write",
+    "flint": "pnpm run format:write && pnpm run lint:fix",
+    "check": "pnpm run flint && pnpm run typecheck",
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "packageManager": "pnpm@11.7.0+sha512.19cc852c120c7125760f2443ee6be0ca5b40f9f50598de1a09a1f177503e010e57c23c77646e01e761de59bf874fb22a3398c33ab9691fc13eb946b6f0f4d620",
+  "dependencies": {
+    "@astrojs/sitemap": "^3.7.3",
+    "@astrojs/svelte": "^8.1.2",
+    "@fontsource/nunito": "^5.2.7",
+    "@fontsource/playfair-display": "^5.2.8",
+    "@lucide/astro": "^1.23.0",
+    "@lucide/svelte": "^1.23.0",
+    "@tailwindcss/vite": "^4.3.2",
+    "astro": "^6.4.8",
+    "daisyui": "^5.6.14",
+    "sharp": "^0.35.3",
+    "svelte": "^5.56.4",
+    "tailwindcss": "^4.3.2"
+  },
+  "devDependencies": {
+    "@astrojs/check": "^0.9.9",
+    "@eslint/js": "^10.0.1",
+    "eslint": "^10.6.0",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-astro": "^1.7.0",
+    "eslint-plugin-svelte": "^3.20.0",
+    "globals": "^17.7.0",
+    "prettier": "^3.9.4",
+    "prettier-plugin-astro": "^0.14.1",
+    "prettier-plugin-svelte": "^4.1.1",
+    "prettier-plugin-tailwindcss": "^0.8.0",
+    "svelte-check": "^4.7.3",
+    "typescript": "^6.0.3",
+    "typescript-eslint": "^8.63.0"
+  }
+}

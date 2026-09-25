@@ -1,0 +1,9 @@
+{
+  "home": { "name": "Home", "icon": "house", "href": "/cisf27/" },
+  "about": { "name": "Chi Siamo", "icon": "users", "href": "/cisf27/chi-siamo" },
+  "program": { "name": "Programma", "icon": "calendar", "href": "/cisf27/programma" },
+  "structures": { "name": "Strutture", "icon": "hotel", "href": "/cisf27/strutture" },
+  "sponsor": { "name": "Sponsor", "icon": "handshake", "href": "/cisf27/sponsor" },
+  "tesi": { "name": "Tesi", "icon": "book-open", "href": "/cisf27/tesi" },
+  "contact": { "name": "Contatto", "icon": "mail", "href": "/cisf27/contatto" }
+}

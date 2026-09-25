@@ -1,0 +1,47 @@
+{
+  "heroSubtitle": "Scopri la storia e la missione della Conferenza Italiana Studenti di Fisica",
+  "aisfBadge": "L'AISF",
+  "aisfHeading": "Associazione Italiana degli",
+  "aisfGradientWord": "Studenti di Fisica",
+  "aisfRole": "AISF rappresenta un punto di riferimento per gli studenti di fisica in Italia, promuovendo la collaborazione e lo scambio culturale tra gli iscritti alle varie università del Paese.",
+  "cisfBadge": "CISF",
+  "cisfHeading": "Cos'è la ",
+  "cisfGradientWord": "CISF",
+  "cisfEditions": "Ogni edizione porta gli studenti in una nuova città italiana, offrendo loro l'opportunità di scoprire la cultura locale e il comitato ospitante, mentre partecipano ad eventi scientifici di alto livello.",
+  "historyBadge": "Storia",
+  "historyHeading": "Le Edizioni ",
+  "historyGradientWord": "Passate",
+  "currentBadge": "Ora",
+  "historyPauseYears": "2021 – 2022",
+  "historyPauseLabel": "Pausa edizioni",
+  "committeeBadge": "Comitato",
+  "committeeHeading": "Il ",
+  "committeeGradientWord": "Comitato Organizzatore",
+  "committeeSubtitle": "Le persone che rendono possibile CISF27",
+  "ctaHeading": "Hai ",
+  "ctaGradientWord": "Domande?",
+  "ctaText": "Non esitare a contattarci per qualsiasi informazione su CISF27",
+  "ctaButton": "Inviaci un Messaggio",
+  "cisfFeatures": {
+    "seminari": {
+      "title": "Seminari Scientifici",
+      "description": "Da esperti nazionali e internazionali",
+      "icon": "graduation-cap"
+    },
+    "laboratori": {
+      "title": "Tour Laboratori",
+      "description": "Visita strutture di eccellenza",
+      "icon": "building-2"
+    },
+    "sociali": {
+      "title": "Eventi Sociali",
+      "description": "Serate e attività in città",
+      "icon": "users"
+    },
+    "aga": {
+      "title": "AGA AISF",
+      "description": "Assemblea Generale Annuale",
+      "icon": "book-open"
+    }
+  }
+}

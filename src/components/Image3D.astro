@@ -1,0 +1,25 @@
+---
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from '../types/astro';
+
+interface Props {
+	src: ImageMetadata;
+	alt: string;
+	class?: string;
+	href?: string;
+}
+
+const hover3dClass = 'hover-3d';
+const { src, alt, class: cls, href } = Astro.props;
+const Tag = href ? 'a' : 'div';
+---
+
+<Tag class={`${hover3dClass}${cls ? ' ' + cls : ''}`} {...href ? { href } : {}}>
+	<figure class="rounded-box overflow-hidden">
+		<div class="rounded-box overflow-hidden">
+			<Image {src} {alt} class="w-full" />
+		</div>
+	</figure>
+	<div></div><div></div><div></div><div></div>
+	<div></div><div></div><div></div><div></div>
+</Tag>
