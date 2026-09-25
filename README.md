@@ -17,7 +17,7 @@ pnpm install
 1. **Google Apps Script** - segui la [guida](#google-apps-script-modulo-contatti) per creare il Form e pubblicare la Web App.
 2. **Configura ambiente** - copia `.env.example` in `.env` e imposta `PUBLIC_GOOGLE_SCRIPT_URL` ([variabili d'ambiente](#variabili-dambiente)).
 3. **Build** - `pnpm run build`. L'output statico è in `dist/`.
-4. **Deploy** - Il deploy è automatizzato su GitHub Pages tramite GitHub Actions su ogni push su `master`. In alternativa, carica `dist/` su Cloudflare Pages, Netlify o qualsiasi hosting statico. Imposta `PUBLIC_GOOGLE_SCRIPT_URL` nei secrets/variabili di GitHub o sulla piattaforma di hosting.
+4. **Deploy** - carica `dist/` su Cloudflare Pages, Netlify, o qualsiasi hosting statico. Imposta `PUBLIC_GOOGLE_SCRIPT_URL` come variabile d'ambiente sulla piattaforma.
 
 ---
 
@@ -79,8 +79,7 @@ pnpm install
 │   └── utils/
 │
 ├── .github/workflows/
-│   ├── ci.yml                  # CI: formato, typecheck e lint su push/PR
-│   └── deploy.yml              # Deploy: build e auto-deploy su GitHub Pages
+│   └── lint.yml                # CI: formato + lint su push/PR
 │
 └── dist/                       # Output di build (gitignorato)
 ```
@@ -164,40 +163,42 @@ In aggiunta, se è configurata la proprietà `FORM_ID`, i dati inviati vengono a
 ### Setup Iniziale & Configurazione Web App
 
 1. **Copia il codice:**
-   - Incolla il contenuto di [google-apps-script/Code.js](google-apps-script/Code.js) nell'editor di Google Apps Script (oppure usa `clasp push`).
-   - Assicurati che il manifest [google-apps-script/appsscript.json](google-apps-script/appsscript.json) includa gli scope `script.send_mail` e `forms` e `executeAs: "USER_DEPLOYING"`.
+
+- Incolla il contenuto di [google-apps-script/Code.js](google-apps-script/Code.js) nell'editor di Google Apps Script (oppure usa `clasp push`).
+- Assicurati che il manifest [google-apps-script/appsscript.json](google-apps-script/appsscript.json) includa gli scope `script.send_mail` e `forms` e `executeAs: "USER_DEPLOYING"`.
 
 2. **(Opzionale) Collega il Google Form di riserva:**
-   - Se desideri salvare anche le risposte nel Form, crea un Google Form con i campi: `Nome e Cognome`, `Email`, `Oggetto` (a scelta multipla), `Messaggio`.
-   - In Apps Script: **Impostazioni progetto ➔ Proprietà script (Script Properties)**.
-   - Aggiungi la proprietà `FORM_ID` con l'ID del form (estratto dall'URL: `https://docs.google.com/forms/d/<FORM_ID>/edit`).
+
+- Se desideri salvare anche le risposte nel Form, crea un Google Form con i campi: `Nome e Cognome`, `Email`, `Oggetto` (a scelta multipla), `Messaggio`.
+- In Apps Script: **Impostazioni progetto ➔ Proprietà script (Script Properties)**.
+- Aggiungi la proprietà `FORM_ID` con l'ID del form (estratto dall'URL: `https://docs.google.com/forms/d/<FORM_ID>/edit`).
 
 3. **Autorizzazione Permessi OAuth (FONDAMENTALE):**
    Prima di pubblicare o testare la Web App, lo script deve essere autorizzato a inviare email:
-   1. Nella barra degli strumenti dell'editor Apps Script, seleziona la funzione **`authorizeScript`** dal menu a tendina delle funzioni.
-   2. Clicca su **Esegui (Run)**.
-   3. Comparirà il pop-up **"Autorizzazione richiesta"** (_Authorization Required_).
-   4. Clicca su **"Esamina autorizzazioni"** (_Review permissions_) e seleziona l'account Google associato (`cisf27@ai-sf.it` o il proprio account).
-   5. Se Google mostra la schermata _"Google non ha verificato questa app"_ (_Google hasn't verified this app_):
-      - Clicca su **Avanzate** (_Advanced_ in basso a sinistra).
-      - Clicca su **Apri CISF27 (non sicura)** (_Go to CISF27 (unsafe)_).
-   6. Clicca su **Consenti** (_Allow_).
-   7. Nel log di esecuzione in basso apparirà: `Autorizzazione completata con successo! Quota email rimanente: ...`.
+1. Nella barra degli strumenti dell'editor Apps Script, seleziona la funzione **`authorizeScript`** dal menu a tendina delle funzioni.
+1. Clicca su **Esegui (Run)**.
+1. Comparirà il pop-up **"Autorizzazione richiesta"** (_Authorization Required_).
+1. Clicca su **"Esamina autorizzazioni"** (_Review permissions_) e seleziona l'account Google associato (`cisf27@ai-sf.it` o il proprio account).
+1. Se Google mostra la schermata _"Google non ha verificato questa app"_ (_Google hasn't verified this app_): - Clicca su **Avanzate** (_Advanced_ in basso a sinistra). - Clicca su **Apri CISF27 (non sicura)** (_Go to CISF27 (unsafe)_).
+1. Clicca su **Consenti** (_Allow_).
+1. Nel log di esecuzione in basso apparirà: `Autorizzazione completata con successo! Quota email rimanente: ...`.
 
-4. **Distribuzione come Web App:**
-   - Clicca in alto a destra su **Distribuisci ➔ Nuova distribuzione** (o _Gestisci distribuzioni_ se già esistente).
-   - Tipo: **Applicazione web (Web App)**.
-   - **Esegui come (Execute as):** **`Me` / `Io` (`USER_DEPLOYING`)**  
-     _(⚠️ CRITICO: NON selezionare `Utente che accede all'app web` / `USER_ACCESSING`, altrimenti i visitatori anonimi del sito non potranno inviare l'email)._
-   - **Chi può accedere (Who has access):** **`Chiunque` / `Anyone` (`ANYONE`)**.
-   - Clicca su **Distribuisci** e copia l'**URL dell'applicazione web**.
+1. **Distribuzione come Web App:**
+
+- Clicca in alto a destra su **Distribuisci ➔ Nuova distribuzione** (o _Gestisci distribuzioni_ se già esistente).
+- Tipo: **Applicazione web (Web App)**.
+- **Esegui come (Execute as):** **`Me` / `Io` (`USER_DEPLOYING`)**  
+  _(⚠️ CRITICO: NON selezionare `Utente che accede all'app web` / `USER_ACCESSING`, altrimenti i visitatori anonimi del sito non potranno inviare l'email)._
+- **Chi può accedere (Who has access):** **`Chiunque` / `Anyone` (`ANYONE`)**.
+- Clicca su **Distribuisci** e copia l'**URL dell'applicazione web**.
 
 5. **Configura la variabile d'ambiente:**
-   - Inserisci l'URL in `.env` come:
-     ```sh
-     PUBLIC_GOOGLE_SCRIPT_URL=https://script.google.com/macros/s/<DEPLOYMENT_ID>/exec
-     ```
-   - Imposta la stessa variabile anche sul pannello di hosting di produzione (es. Cloudflare Pages).
+
+- Inserisci l'URL in `.env` come:
+  ```sh
+  PUBLIC_GOOGLE_SCRIPT_URL=https://script.google.com/macros/s/<DEPLOYMENT_ID>/exec
+  ```
+- Imposta la stessa variabile anche sul pannello di hosting di produzione (es. Cloudflare Pages).
 
 ---
 
@@ -212,11 +213,30 @@ Questo errore si verifica in due casi:
 
 1. **I permessi OAuth non sono stati autorizzati**: esegui la funzione `authorizeScript` dall'editor Apps Script seguendo il passaggio 3 della guida sopra.
 2. **La Web App è distribuita come "Utente che accede" anziché "Io"**:
-   - Vai su **Distribuisci ➔ Gestisci distribuzioni**.
-   - Clicca sull'icona della **matita (Modifica)**.
-   - Assicurati che **Esegui come** sia impostato su **Io (`USER_DEPLOYING`)**.
-   - Nella tendina **Versione**, seleziona **Nuova versione** (obbligatorio per applicare le modifiche al codice).
-   - Clicca **Distribuisci**.
+
+- Vai su **Distribuisci ➔ Gestisci distribuzioni**.
+- Clicca sull'icona della **matita (Modifica)**.
+- Assicurati che **Esegui come** sia impostato su **Io (`USER_DEPLOYING`)**.
+- Nella tendina **Versione**, seleziona **Nuova versione** (obbligatorio per applicare le modifiche al codice).
+- Clicca **Distribuisci**.
+
+#### Risoluzione: Il Google Form non registra le risposte
+
+Se le email arrivano ma le risposte non compaiono nel Google Form:
+
+1. **Verifica diagnostica da browser**: Apri l'URL della Web App (`.../exec`) nel browser. La risposta JSON mostrerà se `FORM_ID` è configurato correttamente, se è accessibile e l'elenco delle domande rilevate.
+2. **Esegui il test manuale in Apps Script**:
+
+- Nell'editor Google Apps Script, seleziona la funzione **`testFormSubmission`** e clicca su **Esegui**.
+- Controlla il log di esecuzione in basso: se c'è un errore o un problema di permessi, verrà mostrato il dettaglio esatto.
+
+3. **Assicurati di aver concesso i permessi di Forms**:
+
+- Esegui la funzione **`authorizeScript`** per verificare che sia `MailApp` che `FormApp` abbiano ricevuto il consenso OAuth.
+
+4. **Ricorda di creare una Nuova Versione dopo aver modificato il codice**:
+
+- Ogni volta che modifichi `Code.js` in Apps Script, devi andare su **Distribuisci ➔ Gestisci distribuzioni ➔ Modifica (matita) ➔ Versione: Nuova versione ➔ Distribuisci**, altrimenti la Web App continuerà a eseguire il vecchio codice.
 
 ---
 

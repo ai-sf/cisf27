@@ -4,6 +4,13 @@ import { errorContent } from '../data/cms';
 export const SCRIPT_URL = import.meta.env.PUBLIC_GOOGLE_SCRIPT_URL;
 
 export async function contactForm(data: FormPayload): Promise<SubmitResult> {
+	if (!SCRIPT_URL) {
+		return {
+			success: false,
+			error: errorContent.defaultMessage ?? 'Endpoint del modulo non configurato.',
+		};
+	}
+
 	try {
 		const res = await fetch(SCRIPT_URL, {
 			method: 'POST',
@@ -13,14 +20,34 @@ export async function contactForm(data: FormPayload): Promise<SubmitResult> {
 			body: JSON.stringify(data),
 		});
 
-		const json = await res.json();
+		const contentType = res.headers.get('content-type') || '';
+		if (!res.ok && !contentType.includes('application/json')) {
+			return {
+				success: false,
+				error: errorContent.defaultMessage ?? 'Si è verificato un errore durante l’invio.',
+			};
+		}
 
-		if (json.status === 'success') {
+		const text = await res.text();
+		let json: { status?: string; message?: string } | null = null;
+		try {
+			json = JSON.parse(text);
+		} catch {
+			return {
+				success: false,
+				error: errorContent.defaultMessage ?? 'Risposta non valida dal server.',
+			};
+		}
+
+		if (json?.status === 'success') {
 			return { success: true };
 		}
 
-		return { success: false, error: json.message ?? errorContent.defaultMessage };
+		return { success: false, error: json?.message ?? errorContent.defaultMessage };
 	} catch (err) {
-		return { success: false, error: (err as Error).message ?? errorContent.defaultMessage };
+		return {
+			success: false,
+			error: errorContent.defaultMessage ?? (err as Error).message,
+		};
 	}
 }

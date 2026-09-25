@@ -17,14 +17,57 @@ const CC_MAP = {
 	Altro: ['francesco.isgrò@ai-sf.it', 'alessandro.dagostino@ai-sf.it'],
 };
 
+// Sinonimi per ciascun campo del form del sito per facilitare l'abbinamento con le domande del Google Form
+const FIELD_ALIASES = {
+	nome: ['nomeecognome', 'nome', 'cognome', 'fullname', 'name', 'nominativo'],
+	email: ['email', 'indirizzoemail', 'postaelettronica', 'mail'],
+	oggetto: ['oggetto', 'argomento', 'motivo', 'subject', 'tipologia', 'selezionaunargomento'],
+	messaggio: ['messaggio', 'testo', 'richiesta', 'message', 'note', 'contenuto'],
+};
+
+/**
+ * Gestione richieste GET (usato anche per diagnostica da browser).
+ */
 function doGet() {
+	let formDiagnostics = null;
+	try {
+		const rawFormId = PropertiesService.getScriptProperties().getProperty('FORM_ID');
+		if (rawFormId) {
+			const cleanId = extractFormId(rawFormId);
+			const form = FormApp.openById(cleanId);
+			formDiagnostics = {
+				configured: true,
+				formId: cleanId,
+				title: form.getTitle(),
+				items: form.getItems().map((item) => ({
+					title: item.getTitle(),
+					type: String(item.getType()),
+				})),
+			};
+		} else {
+			formDiagnostics = {
+				configured: false,
+				message: 'FORM_ID non configurato nelle Script Properties.',
+			};
+		}
+	} catch (err) {
+		formDiagnostics = {
+			configured: true,
+			error: 'Errore durante accesso al Google Form: ' + String(err.message || err),
+		};
+	}
+
 	return jsonOutput({
 		status: 'active',
 		service: 'CISF27 Contact Form Webhook',
 		recipient: MAIN_RECIPIENT,
+		form: formDiagnostics,
 	});
 }
 
+/**
+ * Gestione richieste POST (invio messaggio dal modulo contatti).
+ */
 function doPost(e) {
 	try {
 		if (!e || !e.postData || !e.postData.contents) {
@@ -103,16 +146,17 @@ Inviato tramite il modulo del sito https://ai-sf.it/cisf27`;
 			mailOptions.cc = ccString;
 		}
 
+		// 1. Invio email
 		MailApp.sendEmail(mailOptions);
 
-		// Opzionale: se presente FORM_ID, prova a salvare anche nel Google Form senza bloccare l'invio
+		// 2. Opzionale: se presente FORM_ID, prova a salvare nel Google Form
 		try {
-			const FORM_ID = PropertiesService.getScriptProperties().getProperty('FORM_ID');
-			if (FORM_ID) {
-				submitToForm(FORM_ID, { nome, email, oggetto, messaggio });
+			const rawFormId = PropertiesService.getScriptProperties().getProperty('FORM_ID');
+			if (rawFormId) {
+				submitToForm(rawFormId, { nome, email, oggetto, messaggio });
 			}
 		} catch (formErr) {
-			console.warn('Salvataggio form opzionale saltato:', formErr);
+			console.error('Salvataggio form opzionale non riuscito:', formErr);
 		}
 
 		return jsonOutput({ status: 'success' });
@@ -120,6 +164,162 @@ Inviato tramite il modulo del sito https://ai-sf.it/cisf27`;
 		console.error('Errore gestione richiesta:', err);
 		return jsonOutput({ status: 'error', message: String(err.message || err) });
 	}
+}
+
+/**
+ * Estrae l'ID alfanumerico pulito del form, anche se l'utente ha incollato l'URL completo.
+ */
+function extractFormId(raw) {
+	if (!raw) return '';
+	const trimmed = String(raw).trim();
+	const match = trimmed.match(/\/forms\/d\/(?:e\/)?([a-zA-Z0-9_-]+)/);
+	if (match && match[1]) {
+		return match[1];
+	}
+	const idMatch = trimmed.match(/^[a-zA-Z0-9_-]{20,}$/);
+	if (idMatch) {
+		return idMatch[0];
+	}
+	return trimmed;
+}
+
+/**
+ * Normalizza il testo rimuovendo spazi, asterischi (campi obbligatori), punteggiatura e convertendo in minuscolo.
+ */
+function normalizeTitle(title) {
+	return String(title || '')
+		.replace(/[\s\*\:\.\-\_\(\)\[\]]/g, '')
+		.trim()
+		.toLowerCase();
+}
+
+/**
+ * Trova la domanda corrispondente nel Google Form.
+ */
+function findFormItem(formItems, fieldKey) {
+	const aliases = FIELD_ALIASES[fieldKey] || [fieldKey];
+
+	// 1. Match esatto normalizzato
+	for (let i = 0; i < formItems.length; i++) {
+		const itemTitle = normalizeTitle(formItems[i].getTitle());
+		if (aliases.includes(itemTitle)) {
+			return formItems[i];
+		}
+	}
+
+	// 2. Match parziale (uno contiene l'altro)
+	for (let i = 0; i < formItems.length; i++) {
+		const itemTitle = normalizeTitle(formItems[i].getTitle());
+		for (let j = 0; j < aliases.length; j++) {
+			const alias = aliases[j];
+			if (itemTitle.includes(alias) || alias.includes(itemTitle)) {
+				return formItems[i];
+			}
+		}
+	}
+
+	return null;
+}
+
+/**
+ * Crea la risposta per una specifica domanda del Form in base al suo tipo.
+ */
+function createItemResponse(item, value) {
+	const itemType = item.getType();
+
+	if (itemType === FormApp.ItemType.TEXT) {
+		return item.asTextItem().createResponse(value);
+	}
+
+	if (itemType === FormApp.ItemType.PARAGRAPH_TEXT) {
+		return item.asParagraphTextItem().createResponse(value);
+	}
+
+	if (itemType === FormApp.ItemType.MULTIPLE_CHOICE) {
+		const mcItem = item.asMultipleChoiceItem();
+		const choices = mcItem.getChoices().map((c) => c.getValue());
+		const matchedChoice = choices.find((c) => normalizeTitle(c) === normalizeTitle(value));
+		if (matchedChoice) {
+			return mcItem.createResponse(matchedChoice);
+		}
+		const partial = choices.find(
+			(c) =>
+				c.toLowerCase().includes(value.toLowerCase()) ||
+				value.toLowerCase().includes(c.toLowerCase())
+		);
+		return mcItem.createResponse(partial || value);
+	}
+
+	if (itemType === FormApp.ItemType.LIST) {
+		const listItem = item.asListItem();
+		const choices = listItem.getChoices().map((c) => c.getValue());
+		const matchedChoice = choices.find((c) => normalizeTitle(c) === normalizeTitle(value));
+		if (matchedChoice) {
+			return listItem.createResponse(matchedChoice);
+		}
+		const partial = choices.find(
+			(c) =>
+				c.toLowerCase().includes(value.toLowerCase()) ||
+				value.toLowerCase().includes(c.toLowerCase())
+		);
+		return listItem.createResponse(partial || value);
+	}
+
+	if (itemType === FormApp.ItemType.CHECKBOX) {
+		const cbItem = item.asCheckboxItem();
+		const choices = cbItem.getChoices().map((c) => c.getValue());
+		const matched = choices.filter(
+			(c) =>
+				normalizeTitle(c) === normalizeTitle(value) || c.toLowerCase().includes(value.toLowerCase())
+		);
+		return cbItem.createResponse(matched.length > 0 ? matched : [value]);
+	}
+
+	return null;
+}
+
+/**
+ * Salva la risposta nel Google Form collegato.
+ */
+function submitToForm(rawFormId, data) {
+	const cleanId = extractFormId(rawFormId);
+	const form = FormApp.openById(cleanId);
+	const formItems = form.getItems();
+	const response = form.createResponse();
+
+	const fields = ['nome', 'email', 'oggetto', 'messaggio'];
+	let matchedCount = 0;
+
+	fields.forEach((fieldKey) => {
+		const value = data[fieldKey];
+		if (!value) return;
+
+		const item = findFormItem(formItems, fieldKey);
+		if (item) {
+			try {
+				const itemResponse = createItemResponse(item, value);
+				if (itemResponse) {
+					response.withItemResponse(itemResponse);
+					matchedCount++;
+				}
+			} catch (itemErr) {
+				console.warn('Errore creazione risposta per campo ' + fieldKey + ':', itemErr);
+			}
+		} else {
+			console.warn('Campo non trovato nel Google Form per la chiave: ' + fieldKey);
+		}
+	});
+
+	if (matchedCount === 0) {
+		throw new Error(
+			'Nessuna domanda del Google Form corrisponde ai campi del messaggio (Nome, Email, Oggetto, Messaggio).'
+		);
+	}
+
+	response.submit();
+	Logger.log(
+		'Risposta salvata con successo nel Google Form (' + matchedCount + ' campi abbinati).'
+	);
 }
 
 function parseRequestBody(e) {
@@ -148,43 +348,6 @@ function escapeHtml(text) {
 		.replace(/'/g, '&#039;');
 }
 
-function submitToForm(formId, data) {
-	const fieldMap = {
-		nome: 'Nome e Cognome',
-		email: 'Email',
-		oggetto: 'Oggetto',
-		messaggio: 'Messaggio',
-	};
-
-	const form = FormApp.openById(formId);
-	const formItems = form.getItems();
-	const response = form.createResponse();
-
-	Object.keys(fieldMap).forEach((field) => {
-		const title = fieldMap[field];
-		const value = data[field];
-		const item = formItems.find(
-			(i) =>
-				i.getTitle().replace(/\s/g, '').trim().toLowerCase() ===
-				title.replace(/\s/g, '').trim().toLowerCase()
-		);
-		if (item) {
-			const itemType = item.getType();
-			if (itemType === FormApp.ItemType.TEXT) {
-				response.withItemResponse(item.asTextItem().createResponse(value));
-			} else if (itemType === FormApp.ItemType.PARAGRAPH_TEXT) {
-				response.withItemResponse(item.asParagraphTextItem().createResponse(value));
-			} else if (itemType === FormApp.ItemType.MULTIPLE_CHOICE) {
-				response.withItemResponse(item.asMultipleChoiceItem().createResponse(value));
-			} else if (itemType === FormApp.ItemType.LIST) {
-				response.withItemResponse(item.asListItem().createResponse(value));
-			}
-		}
-	});
-
-	response.submit();
-}
-
 function jsonOutput(obj) {
 	return ContentService.createTextOutput(JSON.stringify(obj)).setMimeType(
 		ContentService.MimeType.JSON
@@ -192,13 +355,52 @@ function jsonOutput(obj) {
 }
 
 /**
- * Funzione di test e prima autorizzazione.
+ * Funzione di test e autorizzazione permessi (OAuth).
  * Esegui questa funzione dall'editor Apps Script (seleziona "authorizeScript" e clicca "Esegui" / "Run")
- * per sbloccare la schermata di autorizzazione OAuth per l'invio email e il salvataggio form.
+ * per sbloccare la schermata di autorizzazione OAuth sia per l'invio email che per l'accesso a Google Forms.
  */
 function authorizeScript() {
 	const quota = MailApp.getRemainingDailyQuota();
-	Logger.log('Autorizzazione completata con successo!');
+	Logger.log('=== Verifica Autorizzazione CISF27 ===');
 	Logger.log('Destinatario principale: ' + MAIN_RECIPIENT);
 	Logger.log('Quota giornaliera email rimanente per questo account: ' + quota);
+
+	const rawFormId = PropertiesService.getScriptProperties().getProperty('FORM_ID');
+	if (rawFormId) {
+		const cleanId = extractFormId(rawFormId);
+		// Chiamata diretta senza try/catch: se mancano i permessi OAuth per Forms,
+		// Apps Script blocca l'esecuzione e mostra il pop-up "Autorizzazione richiesta".
+		const form = FormApp.openById(cleanId);
+		Logger.log(
+			'Google Form collegato con successo: "' + form.getTitle() + '" (ID: ' + cleanId + ')'
+		);
+		Logger.log('Domande rilevate nel form:');
+		form.getItems().forEach((it, i) => {
+			Logger.log('  ' + (i + 1) + '. [' + it.getType() + '] ' + it.getTitle());
+		});
+	} else {
+		Logger.log('Nessun FORM_ID configurato in Proprietà script (opzionale).');
+	}
+
+	Logger.log('Autorizzazione completata con successo!');
+}
+
+/**
+ * Funzione di test per verificare il salvataggio nel form dall'editor di Apps Script.
+ * Esegui questa funzione direttamente con "Esegui" per testare l'inserimento nel form e visualizzare i log.
+ */
+function testFormSubmission() {
+	const rawFormId = PropertiesService.getScriptProperties().getProperty('FORM_ID');
+	if (!rawFormId) {
+		throw new Error('Nessun FORM_ID impostato in Impostazioni progetto -> Proprietà script!');
+	}
+	Logger.log('Avvio test sottomissione form...');
+	submitToForm(rawFormId, {
+		nome: 'Test CISF27',
+		email: 'test@cisf27.it',
+		oggetto: 'Altro',
+		messaggio:
+			'Messaggio di test per verificare il salvataggio automatico delle risposte nel Google Form.',
+	});
+	Logger.log('Test sottomissione form completato con successo!');
 }
