@@ -17,7 +17,7 @@ pnpm install
 1. **Google Apps Script** - segui la [guida](#google-apps-script-modulo-contatti) per creare il Form e pubblicare la Web App.
 2. **Configura ambiente** - copia `.env.example` in `.env` e imposta `PUBLIC_GOOGLE_SCRIPT_URL` ([variabili d'ambiente](#variabili-dambiente)).
 3. **Build** - `pnpm run build`. L'output statico è in `dist/`.
-4. **Deploy** - carica `dist/` su Cloudflare Pages, Netlify, o qualsiasi hosting statico. Imposta `PUBLIC_GOOGLE_SCRIPT_URL` come variabile d'ambiente sulla piattaforma.
+4. **Deploy** - Il deploy è automatizzato su GitHub Pages tramite GitHub Actions su ogni push su `master`. In alternativa, carica `dist/` su Cloudflare Pages, Netlify o qualsiasi hosting statico. Imposta `PUBLIC_GOOGLE_SCRIPT_URL` nei secrets/variabili di GitHub o sulla piattaforma di hosting.
 
 ---
 
@@ -79,7 +79,8 @@ pnpm install
 │   └── utils/
 │
 ├── .github/workflows/
-│   └── lint.yml                # CI: formato + lint su push/PR
+│   ├── ci.yml                  # CI: formato, typecheck e lint su push/PR
+│   └── deploy.yml              # Deploy: build e auto-deploy su GitHub Pages
 │
 └── dist/                       # Output di build (gitignorato)
 ```
