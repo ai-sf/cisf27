@@ -95,6 +95,7 @@
   {
     "name": "Francesca Torelli",
     "role": "responsabile-pasti",
+    "image": "../assets/images/committee/francescatorelli.jpg",
     "email": "francescateresa.torelli@ai-sf.it",
     "isCommittee": true,
     "isContact": false
@@ -112,6 +113,24 @@
     "image": "../assets/images/committee/immagine2026-07-17182811419.png",
     "email": "alessandro.amalfitani@ai-sf.it",
     "phone": "+39 3917587874",
+    "isCommittee": true,
+    "isContact": false
+  },
+  {
+    "name": "Vittoria Fedecostante",
+    "role": "collaboratore-organizzativo",
+    "image": "../assets/images/committee/press-kit-cisf27-enti-e-fondazioni-1.png",
+    "email": "vittoria.fedecostante@ai-sf.it",
+    "phone": "+39 370 364 8870",
+    "isCommittee": true,
+    "isContact": false
+  },
+  {
+    "name": "Irene Cunsolo",
+    "role": "collaboratore-organizzativo",
+    "image": "../assets/images/committee/irene-cunsolo.jpg",
+    "email": "irene.cunsolo@ai-sf.it",
+    "phone": "+39 348 305 2249",
     "isCommittee": true,
     "isContact": false
   }
