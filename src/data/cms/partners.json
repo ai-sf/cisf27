@@ -71,6 +71,12 @@
       "category": "patrocinio",
       "image": "../assets/images/partners/logo-agenter-nuovovettoriale.svg",
       "link": "https://www.agenter.it"
+    },
+    {
+      "name": "CINECA",
+      "category": "patrocinio",
+      "image": "../assets/images/partners/logo-cineca.png",
+      "link": "https://www.cineca.it/it"
     }
   ]
 }
