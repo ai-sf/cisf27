@@ -62,3 +62,9 @@
 		font-family: 'Nunito', sans-serif;
 	}
 }
+
+.badge {
+	height: fit-content;
+	min-height: var(--size);
+	max-height: fit-content;
+}

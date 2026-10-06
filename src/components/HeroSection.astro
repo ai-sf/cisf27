@@ -36,8 +36,14 @@ const {
 		<div class="max-w-full">
 			{
 				Icon && (
-					<div class:list={['badge', badgeClass, 'badge-soft mb-8 gap-2 py-3 pe-5 text-sm']}>
-						<Icon class="size-4" />
+					<div
+						class:list={[
+							'badge',
+							badgeClass,
+							'badge-soft mb-8 h-fit max-h-fit gap-2 py-1 pe-4 text-sm',
+						]}
+					>
+						<Icon class="size-4 shrink-0" />
 						{label}
 					</div>
 				)

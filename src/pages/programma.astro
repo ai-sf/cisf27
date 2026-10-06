@@ -39,17 +39,17 @@ import { resolveImage, structureImages } from '../utils/helpers';
 							/>
 							<div class="from-secondary/10 to-primary/10 border-base-300/50 border-b bg-linear-to-r p-4 sm:p-6">
 								<div class="flex items-center gap-3 sm:gap-4">
-									<div class="from-secondary to-primary shadow-secondary/20 flex h-10 w-10 items-center justify-center rounded-2xl bg-linear-to-br shadow-lg sm:h-14 sm:w-14">
+									<div class="from-secondary to-primary shadow-secondary/20 flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl bg-linear-to-br shadow-lg sm:h-14 sm:w-14">
 										<span class="text-primary-content text-base font-bold sm:text-xl">
 											{dayIndex + 1}
 										</span>
 									</div>
-									<div>
+									<div class="min-w-0 flex-1">
 										<h2 class="text-base-content/90 text-xl font-bold sm:text-2xl">{day.day}</h2>
 										<p class="text-base-content/60">{day.date}</p>
 									</div>
-									<div class="badge badge-secondary ml-auto gap-1">
-										<Clock class="size-3" />
+									<div class="badge badge-secondary ml-auto h-fit max-h-fit shrink-0 gap-1 whitespace-nowrap">
+										<Clock class="size-3 shrink-0" />
 										{(day.sections ?? []).length} eventi
 									</div>
 								</div>

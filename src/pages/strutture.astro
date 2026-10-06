@@ -64,9 +64,11 @@ import { gradientMap } from '../utils/helpers.ts';
 							/>
 						</div>
 						<div class="flex flex-col justify-center p-8 lg:p-10">
-							<div class="badge badge-info mb-4 gap-1">
-								<Building2 class="size-3" />
-								{structuresData.venue?.note}
+							<div
+								class="badge badge-info mb-4 h-fit max-h-fit max-w-full gap-1.5 py-1 text-center leading-snug"
+							>
+								<Building2 class="size-3 shrink-0" />
+								<span>{structuresData.venue?.note}</span>
 							</div>
 							<h3 class="text-2xl font-bold lg:text-3xl">{structuresData.venue?.name}</h3>
 							<p class="text-base-content/60 mt-2 flex items-center gap-1.5">
@@ -204,7 +206,7 @@ import { gradientMap } from '../utils/helpers.ts';
 															<div class="mb-4 flex flex-wrap gap-2">
 																{structure.features.map((feature) => (
 																	<span class="badge badge-ghost badge-sm gap-1">
-																		<Check class="text-primary size-3" />
+																		<Check class="text-primary size-3 shrink-0" />
 																		{feature}
 																	</span>
 																))}

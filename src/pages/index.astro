@@ -118,8 +118,10 @@ const aboutCardEntries = [
 
 		<div class="hero-content text-center">
 			<div class="max-w-full">
-				<div class="badge badge-primary badge-md sm:badge-lg badge-soft animate-fade-in mb-8">
-					<Star class="size-4" />
+				<div
+					class="badge badge-primary badge-md sm:badge-lg badge-soft animate-fade-in mb-8 h-fit max-h-fit"
+				>
+					<Star class="size-4 shrink-0" />
 					<span>{conf.edition}{home.editionSuffix}{conf.year}</span>
 				</div>
 
@@ -130,19 +132,25 @@ const aboutCardEntries = [
 				/>
 
 				<div class="animate-fade-in-up mb-4 flex flex-wrap items-center justify-center gap-4">
-					<div class="badge badge-primary badge-md sm:badge-xl badge-soft py-4 sm:px-5 sm:py-6">
-						<MapPin class="size-5" />
+					<div
+						class="badge badge-primary badge-md sm:badge-xl badge-soft h-fit max-h-fit px-4 py-2 sm:px-5"
+					>
+						<MapPin class="size-5 shrink-0" />
 						<span class="text-base-content/90 font-semibold">{conf.location}</span>
 					</div>
-					<div class="badge badge-secondary badge-md sm:badge-xl badge-soft py-4 sm:px-5 sm:py-6">
-						<CalendarDays class="size-5" />
+					<div
+						class="badge badge-secondary badge-md sm:badge-xl badge-soft h-fit max-h-fit px-4 py-2 sm:px-5"
+					>
+						<CalendarDays class="size-5 shrink-0" />
 						<span class="text-base-content/90 font-semibold">{conf.fullDates}</span>
 					</div>
 				</div>
 
 				<div class="animate-fade-in-up-d1 mb-8 flex flex-wrap items-center justify-center gap-2">
-					<div class="badge badge-soft badge-primary badge-md sm:badge-lg gap-1.5 py-3 sm:py-4">
-						<Sparkles class="size-4" />
+					<div
+						class="badge badge-soft badge-primary badge-md sm:badge-lg h-fit max-h-fit gap-1.5 px-3 py-1.5 sm:px-4"
+					>
+						<Sparkles class="size-4 shrink-0" />
 						<span class="font-semibold">{theme.name}</span>
 					</div>
 				</div>
