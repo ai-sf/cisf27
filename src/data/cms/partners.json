@@ -77,6 +77,13 @@
       "category": "patrocinio",
       "image": "../assets/images/partners/logo-cineca.png",
       "link": "https://www.cineca.it/it"
+    },
+    {
+      "name": "INGV - Istituto Nazionale di Geofisica e Vulcanologia",
+      "shortName": "INGV",
+      "category": "patrocinio",
+      "image": "../assets/images/partners/ingvlogoprimario.png",
+      "link": "https://www.ingv.it"
     }
   ]
 }
