@@ -25,28 +25,35 @@
       "link": "https://fisica-astronomia.unibo.it/it/index.html"
     },
     {
-      "name": "Città metropolitana di Bologna",
-      "category": "patrocinio",
-      "image": "../assets/images/partners/cittametrobo.png",
-      "link": "https://www.cittametropolitana.bo.it/portale/"
-    },
-    {
-      "name": "Camera di Commercio di Bologna",
-      "category": "patrocinio",
-      "image": "../assets/images/partners/camcom.jpg",
-      "link": "https://www.bo.camcom.gov.it"
-    },
-    {
       "name": "Regione Emilia-Romagna",
       "category": "patrocinio",
       "image": "../assets/images/partners/press-kit-cisf27-aziende.png",
       "link": "https://www.regione.emilia-romagna.it"
     },
     {
+      "name": "Città metropolitana di Bologna",
+      "category": "patrocinio",
+      "image": "../assets/images/partners/cittametrobo.png",
+      "link": "https://www.cittametropolitana.bo.it/portale/"
+    },
+    {
+      "name": "Comune di Bologna - Quartiere Navile",
+      "shortName": "Comune di Bologna",
+      "category": "patrocinio",
+      "image": "../assets/images/partners/42-quartiere-navile-bn-rgb-1.png",
+      "link": "https://quartieri.comune.bologna.it/quartieri/navile"
+    },
+    {
       "name": "PlasticFreER - Regione Emilia-Romagna",
       "category": "patrocinio",
       "image": "../assets/images/partners/plasticfreeemiliaromagna.png",
       "link": "https://ambiente.regione.emilia-romagna.it/it/rifiuti/rifiuti/economia-circolare/strategia-plasticfreer-1"
+    },
+    {
+      "name": "Camera di Commercio di Bologna",
+      "category": "patrocinio",
+      "image": "../assets/images/partners/camcom.jpg",
+      "link": "https://www.bo.camcom.gov.it"
     },
     {
       "name": "CNR - Area territoriale di Ricerca di Bologna",
@@ -59,6 +66,13 @@
       "category": "patrocinio",
       "image": "../assets/images/partners/2logoinfnconnomeesteso.png",
       "link": "https://www.infn.it"
+    },
+    {
+      "name": "INGV - Istituto Nazionale di Geofisica e Vulcanologia",
+      "shortName": "INGV",
+      "category": "patrocinio",
+      "image": "../assets/images/partners/ingvlogoprimario.png",
+      "link": "https://www.ingv.it"
     },
     {
       "name": "Museo del Cielo e della Terra",
@@ -77,13 +91,6 @@
       "category": "patrocinio",
       "image": "../assets/images/partners/logo-cineca.png",
       "link": "https://www.cineca.it/it"
-    },
-    {
-      "name": "INGV - Istituto Nazionale di Geofisica e Vulcanologia",
-      "shortName": "INGV",
-      "category": "patrocinio",
-      "image": "../assets/images/partners/ingvlogoprimario.png",
-      "link": "https://www.ingv.it"
     }
   ]
 }
