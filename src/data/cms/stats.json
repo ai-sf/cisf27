@@ -30,7 +30,7 @@
     },
     {
       "id": "localCommittees",
-      "number": "16",
+      "number": "19",
       "label": "Comitati Locali",
       "icon": "map"
     },
@@ -56,7 +56,7 @@
     },
     {
       "id": "localCommitteesIaps",
-      "number": "13",
+      "number": "14",
       "label": "Local Committee",
       "icon": "map"
     },
@@ -68,7 +68,7 @@
     },
     {
       "id": "studentsIaps",
-      "number": "60000",
+      "number": "90000",
       "label": "Studenti",
       "icon": "users"
     }
