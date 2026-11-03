@@ -2,7 +2,7 @@
 import { resolveIcon } from '../utils/helpers';
 import SectionBadge from './SectionBadge.astro';
 import GradientSpan from './GradientSpan.astro';
-import { bolognaData } from '../data/cms';
+import { getCmsData, getLocale, bolognaData as baseBologna } from '../data/cms';
 
 export interface Props {
 	id?: string;
@@ -11,6 +11,9 @@ export interface Props {
 const BolognaIcon = resolveIcon('map-pin');
 
 const { id } = Astro.props;
+
+const locale = getLocale(Astro);
+const { bolognaData } = getCmsData(locale);
 
 const eraColors = [
 	'from-warning to-primary',
@@ -33,7 +36,7 @@ const eraColors = [
 		<div class="reveal-stagger mx-auto grid max-w-6xl gap-8 md:grid-cols-3">
 			{
 				(bolognaData.eras ?? []).map((era, i) => {
-					const Icon = resolveIcon(era.icon);
+					const Icon = resolveIcon(baseBologna.eras?.[i]?.icon ?? era.icon);
 					return (
 						<div class="relative">
 							{i < (bolognaData.eras ?? []).length - 1 && (

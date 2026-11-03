@@ -1,15 +1,19 @@
 ---
 import { Image } from 'astro:assets';
-import { partners, partnerCategories } from '../data/partners.ts';
+import { getPartners, getPartnerCategories } from '../data/partners.ts';
 import type { Partner } from '../data/partners.ts';
 import GradientSpan from './GradientSpan.astro';
 import { gradientMap } from '../utils/helpers.ts';
+import { getLocale } from '../data/cms';
 
 export interface Props {
 	categories?: Partner['category'][];
 }
 
 const { categories: filterCategories } = Astro.props;
+const locale = getLocale(Astro);
+const partnerCategories = getPartnerCategories(locale);
+const partners = getPartners(locale);
 
 const displayCategories = partnerCategories.filter(
 	(cat) => !filterCategories || filterCategories.includes(cat.id)

@@ -6,7 +6,7 @@ content:
   - name: conference
     label: Conferenza
     type: file
-    path: src/data/cms/conference.json
+    path: src/data/cms/it/conference.json
     format: json
     fields:
       - name: title
@@ -34,7 +34,7 @@ content:
   - name: home
     label: Homepage
     type: file
-    path: src/data/cms/home.json
+    path: src/data/cms/it/home.json
     format: json
     fields:
       - name: aboutBadge
@@ -137,7 +137,7 @@ content:
   - name: about
     label: Pagina About
     type: file
-    path: src/data/cms/about.json
+    path: src/data/cms/it/about.json
     format: json
     fields:
       - name: heroSubtitle
@@ -285,7 +285,7 @@ content:
   - name: people
     label: Persone
     type: file
-    path: src/data/cms/people.json
+    path: src/data/cms/it/people.json
     format: json
     list: true
     fields:
@@ -320,7 +320,7 @@ content:
   - name: people-roles
     label: Ruoli Persone
     type: collection
-    path: src/data/cms/people-roles
+    path: src/data/cms/it/people-roles
     format: json
     filename: '{id}.json'
     fields:
@@ -339,7 +339,7 @@ content:
   - name: history
     label: Storia Edizioni
     type: file
-    path: src/data/cms/history.json
+    path: src/data/cms/it/history.json
     format: json
     list: true
     fields:
@@ -365,7 +365,7 @@ content:
   - name: stats
     label: Statistiche
     type: file
-    path: src/data/cms/stats.json
+    path: src/data/cms/it/stats.json
     format: json
     fields:
       - name: conferenceStats
@@ -429,7 +429,7 @@ content:
   - name: program
     label: Programma
     type: file
-    path: src/data/cms/program.json
+    path: src/data/cms/it/program.json
     format: json
     fields:
       - name: heroHeading
@@ -486,7 +486,7 @@ content:
   - name: structures
     label: Strutture
     type: file
-    path: src/data/cms/structures.json
+    path: src/data/cms/it/structures.json
     format: json
     fields:
       - name: heroHeading
@@ -577,7 +577,7 @@ content:
   - name: structure-entries
     label: Voci Strutture
     type: collection
-    path: src/data/cms/structures
+    path: src/data/cms/it/structures
     format: json
     filename: '{id}.json'
     fields:
@@ -678,7 +678,7 @@ content:
   - name: partner-categories
     label: Categorie Partner
     type: collection
-    path: src/data/cms/partner-categories
+    path: src/data/cms/it/partner-categories
     format: json
     filename: '{id}.json'
     fields:
@@ -708,7 +708,7 @@ content:
   - name: structure-categories
     label: Categorie Strutture
     type: collection
-    path: src/data/cms/structure-categories
+    path: src/data/cms/it/structure-categories
     format: json
     filename: '{id}.json'
     fields:
@@ -738,7 +738,7 @@ content:
   - name: thesis
     label: Tesi e Poster
     type: file
-    path: src/data/cms/thesis.json
+    path: src/data/cms/it/thesis.json
     format: json
     fields:
       - name: heroHeading
@@ -812,7 +812,7 @@ content:
   - name: contacts
     label: Pagina Contatti
     type: file
-    path: src/data/cms/contacts.json
+    path: src/data/cms/it/contacts.json
     format: json
     fields:
       - name: form
@@ -894,7 +894,7 @@ content:
   - name: partners
     label: Partner
     type: file
-    path: src/data/cms/partners.json
+    path: src/data/cms/it/partners.json
     format: json
     fields:
       - name: organizzatore
@@ -987,7 +987,7 @@ content:
   - name: pageLinks
     label: Link Pagine
     type: file
-    path: src/data/cms/pageLinks.json
+    path: src/data/cms/it/pageLinks.json
     format: json
     fields:
       - name: home
@@ -1120,7 +1120,7 @@ content:
   - name: nav
     label: Navigazione
     type: file
-    path: src/data/cms/nav.json
+    path: src/data/cms/it/nav.json
     format: json
     fields:
       - name: more
@@ -1146,11 +1146,20 @@ content:
           collection: icon-options
           value: '{lucideId}'
           label: '{label}'
+      - name: switchLanguage
+        type: string
+        label: Etichetta Cambia Lingua
+      - name: language
+        type: string
+        label: Intestazione Lingua
+      - name: actions
+        type: string
+        label: Intestazione Azioni
 
   - name: sponsor
     label: Pagina Sponsor
     type: file
-    path: src/data/cms/sponsor.json
+    path: src/data/cms/it/sponsor.json
     format: json
     fields:
       - name: heroHeading
@@ -1196,7 +1205,7 @@ content:
   - name: iaps
     label: Sezione IAPS
     type: file
-    path: src/data/cms/iaps.json
+    path: src/data/cms/it/iaps.json
     format: json
     fields:
       - name: badge
@@ -1218,7 +1227,7 @@ content:
   - name: bologna
     label: Sezione Bologna
     type: file
-    path: src/data/cms/bologna.json
+    path: src/data/cms/it/bologna.json
     format: json
     fields:
       - name: badge
@@ -1256,7 +1265,7 @@ content:
   - name: theme
     label: Sezione Tema
     type: file
-    path: src/data/cms/theme.json
+    path: src/data/cms/it/theme.json
     format: json
     fields:
       - name: badge
@@ -1290,7 +1299,7 @@ content:
   - name: pricing
     label: Prezzi
     type: file
-    path: src/data/cms/pricing.json
+    path: src/data/cms/it/pricing.json
     format: json
     list: true
     fields:
@@ -1308,7 +1317,7 @@ content:
   - name: footer
     label: Footer
     type: file
-    path: src/data/cms/footer.json
+    path: src/data/cms/it/footer.json
     format: json
     fields:
       - name: rights
@@ -1326,11 +1335,14 @@ content:
       - name: partners
         type: string
         label: Partner
+      - name: backToTop
+        type: string
+        label: Torna Su
 
   - name: error
     label: Pagina Errore
     type: file
-    path: src/data/cms/error.json
+    path: src/data/cms/it/error.json
     format: json
     fields:
       - name: error404Message

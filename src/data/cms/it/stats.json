@@ -1,35 +1,35 @@
 {
   "conferenceStats": [
     {
-      "id": "students",
+      "id": "studenti",
       "number": "170",
       "label": "Studenti"
     },
     {
-      "id": "guests",
+      "id": "ospiti",
       "number": "26",
       "label": "Ospiti"
     },
     {
-      "id": "edition",
+      "id": "edizione",
       "number": "XI",
       "label": "Edizione"
     },
     {
-      "id": "days",
+      "id": "giorni",
       "number": "5",
       "label": "Giorni"
     }
   ],
   "aisfStats": [
     {
-      "id": "members",
+      "id": "membri",
       "number": "1400",
       "label": "Membri",
       "icon": "users"
     },
     {
-      "id": "localCommittees",
+      "id": "comitati_locali",
       "number": "19",
       "label": "Comitati Locali",
       "icon": "map"
@@ -41,7 +41,7 @@
       "icon": "globe"
     },
     {
-      "id": "passion",
+      "id": "passione",
       "number": "∞",
       "label": "Passione",
       "icon": "heart"
@@ -49,25 +49,25 @@
   ],
   "iapsStats": [
     {
-      "id": "nationalCommittees",
+      "id": "comitati_nazionali",
       "number": "34",
       "label": "Territorial Committee",
       "icon": "map"
     },
     {
-      "id": "localCommitteesIaps",
+      "id": "comitati_locali_iaps",
       "number": "14",
       "label": "Local Committee",
       "icon": "map"
     },
     {
-      "id": "countries",
+      "id": "paesi",
       "number": "40+",
       "label": "Paesi",
       "icon": "globe"
     },
     {
-      "id": "studentsIaps",
+      "id": "studenti_iaps",
       "number": "90000",
       "label": "Studenti",
       "icon": "users"

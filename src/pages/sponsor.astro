@@ -6,8 +6,14 @@ import CTASection from '../components/CTASection.astro';
 import PartnerGrid from '../components/PartnerGrid.astro';
 import SectionBadge from '../components/SectionBadge.astro';
 import GradientSpan from '../components/GradientSpan.astro';
-import { sponsor } from '../data/cms';
-import { contactLink, sponsorLink } from '../data/pageLinks.ts';
+import { getCmsData, getLocale } from '../data/cms';
+import { getPageLink } from '../data/pageLinks.ts';
+
+const locale = getLocale(Astro);
+const { sponsor } = getCmsData(locale);
+
+const sponsorLink = getPageLink('sponsor', locale);
+const contactLink = getPageLink('contact', locale);
 
 const rawDownloadUrl =
 	sponsor.downloadUrl ||
@@ -54,7 +60,9 @@ const downloadHref = isExternal
 							badgeClass="badge-warning"
 						/>
 					</div>
-					<h2 class="mt-4 mb-4 text-3xl font-bold">{sponsor.downloadHeading}</h2>
+					<h2 class="mt-4 mb-4 text-3xl font-bold">
+						{sponsor.downloadHeading}
+					</h2>
 					<p class="text-base-content/60 mb-8 text-lg leading-relaxed">
 						{sponsor.downloadDescription}
 					</p>

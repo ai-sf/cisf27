@@ -1,5 +1,10 @@
 import { resolveIcon, resolveImage, partnerImages } from '../utils/helpers';
-import { partnerCategoryGlob, partnersData as cmsPartners } from './cms';
+import {
+	partnerCategoryGlob,
+	localizedPartnerCategoryGlob,
+	partnersData as cmsPartners,
+	getCmsData,
+} from './cms';
 
 import type { ImageMetadata } from '../types/astro';
 
@@ -19,40 +24,62 @@ export interface PartnerCategory {
 	color: string;
 }
 
-export const partnerCategories: PartnerCategory[] = Object.entries(partnerCategoryGlob).map(
-	([, mod]) => ({
-		id: mod.default.id ?? crypto.randomUUID(),
-		title: mod.default.label ?? mod.default.id ?? '',
-		icon: resolveIcon(mod.default.icon),
-		color: mod.default.color ?? 'primary',
-	})
-);
+export function getPartnerCategories(locale?: string): PartnerCategory[] {
+	return Object.entries(partnerCategoryGlob).map(([path, mod]) => {
+		const base = mod.default;
+		const id = base.id ?? crypto.randomUUID();
+		if (!locale || locale === 'it') {
+			return {
+				id,
+				title: base.label ?? id,
+				icon: resolveIcon(base.icon),
+				color: base.color ?? 'primary',
+			};
+		}
+		const filename = path.split('/').pop();
+		const localizedKey = `./${locale}/partner-categories/${filename}`;
+		const localizedMod = localizedPartnerCategoryGlob[localizedKey]?.default;
+		return {
+			id,
+			title: localizedMod?.label ?? base.label ?? id,
+			icon: resolveIcon(base.icon),
+			color: base.color ?? 'primary',
+		};
+	});
+}
 
-export const aisfPartner: Partner = {
-	name: cmsPartners.organizzatore?.aisf?.name ?? '',
-	shortName: cmsPartners.organizzatore?.aisf?.shortName ?? '',
-	description: cmsPartners.organizzatore?.aisf?.description,
-	logo: resolveImage(partnerImages, cmsPartners.organizzatore?.aisf?.image),
-	category: cmsPartners.organizzatore?.aisf?.category ?? '',
-	link: cmsPartners.organizzatore?.aisf?.link ?? '',
-};
-export const aisfBoloPartner: Partner = {
-	name: cmsPartners.organizzatore?.aisfBolo?.name ?? '',
-	shortName: cmsPartners.organizzatore?.aisfBolo?.shortName ?? '',
-	logo: resolveImage(partnerImages, cmsPartners.organizzatore?.aisfBolo?.image),
-	category: cmsPartners.organizzatore?.aisfBolo?.category ?? '',
-	link: cmsPartners.organizzatore?.aisfBolo?.link ?? '',
-};
+export function getPartners(locale?: string): Partner[] {
+	const data = locale ? getCmsData(locale).partnersData : cmsPartners;
+	const aisf: Partner = {
+		name: data.organizzatore?.aisf?.name ?? '',
+		shortName: data.organizzatore?.aisf?.shortName ?? '',
+		description: data.organizzatore?.aisf?.description,
+		logo: resolveImage(partnerImages, data.organizzatore?.aisf?.image),
+		category: data.organizzatore?.aisf?.category ?? '',
+		link: data.organizzatore?.aisf?.link ?? '',
+	};
+	const aisfBolo: Partner = {
+		name: data.organizzatore?.aisfBolo?.name ?? '',
+		shortName: data.organizzatore?.aisfBolo?.shortName ?? '',
+		logo: resolveImage(partnerImages, data.organizzatore?.aisfBolo?.image),
+		category: data.organizzatore?.aisfBolo?.category ?? '',
+		link: data.organizzatore?.aisfBolo?.link ?? '',
+	};
 
-const partnersFromArray: Partner[] = (cmsPartners.partners ?? []).map((p) => ({
-	name: p.name ?? '',
-	shortName: p.shortName ?? p.name ?? '',
-	description: p.description,
-	logo: resolveImage(partnerImages, p.image),
-	category: p.category ?? '',
-	link: p.link ?? '',
-}));
+	const partnersFromArray: Partner[] = (data.partners ?? []).map((p) => ({
+		name: p.name ?? '',
+		shortName: p.shortName ?? p.name ?? '',
+		description: 'description' in p ? (p.description as string | undefined) : undefined,
+		logo: resolveImage(partnerImages, p.image),
+		category: p.category ?? '',
+		link: p.link ?? '',
+	}));
 
-export const uniboPartner: Partner = partnersFromArray.find((p) => p.link.includes('unibo.it'))!;
+	return [aisf, aisfBolo, ...partnersFromArray];
+}
 
-export const partners: Partner[] = [aisfPartner, aisfBoloPartner, ...partnersFromArray] as const;
+export const partnerCategories: PartnerCategory[] = getPartnerCategories();
+export const aisfPartner: Partner = getPartners()[0];
+export const aisfBoloPartner: Partner = getPartners()[1];
+export const partners: Partner[] = getPartners();
+export const uniboPartner: Partner = partners.find((p) => p.link.includes('unibo.it'))!;

@@ -5,14 +5,18 @@ import ClientRouter from 'astro/components/ClientRouter.astro';
 import type PageProps from '../types/pageProps';
 import cisfFavicon from '../assets/images/favicon.png';
 import cisfPreviewImage from '../assets/images/preview.png';
-import { conference } from '../data/cms';
+import { getCmsData } from '../data/cms';
+import { switchLocalePath, languages, getLocale } from '../utils/i18n';
 
 const props = Astro.props as PageProps;
+const currentLocale = getLocale(Astro);
+const { conference } = getCmsData(currentLocale);
 
-const siteLangCode = 'it-IT';
+const currentLang = languages.find((l) => l.code === currentLocale);
+const siteLangCode = currentLang?.htmlLang || currentLocale;
 const siteName = conference.title;
 const title = `${props.title ? props.title + ' - ' : ''}${siteName}`;
-const description = conference.shortDescription;
+const description = props.description || conference.shortDescription;
 const siteLogo = cisfFavicon.src;
 const siteLogoType = 'image/' + cisfFavicon.format;
 const imageUrl = new URL(props.image || cisfPreviewImage.src, Astro.url);
@@ -30,6 +34,15 @@ const sitemapUrl = `${base}/sitemap-index.xml`;
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<link rel="icon" type={siteLogoType} href={siteLogo} />
 		<link rel="sitemap" href={sitemapUrl} />
+		{
+			languages.map((lang) => (
+				<link
+					rel="alternate"
+					hreflang={lang.code}
+					href={switchLocalePath(Astro.url.pathname, lang.code)}
+				/>
+			))
+		}
 		<meta name="generator" content={Astro.generator} />
 		<ClientRouter fallback="swap" />
 
@@ -41,6 +54,7 @@ const sitemapUrl = `${base}/sitemap-index.xml`;
 		<meta property="og:url" content={Astro.url} />
 		<meta property="og:description" content={description} />
 		<meta property="og:type" content="object" />
+		<meta property="og:locale" content={siteLangCode.replace('-', '_')} />
 
 		<meta property="og:image" content={imageUrl} />
 		<meta property="og:image:type" content={imageType} />

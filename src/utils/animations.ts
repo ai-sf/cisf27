@@ -98,9 +98,9 @@ function initCharStagger(): void {
 		// which Chrome handles correctly.
 		if (gradientBg && clipSource) {
 			clipSource.style.backgroundImage = 'none';
-			clipSource.style.webkitBackgroundClip = 'unset';
+			clipSource.style.setProperty('-webkit-background-clip', 'unset');
 			clipSource.style.backgroundClip = 'unset';
-			clipSource.style.webkitTextFillColor = 'unset';
+			clipSource.style.setProperty('-webkit-text-fill-color', 'unset');
 			clipSource.style.color = 'unset';
 		}
 

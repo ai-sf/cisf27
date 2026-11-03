@@ -4,8 +4,11 @@ import Footer from '../components/Footer.astro';
 import BaseLayout from './BaseLayout.astro';
 import type PageProps from '../types/pageProps';
 import { ChevronUp } from '@lucide/astro';
+import { getCmsData, getLocale } from '../data/cms';
 
 const props = Astro.props as PageProps;
+const locale = getLocale(Astro);
+const { footer } = getCmsData(locale);
 ---
 
 <BaseLayout {...props}>
@@ -15,7 +18,7 @@ const props = Astro.props as PageProps;
 	<a
 		href="#"
 		class="back-to-top from-primary to-secondary text-primary-content pointer-events-none fixed right-8 bottom-8 z-50 flex size-12 translate-y-5 items-center justify-center rounded-full bg-linear-to-br text-xl opacity-0 shadow-lg transition-all duration-300 hover:scale-110"
-		aria-label="Torna su"
+		aria-label={footer.backToTop || 'Torna su'}
 	>
 		<ChevronUp class="size-5" />
 	</a>

@@ -1,10 +1,16 @@
 ---
 import { Image } from 'astro:assets';
-import { contactPeople } from '../data/people.ts';
-import { conference, footer } from '../data/cms';
-import { pageLinks } from '../data/pageLinks.ts';
-import { partners } from '../data/partners.ts';
+import { getContactPeople } from '../data/people.ts';
+import { getCmsData, getLocale } from '../data/cms';
+import { getPageLinks } from '../data/pageLinks.ts';
+import { getPartners } from '../data/partners.ts';
 import cisfLogo from '../assets/images/logo.png';
+
+const locale = getLocale(Astro);
+const { conference, footer } = getCmsData(locale);
+const links = getPageLinks(locale);
+const contactPeople = getContactPeople(locale);
+const partners = getPartners(locale);
 ---
 
 <footer
@@ -22,9 +28,9 @@ import cisfLogo from '../assets/images/logo.png';
 		</aside>
 
 		<nav>
-			<h6 class="footer-title">{footer.links}</h6>
+			<h6 class="footer-title">{footer.links || 'Link'}</h6>
 			{
-				pageLinks.map((link) => {
+				links.map((link) => {
 					const Icon = link.icon;
 					return (
 						<a href={link.href} class="link link-hover inline-flex items-center gap-2">
@@ -37,7 +43,7 @@ import cisfLogo from '../assets/images/logo.png';
 		</nav>
 
 		<nav>
-			<h6 class="footer-title">{footer.contacts}</h6>
+			<h6 class="footer-title">{footer.contacts || 'Contatti'}</h6>
 			{
 				contactPeople.map((person) => (
 					<div>
@@ -49,13 +55,17 @@ import cisfLogo from '../assets/images/logo.png';
 				))
 			}
 			<div class="mt-2">
-				<span class="text-base-content/80 text-sm font-semibold">{footer.location}</span>
-				<p class="text-base-content/60 text-sm">{conference.location}</p>
+				<span class="text-base-content/80 text-sm font-semibold">
+					{footer.location || 'Sede'}
+				</span>
+				<p class="text-base-content/60 text-sm">
+					{conference.location}
+				</p>
 			</div>
 		</nav>
 
 		<nav>
-			<h6 class="footer-title">{footer.partners}</h6>
+			<h6 class="footer-title">{footer.partners || 'Partner'}</h6>
 			{
 				partners.map((partner) => (
 					<a href={partner.link} target="_blank" rel="noopener noreferrer" class="link link-hover">
@@ -67,6 +77,9 @@ import cisfLogo from '../assets/images/logo.png';
 	</div>
 
 	<div class="footer footer-center">
-		<p>&copy; {new Date().getFullYear()} {conference.title}{footer.rights}</p>
+		<p>
+			&copy; {new Date().getFullYear()}
+			{conference.title} - {footer.rights || 'Tutti i diritti riservati.'}
+		</p>
 	</div>
 </footer>

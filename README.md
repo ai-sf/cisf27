@@ -1,6 +1,6 @@
 # CISF 27
 
-Sito web statico della **XI Conferenza Italiana Studenti di Fisica**, realizzato con [Astro](https://astro.build) + [Svelte](https://svelte.dev/), stili con [Tailwind CSS](https://tailwindcss.com/) e [daisyUI](https://daisyui.com/). La compilazione del modulo contatti è gestita tramite **Google Apps Script**.
+Sito web statico della **XI Conferenza Italiana Studenti di Fisica**, realizzato con [Astro](https://astro.build) + [Svelte](https://svelte.dev/), stili con [Tailwind CSS](https://tailwindcss.com/) e [daisyUI](https://daisyui.com/). La compilazione del modulo contatti è gestita tramite **Google Apps Script**. Traduzioni gestite tramite **[Fink](https://fink.inlang.com/) (inlang)**.
 
 **URL:** <https://ai-sf.it/cisf27>
 
@@ -14,7 +14,7 @@ cd cisf27
 pnpm install
 ```
 
-1. **Google Apps Script** - segui la [guida](#google-apps-script-modulo-contatti) per creare il Form e pubblicare la Web App.
+1. **Google Apps Script** - segui la [guida](docs/google-apps-script.md) per creare il Form e pubblicare la Web App.
 2. **Configura ambiente** - copia `.env.example` in `.env` e imposta `PUBLIC_GOOGLE_SCRIPT_URL` ([variabili d'ambiente](#variabili-dambiente)).
 3. **Build** - `pnpm run build`. L'output statico è in `dist/`.
 4. **Deploy** - carica `dist/` su Cloudflare Pages, Netlify, o qualsiasi hosting statico. Imposta `PUBLIC_GOOGLE_SCRIPT_URL` come variabile d'ambiente sulla piattaforma.
@@ -29,6 +29,7 @@ pnpm install
 | Stili                | [Tailwind CSS 4](https://tailwindcss.com/) + [daisyUI 5](https://daisyui.com/) |
 | Icone                | [Lucide](https://lucide.dev/)                                                  |
 | Font                 | Nunito, Playfair Display (via Fontsource)                                      |
+| Traduzioni / i18n    | [Fink](https://fink.inlang.com/) / inlang (file JSON in `src/data/cms/`)       |
 | CMS                  | [PagesCMS](https://pagescms.org/) / file JSON                                  |
 | Backend contatti     | Google Apps Script                                                             |
 | Package manager      | pnpm 11                                                                        |
@@ -43,8 +44,9 @@ pnpm install
 /
 ├── .env                        # Variabili d'ambiente (gitignorato)
 ├── .env.example                # Template delle variabili d'ambiente
-├── _pages.yml                  # Schema CMS PagesCMS
-├── astro.config.mjs            # Configurazione Astro
+├── .pages.yml                  # Schema CMS PagesCMS (punta a src/data/cms/it/)
+├── project.inlang/             # Configurazione inlang / Fink
+├── astro.config.mjs            # Configurazione Astro (routing i18n it/en)
 ├── svelte.config.js            # Configurazione Svelte
 ├── tsconfig.json               # Configurazione TypeScript
 ├── eslint.config.mjs           # ESLint flat config
@@ -52,32 +54,51 @@ pnpm install
 ├── pnpm-workspace.yaml         # Pnpm workspace
 ├── package.json
 │
+├── docs/                       # Documentazione di dettaglio
+│   ├── fink-inlang-setup.md    # Guida architettura e flusso traduzioni Fink
+│   └── google-apps-script.md   # Guida completa setup, deploy e debug Apps Script
+│
 ├── google-apps-script/         # Backend contatti (Google Apps Script)
 │   ├── .clasp.json             # Config clasp (scriptId)
 │   ├── appsscript.json         # Manifest GAS
-│   └── Code.js                 # Web App: doPost → Google Form
+│   └── Code.js                 # Web App: doPost → Invio email con CC + Google Form
 │
 ├── public/
 │   ├── favicon.ico
 │   └── robots.txt
 │
+├── scripts/
+│   ├── check-i18n.js           # Validazione parità chiavi e sintassi JSON i18n
+│   └── sync-subcatalogs.js     # Sincronizzazione automatica sottocataloghi e namespace
+│
 ├── src/
 │   ├── assets/
 │   │   └── images/             # Immagini caricate via CMS
 │   ├── components/             # Componenti Astro / Svelte
+│   ├── config/
+│   │   └── languages.json      # Configurazione lingue attive
 │   ├── data/
-│   │   ├── cms/                # File JSON gestiti dal CMS
+│   │   ├── cms/
+│   │   │   ├── it/             # Base italiana autorevole (modificabile via PagesCMS)
+│   │   │   │   ├── structures/
+│   │   │   │   ├── structure-categories/
+│   │   │   │   ├── partner-categories/
+│   │   │   │   └── people-roles/
+│   │   │   └── en/             # Traduzioni inglesi (modificabili via Fink)
 │   │   ├── pageLinks.ts
 │   │   ├── partners.ts
-│   │   └── stats.ts
+│   │   ├── people.ts
+│   │   ├── stats.ts
+│   │   └── structures.ts
 │   ├── layouts/                # Layout Astro
-│   ├── pages/                  # Route
+│   ├── pages/                  # Route Astro (italiano e sub-route en/)
 │   ├── styles/
 │   ├── types/
 │   └── utils/
 │
 ├── .github/workflows/
-│   └── lint.yml                # CI: formato + lint su push/PR
+│   ├── ci.yml                  # CI: validazione i18n, formato + lint + typecheck
+│   └── deploy.yml              # Deployment automatico
 │
 └── dist/                       # Output di build (gitignorato)
 ```
@@ -100,20 +121,36 @@ pnpm install
 
 Tutti i comandi vanno eseguiti dalla **root del progetto**.
 
-| Comando                 | Azione                                                |
-| ----------------------- | ----------------------------------------------------- |
-| `pnpm install`          | Installa le dipendenze                                |
-| `pnpm run dev`          | Avvia il server di sviluppo su `localhost:4321`       |
-| `pnpm run build`        | Compila il sito di produzione in `./dist/`            |
-| `pnpm run preview`      | Anteprima locale della build di produzione            |
-| `pnpm run astro`        | Esegue un comando Astro CLI (`astro add`, …)          |
-| `pnpm run typecheck`    | Controlla i tipi con `astro check`                    |
-| `pnpm run check`        | `flint` + `typecheck` (da usare prima di ogni commit) |
-| `pnpm run lint`         | Controlla il codice con ESLint                        |
-| `pnpm run lint:fix`     | Corregge automaticamente i problemi ESLint            |
-| `pnpm run format`       | Controlla la formattazione con Prettier               |
-| `pnpm run format:write` | Formatta tutti i file con Prettier                    |
-| `pnpm run flint`        | `format:write` + `lint:fix` in sequenza               |
+| Comando                     | Azione                                                                      |
+| --------------------------- | --------------------------------------------------------------------------- |
+| `pnpm install`              | Installa le dipendenze del progetto                                         |
+| `pnpm run dev`              | Avvia il server di sviluppo su `localhost:4321`                             |
+| `pnpm run build`            | Compila il sito statico di produzione in `./dist/`                          |
+| `pnpm run preview`          | Anteprima locale della build di produzione                                  |
+| `pnpm run astro`            | Esegue un comando Astro CLI (`astro add`, …)                                |
+| `pnpm run sync:subcatalogs` | Sincronizza i file delle lingue target da `it/` e aggiorna `project.inlang` |
+| `pnpm run check:i18n`       | Controlla la validità JSON e la parità delle chiavi i18n                    |
+| `pnpm run inlang:check`     | Valida le traduzioni con inlang CLI (sintassi, markup, variabili)           |
+| `pnpm run typecheck`        | Controlla i tipi con `astro check` e `svelte-check`                         |
+| `pnpm run check`            | `check:i18n` + `flint` + `typecheck` (da eseguire prima di ogni commit)     |
+| `pnpm run lint`             | Controlla il codice con ESLint                                              |
+| `pnpm run lint:fix`         | Corregge automaticamente i problemi ESLint                                  |
+| `pnpm run format`           | Controlla la formattazione con Prettier                                     |
+| `pnpm run format:write`     | Formatta tutti i file con Prettier                                          |
+| `pnpm run flint`            | `format:write` + `lint:fix` in sequenza                                     |
+
+---
+
+## Traduzioni & Fink (inlang)
+
+I testi dell'interfaccia e i contenuti della conferenza sono organizzati come file JSON in `src/data/cms/`:
+
+- `src/data/cms/it/`: lingua sorgente e fonte di verità autorevole, modificata direttamente tramite **PagesCMS**.
+- `src/data/cms/en/`: traduzioni in lingua inglese, tradotte collaborativamente su **Fink**. Contengono unicamente i testi traducibili: ID, percorsi immagini, icone e coordinate geografiche sono ereditati a runtime dalla base italiana.
+
+La traduzione visiva collaborativa è gestita tramite **Fink** ([https://fink.inlang.com/github.com/ai-sf/cisf27](https://fink.inlang.com/github.com/ai-sf/cisf27)).
+
+Per la guida completa sull'architettura, sincronizzazione automatica dei sottocataloghi e aggiunta di nuove lingue, consulta [`docs/fink-inlang-setup.md`](./docs/fink-inlang-setup.md).
 
 ---
 
@@ -133,13 +170,13 @@ cp .env.example .env
 
 Modifica `.env` con l'URL del tuo deployment Google Apps Script (vedi sezione successiva).
 
-> `.env` è gitignorato. In produzione imposta la variabile d'ambiente nella piattaforma di hosting.
+> `.env` è gitignorato. In produzione imposta la variabile d'ambiente nella dashboard della piattaforma di hosting.
 
 ---
 
 ## Google Apps Script (modulo contatti)
 
-Il backend del form contatti risiede in `google-apps-script/` e gestisce l'invio immediato di un'email formattata tramite `MailApp.sendEmail` all'indirizzo istituzionale **`cisf27@ai-sf.it`**, con impostazione automatica del `replyTo` del mittente e **CC dinamico** in base all'argomento selezionato:
+Il backend del form contatti risiede in [`google-apps-script/`](google-apps-script/) e gestisce l'invio immediato di un'email formattata tramite `MailApp.sendEmail` all'indirizzo istituzionale **`cisf27@ai-sf.it`**, con impostazione automatica del `replyTo` del mittente e **CC dinamico** in base all'argomento selezionato:
 
 - **Sponsorizzazione** ➔ CC: `diego.ficarra@ai-sf.it`, `mariarosaria.sivo@ai-sf.it`
 - **Logistica** ➔ CC: `tomislav.vojvodic@ai-sf.it`
@@ -147,121 +184,23 @@ Il backend del form contatti risiede in `google-apps-script/` e gestisce l'invio
 - **Iscrizione** ➔ CC: `francesco.isgrò@ai-sf.it`, `alessandro.dagostino@ai-sf.it`
 - **Altro / Fallback** ➔ CC: `francesco.isgrò@ai-sf.it`, `alessandro.dagostino@ai-sf.it`
 
-In aggiunta, se è configurata la proprietà `FORM_ID`, i dati inviati vengono archiviati anche in un Google Form di riserva senza bloccare la consegna dell'email.
+Se configurata la proprietà `FORM_ID`, i messaggi vengono inoltre archiviati come risposte in un Google Form di riserva.
 
-### Flusso
-
-1. Il client (Svelte) invia una richiesta POST a `PUBLIC_GOOGLE_SCRIPT_URL` con il payload `{ nome, email, oggetto, messaggio }`.
-2. La Web App `doPost(e)` valida i campi obbligatori, determina i destinatari in CC e invia l'email tramite `MailApp.sendEmail`.
-3. Opzionalmente (se impostato `FORM_ID`), la risposta viene registrata nel Google Form.
-4. Il webhook restituisce `{ status: "success" }` oppure `{ status: "error", message: "…" }`.
-
----
-
-### Setup Iniziale & Configurazione Web App
-
-1. **Copia il codice:**
-
-- Incolla il contenuto di [google-apps-script/Code.js](google-apps-script/Code.js) nell'editor di Google Apps Script (oppure usa `clasp push`).
-- Assicurati che il manifest [google-apps-script/appsscript.json](google-apps-script/appsscript.json) includa gli scope `script.send_mail` e `forms` e `executeAs: "USER_DEPLOYING"`.
-
-2. **(Opzionale) Collega il Google Form di riserva:**
-
-- Se desideri salvare anche le risposte nel Form, crea un Google Form con i campi: `Nome e Cognome`, `Email`, `Oggetto` (a scelta multipla), `Messaggio`.
-- In Apps Script: **Impostazioni progetto ➔ Proprietà script (Script Properties)**.
-- Aggiungi la proprietà `FORM_ID` con l'ID del form (estratto dall'URL: `https://docs.google.com/forms/d/<FORM_ID>/edit`).
-
-3. **Autorizzazione Permessi OAuth (FONDAMENTALE):**
-   Prima di pubblicare o testare la Web App, lo script deve essere autorizzato a inviare email:
-1. Nella barra degli strumenti dell'editor Apps Script, seleziona la funzione **`authorizeScript`** dal menu a tendina delle funzioni.
-1. Clicca su **Esegui (Run)**.
-1. Comparirà il pop-up **"Autorizzazione richiesta"** (_Authorization Required_).
-1. Clicca su **"Esamina autorizzazioni"** (_Review permissions_) e seleziona l'account Google associato (`cisf27@ai-sf.it` o il proprio account).
-1. Se Google mostra la schermata _"Google non ha verificato questa app"_ (_Google hasn't verified this app_): - Clicca su **Avanzate** (_Advanced_ in basso a sinistra). - Clicca su **Apri CISF27 (non sicura)** (_Go to CISF27 (unsafe)_).
-1. Clicca su **Consenti** (_Allow_).
-1. Nel log di esecuzione in basso apparirà: `Autorizzazione completata con successo! Quota email rimanente: ...`.
-
-1. **Distribuzione come Web App:**
-
-- Clicca in alto a destra su **Distribuisci ➔ Nuova distribuzione** (o _Gestisci distribuzioni_ se già esistente).
-- Tipo: **Applicazione web (Web App)**.
-- **Esegui come (Execute as):** **`Me` / `Io` (`USER_DEPLOYING`)**  
-  _(⚠️ CRITICO: NON selezionare `Utente che accede all'app web` / `USER_ACCESSING`, altrimenti i visitatori anonimi del sito non potranno inviare l'email)._
-- **Chi può accedere (Who has access):** **`Chiunque` / `Anyone` (`ANYONE`)**.
-- Clicca su **Distribuisci** e copia l'**URL dell'applicazione web**.
-
-5. **Configura la variabile d'ambiente:**
-
-- Inserisci l'URL in `.env` come:
-  ```sh
-  PUBLIC_GOOGLE_SCRIPT_URL=https://script.google.com/macros/s/<DEPLOYMENT_ID>/exec
-  ```
-- Imposta la stessa variabile anche sul pannello di hosting di produzione (es. Cloudflare Pages).
-
----
-
-### Risoluzione Errori Comuni (Troubleshooting)
-
-#### Errore: `Non hai l'autorizzazione per chiamare MailApp.sendEmail` / `You do not have permission to call MailApp.sendEmail`
-
-> `Permessi richiesti / Required permissions: https://www.googleapis.com/auth/script.send_mail`
-> `Per maggiori informazioni consulta: https://developers.google.com/apps-script/guides/support/troubleshooting#authorization-is`
-
-Questo errore si verifica in due casi:
-
-1. **I permessi OAuth non sono stati autorizzati**: esegui la funzione `authorizeScript` dall'editor Apps Script seguendo il passaggio 3 della guida sopra.
-2. **La Web App è distribuita come "Utente che accede" anziché "Io"**:
-
-- Vai su **Distribuisci ➔ Gestisci distribuzioni**.
-- Clicca sull'icona della **matita (Modifica)**.
-- Assicurati che **Esegui come** sia impostato su **Io (`USER_DEPLOYING`)**.
-- Nella tendina **Versione**, seleziona **Nuova versione** (obbligatorio per applicare le modifiche al codice).
-- Clicca **Distribuisci**.
-
-#### Risoluzione: Il Google Form non registra le risposte
-
-Se le email arrivano ma le risposte non compaiono nel Google Form:
-
-1. **Verifica diagnostica da browser**: Apri l'URL della Web App (`.../exec`) nel browser. La risposta JSON mostrerà se `FORM_ID` è configurato correttamente, se è accessibile e l'elenco delle domande rilevate.
-2. **Esegui il test manuale in Apps Script**:
-
-- Nell'editor Google Apps Script, seleziona la funzione **`testFormSubmission`** e clicca su **Esegui**.
-- Controlla il log di esecuzione in basso: se c'è un errore o un problema di permessi, verrà mostrato il dettaglio esatto.
-
-3. **Assicurati di aver concesso i permessi di Forms**:
-
-- Esegui la funzione **`authorizeScript`** per verificare che sia `MailApp` che `FormApp` abbiano ricevuto il consenso OAuth.
-
-4. **Ricorda di creare una Nuova Versione dopo aver modificato il codice**:
-
-- Ogni volta che modifichi `Code.js` in Apps Script, devi andare su **Distribuisci ➔ Gestisci distribuzioni ➔ Modifica (matita) ➔ Versione: Nuova versione ➔ Distribuisci**, altrimenti la Web App continuerà a eseguire il vecchio codice.
-
----
-
-### Sviluppo con clasp
-
-Per sincronizzare il codice direttamente dal terminale:
-
-```sh
-npx @google/clasp login
-cd google-apps-script
-npx @google/clasp push
-```
-
-> `google-apps-script/.clasp.json` contiene già lo `scriptId` del deployment corrente.
-> `google-apps-script/appsscript.json` contiene il manifest con gli scope OAuth e le impostazioni Web App.
+> 📖 **Guida Completa di Setup, Deploy e Risoluzione Errori:**  
+> Consulta [`docs/google-apps-script.md`](./docs/google-apps-script.md) per istruzioni dettagliate su autorizzazioni OAuth, deploy come Web App, test diagnostici e gestione con `clasp`.
 
 ---
 
 ## CMS
 
-Il contenuto è gestito tramite **PagesCMS**, configurato in `_pages.yml`.
+I contenuti editoriali sono gestiti tramite **PagesCMS**, configurato in `.pages.yml`.
 
-- I dati risiedono in `src/data/cms/*.json` (file JSON editabili anche a mano).
-- Ogni file JSON corrisponde a una sezione del CMS: `home.json`, `about.json`, `program.json`, `contacts.json`, …
-- Le immagini caricate via CMS finiscono in `src/assets/images/` e vengono rinominate automaticamente.
-
-Per modificare i contenuti: apri il sito su PagesCMS oppure modifica direttamente i file JSON in `src/data/cms/`.
+- I dati risiedono in `src/data/cms/it/` (file JSON editabili sia tramite interfaccia che a mano).
+- Ogni file o cartella JSON corrisponde a una collezione o catalogo:
+  - Cataloghi principali di pagina: `home.json`, `about.json`, `program.json`, `contacts.json`, `structures.json`, …
+  - Sottocataloghi modulari: `structures/` (alloggi e sedi), `partner-categories/`, `people-roles/`, `structure-categories/`.
+- Le immagini caricate tramite CMS vengono salvate in `src/assets/images/` e ottimizzate in fase di build.
+- In PagesCMS la modifica agisce direttamente sui contenuti italiani in `src/data/cms/it/`. Le altre lingue ereditano la struttura e vengono tradotte via Fink.
 
 ---
 
@@ -281,10 +220,10 @@ cp .env.example .env
 # 4. Avvia il dev server
 pnpm run dev
 
-# 5. Sviluppa - tutte le modifiche sono visibili su localhost:4321
+# 5. Sviluppa - tutte le modifiche sono visibili in tempo reale su localhost:4321
 
-# 6. Prima del commit, esegui formato e lint
-pnpm run flint
+# 6. Prima di ogni commit, esegui i controlli completi di qualità
+pnpm run check
 ```
 
 ---
@@ -292,14 +231,14 @@ pnpm run flint
 ## Guida produzione
 
 ```sh
-# Build statica
+# Build statica per produzione
 pnpm run build
 ```
 
-L'output è in `dist/`. Puoi servire la cartella con **qualsiasi hosting statico**:
+L'output compilato è disponibile nella cartella `dist/`. Può essere ospitato su **qualsiasi provider statico**:
 
-- **Cloudflare Pages** → collega il repo, build command: `pnpm run build`, output: `dist`
-- **Netlify** → build command: `pnpm run build`, publish: `dist`
-- **GitHub Pages** → deploy `dist/` tramite GitHub Actions
+- **Cloudflare Pages** → collega il repository GitHub, build command: `pnpm run build`, output directory: `dist`
+- **Netlify** → build command: `pnpm run build`, publish directory: `dist`
+- **GitHub Pages** → distribuzione automatica della cartella `dist/` tramite GitHub Actions
 
-Imposta la variabile d'ambiente `PUBLIC_GOOGLE_SCRIPT_URL` nella dashboard della piattaforma di hosting.
+Assicurati di configurare la variabile d'ambiente `PUBLIC_GOOGLE_SCRIPT_URL` nelle impostazioni della piattaforma di hosting.

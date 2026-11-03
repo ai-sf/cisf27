@@ -11,13 +11,16 @@
     "node": ">=22.12.0"
   },
   "scripts": {
+    "sync:subcatalogs": "node scripts/sync-subcatalogs.js",
+    "check:i18n": "node scripts/check-i18n.js",
+    "inlang:check": "inlang check --project ./project.inlang --empty-translations --empty-variants --missing-variables --unknown-variables --missing-markup --missing-variants --missing-selectors",
     "typecheck": "astro check && svelte-check --no-tsconfig",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "format": "prettier .",
     "format:write": "prettier . --write",
     "flint": "pnpm run format:write && pnpm run lint:fix",
-    "check": "pnpm run flint && pnpm run typecheck",
+    "check": "pnpm run check:i18n && pnpm run flint && pnpm run typecheck",
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
@@ -41,6 +44,7 @@
   "devDependencies": {
     "@astrojs/check": "^0.9.9",
     "@eslint/js": "^10.0.1",
+    "@inlang/cli": "^3.4.5",
     "eslint": "^10.6.0",
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-astro": "^1.7.0",

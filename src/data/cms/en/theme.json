@@ -1,0 +1,23 @@
+{
+  "badge": "Theme",
+  "name": "Trajectories of Physics",
+  "description": "In an increasingly specialized scientific landscape where boundaries between disciplines blur, the challenge for future generations of physicists is not only studying the universe, but finding their own place within it. CISF27 was created to bridge the gap between lecture halls and boundless career opportunities. Over the conference week, AISF offers a compass to those seeking orientation by exploring physics beyond academia. Through four pillars — History, Energy, Research, and Innovation — we chart the careers of tomorrow, showing how a physics degree opens paths in infinite directions.",
+  "pillars": [
+    {
+      "title": "History",
+      "description": "Pioneering Bologna figures — Laura Bassi, Guglielmo Marconi, Luigi Galvani — and landmark discoveries that shaped scientific history to ignite our curiosity."
+    },
+    {
+      "title": "Energy",
+      "description": "A round table to explore multiple career horizons: academic research, software engineering, scientific communication, and finance."
+    },
+    {
+      "title": "Research",
+      "description": "Guided tours to prominent regional research facilities: INFN, INGV, INAF, Cineca, and more."
+    },
+    {
+      "title": "Innovation",
+      "description": "The future of physics and cutting-edge industrial opportunities empowering a new generation of leaders."
+    }
+  ]
+}

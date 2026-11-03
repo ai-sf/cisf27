@@ -8,35 +8,82 @@
 
 	type Status = { variant: 'success' | 'error'; heading: string; message: string } | null;
 
+	interface FormTranslations {
+		heroHeading?: string;
+		heroSubtitle?: string;
+		formHeading?: string;
+		nameLabel?: string;
+		namePlaceholder?: string;
+		emailLabel?: string;
+		emailPlaceholder?: string;
+		subjectLabel?: string;
+		subjectDefault?: string;
+		subjects?: (string | undefined)[];
+		messageLabel?: string;
+		messagePlaceholder?: string;
+		nameValidationHint?: string;
+		emailValidationHint?: string;
+		subjectValidationHint?: string;
+		messageValidationHint?: string;
+		successHeading?: string;
+		successMessage?: string;
+		errorHeading?: string;
+		resetButton?: string;
+		submitButton?: string;
+		submittingButton?: string;
+		mapHeading?: string;
+		mapDept?: string;
+	}
+
+	let { translations = null, locale = 'it' } = $props<{
+		translations?: FormTranslations | null;
+		locale?: string;
+	}>();
+
+	const tForm = $derived(translations ?? (contacts.form as FormTranslations));
+
 	let nome = $state('');
 	let email = $state('');
-	let oggetto = $state<FormPayload['oggetto'] | ''>('');
+	let oggetto = $state<string>('');
 	let messaggio = $state('');
 	let submitting = $state(false);
 	let status = $state<Status>(null);
 	let formEl = $state<HTMLFormElement | null>(null);
 
-	const subjectValues: FormPayload['oggetto'][] =
-		(contacts.form?.subjects as FormPayload['oggetto'][]) ?? [];
+	const subjectValues = $derived<string[]>(
+		(tForm?.subjects as string[]) ?? (contacts.form?.subjects as string[]) ?? []
+	);
 
-	const oggettoMap: Record<string, FormPayload['oggetto']> = {
-		sponsor: 'Sponsorizzazione',
-		sponsorizzazione: 'Sponsorizzazione',
-		iscrizione: 'Iscrizione',
-		iscriviti: 'Iscrizione',
-		logistica: 'Logistica',
-		programma: 'Programma Scientifico',
-		'programma-scientifico': 'Programma Scientifico',
-		altro: 'Altro',
+	const CANONICAL_SUBJECTS: FormPayload['oggetto'][] = [
+		'Iscrizione',
+		'Sponsorizzazione',
+		'Logistica',
+		'Programma Scientifico',
+		'Altro',
+	];
+
+	const QUERY_PARAM_MAP: Record<string, number> = {
+		iscrizione: 0,
+		iscriviti: 0,
+		sponsor: 1,
+		sponsorizzazione: 1,
+		logistica: 2,
+		programma: 3,
+		'programma-scientifico': 3,
+		altro: 4,
 	};
 
 	onMount(() => {
 		const params = new SvelteURLSearchParams(window.location.search);
 		const raw = params.get('oggetto') ?? params.get('tipo') ?? params.get('azione');
 		if (raw) {
-			const mapped = oggettoMap[raw.toLowerCase()];
-			if (mapped) {
-				oggetto = mapped;
+			const lower = raw.toLowerCase();
+			const idxFromParam = QUERY_PARAM_MAP[lower];
+			const directIdx = subjectValues.findIndex((s) => s.toLowerCase() === lower);
+			const targetIdx = idxFromParam !== undefined ? idxFromParam : directIdx;
+
+			if (targetIdx !== -1 && subjectValues[targetIdx]) {
+				oggetto = subjectValues[targetIdx];
 				formEl?.scrollIntoView({ behavior: 'smooth', block: 'center' });
 			}
 		}
@@ -58,19 +105,21 @@
 		submitting = true;
 		status = null;
 
-		const data: FormPayload = { nome, email, oggetto, messaggio };
-		const result = await contactForm(data);
+		const idx = subjectValues.indexOf(oggetto);
+		const canonicalSubject = idx !== -1 ? CANONICAL_SUBJECTS[idx] : 'Altro';
+		const data: FormPayload = { nome, email, oggetto: canonicalSubject, messaggio };
+		const result = await contactForm(data, locale);
 
 		if (result.success) {
 			status = {
 				variant: 'success',
-				heading: contacts.form?.successHeading ?? 'Messaggio inviato!',
-				message: contacts.form?.successMessage ?? 'Ti risponderemo al più presto.',
+				heading: tForm?.successHeading ?? 'Messaggio inviato!',
+				message: tForm?.successMessage ?? 'Ti risponderemo al più presto.',
 			};
 		} else {
 			status = {
 				variant: 'error',
-				heading: contacts.form?.errorHeading ?? 'Qualcosa è andato storto',
+				heading: tForm?.errorHeading ?? 'Qualcosa è andato storto',
 				message: result.error ?? errorContent.defaultMessage ?? 'Errore sconosciuto',
 			};
 		}
@@ -80,7 +129,7 @@
 </script>
 
 <div class="card card-border border-primary/30 bg-base-100/60 p-8">
-	<h2 class="card-title mb-6 text-2xl">{contacts.form?.formHeading}</h2>
+	<h2 class="card-title mb-6 text-2xl">{tForm?.formHeading}</h2>
 
 	<form
 		bind:this={formEl}
@@ -110,42 +159,42 @@
 
 				<button class="btn btn-primary btn-outline" onclick={reset}>
 					<RotateCcw class="size-4 shrink-0" />
-					{contacts.form?.resetButton}
+					{tForm?.resetButton ?? 'Invia un altro'}
 				</button>
 			</div>
 		{:else}
 			<fieldset class="fieldset">
-				<label class="label text-base" for="nome">{contacts.form?.nameLabel}</label>
+				<label class="label text-base" for="nome">{tForm?.nameLabel}</label>
 				<input
 					id="nome"
 					name="nome"
 					type="text"
 					required
-					placeholder={contacts.form?.namePlaceholder}
+					placeholder={tForm?.namePlaceholder}
 					bind:value={nome}
 					class="input validator focus:input-primary w-full"
 					minlength="2"
 					maxlength="256"
 				/>
-				<p class="validator-hint hidden">{contacts.form?.nameValidationHint}</p>
+				<p class="validator-hint hidden">{tForm?.nameValidationHint}</p>
 			</fieldset>
 
 			<fieldset class="fieldset">
-				<label class="label text-base" for="email">{contacts.form?.emailLabel}</label>
+				<label class="label text-base" for="email">{tForm?.emailLabel}</label>
 				<input
 					id="email"
 					name="email"
 					type="email"
 					required
-					placeholder={contacts.form?.emailPlaceholder}
+					placeholder={tForm?.emailPlaceholder}
 					bind:value={email}
 					class="input validator focus:input-primary w-full"
 				/>
-				<p class="validator-hint hidden">{contacts.form?.emailValidationHint}</p>
+				<p class="validator-hint hidden">{tForm?.emailValidationHint}</p>
 			</fieldset>
 
 			<fieldset class="fieldset">
-				<label class="label text-base" for="oggetto">{contacts.form?.subjectLabel}</label>
+				<label class="label text-base" for="oggetto">{tForm?.subjectLabel}</label>
 				<select
 					id="oggetto"
 					name="oggetto"
@@ -153,25 +202,25 @@
 					bind:value={oggetto}
 					class="select validator focus:select-primary w-full"
 				>
-					<option value="" disabled selected>{contacts.form?.subjectDefault}</option>
+					<option value="" disabled selected>{tForm?.subjectDefault}</option>
 					{#each subjectValues as value (value)}
 						<option {value}>{value}</option>
 					{/each}
 				</select>
-				<p class="validator-hint hidden">{contacts.form?.subjectValidationHint}</p>
+				<p class="validator-hint hidden">{tForm?.subjectValidationHint}</p>
 			</fieldset>
 
 			<fieldset class="fieldset">
-				<label class="label text-base" for="messaggio">{contacts.form?.messageLabel}</label>
+				<label class="label text-base" for="messaggio">{tForm?.messageLabel}</label>
 				<textarea
 					id="messaggio"
 					name="messaggio"
 					required
 					rows={5}
-					placeholder={contacts.form?.messagePlaceholder}
+					placeholder={tForm?.messagePlaceholder}
 					bind:value={messaggio}
 					class="textarea validator w-full focus:textarea-primary"></textarea>
-				<p class="validator-hint hidden">{contacts.form?.messageValidationHint}</p>
+				<p class="validator-hint hidden">{tForm?.messageValidationHint}</p>
 			</fieldset>
 
 			<button type="submit" disabled={submitting} class="btn btn-primary glow-hover btn-block">
@@ -179,7 +228,7 @@
 					<span class="loading loading-dots loading-md"></span>
 				{:else}
 					<Mail class="size-5" />
-					{contacts.form?.submitButton}
+					{tForm?.submitButton}
 					<ArrowRight class="size-5" />
 				{/if}
 			</button>

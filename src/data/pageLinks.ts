@@ -1,17 +1,12 @@
 import type { Icon } from '@lucide/astro';
 import { resolveIcon } from '../utils/helpers';
-import { pageLinksData } from './cms';
+import { pageLinksData, getCmsData } from './cms';
+import { getLocalizedHref } from '../utils/i18n';
 
 const p = pageLinksData;
 
-const base = import.meta.env.BASE_URL.replace(/\/$/, '');
-const resolveHref = (href?: string): string => {
-	if (!href) return base ? `${base}/` : '/';
-	if (href.startsWith('http://') || href.startsWith('https://') || href.startsWith('#'))
-		return href;
-	const clean = href.startsWith(base) ? href.slice(base.length) : href;
-	if (clean === '' || clean === '/') return base ? `${base}/` : '/';
-	return `${base}${clean.startsWith('/') ? '' : '/'}${clean}`;
+export const resolveHref = (href?: string, locale?: string): string => {
+	return getLocalizedHref(href, locale);
 };
 
 export interface PageLink {
@@ -65,3 +60,75 @@ export const pageLinks: PageLink[] = [
 	aboutLink,
 	contactLink,
 ] as const;
+
+export function getPageLinks(locale: string = 'it'): PageLink[] {
+	if (!locale || locale === 'it') return pageLinks;
+	const { pageLinksData: pl } = getCmsData(locale);
+	return [
+		{
+			name: pl.home?.name ?? homeLink.name,
+			href: resolveHref(pl.home?.href ?? p.home?.href ?? '/', locale),
+			icon: homeLink.icon,
+		},
+		{
+			name: pl.sponsor?.name ?? sponsorLink.name,
+			href: resolveHref(pl.sponsor?.href ?? p.sponsor?.href ?? '/sponsor', locale),
+			icon: sponsorLink.icon,
+		},
+		{
+			name: pl.program?.name ?? programLink.name,
+			href: resolveHref(pl.program?.href ?? p.program?.href ?? '/programma', locale),
+			icon: programLink.icon,
+		},
+		{
+			name: pl.structures?.name ?? structuresLink.name,
+			href: resolveHref(pl.structures?.href ?? p.structures?.href ?? '/strutture', locale),
+			icon: structuresLink.icon,
+		},
+		{
+			name: pl.tesi?.name ?? tesiLink.name,
+			href: resolveHref(pl.tesi?.href ?? p.tesi?.href ?? '/tesi', locale),
+			icon: tesiLink.icon,
+		},
+		{
+			name: pl.about?.name ?? aboutLink.name,
+			href: resolveHref(pl.about?.href ?? p.about?.href ?? '/chi-siamo', locale),
+			icon: aboutLink.icon,
+		},
+		{
+			name: pl.contact?.name ?? contactLink.name,
+			href: resolveHref(pl.contact?.href ?? p.contact?.href ?? '/contatto', locale),
+			icon: contactLink.icon,
+		},
+	];
+}
+
+export function getPageLink(
+	id: 'home' | 'about' | 'program' | 'structures' | 'sponsor' | 'tesi' | 'contact' | string,
+	locale: string = 'it'
+): PageLink {
+	if (!locale || locale === 'it') {
+		switch (id) {
+			case 'home':
+				return homeLink;
+			case 'about':
+				return aboutLink;
+			case 'program':
+				return programLink;
+			case 'structures':
+				return structuresLink;
+			case 'sponsor':
+				return sponsorLink;
+			case 'tesi':
+				return tesiLink;
+			case 'contact':
+				return contactLink;
+			default:
+				return { name: id, href: resolveHref(id) };
+		}
+	}
+	const links = getPageLinks(locale);
+	const ids = ['home', 'sponsor', 'program', 'structures', 'tesi', 'about', 'contact'];
+	const idx = ids.indexOf(id);
+	return idx !== -1 ? links[idx] : { name: id, href: resolveHref(id, locale) };
+}

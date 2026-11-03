@@ -1,0 +1,161 @@
+{
+  "heroHeading": "The Program",
+  "heroSubtitle": "5 days of science, culture, and networking in Bologna",
+  "locationBadge": "Venue",
+  "locationHeading": "Where CISF27 Takes ",
+  "locationGradientWord": "Place",
+  "goToDay": "Go to day",
+  "goToStructure": "Go to structure",
+  "eventsCountLabel": "events",
+  "openInMaps": "Open in Google Maps",
+  "program": [
+    {
+      "id": "lunedi",
+      "day": "Monday",
+      "date": "April 19",
+      "sections": [
+        {
+          "time": "09:00 - 15:00",
+          "title": "Welcome and Registration"
+        },
+        {
+          "time": "15:00 - 16:00",
+          "title": "Opening Ceremony",
+          "description": "CISF27 kicks off: introduction by the Organizing Committee, presentation of the theme, and a keynote address by an esteemed professor. Also our first chance to thank our key partners."
+        },
+        {
+          "time": "16:00 - 16:30",
+          "title": "Coffee Break"
+        },
+        {
+          "time": "16:30 - 18:30",
+          "title": "Keynote Lecture with Guest Speaker"
+        },
+        {
+          "title": "Free Dinner"
+        },
+        {
+          "time": "21:30 - 23:30",
+          "title": "Social Event",
+          "description": "Coulomb's Shock"
+        }
+      ]
+    },
+    {
+      "id": "martedi",
+      "day": "Tuesday — History",
+      "date": "April 20",
+      "sections": [
+        {
+          "time": "08:00 - 12:00",
+          "title": "Laboratory Visits",
+          "description": "Participants split up to visit major research facilities in the region: TBA"
+        },
+        {
+          "title": "Travel to San Giovanni in Persiceto"
+        },
+        {
+          "time": "13:00 - 14:00",
+          "title": "Free Lunch"
+        },
+        {
+          "time": "15:30 - 17:30",
+          "title": "Plenary Session"
+        },
+        {
+          "time": "18:30 - 20:00",
+          "title": "Public Afternoon Session"
+        },
+        {
+          "title": "Free Evening in Bologna"
+        }
+      ]
+    },
+    {
+      "id": "mercoledi",
+      "day": "Wednesday — Association Day",
+      "date": "April 21",
+      "sections": [
+        {
+          "time": "09:00 - 13:00",
+          "title": "Parallel Sessions",
+          "description": "Selected CISF27 attendees present their thesis and research work to fellow students: an opportunity to discover new horizons and gain insights into Bachelor's, Master's, or PhD thesis projects."
+        },
+        {
+          "time": "09:00 - 13:00",
+          "title": "Breakfast Workshop"
+        },
+        {
+          "time": "13:00 - 14:00",
+          "title": "Packed Lunch"
+        },
+        {
+          "time": "14:30 - 20:00",
+          "title": "AGM",
+          "description": "Annual General Meeting, including the election of the Association's new Executive Committee."
+        },
+        {
+          "title": "Free Dinner"
+        },
+        {
+          "title": "Social Night Out"
+        }
+      ]
+    },
+    {
+      "id": "giovedi",
+      "day": "Thursday — Energy and Innovation",
+      "date": "April 22",
+      "sections": [
+        {
+          "time": "10:00 - 12:30",
+          "title": "Round Table",
+          "description": "Physicists from different sectors discuss career paths available after graduation: Academic Research, Software, Insurance, Science Communication, Big Data, Logistics, Finance..."
+        },
+        {
+          "title": "Group Photo"
+        },
+        {
+          "time": "13:00 - 14:00",
+          "title": "Free Lunch"
+        },
+        {
+          "time": "14:30 - 16:30",
+          "title": "Public Afternoon Session",
+          "description": "Keynote speaker + sponsor presentations"
+        },
+        {
+          "title": "Free Dinner"
+        },
+        {
+          "title": "Closing Gala Night"
+        }
+      ]
+    },
+    {
+      "id": "venerdi",
+      "day": "Friday — Careers",
+      "date": "April 23",
+      "sections": [
+        {
+          "time": "10:00 - 11:30",
+          "title": "Board Games"
+        },
+        {
+          "time": "11:30 - 13:00",
+          "title": "Plenary (Career Focus)",
+          "description": "Several key sponsors present career opportunities, followed by direct interaction with physics students."
+        },
+        {
+          "time": "13:00 - 14:00",
+          "title": "Packed Lunch"
+        },
+        {
+          "time": "14:30 - 16:30",
+          "title": "Closing Ceremony",
+          "description": "Final review looking back at the highlights that made CISF27 unforgettable, and acknowledgments to everyone who contributed."
+        }
+      ]
+    }
+  ]
+}

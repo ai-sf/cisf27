@@ -1,0 +1,20 @@
+{
+  "conferenceStats": [
+    { "label": "Students" },
+    { "label": "Guests" },
+    { "label": "Edition" },
+    { "label": "Days" }
+  ],
+  "aisfStats": [
+    { "label": "Members" },
+    { "label": "Local Committees" },
+    { "label": "IAPS" },
+    { "label": "Passion" }
+  ],
+  "iapsStats": [
+    { "label": "Territorial Committees" },
+    { "label": "Local Committees" },
+    { "label": "Countries" },
+    { "label": "Students" }
+  ]
+}

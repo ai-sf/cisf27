@@ -1,0 +1,9 @@
+{
+  "home": { "name": "Home", "icon": "house", "href": "/" },
+  "about": { "name": "Chi Siamo", "icon": "users", "href": "/chi-siamo" },
+  "program": { "name": "Programma", "icon": "calendar", "href": "/programma" },
+  "structures": { "name": "Strutture", "icon": "hotel", "href": "/strutture" },
+  "sponsor": { "name": "Sponsor", "icon": "handshake", "href": "/sponsor" },
+  "tesi": { "name": "Tesi", "icon": "book-open", "href": "/tesi" },
+  "contact": { "name": "Contatto", "icon": "mail", "href": "/contatto" }
+}

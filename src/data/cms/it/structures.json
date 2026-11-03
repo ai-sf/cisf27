@@ -26,5 +26,7 @@
   "distanceLabel": "Distanza",
   "capacityLabel": "Posti",
   "roomsLabel": "Camere",
-  "priceLabel": "Prezzo"
+  "priceLabel": "Prezzo",
+  "phoneLabel": "Telefono",
+  "whatsappLabel": "WhatsApp"
 }

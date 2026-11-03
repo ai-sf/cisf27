@@ -1,13 +1,26 @@
 ---
 import { Image } from 'astro:assets';
-import { EllipsisVertical, Ellipsis } from '@lucide/astro';
+import { EllipsisVertical, Ellipsis, Globe, ChevronDown } from '@lucide/astro';
 import { resolveIcon } from '../utils/helpers';
-import { contactLink, homeLink, pageLinks } from '../data/pageLinks.ts';
-import { conference, nav } from '../data/cms';
+import { getPageLinks, getPageLink } from '../data/pageLinks.ts';
+import { getCmsData } from '../data/cms';
 import cisfLogo from '../assets/images/logo.png';
+import { switchLocalePath, languages, getLocale } from '../utils/i18n';
 
 const { pathname } = Astro.url;
 const currentPage = pathname || '/';
+
+const locale = getLocale(Astro);
+const { conference, nav } = getCmsData(locale);
+const pageLinks = getPageLinks(locale);
+const homeLink = getPageLink('home', locale);
+const contactLink = getPageLink('contact', locale);
+
+const currentLanguage = languages.find((l) => l.code === locale) || {
+	code: locale,
+	name: locale.toUpperCase(),
+	badge: locale.toUpperCase(),
+};
 
 const normalize = (path: string): string => {
 	const p = path.split('?')[0].split('#')[0];
@@ -83,8 +96,47 @@ const RegisterIcon = resolveIcon(nav.registerIcon);
 		</ul>
 	</div>
 
-	<!-- CTA button -->
+	<!-- CTA & Language buttons -->
 	<div class="navbar-end gap-2">
+		<!-- Language Switcher Dropdown -->
+		<div class="dropdown dropdown-end">
+			<div
+				tabindex="0"
+				role="button"
+				class="btn btn-ghost btn-sm"
+				aria-label={nav.switchLanguage || 'Switch language'}
+			>
+				<Globe class="size-4" />
+				<span>{currentLanguage.badge}</span>
+				<ChevronDown class="size-3 opacity-60" />
+			</div>
+			<ul
+				tabindex="0"
+				class="dropdown-content menu bg-base-100 rounded-box border-base-200 z-50 w-36 border p-1.5 shadow-lg"
+			>
+				{
+					languages.map((lang) => (
+						<li>
+							<a
+								href={switchLocalePath(currentPage, lang.code)}
+								class={locale === lang.code ? 'menu-active font-bold' : ''}
+							>
+								<span>{lang.name}</span>
+								<span
+									class:list={[
+										'badge badge-xs',
+										locale === lang.code ? 'badge-primary' : 'badge-neutral badge-soft',
+									]}
+								>
+									{lang.badge}
+								</span>
+							</a>
+						</li>
+					))
+				}
+			</ul>
+		</div>
+
 		<a
 			href={`${contactLink.href}?tipo=sponsor`}
 			class="btn btn-primary btn-sm sm:btn-md shadow-primary/20 hover:shadow-primary/40 card-interactive glow-hover shadow-lg"
@@ -178,7 +230,35 @@ const RegisterIcon = resolveIcon(nav.registerIcon);
 		})
 	}
 	<li class="menu-title">
-		<span class="text-base-content/40 text-xs font-semibold uppercase">Azioni</span>
+		<span class="text-base-content/40 text-xs font-semibold uppercase"
+			>{nav.language || 'Language'}</span
+		>
+	</li>
+	{
+		languages.map((lang, index) => (
+			<li class={index === languages.length - 1 ? 'mb-2' : ''}>
+				<a
+					href={switchLocalePath(currentPage, lang.code)}
+					class={locale === lang.code ? 'active font-bold' : ''}
+				>
+					<Globe class="size-4" />
+					<span>{lang.name}</span>
+					<span
+						class:list={[
+							'badge badge-xs',
+							locale === lang.code ? 'badge-primary' : 'badge-neutral badge-soft',
+						]}
+					>
+						{lang.badge}
+					</span>
+				</a>
+			</li>
+		))
+	}
+	<li class="menu-title">
+		<span class="text-base-content/40 text-xs font-semibold uppercase"
+			>{nav.actions || 'Actions'}</span
+		>
 	</li>
 	<li class="mb-2">
 		<a

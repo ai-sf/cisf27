@@ -25,9 +25,13 @@
     "successHeading": "Messaggio inviato!",
     "successMessage": "Ti risponderemo al più presto.",
     "errorHeading": "Qualcosa è andato storto",
-    "resetButton": "Invia un'altro",
+    "resetButton": "Invia un altro",
     "submitButton": "Invia Messaggio",
+    "submittingButton": "Invio in corso...",
     "mapHeading": "Sede CISF27",
-    "mapDept": "Dipartimento di Fisica e Astronomia"
+    "mapDept": "Dipartimento di Fisica e Astronomia",
+    "endpointError": "Endpoint del modulo non configurato.",
+    "sendError": "Si è verificato un errore durante l'invio.",
+    "timeoutError": "Il server sta impiegando più tempo del previsto. Se hai già inviato il messaggio, controlla la tua casella email prima di riprovare."
   }
 }
