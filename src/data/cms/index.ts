@@ -28,8 +28,8 @@ const baseModules = import.meta.glob<Record<string, unknown>>('./*.json', {
 	import: 'default',
 });
 
-// Eagerly import localized overrides from src/locales/
-const localizedModules = import.meta.glob<Record<string, unknown>>('../../locales/*/*.json', {
+// Eagerly import localized overrides from src/data/locales/
+const localizedModules = import.meta.glob<Record<string, unknown>>('../locales/*/*.json', {
 	eager: true,
 	import: 'default',
 });
@@ -79,7 +79,7 @@ export function getCatalog(name: string, locale: string = 'it'): unknown {
 	const base = baseModules[`./${name}.json`];
 	if (!base) return {};
 	if (locale === 'it' || !locale) return base;
-	const override = localizedModules[`../../locales/${locale}/${name}.json`];
+	const override = localizedModules[`../locales/${locale}/${name}.json`];
 	if (!override) return base;
 	return deepMerge(base, override);
 }
@@ -173,7 +173,7 @@ export const partnerCategoryGlob = import.meta.glob<{
 
 export const localizedPartnerCategoryGlob = import.meta.glob<{
 	default: { id?: string; label?: string; icon?: string; color?: string };
-}>('../../locales/*/partner-categories/*.json', {
+}>('../locales/*/partner-categories/*.json', {
 	eager: true,
 });
 
@@ -185,7 +185,7 @@ export const committeeRoleGlob = import.meta.glob<{
 
 export const localizedCommitteeRoleGlob = import.meta.glob<{
 	default: { id?: string; label?: string; description?: string };
-}>('../../locales/*/people-roles/*.json', {
+}>('../locales/*/people-roles/*.json', {
 	eager: true,
 });
 
@@ -231,7 +231,7 @@ export const localizedStructureGlob = import.meta.glob<{
 		features?: string[] | Record<string, string>;
 		image?: string;
 	};
-}>('../../locales/*/structures/*.json', {
+}>('../locales/*/structures/*.json', {
 	eager: true,
 });
 
@@ -243,7 +243,7 @@ export const structureCategoryGlob = import.meta.glob<{
 
 export const localizedStructureCategoryGlob = import.meta.glob<{
 	default: { id?: string; label?: string; icon?: string; color?: string };
-}>('../../locales/*/structure-categories/*.json', {
+}>('../locales/*/structure-categories/*.json', {
 	eager: true,
 });
 

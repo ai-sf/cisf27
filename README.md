@@ -29,7 +29,7 @@ pnpm install
 | Stili                | [Tailwind CSS 4](https://tailwindcss.com/) + [daisyUI 5](https://daisyui.com/) |
 | Icone                | [Lucide](https://lucide.dev/)                                                  |
 | Font                 | Nunito, Playfair Display (via Fontsource)                                      |
-| Traduzioni / i18n    | [Fink](https://fink.inlang.com/) / inlang (file JSON in `src/locales/`)        |
+| Traduzioni / i18n    | [Fink](https://fink.inlang.com/) / inlang (file JSON in `src/data/locales/`)   |
 | CMS                  | [PagesCMS](https://pagescms.org/) / file JSON                                  |
 | Backend contatti     | Google Apps Script                                                             |
 | Package manager      | pnpm 11                                                                        |
@@ -88,7 +88,7 @@ pnpm install
 │   │   ├── people.ts
 │   │   ├── stats.ts
 │   │   └── structures.ts
-│   ├── locales/                # Traduzioni e cataloghi per Fink
+│   │   ├── locales/            # Traduzioni e cataloghi per Fink                # Traduzioni e cataloghi per Fink
 │   │   ├── it/                 # Generato automaticamente da sync-subcatalogs.js (baseLocale)
 │   │   └── en/                 # Traduzioni in lingua inglese (gestite da Fink)
 │   │   ├── stats.ts
@@ -149,8 +149,8 @@ Tutti i comandi vanno eseguiti dalla **root del progetto**.
 I testi dell'interfaccia e i contenuti della conferenza sono organizzati tra sorgente CMS e cataloghi di traduzione:
 
 - `src/data/cms/`: lingua sorgente e fonte di verità autorevole, modificata direttamente tramite **PagesCMS** (senza cartelle per-lingua, con array JSON completi, ID e metadati).
-- `src/locales/it/`: catalogo di riferimento per **Fink**, generato automaticamente dallo script di sincronizzazione a partire da `src/data/cms/` (array convertiti in oggetti indicizzati per compatibilità totale con plugin-json).
-- `src/locales/en/`: traduzioni in lingua inglese, tradotte collaborativamente su **Fink**.
+- `src/data/locales/it/`: catalogo di riferimento per **Fink**, generato automaticamente dallo script di sincronizzazione a partire da `src/data/cms/` (array convertiti in oggetti indicizzati per compatibilità totale con plugin-json).
+- `src/data/locales/en/`: traduzioni in lingua inglese, tradotte collaborativamente su **Fink**.
 
 La traduzione visiva collaborativa è gestita tramite **Fink** ([https://fink.inlang.com/github.com/ai-sf/cisf27](https://fink.inlang.com/github.com/ai-sf/cisf27)).
 
@@ -204,7 +204,7 @@ I contenuti editoriali sono gestiti tramite **PagesCMS**, configurato in `.pages
   - Cataloghi principali di pagina: `home.json`, `about.json`, `program.json`, `contacts.json`, `structures.json`, …
   - Sottocataloghi modulari: `structures/` (alloggi e sedi), `partner-categories/`, `people-roles/`, `structure-categories/`.
 - Le immagini caricate tramite CMS vengono salvate in `src/assets/images/` e ottimizzate in fase di build.
-- In PagesCMS la modifica agisce direttamente sui contenuti in `src/data/cms/`. Lo script `pnpm run sync:subcatalogs` genera la versione per Fink in `src/locales/it/`.
+- In PagesCMS la modifica agisce direttamente sui contenuti in `src/data/cms/`. Lo script `pnpm run sync:subcatalogs` genera la versione per Fink in `src/data/locales/it/`.
 
 ---
 

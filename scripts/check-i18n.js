@@ -3,7 +3,7 @@ import { readdirSync, readFileSync, existsSync } from 'node:fs';
 import { join, resolve } from 'node:path';
 
 const ROOT_DIR = resolve('.');
-const LOCALES_DIR = join(ROOT_DIR, 'src', 'locales');
+const LOCALES_DIR = join(ROOT_DIR, 'src', 'data', 'locales');
 const BASE_LANG = 'it';
 
 if (!existsSync(LOCALES_DIR)) {

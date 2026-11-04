@@ -15,8 +15,8 @@ const configuredLanguages = JSON.parse(
 	fs.readFileSync(new URL('./src/config/languages.json', import.meta.url), 'utf8')
 );
 
-// 2. Auto-discover any additional language directories in src/locales/
-const localesDir = path.resolve('src/locales');
+// 2. Auto-discover any additional language directories in src/data/locales/
+const localesDir = path.resolve('src/data/locales');
 
 const discoveredLocales = fs.existsSync(localesDir)
 	? fs

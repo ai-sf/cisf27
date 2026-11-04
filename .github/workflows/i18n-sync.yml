@@ -42,9 +42,9 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          if [ -n "$(git status --porcelain src/locales/it/ project.inlang/)" ]; then
-            git add src/locales/it/ project.inlang/
-            git commit -m "chore(i18n): auto-generate locales/it from CMS source [skip ci]"
+          if [ -n "$(git status --porcelain src/data/locales/it/ project.inlang/)" ]; then
+            git add src/data/locales/it/ project.inlang/
+            git commit -m "chore(i18n): auto-generate data/locales/it from CMS source [skip ci]"
             git push
           else
             echo "No translation catalog changes detected."

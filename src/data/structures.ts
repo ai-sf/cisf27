@@ -29,7 +29,7 @@ export function getStructureCategories(locale?: string): StructureCategory[] {
 			};
 		}
 		const filename = path.split('/').pop();
-		const localizedKey = `../../locales/${locale}/structure-categories/${filename}`;
+		const localizedKey = `../locales/${locale}/structure-categories/${filename}`;
 		const localizedMod = localizedStructureCategoryGlob[localizedKey]?.default;
 		return {
 			id,
@@ -49,7 +49,7 @@ export function getStructures(locale?: string): Structure[] {
 
 		// Look for localized file: e.g. ./en/structures/combo.json
 		const filename = path.split('/').pop();
-		const localizedKey = `../../locales/${locale}/structures/${filename}`;
+		const localizedKey = `../locales/${locale}/structures/${filename}`;
 		const localizedMod = localizedStructureGlob[localizedKey]?.default;
 		if (!localizedMod) {
 			return base;

@@ -1,10 +1,17 @@
 #!/usr/bin/env node
-import { readdirSync, readFileSync, writeFileSync, existsSync, mkdirSync } from 'node:fs';
+import {
+	readdirSync,
+	readFileSync,
+	writeFileSync,
+	existsSync,
+	mkdirSync,
+	unlinkSync,
+} from 'node:fs';
 import { join, resolve, relative } from 'node:path';
 
 const ROOT_DIR = resolve('.');
 const CMS_DIR = join(ROOT_DIR, 'src', 'data', 'cms');
-const LOCALES_DIR = join(ROOT_DIR, 'src', 'locales');
+const LOCALES_DIR = join(ROOT_DIR, 'src', 'data', 'locales');
 const BASE_LOCALE = 'it';
 const BASE_LOCALES_DIR = join(LOCALES_DIR, BASE_LOCALE);
 const INLANG_SETTINGS_PATH = join(ROOT_DIR, 'project.inlang', 'settings.json');
@@ -146,7 +153,7 @@ for (const relFile of allBaseFiles) {
 	const inlangKey = relFile.replace('.json', '');
 	allInlangCatalogKeys.push({
 		key: inlangKey,
-		path: `./src/locales/{locale}/${relFile}`,
+		path: `./src/data/locales/{locale}/${relFile}`,
 	});
 
 	const cmsFilePath = join(CMS_DIR, relFile);
@@ -171,6 +178,18 @@ for (const relFile of allBaseFiles) {
 		writeFileSync(targetFilePath, newJson, 'utf8');
 		console.log(`✨ Generated [locales/it/${relFile}] from CMS`);
 		generatedCount++;
+	}
+}
+
+// Clean up orphaned files in src/locales/it/ that no longer exist in CMS
+if (existsSync(BASE_LOCALES_DIR)) {
+	const currentItFiles = getAllJsonFiles(BASE_LOCALES_DIR);
+	const validFilesSet = new Set(allInlangCatalogKeys.map((k) => k.key + '.json'));
+	for (const itFile of currentItFiles) {
+		if (!validFilesSet.has(itFile)) {
+			unlinkSync(join(BASE_LOCALES_DIR, itFile));
+			console.log(`🗑️ Removed orphaned [locales/it/${itFile}]`);
+		}
 	}
 }
 
