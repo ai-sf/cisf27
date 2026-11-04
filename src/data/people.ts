@@ -32,7 +32,7 @@ export function getPeople(locale?: string): Person[] {
 			};
 		} else {
 			const filename = path.split('/').pop();
-			const localizedKey = `./${locale}/people-roles/${filename}`;
+			const localizedKey = `../locales/${locale}/people-roles/${filename}`;
 			const localizedMod = localizedCommitteeRoleGlob[localizedKey]?.default;
 			roleLookup[base.id] = {
 				label: localizedMod?.label ?? base.label ?? base.id,
