@@ -86,6 +86,6 @@ export default [
 
 	{
 		name: 'global-ignores',
-		ignores: ['*', '!src/'],
+		ignores: ['*', '!src/', 'src/data/locales/**', 'dist/**', '.astro/**'],
 	},
 ];
