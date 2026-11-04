@@ -26,3 +26,4 @@ src/data/cms/*
 
 # Localization files
 src/data/locales/**
+project.inlang/**
