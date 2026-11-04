@@ -1,0 +1,28 @@
+{
+  "heroHeading": "Strutture",
+  "heroSubtitle": "La struttura per il pernottamento, e le sedi degli eventi della conferenza — TBA",
+  "infoHeading": "Informazioni Utili",
+  "checkInHeading": "Check-in / Check-out",
+  "checkInText": "Check-in dalle 14:00 ⚛︎ Check-out entro le 11:00 ⚛︎ Reception aperta h24 ⚛︎ Deposito bagagli ad uso gratuito",
+  "roomTypeHeading": "Tipologia Camere",
+  "roomTypeText": "Quadruple con letti a castello (72 ospiti), e triple (30 ospiti) e doppie (48 ospiti) con letti singoli ☯ Tutte le camere sono ensuite, con gli asciugamani e la biancheria da letto inclusi",
+  "mealsHeading": "Pasti",
+  "mealsText": "Colazione buffet a €10 per persona per notte, ogni giorno dalle 07:00 alle 10:30 ꩜ Ristorante per pranzo e cena à la carte",
+  "transportHeading": "Trasporti",
+  "transportText": "TBD",
+  "venue": {
+    "name": "Consiglio Nazionale delle Ricerche",
+    "note": "Area territoriale di Ricerca di Bologna",
+    "description": "La sede principale della Conferenza Italiana degli Studenti di Fisica - CISF27. Vari eventi si svolgeranno in varie location cittadine (TBA).",
+    "badge": "Sede della Conferenza",
+    "heading": "La ",
+    "gradientWord": "Location"
+  },
+  "fallbackName": "Struttura",
+  "distanceLabel": "Distanza",
+  "capacityLabel": "Posti",
+  "roomsLabel": "Camere",
+  "priceLabel": "Prezzo",
+  "phoneLabel": "Telefono",
+  "whatsappLabel": "WhatsApp"
+}

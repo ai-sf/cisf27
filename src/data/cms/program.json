@@ -153,5 +153,9 @@
         }
       ]
     }
-  ]
+  ],
+  "goToDay": "Vai al giorno",
+  "goToStructure": "Vai alla struttura",
+  "eventsCountLabel": "eventi",
+  "openInMaps": "Apri in Google Maps"
 }

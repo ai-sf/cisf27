@@ -1,5 +1,5 @@
 ---
-import { programData, structuresData } from '../data/cms';
+import { getCmsData, getLocale, programData as baseProgram } from '../data/cms';
 import { getStructureById } from '../data/structures.ts';
 import { CalendarDays, Clock, Building2, MapPin, ArrowRight, Hotel } from '@lucide/astro';
 import { Image } from 'astro:assets';
@@ -7,8 +7,15 @@ import PageLayout from '../layouts/PageLayout.astro';
 import HeroSection from '../components/HeroSection.astro';
 import SectionBadge from '../components/SectionBadge.astro';
 import GradientSpan from '../components/GradientSpan.astro';
-import { programLink, structuresLink } from '../data/pageLinks.ts';
+import { getPageLink } from '../data/pageLinks.ts';
 import { resolveImage, structureImages } from '../utils/helpers';
+
+const locale = getLocale(Astro);
+const { programData, structuresData } = getCmsData(locale);
+const programLink = getPageLink('program', locale);
+const structuresLink = getPageLink('structures', locale);
+
+const baseDays = baseProgram.program ?? [];
 ---
 
 <PageLayout title={programLink.name}>
@@ -27,100 +34,113 @@ import { resolveImage, structureImages } from '../utils/helpers';
 		<div class="container mx-auto px-4 lg:px-8">
 			<div class="reveal-stagger mx-auto max-w-4xl space-y-6 lg:space-y-8">
 				{
-					(programData.program ?? []).map((day, dayIndex) => (
-						<div
-							id={`giorno-${day.id}`}
-							class="card card-border border-primary/30 bg-base-100/60 card-interactive relative scroll-mt-28 transition-all"
-						>
-							<a
-								href={`#giorno-${day.id}`}
-								class="absolute inset-0"
-								aria-label={`Vai al giorno ${dayIndex + 1}`}
-							/>
-							<div class="from-secondary/10 to-primary/10 border-base-300/50 border-b bg-linear-to-r p-4 sm:p-6">
-								<div class="flex items-center gap-3 sm:gap-4">
-									<div class="from-secondary to-primary shadow-secondary/20 flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl bg-linear-to-br shadow-lg sm:h-14 sm:w-14">
-										<span class="text-primary-content text-base font-bold sm:text-xl">
-											{dayIndex + 1}
-										</span>
-									</div>
-									<div class="min-w-0 flex-1">
-										<h2 class="text-base-content/90 text-xl font-bold sm:text-2xl">{day.day}</h2>
-										<p class="text-base-content/60">{day.date}</p>
-									</div>
-									<div class="badge badge-secondary ml-auto h-fit max-h-fit shrink-0 gap-1 whitespace-nowrap">
-										<Clock class="size-3 shrink-0" />
-										{(day.sections ?? []).length} eventi
-									</div>
-								</div>
-							</div>
-
-							<div class="p-4 sm:p-6">
-								<div class="space-y-3 sm:space-y-4">
-									{(day.sections ?? []).map((section) => (
-										<div class="group flex items-start gap-3 sm:gap-4">
-											<div class="hidden w-28 shrink-0 text-right sm:block">
-												<span class="text-secondary font-mono text-sm font-medium">
-													{section.time}
-												</span>
-											</div>
-
-											<div class="hidden shrink-0 pt-1.5 sm:block">
-												<div class="bg-secondary/30 group-hover:bg-secondary/60 h-3 w-3 rounded-full transition-colors" />
-											</div>
-
-											<div class="bg-base-200/40 border-base-300/30 group-hover:border-secondary/20 group-hover:bg-secondary/5 flex-1 rounded-xl border p-3 transition-all sm:p-4">
-												<span class="text-secondary/70 mb-1 block font-mono text-xs font-medium sm:hidden">
-													{section.time}
-												</span>
-												<h3 class="text-base-content/90 mb-1 font-bold">{section.title}</h3>
-												{section.description && (
-													<p class="text-base-content/50 text-sm">{section.description}</p>
-												)}
-												{(() => {
-													const linkedStructure =
-														'structureId' in section && section.structureId
-															? getStructureById(`${section.structureId}`)
-															: undefined;
-													if (!linkedStructure) return null;
-													return (
-														<div class="border-primary/20 bg-base-100/80 hover:border-primary/40 relative mt-3 flex items-center gap-3 rounded-xl border p-2 transition-colors">
-															<a
-																href={`${structuresLink.href}#struttura-${linkedStructure.id}`}
-																class="absolute inset-0 z-10"
-																aria-label={`Vai alla struttura ${linkedStructure.label}`}
-															/>
-															<div class="size-12 shrink-0 overflow-hidden rounded-lg">
-																{linkedStructure.image ? (
-																	<Image
-																		src={resolveImage(structureImages, linkedStructure.image)}
-																		alt={linkedStructure.label ?? linkedStructure.id ?? 'Structure'}
-																		class="h-full w-full object-cover"
-																	/>
-																) : (
-																	<div class="from-primary/20 to-secondary/20 flex h-full w-full items-center justify-center bg-linear-to-br">
-																		<Hotel class="text-primary size-5" />
-																	</div>
-																)}
-															</div>
-															<div class="min-w-0 flex-1">
-																<div class="text-xs font-semibold">{linkedStructure.label}</div>
-																<div class="text-base-content/40 mt-0.5 flex items-center gap-1 text-xs">
-																	<MapPin class="size-3" />
-																	<span class="truncate">{linkedStructure.address}</span>
-																</div>
-															</div>
-															<ArrowRight class="text-base-content/40 size-4 shrink-0" />
-														</div>
-													);
-												})()}
-											</div>
+					(programData.program ?? []).map((day, dayIndex) => {
+						const baseDay = baseDays[dayIndex] ?? day;
+						const dayId = baseDay.id ?? day.id;
+						return (
+							<div
+								id={`giorno-${dayId}`}
+								class="card card-border border-primary/30 bg-base-100/60 card-interactive relative scroll-mt-28 transition-all"
+							>
+								<a
+									href={`#giorno-${dayId}`}
+									class="absolute inset-0"
+									aria-label={`${programData.goToDay ?? 'Vai al giorno'} ${dayIndex + 1}`}
+								/>
+								<div class="from-secondary/10 to-primary/10 border-base-300/50 border-b bg-linear-to-r p-4 sm:p-6">
+									<div class="flex items-center gap-3 sm:gap-4">
+										<div class="from-secondary to-primary shadow-secondary/20 flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl bg-linear-to-br shadow-lg sm:h-14 sm:w-14">
+											<span class="text-primary-content text-base font-bold sm:text-xl">
+												{dayIndex + 1}
+											</span>
 										</div>
-									))}
+										<div class="min-w-0 flex-1">
+											<h2 class="text-base-content/90 text-xl font-bold sm:text-2xl">{day.day}</h2>
+											<p class="text-base-content/60">{day.date}</p>
+										</div>
+										<div class="badge badge-secondary ml-auto h-fit max-h-fit shrink-0 gap-1 whitespace-nowrap">
+											<Clock class="size-3 shrink-0" />
+											{(day.sections ?? []).length} {programData.eventsCountLabel ?? 'eventi'}
+										</div>
+									</div>
+								</div>
+
+								<div class="p-4 sm:p-6">
+									<div class="space-y-3 sm:space-y-4">
+										{(day.sections ?? []).map((section, sIndex) => {
+											const baseSection = baseDay.sections?.[sIndex];
+											const time = baseSection?.time ?? section.time;
+											const structId =
+												baseSection && 'structureId' in baseSection && baseSection.structureId
+													? baseSection.structureId
+													: 'structureId' in section && section.structureId
+														? section.structureId
+														: undefined;
+											return (
+												<div class="group flex items-start gap-3 sm:gap-4">
+													<div class="hidden w-28 shrink-0 text-right sm:block">
+														<span class="text-secondary font-mono text-sm font-medium">{time}</span>
+													</div>
+
+													<div class="hidden shrink-0 pt-1.5 sm:block">
+														<div class="bg-secondary/30 group-hover:bg-secondary/60 h-3 w-3 rounded-full transition-colors" />
+													</div>
+
+													<div class="bg-base-200/40 border-base-300/30 group-hover:border-secondary/20 group-hover:bg-secondary/5 flex-1 rounded-xl border p-3 transition-all sm:p-4">
+														<span class="text-secondary/70 mb-1 block font-mono text-xs font-medium sm:hidden">
+															{time}
+														</span>
+														<h3 class="text-base-content/90 mb-1 font-bold">{section.title}</h3>
+														{section.description && (
+															<p class="text-base-content/50 text-sm">{section.description}</p>
+														)}
+														{(() => {
+															const linkedStructure = structId
+																? getStructureById(`${structId}`, locale)
+																: undefined;
+															if (!linkedStructure) return null;
+															return (
+																<div class="border-primary/20 bg-base-100/80 hover:border-primary/40 relative mt-3 flex items-center gap-3 rounded-xl border p-2 transition-colors">
+																	<a
+																		href={`${structuresLink.href}#struttura-${linkedStructure.id}`}
+																		class="absolute inset-0 z-10"
+																		aria-label={`${programData.goToStructure ?? 'Vai alla struttura'} ${linkedStructure.label}`}
+																	/>
+																	<div class="size-12 shrink-0 overflow-hidden rounded-lg">
+																		{linkedStructure.image ? (
+																			<Image
+																				src={resolveImage(structureImages, linkedStructure.image)}
+																				alt={
+																					linkedStructure.label ?? linkedStructure.id ?? 'Structure'
+																				}
+																				class="h-full w-full object-cover"
+																			/>
+																		) : (
+																			<div class="from-primary/20 to-secondary/20 flex h-full w-full items-center justify-center bg-linear-to-br">
+																				<Hotel class="text-primary size-5" />
+																			</div>
+																		)}
+																	</div>
+																	<div class="min-w-0 flex-1">
+																		<div class="text-xs font-semibold">{linkedStructure.label}</div>
+																		<div class="text-base-content/40 mt-0.5 flex items-center gap-1 text-xs">
+																			<MapPin class="size-3" />
+																			<span class="truncate">{linkedStructure.address}</span>
+																		</div>
+																	</div>
+																	<ArrowRight class="text-base-content/40 size-4 shrink-0" />
+																</div>
+															);
+														})()}
+													</div>
+												</div>
+											);
+										})}
+									</div>
 								</div>
 							</div>
-						</div>
-					))
+						);
+					})
 				}
 			</div>
 		</div>
@@ -162,7 +182,7 @@ import { resolveImage, structureImages } from '../utils/helpers';
 							class="btn btn-outline btn-info mt-6 gap-2"
 						>
 							<MapPin class="size-4" />
-							Apri in Google Maps
+							{programData.openInMaps ?? 'Apri in Google Maps'}
 						</a>
 
 						<div class="mt-8 text-center">

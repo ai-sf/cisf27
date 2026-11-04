@@ -1,0 +1,16 @@
+{
+  "0": {
+    "plan": "With accommodation",
+    "price": "120€",
+    "features": {
+      "0": "TBD"
+    }
+  },
+  "1": {
+    "plan": "Without accommodation",
+    "price": "70€",
+    "features": {
+      "0": "TBD"
+    }
+  }
+}

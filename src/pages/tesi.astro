@@ -3,8 +3,16 @@ import { BookOpen, GraduationCap, MicVocal, Image, ArrowRight, FileText } from '
 import PageLayout from '../layouts/PageLayout.astro';
 import HeroSection from '../components/HeroSection.astro';
 import SectionBadge from '../components/SectionBadge.astro';
-import { thesisContent } from '../data/cms';
-import { tesiLink } from '../data/pageLinks.ts';
+import { getCmsData, getLocale } from '../data/cms';
+import { getPageLink } from '../data/pageLinks.ts';
+
+const locale = getLocale(Astro);
+const { thesisContent } = getCmsData(locale);
+const tesiLink = getPageLink('tesi', locale);
+
+const posterInfo = thesisContent.posterInfo ?? [];
+const posterSteps = thesisContent.posterSteps ?? [];
+const thesisTopics = thesisContent.thesisTopics ?? [];
 ---
 
 <PageLayout title={tesiLink.name}>
@@ -27,7 +35,9 @@ import { tesiLink } from '../data/pageLinks.ts';
 				>
 					<div class="mb-6 flex items-center gap-3">
 						<Image class="text-info size-6" />
-						<h2 class="card-title text-2xl">{thesisContent.posterHeading}</h2>
+						<h2 class="card-title text-2xl">
+							{thesisContent.posterHeading}
+						</h2>
 					</div>
 
 					<div class="grid gap-8 md:grid-cols-2">
@@ -37,7 +47,7 @@ import { tesiLink } from '../data/pageLinks.ts';
 							</p>
 							<ul class="flex flex-col gap-3">
 								{
-									(thesisContent.posterInfo ?? []).map(({ text }) => (
+									posterInfo.map(({ text }) => (
 										<li class="text-base-content/60 flex items-center gap-2 text-sm">
 											<ArrowRight class="text-primary size-4" />
 											{text}
@@ -47,10 +57,12 @@ import { tesiLink } from '../data/pageLinks.ts';
 							</ul>
 						</div>
 						<div class="card card-border border-primary/30 bg-base-100/60 p-6">
-							<h3 class="mb-3 font-bold">{thesisContent.posterStepsHeading}</h3>
+							<h3 class="mb-3 font-bold">
+								{thesisContent.posterStepsHeading}
+							</h3>
 							<ol class="text-base-content/60 flex flex-col gap-2 text-sm">
 								{
-									(thesisContent.posterSteps ?? []).map(({ step, text }) => (
+									posterSteps.map(({ step, text }) => (
 										<li class="flex items-start gap-2">
 											<span class="text-primary font-bold">{step}.</span>
 											<span>{text}</span>
@@ -74,7 +86,9 @@ import { tesiLink } from '../data/pageLinks.ts';
 					label={thesisContent.sectionBadge}
 					badgeClass="badge-secondary"
 				/>
-				<h2 class="mb-4 text-3xl font-bold">{thesisContent.sectionHeading}</h2>
+				<h2 class="mb-4 text-3xl font-bold">
+					{thesisContent.sectionHeading}
+				</h2>
 				<p class="text-base-content/60 mx-auto max-w-xl">
 					{thesisContent.presentationDesc}
 				</p>
@@ -82,7 +96,7 @@ import { tesiLink } from '../data/pageLinks.ts';
 
 			<div class="reveal-stagger mx-auto max-w-4xl space-y-6">
 				{
-					(thesisContent.thesisTopics ?? []).map((thesis, index) => (
+					thesisTopics.map((thesis, index: number) => (
 						<div class="card card-border border-primary/30 bg-base-100/60 card-interactive">
 							<div class="card-body p-6 lg:p-8">
 								<div class="flex items-start gap-4">

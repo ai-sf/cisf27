@@ -1,8 +1,8 @@
 ---
 import { Image } from 'astro:assets';
 import PageLayout from '../layouts/PageLayout.astro';
-import { conference, about, themeData, home, programData, pricing } from '../data/cms';
-import { conferenceStats } from '../data/stats.ts';
+import { getCmsData, getLocale } from '../data/cms';
+import { getStats } from '../data/stats.ts';
 import {
 	CalendarDays,
 	MapPin,
@@ -17,7 +17,7 @@ import {
 	Mail,
 } from '@lucide/astro';
 import { resolveIcon } from '../utils/helpers';
-import { contactLink, programLink, aboutLink, structuresLink } from '../data/pageLinks.ts';
+import { getPageLink } from '../data/pageLinks.ts';
 import cisfLogo from '../assets/images/logo.png';
 import uniboPhotoImage from '../assets/images/structures/unibo.jpg';
 import SectionBadge from '../components/SectionBadge.astro';
@@ -25,9 +25,24 @@ import GradientSpan from '../components/GradientSpan.astro';
 import Image3D from '../components/Image3D.astro';
 import CTASection from '../components/CTASection.astro';
 import PartnerGrid from '../components/PartnerGrid.astro';
-import { uniboPartner } from '../data/partners.ts';
+import { getPartners } from '../data/partners.ts';
 
-const { theme, conference: conf } = { theme: themeData, conference };
+const locale = getLocale(Astro);
+const {
+	home,
+	conference: conf,
+	about,
+	themeData: theme,
+	pricing,
+	programData,
+} = getCmsData(locale);
+const { conferenceStats } = getStats(locale);
+const uniboPartner = getPartners(locale).find((p) => p.link.includes('unibo.it'))!;
+
+const aboutLink = getPageLink('about', locale);
+const programLink = getPageLink('program', locale);
+const structuresLink = getPageLink('structures', locale);
+const contactLink = getPageLink('contact', locale);
 
 interface InfoCard {
 	href: string;

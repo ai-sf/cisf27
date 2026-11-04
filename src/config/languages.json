@@ -1,0 +1,14 @@
+[
+  {
+    "code": "it",
+    "name": "Italiano",
+    "badge": "IT",
+    "htmlLang": "it-IT"
+  },
+  {
+    "code": "en",
+    "name": "English",
+    "badge": "EN",
+    "htmlLang": "en-US"
+  }
+]

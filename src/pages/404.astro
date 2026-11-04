@@ -1,6 +1,10 @@
 ---
 import ErrorPageLayout from '../layouts/ErrorPageLayout.astro';
-import { errorContent } from '../data/cms';
+import { getCmsData, getLocale } from '../data/cms';
+
+const locale = getLocale(Astro);
+const { errorContent } = getCmsData(locale);
+const message = errorContent.error404Message || 'Pagina non trovata';
 ---
 
-<ErrorPageLayout code={404} message={errorContent.error404Message} />
+<ErrorPageLayout code={404} {message} />

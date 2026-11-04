@@ -3,9 +3,15 @@ import { Mail, Phone, MessageSquare, User } from '@lucide/astro';
 import PageLayout from '../layouts/PageLayout.astro';
 import HeroSection from '../components/HeroSection.astro';
 import ContactForm from '../components/ContactForm.svelte';
-import { contactPeople } from '../data/people.ts';
-import { contacts, structuresData } from '../data/cms';
-import { contactLink } from '../data/pageLinks.ts';
+import { getContactPeople } from '../data/people.ts';
+import { getCmsData, getLocale } from '../data/cms';
+import { getPageLink } from '../data/pageLinks.ts';
+
+const locale = getLocale(Astro);
+const { contacts, structuresData } = getCmsData(locale);
+const contactPeople = getContactPeople(locale);
+const form = contacts.form;
+const contactLink = getPageLink('contact', locale);
 ---
 
 <PageLayout title={contactLink.name}>
@@ -13,10 +19,10 @@ import { contactLink } from '../data/pageLinks.ts';
 		icon={MessageSquare}
 		label={contactLink.name}
 		badgeClass="badge-info"
-		heading={contacts.form?.heroHeading}
+		heading={form?.heroHeading}
 		headingClass="from-info to-primary"
 		bgClass="from-info/5 to-primary/5"
-		subtitle={contacts.form?.heroSubtitle}
+		subtitle={form?.heroSubtitle}
 	/>
 
 	<!-- Contact Section -->
@@ -25,7 +31,7 @@ import { contactLink } from '../data/pageLinks.ts';
 			<div class="mx-auto grid max-w-6xl gap-12 lg:grid-cols-2">
 				<!-- Contact Form -->
 				<div>
-					<ContactForm client:load />
+					<ContactForm client:load {locale} translations={form} />
 				</div>
 
 				<!-- Contact Info -->
@@ -70,7 +76,7 @@ import { contactLink } from '../data/pageLinks.ts';
 					<div
 						class="card card-border border-primary/30 from-primary/10 to-secondary/10 bg-linear-to-br p-6"
 					>
-						<h3 class="mb-3 font-bold">{contacts.form?.mapHeading}</h3>
+						<h3 class="mb-3 font-bold">{form?.mapHeading}</h3>
 						<div class="overflow-hidden rounded-xl">
 							<iframe
 								src={structuresData.venue?.embedSrc}
@@ -79,7 +85,7 @@ import { contactLink } from '../data/pageLinks.ts';
 								allowfullscreen=""
 								loading="lazy"
 								referrerpolicy="no-referrer-when-downgrade"
-								title={contacts.form?.mapDept}></iframe>
+								title={form?.mapDept}></iframe>
 						</div>
 					</div>
 				</div>

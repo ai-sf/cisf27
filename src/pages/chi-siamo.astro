@@ -1,40 +1,49 @@
 ---
-import { conference, history, about, iaps } from '../data/cms';
-import { committeePeople } from '../data/people.ts';
-import { aisfStats, iapsStats } from '../data/stats.ts';
+import { getCmsData, getLocale } from '../data/cms';
+import { getCommitteePeople } from '../data/people.ts';
+import { getStats } from '../data/stats.ts';
 import { ExternalLink, Globe, Users, Mail, History, Heart, Star, MapPin } from '@lucide/astro';
 import { resolveIcon } from '../utils/helpers';
 import PageLayout from '../layouts/PageLayout.astro';
-import { contactLink } from '../data/pageLinks.ts';
-import { aisfPartner } from '../data/partners.ts';
+import { getPageLink } from '../data/pageLinks.ts';
+import { getPartners } from '../data/partners.ts';
 import HeroSection from '../components/HeroSection.astro';
 import SectionBadge from '../components/SectionBadge.astro';
 import GradientSpan from '../components/GradientSpan.astro';
 import InfoSection from '../components/InfoSection.astro';
 import CTASection from '../components/CTASection.astro';
 import ThemeSection from '../components/ThemeSection.astro';
-import { aboutLink, programLink } from '../data/pageLinks.ts';
 import BolognaSection from '../components/BolognaSection.astro';
 import { Image } from 'astro:assets';
 
+const locale = getLocale(Astro);
+const { about, conference: conf, iaps, history } = getCmsData(locale);
+const { aisfStats, iapsStats } = getStats(locale);
+const aisfPartner = getPartners(locale)[0];
+const committeePeople = getCommitteePeople(locale);
+
+const aboutLink = getPageLink('about', locale);
+const programLink = getPageLink('program', locale);
+const contactLink = getPageLink('contact', locale);
+
 const cisfCardEntries = [
 	{
-		Icon: resolveIcon(about.cisfFeatures?.seminari?.icon),
+		Icon: resolveIcon(about.cisfFeatures?.seminari?.icon || 'graduation-cap'),
 		title: about.cisfFeatures?.seminari?.title,
 		description: about.cisfFeatures?.seminari?.description,
 	},
 	{
-		Icon: resolveIcon(about.cisfFeatures?.laboratori?.icon),
+		Icon: resolveIcon(about.cisfFeatures?.laboratori?.icon || 'building-2'),
 		title: about.cisfFeatures?.laboratori?.title,
 		description: about.cisfFeatures?.laboratori?.description,
 	},
 	{
-		Icon: resolveIcon(about.cisfFeatures?.sociali?.icon),
+		Icon: resolveIcon(about.cisfFeatures?.sociali?.icon || 'users'),
 		title: about.cisfFeatures?.sociali?.title,
 		description: about.cisfFeatures?.sociali?.description,
 	},
 	{
-		Icon: resolveIcon(about.cisfFeatures?.aga?.icon),
+		Icon: resolveIcon(about.cisfFeatures?.aga?.icon || 'book-open'),
 		title: about.cisfFeatures?.aga?.title,
 		description: about.cisfFeatures?.aga?.description,
 	},
@@ -103,7 +112,7 @@ const cisfCardEntries = [
 						>
 					</h2>
 					<p class="text-base-content/70 mb-6 text-lg leading-relaxed">
-						{conference.description}
+						{conf.description}
 					</p>
 					<p class="text-base-content/60 leading-relaxed">
 						{about.cisfEditions}
@@ -264,7 +273,7 @@ const cisfCardEntries = [
 									{member.image ? (
 										<Image
 											src={member.image}
-											alt={`${member.name} foto`}
+											alt={`${member.name} ${about.photoAlt ?? 'foto'}`}
 											class="size-full object-cover"
 										/>
 									) : (

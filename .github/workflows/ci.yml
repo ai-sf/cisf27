@@ -17,6 +17,25 @@ permissions:
   contents: write
 
 jobs:
+  i18n:
+    name: i18n Catalogs Check
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out Git repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: lts/*
+
+      - name: Set up pnpm
+        uses: pnpm/action-setup@v4
+
+      - name: Check i18n keys and JSON catalogs
+        run: pnpm run check:i18n
+
   format:
     name: Format
     runs-on: ubuntu-latest

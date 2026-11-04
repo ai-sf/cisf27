@@ -23,3 +23,7 @@ pnpm-debug.log*
 
 src/data/cms/*
 !src/data/cms/index.ts
+
+# Localization files
+src/data/locales/**
+project.inlang/**

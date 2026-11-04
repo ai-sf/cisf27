@@ -2,7 +2,10 @@
 import { resolveIcon } from '../utils/helpers';
 import SectionBadge from './SectionBadge.astro';
 import GradientSpan from './GradientSpan.astro';
-import { themeData } from '../data/cms';
+import { getCmsData, getLocale, themeData as baseTheme } from '../data/cms';
+
+const locale = getLocale(Astro);
+const { themeData } = getCmsData(locale);
 
 const SectionIcon = resolveIcon('lightbulb');
 ---
@@ -23,8 +26,8 @@ const SectionIcon = resolveIcon('lightbulb');
 
 		<div class="reveal-stagger grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
 			{
-				(themeData.pillars ?? []).map((pillar) => {
-					const Icon = resolveIcon(pillar.icon);
+				(themeData.pillars ?? []).map((pillar, index) => {
+					const Icon = resolveIcon(baseTheme.pillars?.[index]?.icon ?? pillar.icon);
 					return (
 						<div class="card card-border border-primary/30 bg-base-200/60 card-interactive">
 							<div class="card-body items-center p-6 text-center">

@@ -1,0 +1,44 @@
+{
+  "heroSubtitle": "Discover the history and mission of the Italian Conference of Physics Students",
+  "aisfBadge": "AISF",
+  "aisfHeading": "Italian Association of",
+  "aisfGradientWord": "Physics Students",
+  "aisfRole": "AISF represents a central hub for physics students in Italy, fostering collaboration and scientific exchange across Italian universities.",
+  "cisfBadge": "CISF",
+  "cisfHeading": "What is ",
+  "cisfGradientWord": "CISF",
+  "cisfEditions": "Each edition brings students to a new Italian city, offering them the opportunity to immerse in local culture and the host committee while engaging in high-level scientific sessions.",
+  "historyBadge": "History",
+  "historyHeading": "Past ",
+  "historyGradientWord": "Editions",
+  "currentBadge": "Now",
+  "historyPauseYears": "2021 – 2022",
+  "historyPauseLabel": "Editions hiatus",
+  "committeeBadge": "Committee",
+  "committeeHeading": "The ",
+  "committeeGradientWord": "Organizing Committee",
+  "committeeSubtitle": "The people making CISF27 possible",
+  "ctaHeading": "Have ",
+  "ctaGradientWord": "Questions?",
+  "ctaText": "Do not hesitate to reach out for any information regarding CISF27",
+  "ctaButton": "Send us a Message",
+  "cisfFeatures": {
+    "seminari": {
+      "title": "Scientific Seminars",
+      "description": "Led by national and international experts"
+    },
+    "laboratori": {
+      "title": "Laboratory Tours",
+      "description": "Visit centers of scientific excellence"
+    },
+    "sociali": {
+      "title": "Social Events",
+      "description": "Evenings and cultural activities in the city"
+    },
+    "aga": {
+      "title": "AISF AGM",
+      "description": "Annual General Meeting"
+    }
+  },
+  "photoAlt": "photo"
+}

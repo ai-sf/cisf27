@@ -1,0 +1,136 @@
+{
+  "heroHeading": "Il Programma",
+  "heroSubtitle": "5 giorni di scienza, cultura e socialità a Bologna",
+  "locationBadge": "Location",
+  "locationHeading": "Dove si Svolge la ",
+  "locationGradientWord": "CISF27",
+  "program": {
+    "0": {
+      "day": "Lunedì",
+      "date": "19 Aprile",
+      "sections": {
+        "0": {
+          "title": "Accoglienza e Registrazione"
+        },
+        "1": {
+          "title": "Cerimonia di Apertura",
+          "description": "CISF27 apre i battenti: presentazione del Comitato Organizzatore, del tema e discorso di un importante professore. Sarà anche la prima occasione per ringraziare i più importanti partner dell'evento."
+        },
+        "2": {
+          "title": "Coffee Break"
+        },
+        "3": {
+          "title": "Intervento con Ospite"
+        },
+        "4": {
+          "title": "Cena Libera"
+        },
+        "5": {
+          "title": "Evento Sociale",
+          "description": "Botta di Coulomb"
+        }
+      }
+    },
+    "1": {
+      "day": "Martedì — Storia",
+      "date": "20 Aprile",
+      "sections": {
+        "0": {
+          "title": "Visite ai Laboratori",
+          "description": "I partecipanti si dividono per visitare i laboratori dei principali centri di ricerca della regione: TBA"
+        },
+        "1": {
+          "title": "Viaggio verso San Giovanni in Persiceto"
+        },
+        "2": {
+          "title": "Pranzo Libero"
+        },
+        "3": {
+          "title": "Sessione Plenaria"
+        },
+        "4": {
+          "title": "Pomeriggio Aperto al Pubblico"
+        },
+        "5": {
+          "title": "Serata Libera a Bologna"
+        }
+      }
+    },
+    "2": {
+      "day": "Mercoledì — Giorno Associativo",
+      "date": "21 Aprile",
+      "sections": {
+        "0": {
+          "title": "Parallel Sessions",
+          "description": "Alcuni partecipanti di CISF27, selezionati dagli organizzatori, presentano i loro lavori di tesi e di ricerca ai loro colleghi: è un'occasione per conoscere gli ultimi orizzonti per giovanə fisicə e farsi un'idea di come sia strutturato il lavoro di tesi triennale o magistrale in fisica, o un lavoro di dottorato."
+        },
+        "1": {
+          "title": "Breakfast Workshop"
+        },
+        "2": {
+          "title": "Pranzo al Sacco"
+        },
+        "3": {
+          "title": "AGA",
+          "description": "Assemblea Generale Annuale, in cui avverrà l'elezione del nuovo Comitato Esecutivo dell'Associazione."
+        },
+        "4": {
+          "title": "Cena Libera"
+        },
+        "5": {
+          "title": "Serata Organizzata"
+        }
+      }
+    },
+    "3": {
+      "day": "Giovedì — Energia e Innovazione",
+      "date": "22 Aprile",
+      "sections": {
+        "0": {
+          "title": "Tavola Rotonda",
+          "description": "Fisicə provenienti da diversi mondi lavorativi si confrontano sulle numerose strade che può intraprendere unə fisicə: Ricerca accademica, Programmazione, Assicurazioni, Divulgazione, Big data, Logistica, Economia..."
+        },
+        "1": {
+          "title": "Momento Foto"
+        },
+        "2": {
+          "title": "Pranzo Libero"
+        },
+        "3": {
+          "title": "Pomeriggio Aperto al Pubblico",
+          "description": "Intervento ospite premium + sponsor"
+        },
+        "4": {
+          "title": "Cena Libera"
+        },
+        "5": {
+          "title": "Serata Finale"
+        }
+      }
+    },
+    "4": {
+      "day": "Venerdì — Lavoro",
+      "date": "23 Aprile",
+      "sections": {
+        "0": {
+          "title": "Giochi di Società"
+        },
+        "1": {
+          "title": "Plenaria (Tema Lavoro)",
+          "description": "Alcuni dei nostri più importanti sponsor avranno la possibilità di un intero spazio dedicato ad un intervento, attraverso cui conoscere e farsi conoscere ad una platea di fisicə."
+        },
+        "2": {
+          "title": "Pranzo al Sacco"
+        },
+        "3": {
+          "title": "Cerimonia di Chiusura",
+          "description": "Restituzione finale, ripercorrendo i momenti che avranno reso CISF27 indimenticabile. Grande occasione anche per ringraziare tutti coloro che avranno partecipato alla realizzazione dell'evento."
+        }
+      }
+    }
+  },
+  "goToDay": "Vai al giorno",
+  "goToStructure": "Vai alla struttura",
+  "eventsCountLabel": "eventi",
+  "openInMaps": "Apri in Google Maps"
+}

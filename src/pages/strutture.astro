@@ -1,28 +1,47 @@
 ---
-import { structuresData } from '../data/cms';
+import { getCmsData, getLocale } from '../data/cms';
+import { getStructures, getStructureCategories } from '../data/structures.ts';
 import {
 	Hotel,
 	MapPin,
-	Clock,
+	Building2,
 	Phone,
 	Mail,
-	BedDouble,
-	Utensils,
+	MessageCircle,
 	Check,
 	Info,
-	Building2,
+	Clock,
+	BedDouble,
+	Utensils,
 	Car,
-	MessageCircle,
 } from '@lucide/astro';
 import { Image } from 'astro:assets';
 import PageLayout from '../layouts/PageLayout.astro';
 import HeroSection from '../components/HeroSection.astro';
 import SectionBadge from '../components/SectionBadge.astro';
 import GradientSpan from '../components/GradientSpan.astro';
-import { structuresLink } from '../data/pageLinks.ts';
-import { structureCategories, structures } from '../data/structures.ts';
-import { resolveImage, structureImages } from '../utils/helpers';
-import { gradientMap } from '../utils/helpers.ts';
+import { getPageLink } from '../data/pageLinks.ts';
+import { gradientMap, resolveImage, structureImages } from '../utils/helpers.ts';
+
+const locale = getLocale(Astro);
+const { structuresData } = getCmsData(locale);
+const structuresLink = getPageLink('structures', locale);
+
+const venue = structuresData.venue ?? {
+	name: 'CNR - Area della Ricerca di Bologna',
+	address: 'Via Piero Gobetti, 101, 40129 Bologna BO',
+	note: '',
+	description: '',
+	badge: 'Sede',
+	heading: 'La Nostra ',
+	gradientWord: 'Sede',
+	image: 'unibo.jpg',
+	embedSrc:
+		'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2845.0592966551693!2d11.336495376510344!3d44.5139989968434!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x477fd4a6c8b98ce3%3A0x6a26df85b67ad784!2sArea%20Territoriale%20di%20Ricerca%20di%20Bologna%20-%20CNR!5e0!3m2!1sit!2sit!4v1711234567890!5m2!1sit!2sit',
+};
+
+const categories = getStructureCategories(locale);
+const structures = getStructures(locale);
 ---
 
 <PageLayout title={structuresLink.name}>
@@ -41,15 +60,10 @@ import { gradientMap } from '../utils/helpers.ts';
 		<div class="container mx-auto px-4 lg:px-8">
 			<div class="mx-auto max-w-6xl">
 				<div class="mb-12 text-center">
-					<SectionBadge
-						icon={Building2}
-						label={structuresData.venue?.badge}
-						badgeClass="badge-info"
-					/>
+					<SectionBadge icon={Building2} label={venue.badge} badgeClass="badge-info" />
 					<h2 class="mb-4 text-4xl font-bold">
-						{structuresData.venue?.heading}<GradientSpan
-							gradient="from-info to-primary"
-							class="char-stagger">{structuresData.venue?.gradientWord}</GradientSpan
+						{venue.heading}<GradientSpan gradient="from-info to-primary" class="char-stagger"
+							>{venue.gradientWord}</GradientSpan
 						>
 					</h2>
 				</div>
@@ -58,8 +72,8 @@ import { gradientMap } from '../utils/helpers.ts';
 					<div class="grid lg:grid-cols-2">
 						<div class="h-72 lg:h-full">
 							<Image
-								src={resolveImage(structureImages, structuresData.venue?.image)}
-								alt={structuresData.venue?.name ?? ''}
+								src={resolveImage(structureImages, venue.image)}
+								alt={venue.name || ''}
 								class="h-full w-full object-cover"
 							/>
 						</div>
@@ -68,28 +82,29 @@ import { gradientMap } from '../utils/helpers.ts';
 								class="badge badge-info mb-4 h-fit max-h-fit max-w-full gap-1.5 py-1 text-center leading-snug"
 							>
 								<Building2 class="size-3 shrink-0" />
-								<span>{structuresData.venue?.note}</span>
+								<span>{venue.note}</span>
 							</div>
-							<h3 class="text-2xl font-bold lg:text-3xl">{structuresData.venue?.name}</h3>
+							<h3 class="text-2xl font-bold lg:text-3xl">{venue.name}</h3>
 							<p class="text-base-content/60 mt-2 flex items-center gap-1.5">
 								<MapPin class="size-4 shrink-0" />
-								{structuresData.venue?.address}
+								{venue.address}
 							</p>
 							<p class="text-base-content/60 mt-4 leading-relaxed">
-								{structuresData.venue?.description}
+								{venue.description}
 							</p>
 						</div>
 					</div>
 					<div class="border-base-300/50 border-t p-4">
 						<div class="overflow-hidden rounded-xl">
 							<iframe
-								src={structuresData.venue?.embedSrc}
+								src={venue.embedSrc ||
+									'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2845.0592966551693!2d11.336495376510344!3d44.5139989968434!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x477fd4a6c8b98ce3%3A0x6a26df85b67ad784!2sArea%20Territoriale%20di%20Ricerca%20di%20Bologna%20-%20CNR!5e0!3m2!1sit!2sit!4v1711234567890!5m2!1sit!2sit'}
 								class="h-72 w-full md:h-64"
 								style="border: 0"
 								allowfullscreen=""
 								loading="lazy"
 								referrerpolicy="no-referrer-when-downgrade"
-								title={structuresData.venue?.name}></iframe>
+								title={venue.name}></iframe>
 						</div>
 					</div>
 				</div>
@@ -103,7 +118,7 @@ import { gradientMap } from '../utils/helpers.ts';
 			<div class="mx-auto max-w-6xl">
 				<div class="reveal-stagger space-y-8">
 					{
-						structureCategories.map((cat) => {
+						categories.map((cat) => {
 							const CatIcon = cat.icon;
 							const catStructures = structures.filter((s) => s.category === cat.id);
 							if (catStructures.length === 0) return null;
@@ -219,7 +234,7 @@ import { gradientMap } from '../utils/helpers.ts';
 																	<a
 																		href={`tel:${structure.phone.replace(/\s+/g, '')}`}
 																		class="text-base-content/50 hover:text-primary flex items-center gap-1.5 transition-colors"
-																		title="Telefono"
+																		title={structuresData.phoneLabel ?? 'Telefono'}
 																	>
 																		<Phone class="size-4" />
 																		{structure.phone}
@@ -231,7 +246,7 @@ import { gradientMap } from '../utils/helpers.ts';
 																		target="_blank"
 																		rel="noopener noreferrer"
 																		class="text-base-content/50 hover:text-success flex items-center gap-1.5 transition-colors"
-																		title="WhatsApp"
+																		title={structuresData.whatsappLabel ?? 'WhatsApp'}
 																	>
 																		<MessageCircle class="text-success size-4" />
 																		<span>WhatsApp {structure.whatsapp}</span>

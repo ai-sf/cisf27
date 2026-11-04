@@ -1,0 +1,37 @@
+{
+  "form": {
+    "heroHeading": "Contattaci",
+    "heroSubtitle": "Sei interessato a sponsorizzare CISF27? Contattaci pure, e saremo lieti di esplorare ogni possibilità con te!",
+    "formHeading": "Inviaci un Messaggio",
+    "nameLabel": "Nome e Cognome *",
+    "namePlaceholder": "Il tuo nome completo",
+    "emailLabel": "Email *",
+    "emailPlaceholder": "la.tua@email.it",
+    "subjectLabel": "Oggetto *",
+    "subjectDefault": "Seleziona un argomento",
+    "subjects": {
+      "0": "Iscrizione",
+      "1": "Sponsorizzazione",
+      "2": "Logistica",
+      "3": "Programma Scientifico",
+      "4": "Altro"
+    },
+    "messageLabel": "Messaggio *",
+    "messagePlaceholder": "Scrivi il tuo messaggio qui...",
+    "nameValidationHint": "Inserisci un nome valido",
+    "emailValidationHint": "Inserisci un indirizzo email valido",
+    "subjectValidationHint": "Seleziona un argomento",
+    "messageValidationHint": "Il messaggio non può essere vuoto",
+    "successHeading": "Messaggio inviato!",
+    "successMessage": "Ti risponderemo al più presto.",
+    "errorHeading": "Qualcosa è andato storto",
+    "resetButton": "Invia un'altro",
+    "submitButton": "Invia Messaggio",
+    "submittingButton": "Invio in corso...",
+    "mapHeading": "Sede CISF27",
+    "mapDept": "Dipartimento di Fisica e Astronomia",
+    "endpointError": "Endpoint del modulo non configurato.",
+    "sendError": "Si è verificato un errore durante l'invio.",
+    "timeoutError": "Il server sta impiegando più tempo del previsto. Se hai già inviato il messaggio, controlla la tua casella email prima di riprovare."
+  }
+}

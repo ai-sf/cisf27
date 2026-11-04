@@ -1,0 +1,136 @@
+{
+  "heroHeading": "The Program",
+  "heroSubtitle": "5 days of science, culture, and networking in Bologna",
+  "locationBadge": "Venue",
+  "locationHeading": "Where CISF27 Takes ",
+  "locationGradientWord": "Place",
+  "program": {
+    "0": {
+      "day": "Monday",
+      "date": "April 19",
+      "sections": {
+        "0": {
+          "title": "Welcome and Registration"
+        },
+        "1": {
+          "title": "Opening Ceremony",
+          "description": "CISF27 kicks off: introduction by the Organizing Committee, presentation of the theme, and a keynote address by an esteemed professor. Also our first chance to thank our key partners."
+        },
+        "2": {
+          "title": "Coffee Break"
+        },
+        "3": {
+          "title": "Keynote Lecture with Guest Speaker"
+        },
+        "4": {
+          "title": "Free Dinner"
+        },
+        "5": {
+          "title": "Social Event",
+          "description": "Coulomb's Shock"
+        }
+      }
+    },
+    "1": {
+      "day": "Tuesday — History",
+      "date": "April 20",
+      "sections": {
+        "0": {
+          "title": "Laboratory Visits",
+          "description": "Participants split up to visit major research facilities in the region: TBA"
+        },
+        "1": {
+          "title": "Travel to San Giovanni in Persiceto"
+        },
+        "2": {
+          "title": "Free Lunch"
+        },
+        "3": {
+          "title": "Plenary Session"
+        },
+        "4": {
+          "title": "Public Afternoon Session"
+        },
+        "5": {
+          "title": "Free Evening in Bologna"
+        }
+      }
+    },
+    "2": {
+      "day": "Wednesday — Association Day",
+      "date": "April 21",
+      "sections": {
+        "0": {
+          "title": "Parallel Sessions",
+          "description": "Selected CISF27 attendees present their thesis and research work to fellow students: an opportunity to discover new horizons and gain insights into Bachelor's, Master's, or PhD thesis projects."
+        },
+        "1": {
+          "title": "Breakfast Workshop"
+        },
+        "2": {
+          "title": "Packed Lunch"
+        },
+        "3": {
+          "title": "AGM",
+          "description": "Annual General Meeting, including the election of the Association's new Executive Committee."
+        },
+        "4": {
+          "title": "Free Dinner"
+        },
+        "5": {
+          "title": "Social Night Out"
+        }
+      }
+    },
+    "3": {
+      "day": "Thursday — Energy and Innovation",
+      "date": "April 22",
+      "sections": {
+        "0": {
+          "title": "Round Table",
+          "description": "Physicists from different sectors discuss career paths available after graduation: Academic Research, Software, Insurance, Science Communication, Big Data, Logistics, Finance..."
+        },
+        "1": {
+          "title": "Group Photo"
+        },
+        "2": {
+          "title": "Free Lunch"
+        },
+        "3": {
+          "title": "Public Afternoon Session",
+          "description": "Keynote speaker + sponsor presentations"
+        },
+        "4": {
+          "title": "Free Dinner"
+        },
+        "5": {
+          "title": "Closing Gala Night"
+        }
+      }
+    },
+    "4": {
+      "day": "Friday — Careers",
+      "date": "April 23",
+      "sections": {
+        "0": {
+          "title": "Board Games"
+        },
+        "1": {
+          "title": "Plenary (Career Focus)",
+          "description": "Several key sponsors present career opportunities, followed by direct interaction with physics students."
+        },
+        "2": {
+          "title": "Packed Lunch"
+        },
+        "3": {
+          "title": "Closing Ceremony",
+          "description": "Final review looking back at the highlights that made CISF27 unforgettable, and acknowledgments to everyone who contributed."
+        }
+      }
+    }
+  },
+  "goToDay": "Go to day",
+  "goToStructure": "Go to structure",
+  "eventsCountLabel": "events",
+  "openInMaps": "Open in Google Maps"
+}

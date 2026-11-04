@@ -1,0 +1,23 @@
+{
+  "home": {
+    "name": "Home"
+  },
+  "about": {
+    "name": "About Us"
+  },
+  "program": {
+    "name": "Program"
+  },
+  "structures": {
+    "name": "Venues"
+  },
+  "sponsor": {
+    "name": "Sponsors"
+  },
+  "tesi": {
+    "name": "Thesis"
+  },
+  "contact": {
+    "name": "Contact"
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "heroHeading": "Venues & Accommodation",
+  "heroSubtitle": "Accommodation and conference venues for CISF27 — TBA",
+  "infoHeading": "Useful Information",
+  "checkInHeading": "Check-in / Check-out",
+  "checkInText": "Check-in from 14:00 ⚛︎ Check-out by 11:00 ⚛︎ 24/7 Reception ⚛︎ Free luggage storage",
+  "roomTypeHeading": "Room Types",
+  "roomTypeText": "Quadruple rooms with bunk beds (72 guests), triple rooms (30 guests), and twin rooms (48 guests) with single beds ☯ All rooms are ensuite, with towels and bed linen included",
+  "mealsHeading": "Meals",
+  "mealsText": "Buffet breakfast at €10 per person per night, daily from 07:00 to 10:30 ꩜ À la carte restaurant for lunch and dinner",
+  "transportHeading": "Transportation",
+  "transportText": "900 m on foot from Bologna Central Station (High-Speed Terminal) and 15 minutes by bus from the CNR Research Area",
+  "venue": {
+    "name": "National Research Council",
+    "note": "Bologna Research Area",
+    "description": "The main venue of the Italian Conference of Physics Students - CISF27. Various sessions and events will take place across Bologna city locations (TBA).",
+    "badge": "Conference Venue",
+    "heading": "The ",
+    "gradientWord": "Location"
+  },
+  "fallbackName": "Venue",
+  "distanceLabel": "Distance",
+  "capacityLabel": "Capacity",
+  "roomsLabel": "Rooms",
+  "priceLabel": "Price",
+  "phoneLabel": "Phone",
+  "whatsappLabel": "WhatsApp"
+}

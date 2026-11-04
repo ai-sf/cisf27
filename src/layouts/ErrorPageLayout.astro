@@ -2,19 +2,26 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import type PageProps from '../types/pageProps';
 import { House } from '@lucide/astro';
-import { homeLink } from '../data/pageLinks.ts';
-import { errorContent } from '../data/cms';
+import { getPageLink } from '../data/pageLinks.ts';
+import { getCmsData, getLocale } from '../data/cms';
 
 const props = Astro.props as PageProps & { code?: number; message?: string };
 
-const code = props.code || 0;
-const message = props.message || errorContent.defaultMessage;
+const locale = getLocale(Astro);
+const { errorContent } = getCmsData(locale);
+const homeLink = getPageLink('home', locale);
+
+const code = props.code || 404;
+const message = props.message || errorContent.error404Message;
+const label = errorContent.label;
+const button = errorContent.button;
+const titlePrefix = errorContent.errorPageTitlePrefix || 'Errore ';
 ---
 
-<BaseLayout {...props} title={`${errorContent.errorPageTitlePrefix}${code}`}>
+<BaseLayout {...props} title={`${titlePrefix}${code}`}>
 	<div class="hero from-base-100 via-base-200 to-base-300 min-h-screen bg-linear-to-br">
 		<div class="hero-content flex-col gap-1 font-bold">
-			<p class="text-error text-4xl uppercase">{errorContent.label}</p>
+			<p class="text-error text-4xl uppercase">{label}</p>
 			<h1
 				class="from-primary via-secondary to-base-content bg-linear-to-r bg-clip-text text-8xl text-transparent"
 			>
@@ -23,7 +30,7 @@ const message = props.message || errorContent.defaultMessage;
 			<p class="text-2xl">{message}</p>
 			<a tabindex="0" href={homeLink.href} class="btn btn-primary m-4 uppercase">
 				<House class="size-6" />
-				<span>{errorContent.button}</span>
+				<span>{button}</span>
 			</a>
 		</div>
 	</div>

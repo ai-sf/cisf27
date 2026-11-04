@@ -1146,6 +1146,15 @@ content:
           collection: icon-options
           value: '{lucideId}'
           label: '{label}'
+      - name: switchLanguage
+        type: string
+        label: Etichetta Cambia Lingua
+      - name: language
+        type: string
+        label: Intestazione Lingua
+      - name: actions
+        type: string
+        label: Intestazione Azioni
 
   - name: sponsor
     label: Pagina Sponsor
@@ -1326,6 +1335,9 @@ content:
       - name: partners
         type: string
         label: Partner
+      - name: backToTop
+        type: string
+        label: Torna Su
 
   - name: error
     label: Pagina Errore

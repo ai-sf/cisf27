@@ -1,0 +1,44 @@
+{
+  "conferenceStats": {
+    "0": {
+      "label": "Studenti"
+    },
+    "1": {
+      "label": "Ospiti"
+    },
+    "2": {
+      "label": "Edizione"
+    },
+    "3": {
+      "label": "Giorni"
+    }
+  },
+  "aisfStats": {
+    "0": {
+      "label": "Membri"
+    },
+    "1": {
+      "label": "Comitati Locali"
+    },
+    "2": {
+      "label": "IAPS"
+    },
+    "3": {
+      "label": "Passione"
+    }
+  },
+  "iapsStats": {
+    "0": {
+      "label": "Territorial Committee"
+    },
+    "1": {
+      "label": "Local Committee"
+    },
+    "2": {
+      "label": "Paesi"
+    },
+    "3": {
+      "label": "Studenti"
+    }
+  }
+}

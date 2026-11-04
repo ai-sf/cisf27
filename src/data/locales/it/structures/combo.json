@@ -1,0 +1,22 @@
+{
+  "label": "Combo Bologna",
+  "description": "La struttura per il pernottamento dei partecipanti",
+  "distance": "900 m a piedi da FS Centrale (Terminale AV)",
+  "capacity": "150 ospiti",
+  "rooms": "Quadruple (18), Triple (10), e Doppie (24)",
+  "price": "Incluso nella quota partecipativa!",
+  "features": {
+    "0": "Wi-Fi",
+    "1": "Deposito bagagli",
+    "2": "Cucina comune",
+    "3": "Lavanderia",
+    "4": "Bagni privati",
+    "5": "Palestra",
+    "6": "Reception 24/7",
+    "7": "Colazione buffet",
+    "8": "Set asciugamani",
+    "9": "Aria condizionata",
+    "10": "Giardino",
+    "11": "Bar"
+  }
+}

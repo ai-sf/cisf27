@@ -1,0 +1,13 @@
+{
+  "organizzatore": {
+    "aisf": {
+      "name": "Associazione Italiana Studenti di Fisica",
+      "shortName": "AISF",
+      "description": "Associazione Italiana Studenti di Fisica è un'associazione no-profit con finalità culturali nata nel 2014 con l'obiettivo di creare un network nazionale tra studenti di Fisica e promuovere la scienza e, in particolare, la Fisica. I suoi 1400 membri sono divisi in 16 comitati locali di altrettante università italiane."
+    },
+    "aisfBolo": {
+      "name": "Associazione Italiana Studenti di Fisica - Bologna",
+      "shortName": "AISF Bologna"
+    }
+  }
+}

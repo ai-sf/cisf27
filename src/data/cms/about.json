@@ -43,5 +43,6 @@
       "description": "Assemblea Generale Annuale",
       "icon": "book-open"
     }
-  }
+  },
+  "photoAlt": "foto"
 }
