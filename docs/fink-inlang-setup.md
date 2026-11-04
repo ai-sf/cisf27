@@ -9,7 +9,7 @@ Questo repository è configurato per la gestione visuale e collaborativa delle t
 - **Editor visuale:** [Fink](https://fink.inlang.com/) — interfaccia web per traduttori che effettua direttamente commit su GitHub senza necessità di server dedicati, database o webhook.
 - **Sorgente CMS (PagesCMS):** `src/data/cms/` — fonte di verità autorevole gestita direttamente tramite PagesCMS (`.pages.yml`). Non contiene cartelle per-lingua: i contenuti risiedono direttamente nella directory principale con schema JSON nativo (`list: true`, array completi, ID, icone, ecc.).
 - **Directory Traduzioni (Fink):** `src/data/locales/`
-  - `src/data/data/locales/it/`: generato automaticamente dallo script di sync a partire da `src/data/cms/`. Funge da `baseLocale` di riferimento per Fink con array convertiti in oggetti indicizzati (`{"0": ..., "1": ...}`) per compatibilità totale con `@inlang/plugin-json`.
+  - `src/data/locales/it/`: generato automaticamente dallo script di sync a partire da `src/data/cms/`. Funge da `baseLocale` di riferimento per Fink con array convertiti in oggetti indicizzati (`{"0": ..., "1": ...}`) per compatibilità totale con `@inlang/plugin-json`.
   - `src/data/locales/en/`: gestito direttamente da Fink e dai traduttori.
 - **Configurazione inlang:** [`project.inlang/settings.json`](../project.inlang/settings.json) (`baseLocale: "it"`, `locales: ["it", "en"]`, pathPattern: `./src/data/locales/{locale}/...`).
 
@@ -41,7 +41,7 @@ src/
   - I content manager lavorano senza alcuna complessità multi-lingua o vincoli di sintassi imposti dai tool di traduzione.
 - **Fink by inlang (`project.inlang/settings.json`)**:
   - Opera esclusivamente su `src/data/locales/{locale}/...`.
-  - `baseLocale` è `"it"`, caricato da `src/data/data/locales/it/` (pulito, indicizzato e pronto per il confronto a colonne).
+  - `baseLocale` è `"it"`, caricato da `src/data/locales/it/` (pulito, indicizzato e pronto per il confronto a colonne).
   - `locales` contiene tutte le lingue supportate (es. `["it", "en"]`).
   - Per l'inglese e le future lingue di destinazione, **non è necessario sincronizzare alcuno script**: Fink crea e gestisce direttamente le chiavi in `src/data/locales/en/`.
   - A runtime, il caricatore unificato (`deepMerge` in `src/data/cms/index.ts`) unisce automaticamente i testi tradotti di `src/data/locales/en/` sopra la struttura e i metadati completi di `src/data/cms/`, restituendo array nativi tipizzati ai componenti Astro.
@@ -56,7 +56,7 @@ Per tradurre il sito visivamente:
    - **Produzione (main):** [https://fink.inlang.com/github.com/ai-sf/cisf27](https://fink.inlang.com/github.com/ai-sf/cisf27)
    - **Branch specifico:** `https://fink.inlang.com/github.com/ai-sf/cisf27?branch=<nome-branch>`
 2. Effettua l'accesso con il tuo account GitHub.
-3. Fink caricherà automaticamente i cataloghi: nella colonna di sinistra vedrai il testo italiano di riferimento (da `src/data/data/locales/it/`) e nella colonna di destra potrai inserire o modificare la traduzione inglese (su `src/data/locales/en/`).
+3. Fink caricherà automaticamente i cataloghi: nella colonna di sinistra vedrai il testo italiano di riferimento (da `src/data/locales/it/`) e nella colonna di destra potrai inserire o modificare la traduzione inglese (su `src/data/locales/en/`).
 4. Al termine del salvataggio, Fink esegue un commit direttamente sul branch configurato nel repository.
 
 ---
@@ -73,13 +73,13 @@ Lo script si occupa di:
 
 1. Leggere i dati CMS sorgente da `src/data/cms/`.
 2. Convertire automaticamente gli array in oggetti indicizzati (`{"0": ..., "1": ...}`) e rimuovere metadati tecnici non traducibili.
-3. Sovrascrivere `src/data/data/locales/it/` con la nuova versione pronta per Fink.
+3. Sovrascrivere `src/data/locales/it/` con la nuova versione pronta per Fink.
 4. Aggiornare `project.inlang/settings.json` con tutti i namespace registrati.
 5. **Non tocca `src/data/locales/en/`**: Fink rileverà automaticamente su GitHub le nuove stringhe aggiunte in `it` evidenziandole come mancanti in `en`.
 
 ### Automazione GitHub Actions (`.github/workflows/i18n-sync.yml`)
 
-Ad ogni push o merge che modifica file in `src/data/cms/**` (ad esempio salvando modifiche da PagesCMS), la GitHub Action esegue automaticamente `pnpm run sync:subcatalogs` ed effettua il commit e push di `src/data/data/locales/it/` e `project.inlang/settings.json` con `[skip ci]`.
+Ad ogni push o merge che modifica file in `src/data/cms/**` (ad esempio salvando modifiche da PagesCMS), la GitHub Action esegue automaticamente `pnpm run sync:subcatalogs` ed effettua il commit e push di `src/data/locales/it/` e `project.inlang/settings.json` con `[skip ci]`.
 
 ---
 

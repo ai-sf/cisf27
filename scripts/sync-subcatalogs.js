@@ -201,8 +201,8 @@ if (existsSync(INLANG_SETTINGS_PATH)) {
 		inlangSettings.baseLocale = BASE_LOCALE;
 		inlangSettings.locales = allLocales;
 
-		if (!inlangSettings['plugin.inlang.json']) {
-			inlangSettings['plugin.inlang.json'] = {};
+		if (!inlangSettings['plugin.inlang.i18next']) {
+			inlangSettings['plugin.inlang.i18next'] = {};
 		}
 
 		const pattern = {};
@@ -215,7 +215,7 @@ if (existsSync(INLANG_SETTINGS_PATH)) {
 			sortedPattern[k] = pattern[k];
 		}
 
-		inlangSettings['plugin.inlang.json'].pathPattern = sortedPattern;
+		inlangSettings['plugin.inlang.i18next'].pathPattern = sortedPattern;
 		writeFileSync(INLANG_SETTINGS_PATH, JSON.stringify(inlangSettings, null, 2) + '\n', 'utf8');
 		console.log(
 			`\n⚙️  Updated project.inlang/settings.json (baseLocale: "${BASE_LOCALE}", locales: [${allLocales.join(', ')}])`
