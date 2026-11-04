@@ -9,6 +9,7 @@ on:
     paths:
       - 'src/data/cms/**'
       - 'src/config/languages.json'
+      - 'scripts/sync-subcatalogs.js'
 
 permissions:
   contents: write
