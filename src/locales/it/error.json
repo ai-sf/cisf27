@@ -1,0 +1,7 @@
+{
+  "error404Message": "Pagina non trovata",
+  "label": "ERRORE",
+  "button": "PAGINA INIZIALE",
+  "errorPageTitlePrefix": "Errore ",
+  "defaultMessage": "Errore sconosciuto"
+}

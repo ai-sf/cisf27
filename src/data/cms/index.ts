@@ -1,49 +1,60 @@
 import type { CmsData } from '../../types/cms';
 
 // Base types defining the content schema
-import type conferenceBase from './it/conference.json';
-import type homeBase from './it/home.json';
-import type aboutBase from './it/about.json';
-import type structuresBase from './it/structures.json';
-import type programBase from './it/program.json';
-import type pricingBase from './it/pricing.json';
-import type contactsBase from './it/contacts.json';
-import type errorBase from './it/error.json';
-import type sponsorBase from './it/sponsor.json';
-import type themeBase from './it/theme.json';
-import type bolognaBase from './it/bologna.json';
-import type thesisBase from './it/thesis.json';
-import type historyBase from './it/history.json';
-import type iapsBase from './it/iaps.json';
-import type footerBase from './it/footer.json';
-import type navBase from './it/nav.json';
-import type partnersBase from './it/partners.json';
-import type peopleBase from './it/people.json';
-import type pageLinksBase from './it/pageLinks.json';
-import type statsBase from './it/stats.json';
+import type conferenceBase from './conference.json';
+import type homeBase from './home.json';
+import type aboutBase from './about.json';
+import type structuresBase from './structures.json';
+import type programBase from './program.json';
+import type pricingBase from './pricing.json';
+import type contactsBase from './contacts.json';
+import type errorBase from './error.json';
+import type sponsorBase from './sponsor.json';
+import type themeBase from './theme.json';
+import type bolognaBase from './bologna.json';
+import type thesisBase from './thesis.json';
+import type historyBase from './history.json';
+import type iapsBase from './iaps.json';
+import type footerBase from './footer.json';
+import type navBase from './nav.json';
+import type partnersBase from './partners.json';
+import type peopleBase from './people.json';
+import type pageLinksBase from './pageLinks.json';
+import type statsBase from './stats.json';
 
-// Eagerly import all CMS json files across all languages dynamically
-const cmsModules = import.meta.glob<Record<string, unknown>>('./*/*.json', {
+// Eagerly import base CMS json files (Italian source of truth)
+const baseModules = import.meta.glob<Record<string, unknown>>('./*.json', {
 	eager: true,
 	import: 'default',
 });
 
-function deepMerge<T>(base: T, override: Partial<T> | undefined): T {
+// Eagerly import localized overrides from src/locales/
+const localizedModules = import.meta.glob<Record<string, unknown>>('../../locales/*/*.json', {
+	eager: true,
+	import: 'default',
+});
+
+export function deepMerge<T>(base: T, override: unknown): T {
 	if (!override) return base;
 	if (typeof base !== 'object' || base === null) return (override ?? base) as T;
 	if (Array.isArray(base)) {
-		if (Array.isArray(override) && override.length > 0) {
+		if (override && typeof override === 'object') {
 			return base.map((baseItem, idx) => {
-				const overItem = (override as unknown[])[idx];
+				const overItem = Array.isArray(override)
+					? (override as unknown[])[idx]
+					: ((override as Record<string, unknown>)[idx] ??
+						(override as Record<string, unknown>)[String(idx)]);
+				if (overItem === undefined) return baseItem;
 				if (
 					typeof baseItem === 'object' &&
 					baseItem !== null &&
 					typeof overItem === 'object' &&
-					overItem !== null
+					overItem !== null &&
+					!Array.isArray(overItem)
 				) {
 					return deepMerge(baseItem, overItem as Partial<typeof baseItem>);
 				}
-				return overItem !== undefined ? overItem : baseItem;
+				return overItem as typeof baseItem;
 			}) as unknown as T;
 		}
 		return base;
@@ -51,13 +62,7 @@ function deepMerge<T>(base: T, override: Partial<T> | undefined): T {
 	const result = { ...base } as Record<string, unknown>;
 	for (const [key, val] of Object.entries(override as Record<string, unknown>)) {
 		if (val !== undefined && val !== null) {
-			if (
-				typeof val === 'object' &&
-				!Array.isArray(val) &&
-				typeof result[key] === 'object' &&
-				result[key] !== null &&
-				!Array.isArray(result[key])
-			) {
+			if (typeof val === 'object' && typeof result[key] === 'object' && result[key] !== null) {
 				result[key] = deepMerge(result[key], val);
 			} else {
 				result[key] = val;
@@ -68,13 +73,13 @@ function deepMerge<T>(base: T, override: Partial<T> | undefined): T {
 }
 
 /**
- * Retrieves a single catalog for a given locale, falling back to Italian
+ * Retrieves a single catalog for a given locale, falling back to base Italian CMS
  */
 export function getCatalog(name: string, locale: string = 'it'): unknown {
-	const base = cmsModules[`./it/${name}.json`];
+	const base = baseModules[`./${name}.json`];
 	if (!base) return {};
 	if (locale === 'it' || !locale) return base;
-	const override = cmsModules[`./${locale}/${name}.json`];
+	const override = localizedModules[`../../locales/${locale}/${name}.json`];
 	if (!override) return base;
 	return deepMerge(base, override);
 }
@@ -137,7 +142,7 @@ export function getCmsData(locale: string = 'it') {
 
 export const getCms = getCmsData;
 
-// Direct base exports (Italian by default for backward compatibility)
+// Direct base exports (Italian CMS by default for backward compatibility)
 const base = getCmsData('it');
 export const conference = base.conference;
 export const home = base.home;
@@ -162,25 +167,25 @@ export const statsData = base.statsData;
 
 export const partnerCategoryGlob = import.meta.glob<{
 	default: { id?: string; label?: string; icon?: string; color?: string };
-}>('./it/partner-categories/*.json', {
+}>('./partner-categories/*.json', {
 	eager: true,
 });
 
 export const localizedPartnerCategoryGlob = import.meta.glob<{
 	default: { id?: string; label?: string; icon?: string; color?: string };
-}>('./*/partner-categories/*.json', {
+}>('../../locales/*/partner-categories/*.json', {
 	eager: true,
 });
 
 export const committeeRoleGlob = import.meta.glob<{
 	default: { id?: string; label?: string; description?: string };
-}>('./it/people-roles/*.json', {
+}>('./people-roles/*.json', {
 	eager: true,
 });
 
 export const localizedCommitteeRoleGlob = import.meta.glob<{
 	default: { id?: string; label?: string; description?: string };
-}>('./*/people-roles/*.json', {
+}>('../../locales/*/people-roles/*.json', {
 	eager: true,
 });
 
@@ -203,7 +208,7 @@ export const structureGlob = import.meta.glob<{
 		features?: string[];
 		image?: string;
 	};
-}>('./it/structures/*.json', {
+}>('./structures/*.json', {
 	eager: true,
 });
 
@@ -223,22 +228,22 @@ export const localizedStructureGlob = import.meta.glob<{
 		phone?: string;
 		whatsapp?: string;
 		email?: string;
-		features?: string[];
+		features?: string[] | Record<string, string>;
 		image?: string;
 	};
-}>('./*/structures/*.json', {
+}>('../../locales/*/structures/*.json', {
 	eager: true,
 });
 
 export const structureCategoryGlob = import.meta.glob<{
 	default: { id?: string; label?: string; icon?: string; color?: string };
-}>('./it/structure-categories/*.json', {
+}>('./structure-categories/*.json', {
 	eager: true,
 });
 
 export const localizedStructureCategoryGlob = import.meta.glob<{
 	default: { id?: string; label?: string; icon?: string; color?: string };
-}>('./*/structure-categories/*.json', {
+}>('../../locales/*/structure-categories/*.json', {
 	eager: true,
 });
 

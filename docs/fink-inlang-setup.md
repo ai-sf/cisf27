@@ -7,25 +7,28 @@ Questo repository è configurato per la gestione visuale e collaborativa delle t
 ## 1. Panoramica e Architettura
 
 - **Editor visuale:** [Fink](https://fink.inlang.com/) — interfaccia web per traduttori che effettua direttamente commit su GitHub senza necessità di server dedicati, database o webhook.
-- **Lingua base / sorgente:** Italiano (`it`) — fonte di verità autorevole gestita direttamente tramite PagesCMS (`.pages.yml`). Configurato come `baseLocale: "it"` ed escluso dai target modificabili in Fink (`locales: ["en"]`).
-- **Lingue di destinazione:** Inglese (`en`) (ed eventuali lingue future configurate in Fink o in `src/config/languages.json`).
-- **Formato file:** JSON (`@inlang/plugin-json`) suddiviso in 47 cataloghi modulari (cataloghi di pagina e sottocataloghi per strutture, categorie e ruoli).
-- **Configurazione inlang:** [`project.inlang/settings.json`](../project.inlang/settings.json)
+- **Sorgente CMS (PagesCMS):** `src/data/cms/` — fonte di verità autorevole gestita direttamente tramite PagesCMS (`.pages.yml`). Non contiene cartelle per-lingua: i contenuti risiedono direttamente nella directory principale con schema JSON nativo (`list: true`, array completi, ID, icone, ecc.).
+- **Directory Traduzioni (Fink):** `src/locales/`
+  - `src/locales/it/`: generato automaticamente dallo script di sync a partire da `src/data/cms/`. Funge da `baseLocale` di riferimento per Fink con array convertiti in oggetti indicizzati (`{"0": ..., "1": ...}`) per compatibilità totale con `@inlang/plugin-json`.
+  - `src/locales/en/`: gestito direttamente da Fink e dai traduttori.
+- **Configurazione inlang:** [`project.inlang/settings.json`](../project.inlang/settings.json) (`baseLocale: "it"`, `locales: ["it", "en"]`, pathPattern: `./src/locales/{locale}/...`).
 
 ```
-src/data/cms/
-├── it/                         # Lingua base (fonte autorevole, modificabile SOLO via PagesCMS)
+src/
+├── data/cms/                   # Fonte primaria PagesCMS (SENZA cartelle per-lingua)
 │   ├── structures/             # Singole strutture (combo.json, ...)
-│   ├── structure-categories/   # Definizioni categorie strutture (alloggi.json, ...)
-│   ├── partner-categories/     # Definizioni categorie partner (sponsor.json, ...)
+│   ├── structure-categories/   # Categorie strutture (alloggi.json, ...)
+│   ├── partner-categories/     # Categorie partner (sponsor.json, ...)
 │   ├── people-roles/           # Ruoli del team e dei contatti
-│   └── ... (cataloghi di pagina)
-└── en/                         # Traduzioni inglesi (modificabili via Fink)
-    ├── structures/             # Campi tradotti delle strutture (solo testi)
-    ├── structure-categories/   # Etichette tradotte delle categorie strutture
-    ├── partner-categories/     # Etichette tradotte delle categorie partner
-    ├── people-roles/           # Titoli e descrizioni tradotte dei ruoli
-    └── ... (solo testi traducibili, senza ID o riferimenti tecnici)
+│   └── ... (cataloghi di pagina con array e ID completi)
+│
+└── locales/                    # Cataloghi inlang / Fink
+    ├── it/                     # Auto-generato dallo script di sync (baseLocale di riferimento)
+    │   ├── structures/
+    │   └── ... (array convertiti in {"0": ..., "1": ...}, solo testi)
+    └── en/                     # Traduzioni inglesi (gestite direttamente da Fink)
+        ├── structures/
+        └── ...
 ```
 
 ---
@@ -33,12 +36,15 @@ src/data/cms/
 ## 2. Separazione dei Ruoli: PagesCMS vs. Fink
 
 - **PagesCMS (`.pages.yml`)**:
-  - Punta esclusivamente a `src/data/cms/it/...`.
-  - I content manager gestiscono i contenuti in italiano, creano nuove strutture, assegnano ruoli, caricano immagini e aggiornano i dettagli dell'evento.
+  - Punta direttamente a `src/data/cms/...` (es. `src/data/cms/home.json`, `src/data/cms/structures/combo.json`).
+  - Mantiene lo schema JSON nativo con array completi (`list: true`), ID strutturali, icone, colori, coordinate e riferimenti tecnici.
+  - I content manager lavorano senza alcuna complessità multi-lingua o vincoli di sintassi imposti dai tool di traduzione.
 - **Fink by inlang (`project.inlang/settings.json`)**:
-  - `baseLocale` è `"it"` (funge da colonna di riferimento in sola lettura).
-  - `locales` è `["en"]` (o altre lingue target). L'italiano è escluso dalla lista `locales` per evitare che i traduttori su Fink possano modificare inavvertitamente i dati originali italiani.
-  - I campi non traducibili (`id`, `role`, `icon`, `color`, `address`, `mapUrl`, `image`, ecc.) sono omessi nelle lingue di destinazione; il sistema di caricamento a runtime (`deepMerge`) eredita automaticamente tutti i dati strutturali e tecnici dal file italiano corrispondente.
+  - Opera esclusivamente su `src/locales/{locale}/...`.
+  - `baseLocale` è `"it"`, caricato da `src/locales/it/` (pulito, indicizzato e pronto per il confronto a colonne).
+  - `locales` contiene tutte le lingue supportate (es. `["it", "en"]`).
+  - Per l'inglese e le future lingue di destinazione, **non è necessario sincronizzare alcuno script**: Fink crea e gestisce direttamente le chiavi in `src/locales/en/`.
+  - A runtime, il caricatore unificato (`deepMerge` in `src/data/cms/index.ts`) unisce automaticamente i testi tradotti di `src/locales/en/` sopra la struttura e i metadati completi di `src/data/cms/`, restituendo array nativi tipizzati ai componenti Astro.
 
 ---
 
@@ -50,14 +56,14 @@ Per tradurre il sito visivamente:
    - **Produzione (main):** [https://fink.inlang.com/github.com/ai-sf/cisf27](https://fink.inlang.com/github.com/ai-sf/cisf27)
    - **Branch specifico:** `https://fink.inlang.com/github.com/ai-sf/cisf27?branch=<nome-branch>`
 2. Effettua l'accesso con il tuo account GitHub.
-3. Fink caricherà automaticamente tutti i namespace definiti in `project.inlang/settings.json`, mostrando un confronto affiancato con evidenziazione automatica delle stringhe mancanti o non tradotte.
+3. Fink caricherà automaticamente i cataloghi: nella colonna di sinistra vedrai il testo italiano di riferimento (da `src/locales/it/`) e nella colonna di destra potrai inserire o modificare la traduzione inglese (su `src/locales/en/`).
 4. Al termine del salvataggio, Fink esegue un commit direttamente sul branch configurato nel repository.
 
 ---
 
-## 4. Sincronizzazione dei Sottocataloghi (`sync:subcatalogs`)
+## 4. Sincronizzazione Automatica (`sync:subcatalogs`)
 
-Quando vengono aggiunti nuovi file in italiano nelle cartelle dei sottocataloghi (`structures/`, `partner-categories/`, `people-roles/`, `structure-categories/`), è sufficiente eseguire:
+Quando vengono modificati o aggiunti nuovi contenuti in `src/data/cms/` tramite PagesCMS, è sufficiente eseguire:
 
 ```bash
 pnpm run sync:subcatalogs
@@ -65,9 +71,15 @@ pnpm run sync:subcatalogs
 
 Lo script si occupa di:
 
-1. Individuare i nuovi file creati in `src/data/cms/it/`.
-2. Generare i corrispettivi file per ogni lingua di destinazione (es. `en/`), estraendo solo i campi di testo traducibili e ripulendo automaticamente ID, icone e riferimenti tecnici.
-3. Registrare i nuovi namespace in `project.inlang/settings.json` affinché appaiano immediatamente disponibili su Fink.
+1. Leggere i dati CMS sorgente da `src/data/cms/`.
+2. Convertire automaticamente gli array in oggetti indicizzati (`{"0": ..., "1": ...}`) e rimuovere metadati tecnici non traducibili.
+3. Sovrascrivere `src/locales/it/` con la nuova versione pronta per Fink.
+4. Aggiornare `project.inlang/settings.json` con tutti i namespace registrati.
+5. **Non tocca `src/locales/en/`**: Fink rileverà automaticamente su GitHub le nuove stringhe aggiunte in `it` evidenziandole come mancanti in `en`.
+
+### Automazione GitHub Actions (`.github/workflows/i18n-sync.yml`)
+
+Ad ogni push o merge che modifica file in `src/data/cms/**` (ad esempio salvando modifiche da PagesCMS), la GitHub Action esegue automaticamente `pnpm run sync:subcatalogs` ed effettua il commit e push di `src/locales/it/` e `project.inlang/settings.json` con `[skip ci]`.
 
 ---
 
@@ -75,9 +87,7 @@ Lo script si occupa di:
 
 Per aggiungere una nuova lingua al sito (es. Spagnolo `es`):
 
-1. **In Fink:** È possibile aggiungere una nuova lingua direttamente dall'interfaccia web di Fink.
-2. **Nel Codice:**
-   - Aggiungi il codice lingua a `locales` in `project.inlang/settings.json` (es. `["en", "es"]`).
+1. **Nel Codice:**
    - Aggiungi i metadati in `src/config/languages.json`:
      ```json
      {
@@ -87,7 +97,8 @@ Per aggiungere una nuova lingua al sito (es. Spagnolo `es`):
        "htmlLang": "es-ES"
      }
      ```
-   - Esegui `pnpm run sync:subcatalogs` per generare i file scheletro dei sottocataloghi per la nuova lingua.
+   - Esegui `pnpm run sync:subcatalogs` per registrare la nuova lingua in `project.inlang/settings.json`.
+2. **In Fink:** Apri Fink, seleziona la lingua `es` e inizia a tradurre direttamente dall'italiano.
 3. Le route Astro, il selettore di lingua nella navbar, il menu mobile e i controlli di CI supporteranno immediatamente la nuova lingua senza ulteriori modifiche al codice.
 
 ---
@@ -100,6 +111,6 @@ Per verificare la conformità e la completezza delle traduzioni prima di effettu
 # Controllo con inlang CLI (verifica sintassi, markup e selettori)
 pnpm run inlang:check
 
-# Controllo rapido parità chiavi e assenza errori di sintassi
+# Controllo parità chiavi tra it ed en
 pnpm run check:i18n
 ```

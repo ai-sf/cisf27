@@ -29,7 +29,7 @@ pnpm install
 | Stili                | [Tailwind CSS 4](https://tailwindcss.com/) + [daisyUI 5](https://daisyui.com/) |
 | Icone                | [Lucide](https://lucide.dev/)                                                  |
 | Font                 | Nunito, Playfair Display (via Fontsource)                                      |
-| Traduzioni / i18n    | [Fink](https://fink.inlang.com/) / inlang (file JSON in `src/data/cms/`)       |
+| Traduzioni / i18n    | [Fink](https://fink.inlang.com/) / inlang (file JSON in `src/locales/`)        |
 | CMS                  | [PagesCMS](https://pagescms.org/) / file JSON                                  |
 | Backend contatti     | Google Apps Script                                                             |
 | Package manager      | pnpm 11                                                                        |
@@ -44,7 +44,7 @@ pnpm install
 /
 ├── .env                        # Variabili d'ambiente (gitignorato)
 ├── .env.example                # Template delle variabili d'ambiente
-├── .pages.yml                  # Schema CMS PagesCMS (punta a src/data/cms/it/)
+├── .pages.yml                  # Schema CMS PagesCMS (punta a src/data/cms/)
 ├── project.inlang/             # Configurazione inlang / Fink
 ├── astro.config.mjs            # Configurazione Astro (routing i18n it/en)
 ├── svelte.config.js            # Configurazione Svelte
@@ -69,7 +69,7 @@ pnpm install
 │
 ├── scripts/
 │   ├── check-i18n.js           # Validazione parità chiavi e sintassi JSON i18n
-│   └── sync-subcatalogs.js     # Sincronizzazione automatica sottocataloghi e namespace
+│   └── sync-subcatalogs.js     # Generazione automatica locales/it da CMS e update inlang
 │
 ├── src/
 │   ├── assets/
@@ -78,16 +78,19 @@ pnpm install
 │   ├── config/
 │   │   └── languages.json      # Configurazione lingue attive
 │   ├── data/
-│   │   ├── cms/
-│   │   │   ├── it/             # Base italiana autorevole (modificabile via PagesCMS)
-│   │   │   │   ├── structures/
-│   │   │   │   ├── structure-categories/
-│   │   │   │   ├── partner-categories/
-│   │   │   │   └── people-roles/
-│   │   │   └── en/             # Traduzioni inglesi (modificabili via Fink)
+│   │   ├── cms/                # Dati CMS sorgente (modificabili via PagesCMS)
+│   │   │   ├── structures/
+│   │   │   ├── structure-categories/
+│   │   │   ├── partner-categories/
+│   │   │   └── people-roles/
 │   │   ├── pageLinks.ts
 │   │   ├── partners.ts
 │   │   ├── people.ts
+│   │   ├── stats.ts
+│   │   └── structures.ts
+│   ├── locales/                # Traduzioni e cataloghi per Fink
+│   │   ├── it/                 # Generato automaticamente da sync-subcatalogs.js (baseLocale)
+│   │   └── en/                 # Traduzioni in lingua inglese (gestite da Fink)
 │   │   ├── stats.ts
 │   │   └── structures.ts
 │   ├── layouts/                # Layout Astro
@@ -143,10 +146,11 @@ Tutti i comandi vanno eseguiti dalla **root del progetto**.
 
 ## Traduzioni & Fink (inlang)
 
-I testi dell'interfaccia e i contenuti della conferenza sono organizzati come file JSON in `src/data/cms/`:
+I testi dell'interfaccia e i contenuti della conferenza sono organizzati tra sorgente CMS e cataloghi di traduzione:
 
-- `src/data/cms/it/`: lingua sorgente e fonte di verità autorevole, modificata direttamente tramite **PagesCMS**.
-- `src/data/cms/en/`: traduzioni in lingua inglese, tradotte collaborativamente su **Fink**. Contengono unicamente i testi traducibili: ID, percorsi immagini, icone e coordinate geografiche sono ereditati a runtime dalla base italiana.
+- `src/data/cms/`: lingua sorgente e fonte di verità autorevole, modificata direttamente tramite **PagesCMS** (senza cartelle per-lingua, con array JSON completi, ID e metadati).
+- `src/locales/it/`: catalogo di riferimento per **Fink**, generato automaticamente dallo script di sincronizzazione a partire da `src/data/cms/` (array convertiti in oggetti indicizzati per compatibilità totale con plugin-json).
+- `src/locales/en/`: traduzioni in lingua inglese, tradotte collaborativamente su **Fink**.
 
 La traduzione visiva collaborativa è gestita tramite **Fink** ([https://fink.inlang.com/github.com/ai-sf/cisf27](https://fink.inlang.com/github.com/ai-sf/cisf27)).
 
@@ -195,12 +199,12 @@ Se configurata la proprietà `FORM_ID`, i messaggi vengono inoltre archiviati co
 
 I contenuti editoriali sono gestiti tramite **PagesCMS**, configurato in `.pages.yml`.
 
-- I dati risiedono in `src/data/cms/it/` (file JSON editabili sia tramite interfaccia che a mano).
+- I dati risiedono direttamente in `src/data/cms/` (file JSON editabili sia tramite interfaccia che a mano).
 - Ogni file o cartella JSON corrisponde a una collezione o catalogo:
   - Cataloghi principali di pagina: `home.json`, `about.json`, `program.json`, `contacts.json`, `structures.json`, …
   - Sottocataloghi modulari: `structures/` (alloggi e sedi), `partner-categories/`, `people-roles/`, `structure-categories/`.
 - Le immagini caricate tramite CMS vengono salvate in `src/assets/images/` e ottimizzate in fase di build.
-- In PagesCMS la modifica agisce direttamente sui contenuti italiani in `src/data/cms/it/`. Le altre lingue ereditano la struttura e vengono tradotte via Fink.
+- In PagesCMS la modifica agisce direttamente sui contenuti in `src/data/cms/`. Lo script `pnpm run sync:subcatalogs` genera la versione per Fink in `src/locales/it/`.
 
 ---
 

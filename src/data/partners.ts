@@ -37,7 +37,7 @@ export function getPartnerCategories(locale?: string): PartnerCategory[] {
 			};
 		}
 		const filename = path.split('/').pop();
-		const localizedKey = `./${locale}/partner-categories/${filename}`;
+		const localizedKey = `../../locales/${locale}/partner-categories/${filename}`;
 		const localizedMod = localizedPartnerCategoryGlob[localizedKey]?.default;
 		return {
 			id,

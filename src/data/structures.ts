@@ -4,6 +4,7 @@ import {
 	localizedStructureGlob,
 	structureCategoryGlob,
 	localizedStructureCategoryGlob,
+	deepMerge,
 } from './cms';
 
 export type Structure = (typeof structureGlob)[number]['default'];
@@ -28,7 +29,7 @@ export function getStructureCategories(locale?: string): StructureCategory[] {
 			};
 		}
 		const filename = path.split('/').pop();
-		const localizedKey = `./${locale}/structure-categories/${filename}`;
+		const localizedKey = `../../locales/${locale}/structure-categories/${filename}`;
 		const localizedMod = localizedStructureCategoryGlob[localizedKey]?.default;
 		return {
 			id,
@@ -48,27 +49,13 @@ export function getStructures(locale?: string): Structure[] {
 
 		// Look for localized file: e.g. ./en/structures/combo.json
 		const filename = path.split('/').pop();
-		const localizedKey = `./${locale}/structures/${filename}`;
+		const localizedKey = `../../locales/${locale}/structures/${filename}`;
 		const localizedMod = localizedStructureGlob[localizedKey]?.default;
 		if (!localizedMod) {
 			return base;
 		}
 
-		// Preserve authoritative canonical fields from base (id, category, maps, image, etc.)
-		// Overlay translatable content (label, description, distance, capacity, rooms, price, features)
-		return {
-			...base,
-			label: localizedMod.label ?? base.label,
-			description: localizedMod.description ?? base.description,
-			distance: localizedMod.distance ?? base.distance,
-			capacity: localizedMod.capacity ?? base.capacity,
-			rooms: localizedMod.rooms ?? base.rooms,
-			price: localizedMod.price ?? base.price,
-			features:
-				localizedMod.features && localizedMod.features.length > 0
-					? localizedMod.features
-					: base.features,
-		};
+		return deepMerge(base, localizedMod);
 	});
 }
 

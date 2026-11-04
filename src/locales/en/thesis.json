@@ -1,0 +1,44 @@
+{
+  "heroHeading": "Thesis & Posters",
+  "heroSubtitle": "Research projects presented during CISF27",
+  "sectionBadge": "Thesis Presentations",
+  "sectionHeading": "Thesis Presentations",
+  "presentationDesc": "The call for abstracts is NOT open yet. Final thesis and poster topics will be announced after registration closes...",
+  "posterBadge": "Sponsor Session",
+  "posterHeading": "Posters & Stand-Up Sponsors",
+  "posterDesc": "Sponsors will have the opportunity to introduce themselves to participants during breakfast workshops and dedicated stands and posters. More details on schedule and participating companies will be shared soon (TBA).",
+  "posterStepsHeading": "Opportunities for Sponsors",
+  "thesisTopics": {
+    "0": {
+      "title": "Thesis Title - To Be Announced",
+      "author": "Speaker - To Be Announced",
+      "affiliation": "Affiliation - To Be Announced",
+      "abstract": "Abstract to be defined. Final details of the presented theses will be announced soon.",
+      "tags": {
+        "0": "TBA"
+      }
+    }
+  },
+  "posterInfo": {
+    "0": {
+      "text": "Presentations during breakfast workshops"
+    },
+    "1": {
+      "text": "Stands and interactive sessions with students"
+    },
+    "2": {
+      "text": "Schedule and full details: TBA (To Be Announced)"
+    }
+  },
+  "posterSteps": {
+    "0": {
+      "text": "Company introduction to the audience"
+    },
+    "1": {
+      "text": "Direct meeting with over 170 physics students"
+    },
+    "2": {
+      "text": "Dedicated workshops and networking"
+    }
+  }
+}

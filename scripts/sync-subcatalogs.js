@@ -1,45 +1,43 @@
 #!/usr/bin/env node
 import { readdirSync, readFileSync, writeFileSync, existsSync, mkdirSync } from 'node:fs';
-import { join, resolve } from 'node:path';
+import { join, resolve, relative } from 'node:path';
 
 const ROOT_DIR = resolve('.');
 const CMS_DIR = join(ROOT_DIR, 'src', 'data', 'cms');
-const BASE_LANG = 'it';
-const BASE_DIR = join(CMS_DIR, BASE_LANG);
+const LOCALES_DIR = join(ROOT_DIR, 'src', 'locales');
+const BASE_LOCALE = 'it';
+const BASE_LOCALES_DIR = join(LOCALES_DIR, BASE_LOCALE);
 const INLANG_SETTINGS_PATH = join(ROOT_DIR, 'project.inlang', 'settings.json');
 const LANG_CONFIG_PATH = join(ROOT_DIR, 'src', 'config', 'languages.json');
 
-if (!existsSync(BASE_DIR)) {
-	console.error(`❌ Base directory not found: ${BASE_DIR}`);
+if (!existsSync(CMS_DIR)) {
+	console.error(`❌ CMS directory not found: ${CMS_DIR}`);
 	process.exit(1);
 }
 
-// 1. Determine target locales
-let targetLocales = [];
+// 1. Determine configured locales
+let allLocales = [BASE_LOCALE];
 if (existsSync(LANG_CONFIG_PATH)) {
 	try {
-		targetLocales = JSON.parse(readFileSync(LANG_CONFIG_PATH, 'utf8'))
-			.map((l) => l.code)
-			.filter((l) => l !== BASE_LANG);
+		const configured = JSON.parse(readFileSync(LANG_CONFIG_PATH, 'utf8')).map((l) => l.code);
+		allLocales = Array.from(new Set([BASE_LOCALE, ...configured]));
 	} catch (e) {
 		console.warn('⚠️ Could not parse languages.json:', e.message);
 	}
 }
 
-if (targetLocales.length === 0) {
-	targetLocales = readdirSync(CMS_DIR, { withFileTypes: true })
-		.filter((d) => d.isDirectory() && d.name !== BASE_LANG)
+if (existsSync(LOCALES_DIR)) {
+	const discovered = readdirSync(LOCALES_DIR, { withFileTypes: true })
+		.filter((d) => d.isDirectory())
 		.map((d) => d.name);
+	allLocales = Array.from(new Set([...allLocales, ...discovered]));
 }
 
-// 2. Discover all subcatalogs in it/
-const subcatalogs = readdirSync(BASE_DIR, { withFileTypes: true })
-	.filter((d) => d.isDirectory())
-	.map((d) => d.name);
+console.log(`\n📦 Locale Synchronizer (CMS source -> ${BASE_LOCALES_DIR})`);
+console.log(`Configured Inlang locales: ${allLocales.join(', ')} (baseLocale: "${BASE_LOCALE}")\n`);
 
-console.log(`\n📦 Subcatalog Synchronizer (Base: ${BASE_LANG})`);
-console.log(`Found subcatalogs: ${subcatalogs.join(', ')}`);
-console.log(`Target locales: ${targetLocales.join(', ')}\n`);
+const CANONICAL_ONLY_CATALOGS = new Set(['history.json', 'people.json']);
+const IGNORED_DIRS = new Set(['icons', 'colors', 'it', 'en']);
 
 const NON_TRANSLATABLE_FIELDS = new Set([
 	'id',
@@ -56,6 +54,7 @@ const NON_TRANSLATABLE_FIELDS = new Set([
 	'embedSrc',
 	'mapLink',
 	'image',
+	'logo',
 	'phone',
 	'whatsapp',
 	'email',
@@ -71,119 +70,142 @@ const NON_TRANSLATABLE_FIELDS = new Set([
 	'isCommittee',
 	'isContact',
 	'partners',
+	'value',
 ]);
 
-function extractTranslatableFields(obj) {
-	const res = {};
-	for (const [k, v] of Object.entries(obj)) {
-		if (!NON_TRANSLATABLE_FIELDS.has(k)) {
-			res[k] = v;
-		}
-	}
-	return res;
-}
-
-let createdCount = 0;
-let syncedCount = 0;
-const allSubcatalogKeys = [];
-
-for (const sub of subcatalogs) {
-	const baseSubDir = join(BASE_DIR, sub);
-	const files = readdirSync(baseSubDir).filter((f) => f.endsWith('.json'));
-
-	for (const file of files) {
-		const id = file.replace('.json', '');
-		const inlangKey = `${sub}/${id}`;
-		allSubcatalogKeys.push({
-			key: inlangKey,
-			path: `./src/data/cms/{locale}/${sub}/${file}`,
+/**
+ * Converts native CMS data (with arrays and technical metadata)
+ * into a Fink/Inlang-compatible schema where:
+ * 1. Arrays are converted to indexed objects {"0": ..., "1": ...}
+ * 2. Non-translatable fields (ids, icons, links, colors, coordinates) are stripped
+ */
+function toFinkSchema(val) {
+	if (Array.isArray(val)) {
+		const res = {};
+		val.forEach((item, idx) => {
+			const converted = toFinkSchema(item);
+			if (
+				converted !== undefined &&
+				(typeof converted !== 'object' || Object.keys(converted).length > 0)
+			) {
+				res[String(idx)] = converted;
+			}
 		});
+		return res;
+	}
 
-		const baseContent = JSON.parse(readFileSync(join(baseSubDir, file), 'utf8'));
-
-		for (const locale of targetLocales) {
-			const targetDir = join(CMS_DIR, locale, sub);
-			if (!existsSync(targetDir)) {
-				mkdirSync(targetDir, { recursive: true });
+	if (typeof val === 'object' && val !== null) {
+		const res = {};
+		for (const [key, subVal] of Object.entries(val)) {
+			if (NON_TRANSLATABLE_FIELDS.has(key)) {
+				continue;
 			}
-
-			const targetPath = join(targetDir, file);
-			if (!existsSync(targetPath)) {
-				// Scaffold new file with only translatable fields
-				const translatable = extractTranslatableFields(baseContent);
-				writeFileSync(targetPath, JSON.stringify(translatable, null, 2) + '\n', 'utf8');
-				console.log(`✨ Created [${locale}/${sub}/${file}] from ${BASE_LANG}`);
-				createdCount++;
-			} else {
-				// Sync missing translatable keys and purge non-translatable fields
-				try {
-					const targetContent = JSON.parse(readFileSync(targetPath, 'utf8'));
-					let updated = false;
-
-					for (const key of Object.keys(targetContent)) {
-						if (NON_TRANSLATABLE_FIELDS.has(key)) {
-							delete targetContent[key];
-							updated = true;
-						}
-					}
-
-					for (const [key, val] of Object.entries(baseContent)) {
-						if (!NON_TRANSLATABLE_FIELDS.has(key) && targetContent[key] === undefined) {
-							targetContent[key] = val;
-							updated = true;
-						}
-					}
-
-					if (updated) {
-						writeFileSync(targetPath, JSON.stringify(targetContent, null, 2) + '\n', 'utf8');
-						console.log(`🔄 Synced translatable keys in [${locale}/${sub}/${file}]`);
-						syncedCount++;
-					}
-				} catch (err) {
-					console.error(`❌ Error parsing [${locale}/${sub}/${file}]:`, err.message);
-				}
+			const converted = toFinkSchema(subVal);
+			if (
+				converted !== undefined &&
+				(typeof converted !== 'object' || Object.keys(converted).length > 0)
+			) {
+				res[key] = converted;
 			}
 		}
+		return res;
+	}
+
+	if (typeof val === 'string') {
+		return val;
+	}
+
+	return undefined;
+}
+
+function getAllJsonFiles(dir, relativeTo = dir) {
+	let results = [];
+	const entries = readdirSync(dir, { withFileTypes: true });
+	for (const entry of entries) {
+		if (IGNORED_DIRS.has(entry.name)) continue;
+		const fullPath = join(dir, entry.name);
+		if (entry.isDirectory()) {
+			results.push(...getAllJsonFiles(fullPath, relativeTo));
+		} else if (entry.isFile() && entry.name.endsWith('.json')) {
+			const relPath = relative(relativeTo, fullPath).replace(/\\/g, '/');
+			results.push(relPath);
+		}
+	}
+	return results;
+}
+
+const allBaseFiles = getAllJsonFiles(CMS_DIR);
+let generatedCount = 0;
+const allInlangCatalogKeys = [];
+
+for (const relFile of allBaseFiles) {
+	if (CANONICAL_ONLY_CATALOGS.has(relFile)) {
+		continue;
+	}
+
+	const inlangKey = relFile.replace('.json', '');
+	allInlangCatalogKeys.push({
+		key: inlangKey,
+		path: `./src/locales/{locale}/${relFile}`,
+	});
+
+	const cmsFilePath = join(CMS_DIR, relFile);
+	const cmsContent = JSON.parse(readFileSync(cmsFilePath, 'utf8'));
+
+	const targetFilePath = join(BASE_LOCALES_DIR, relFile);
+	const targetDir = join(
+		BASE_LOCALES_DIR,
+		relFile.includes('/') ? relFile.slice(0, relFile.lastIndexOf('/')) : ''
+	);
+
+	if (!existsSync(targetDir)) {
+		mkdirSync(targetDir, { recursive: true });
+	}
+
+	const converted = toFinkSchema(cmsContent);
+	const newJson = JSON.stringify(converted, null, 2) + '\n';
+
+	const shouldWrite =
+		!existsSync(targetFilePath) || readFileSync(targetFilePath, 'utf8') !== newJson;
+	if (shouldWrite) {
+		writeFileSync(targetFilePath, newJson, 'utf8');
+		console.log(`✨ Generated [locales/it/${relFile}] from CMS`);
+		generatedCount++;
 	}
 }
 
-// 3. Update project.inlang/settings.json
+// 2. Update project.inlang/settings.json
 if (existsSync(INLANG_SETTINGS_PATH)) {
 	try {
 		const inlangSettings = JSON.parse(readFileSync(INLANG_SETTINGS_PATH, 'utf8'));
+
+		inlangSettings.baseLocale = BASE_LOCALE;
+		inlangSettings.locales = allLocales;
+
 		if (!inlangSettings['plugin.inlang.json']) {
 			inlangSettings['plugin.inlang.json'] = {};
 		}
-		if (!inlangSettings['plugin.inlang.json'].pathPattern) {
-			inlangSettings['plugin.inlang.json'].pathPattern = {};
+
+		const pattern = {};
+		for (const item of allInlangCatalogKeys) {
+			pattern[item.key] = item.path;
 		}
 
-		const pattern = inlangSettings['plugin.inlang.json'].pathPattern;
-		let inlangUpdated = false;
-
-		// Sort keys alphabetically for clean diffs
-		for (const item of allSubcatalogKeys) {
-			if (pattern[item.key] !== item.path) {
-				pattern[item.key] = item.path;
-				inlangUpdated = true;
-			}
+		const sortedPattern = {};
+		for (const k of Object.keys(pattern).sort()) {
+			sortedPattern[k] = pattern[k];
 		}
 
-		if (inlangUpdated) {
-			// Sort pathPattern keys
-			const sortedPattern = {};
-			for (const k of Object.keys(pattern).sort()) {
-				sortedPattern[k] = pattern[k];
-			}
-			inlangSettings['plugin.inlang.json'].pathPattern = sortedPattern;
-			writeFileSync(INLANG_SETTINGS_PATH, JSON.stringify(inlangSettings, null, 2) + '\n', 'utf8');
-			console.log(`⚙️  Updated project.inlang/settings.json with subcatalog pathPatterns`);
-		}
+		inlangSettings['plugin.inlang.json'].pathPattern = sortedPattern;
+		writeFileSync(INLANG_SETTINGS_PATH, JSON.stringify(inlangSettings, null, 2) + '\n', 'utf8');
+		console.log(
+			`\n⚙️  Updated project.inlang/settings.json (baseLocale: "${BASE_LOCALE}", locales: [${allLocales.join(', ')}])`
+		);
 	} catch (err) {
 		console.error('❌ Failed to update project.inlang/settings.json:', err.message);
 	}
 }
 
 console.log(
-	`\n🎉 Sync complete: ${createdCount} created, ${syncedCount} updated, ${allSubcatalogKeys.length} subcatalog entries registered.`
+	`\n🎉 Sync complete: ${generatedCount} files generated in locales/it/, ${allInlangCatalogKeys.length} catalogs registered for Fink.`
 );

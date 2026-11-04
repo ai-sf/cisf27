@@ -15,16 +15,16 @@ const configuredLanguages = JSON.parse(
 	fs.readFileSync(new URL('./src/config/languages.json', import.meta.url), 'utf8')
 );
 
-// 2. Auto-discover any additional language directories in src/data/cms/
-const cmsDir = path.resolve('src/data/cms');
+// 2. Auto-discover any additional language directories in src/locales/
+const localesDir = path.resolve('src/locales');
 
-const discoveredLocales = fs.existsSync(cmsDir)
+const discoveredLocales = fs.existsSync(localesDir)
 	? fs
-			.readdirSync(cmsDir, { withFileTypes: true })
+			.readdirSync(localesDir, { withFileTypes: true })
 			.filter((dirent) => dirent.isDirectory() && dirent.name !== defaultLocale)
 			.map((dirent) => dirent.name)
 			.filter((dir) => {
-				const dirPath = path.join(cmsDir, dir);
+				const dirPath = path.join(localesDir, dir);
 				return (
 					fs.existsSync(path.join(dirPath, 'conference.json')) &&
 					fs.existsSync(path.join(dirPath, 'home.json'))

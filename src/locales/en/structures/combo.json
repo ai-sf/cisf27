@@ -1,0 +1,22 @@
+{
+  "label": "Combo Bologna",
+  "description": "Accommodation venue for conference attendees",
+  "distance": "900 m walk from Central Station (High-Speed Terminal)",
+  "capacity": "150 guests",
+  "rooms": "Quadruple (18), Triple (10), and Twin (24)",
+  "price": "Included in the registration fee!",
+  "features": {
+    "0": "Wi-Fi",
+    "1": "Luggage storage",
+    "2": "Shared kitchen",
+    "3": "Laundry",
+    "4": "Private bathrooms",
+    "5": "Gym",
+    "6": "24/7 Reception",
+    "7": "Buffet breakfast",
+    "8": "Towel set",
+    "9": "Air conditioning",
+    "10": "Garden",
+    "11": "Bar"
+  }
+}

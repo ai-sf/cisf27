@@ -3,7 +3,7 @@ import { readdirSync, readFileSync, existsSync } from 'node:fs';
 import { join, resolve } from 'node:path';
 
 const ROOT_DIR = resolve('.');
-const LOCALES_DIR = join(ROOT_DIR, 'src', 'data', 'cms');
+const LOCALES_DIR = join(ROOT_DIR, 'src', 'locales');
 const BASE_LANG = 'it';
 
 if (!existsSync(LOCALES_DIR)) {
@@ -66,12 +66,23 @@ let totalCheckedKeys = 0;
 
 function flattenKeys(obj, prefix = '') {
 	let keys = {};
-	for (const [k, v] of Object.entries(obj)) {
-		const fullKey = prefix ? `${prefix}.${k}` : k;
-		if (v !== null && typeof v === 'object' && !Array.isArray(v)) {
-			Object.assign(keys, flattenKeys(v, fullKey));
-		} else {
-			keys[fullKey] = v;
+	if (Array.isArray(obj)) {
+		obj.forEach((item, idx) => {
+			const fullKey = prefix ? `${prefix}.${idx}` : String(idx);
+			if (item !== null && typeof item === 'object') {
+				Object.assign(keys, flattenKeys(item, fullKey));
+			} else {
+				keys[fullKey] = item;
+			}
+		});
+	} else if (obj !== null && typeof obj === 'object') {
+		for (const [k, v] of Object.entries(obj)) {
+			const fullKey = prefix ? `${prefix}.${k}` : k;
+			if (v !== null && typeof v === 'object') {
+				Object.assign(keys, flattenKeys(v, fullKey));
+			} else {
+				keys[fullKey] = v;
+			}
 		}
 	}
 	return keys;
@@ -156,6 +167,8 @@ for (const file of baseFiles) {
 			'isCommittee',
 			'isContact',
 			'partners',
+			'value',
+			'logo',
 		]);
 
 		const NON_TRANSLATABLE_FULL_KEYS = new Set([
@@ -170,8 +183,7 @@ for (const file of baseFiles) {
 		const isNonTranslatable = (k) => {
 			if (NON_TRANSLATABLE_FULL_KEYS.has(k)) return true;
 			const parts = k.split('.');
-			const last = parts[parts.length - 1];
-			return NON_TRANSLATABLE_KEYS.has(last);
+			return parts.some((p) => NON_TRANSLATABLE_KEYS.has(p));
 		};
 
 		// Check for missing keys (omitted non-translatable metadata is allowed)

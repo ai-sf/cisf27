@@ -1,0 +1,28 @@
+{
+  "badge": "Bologna",
+  "heading": "Past, Present, ",
+  "gradientWord": "Future",
+  "eras": {
+    "0": {
+      "era": "Past",
+      "title": "The Past",
+      "paragraphs": {
+        "0": "Bologna physics boasts legendary figures such as Laura Bassi, Guglielmo Marconi, and Luigi Galvani. Landmark historical experiments were achieved in our city: Marconi transmitted radio signals over natural barriers in 1895, and in 1974 Merli, Missiroli, and Pozzi performed the groundbreaking single-electron interference experiment. We honor their legacy to inspire future scientific pioneers."
+      }
+    },
+    "1": {
+      "era": "Present",
+      "title": "The Present",
+      "paragraphs": {
+        "0": "Bologna is a premier international hub for physics: world-class research institutes, a top-ranked university department, and cutting-edge supercomputing centers form leaders and provide exceptional research and career opportunities. Our goal is to highlight these opportunities for both students and partners."
+      }
+    },
+    "2": {
+      "era": "Future",
+      "title": "The Future",
+      "paragraphs": {
+        "0": "The Organizing Committee strives to create optimal conditions for ambitious students and visionary partners to power the next generation of key figures for our society and science. We view CISF as the launchpad for interconnected trajectories for all involved."
+      }
+    }
+  }
+}
