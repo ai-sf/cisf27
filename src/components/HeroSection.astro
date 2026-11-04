@@ -27,12 +27,12 @@ const {
 <section
 	{id}
 	class:list={[
-		'hero bg-base-100 relative overflow-hidden py-32',
+		'hero bg-base-100 relative overflow-hidden py-20 sm:py-24 md:py-32',
 		bgClass,
 		'bg-linear-to-br via-transparent',
 	]}
 >
-	<div class="hero-content relative z-10 text-center">
+	<div class="hero-content relative z-10 px-4 text-center sm:px-6">
 		<div class="max-w-full">
 			{
 				Icon && (
@@ -48,12 +48,19 @@ const {
 					</div>
 				)
 			}
-			<h1 class="mb-6 text-5xl font-bold md:text-7xl">
-				<span class:list={[headingClass, 'bg-linear-to-r bg-clip-text text-transparent']}>
+			<h1
+				class="mb-6 text-3xl font-bold tracking-tight text-balance sm:text-5xl md:text-6xl lg:text-7xl"
+			>
+				<span
+					class:list={[
+						headingClass,
+						'inline-block max-w-full bg-linear-to-r bg-clip-text break-words text-transparent',
+					]}
+				>
 					{heading}
 				</span>
 			</h1>
-			<p class="text-base-content/60 mx-auto max-w-2xl text-lg">
+			<p class="text-base-content/60 mx-auto max-w-2xl text-base sm:text-lg">
 				{subtitle}
 			</p>
 		</div>

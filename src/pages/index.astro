@@ -398,10 +398,10 @@ const aboutCardEntries = [
 			<div class="text-center">
 				<a
 					href={`${contactLink.href}?tipo=iscrizione`}
-					class="btn btn-primary btn-lg shadow-primary/25 hover:shadow-primary/40 card-interactive glow-hover gap-3 shadow-xl"
+					class="btn btn-primary shadow-primary/25 hover:shadow-primary/40 card-interactive glow-hover inline-flex h-auto min-h-12 max-w-full items-center justify-center gap-3 px-5 py-3 text-sm leading-snug shadow-xl sm:px-8 sm:text-base md:text-lg"
 				>
-					<Handshake class="size-5" />
-					{home.registerButton}
+					<Handshake class="size-5 shrink-0" />
+					<span>{home.registerButton}</span>
 				</a>
 				<p class="text-base-content/40 mt-4 text-sm">
 					{home.registrationNote}
@@ -429,17 +429,17 @@ const aboutCardEntries = [
 		<Fragment slot="actions">
 			<a
 				href={`${contactLink.href}?tipo=iscrizione`}
-				class="btn btn-primary btn-lg shadow-primary/25 hover:shadow-primary/40 card-interactive glow-hover gap-2 shadow-xl"
+				class="btn btn-primary shadow-primary/25 hover:shadow-primary/40 card-interactive glow-hover inline-flex h-auto min-h-12 max-w-full items-center justify-center gap-2 px-5 py-3 text-sm leading-snug shadow-xl sm:px-8 sm:text-base md:text-lg"
 			>
-				{home.ctaButton}
-				<ArrowRight class="size-5" />
+				<span>{home.ctaButton}</span>
+				<ArrowRight class="size-5 shrink-0" />
 			</a>
 			<a
 				href={contactLink.href}
-				class="btn btn-outline btn-lg hover:bg-primary/10 hover:border-primary hover:text-primary gap-2"
+				class="btn btn-outline hover:bg-primary/10 hover:border-primary hover:text-primary inline-flex h-auto min-h-12 max-w-full items-center justify-center gap-2 px-5 py-3 text-sm leading-snug sm:px-8 sm:text-base md:text-lg"
 			>
-				{home.ctaContact}
-				<Mail class="size-5" />
+				<span>{home.ctaContact}</span>
+				<Mail class="size-5 shrink-0" />
 			</a>
 		</Fragment>
 	</CTASection>

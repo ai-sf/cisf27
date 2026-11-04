@@ -27,11 +27,11 @@ const hasPartners = displayCategories.filter((cat) => partners.some((p) => p.cat
 		const catPartners = partners.filter((p) => p.category === cat.id);
 		const CatIcon = cat.icon;
 		return (
-			<section class="reveal bg-base-200/50 py-24">
+			<section class="reveal bg-base-200/50 py-16 sm:py-24">
 				<div class="container mx-auto px-4 lg:px-8">
-					<div class="mb-12 text-center">
-						<h2 class="flex items-center justify-center gap-3 text-3xl font-bold">
-							{CatIcon && <CatIcon class="size-6" />}
+					<div class="mb-8 text-center sm:mb-12">
+						<h2 class="flex flex-col items-center justify-center gap-2 text-2xl font-bold text-balance sm:flex-row sm:gap-3 sm:text-3xl md:text-4xl">
+							{CatIcon && <CatIcon class="inline-block size-6 shrink-0" />}
 							<GradientSpan gradient={gradientMap.get(cat.color)} class="char-stagger">
 								{cat.title}
 							</GradientSpan>

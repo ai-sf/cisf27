@@ -253,7 +253,8 @@
 
 @media (max-width: 639px) {
 	.back-to-top {
-		bottom: calc(2rem + 4rem);
+		bottom: 5rem;
+		right: 1rem;
 	}
 }
 

@@ -103,17 +103,17 @@ const downloadHref = isExternal
 		<Fragment slot="actions">
 			<a
 				href={`${contactLink.href}?tipo=sponsor`}
-				class="btn btn-warning btn-lg shadow-warning/25 hover:shadow-warning/40 card-interactive glow-hover gap-2 shadow-xl"
+				class="btn btn-warning shadow-warning/25 hover:shadow-warning/40 card-interactive glow-hover inline-flex h-auto min-h-12 max-w-full items-center justify-center gap-2 px-5 py-3 text-sm leading-snug shadow-xl sm:px-8 sm:text-base md:text-lg"
 			>
-				<Handshake class="size-5" />
-				{sponsor.ctaButton}
+				<Handshake class="size-5 shrink-0" />
+				<span>{sponsor.ctaButton}</span>
 			</a>
 			<a
 				href={contactLink.href}
-				class="btn btn-outline btn-lg hover:bg-warning/10 hover:border-warning hover:text-warning gap-2"
+				class="btn btn-outline hover:bg-warning/10 hover:border-warning hover:text-warning inline-flex h-auto min-h-12 max-w-full items-center justify-center gap-2 px-5 py-3 text-sm leading-snug sm:px-8 sm:text-base md:text-lg"
 			>
-				{sponsor.ctaContact}
-				<ArrowRight class="size-4" />
+				<span>{sponsor.ctaContact}</span>
+				<ArrowRight class="size-4 shrink-0" />
 			</a>
 		</Fragment>
 	</CTASection>

@@ -139,8 +139,8 @@ const cisfCardEntries = [
 				</h2>
 			</div>
 
-			<div class="-ml-32 max-w-3xl md:mx-auto">
-				<ul class="timeline timeline-vertical timeline-snap-icon">
+			<div class="mx-auto max-w-3xl px-2 sm:px-4">
+				<ul class="timeline timeline-vertical timeline-snap-icon history-timeline">
 					{
 						history.map((item, index) => (
 							<Fragment>
@@ -149,7 +149,7 @@ const cisfCardEntries = [
 									<div class="timeline-start">
 										<div
 											class={[
-												'flex h-16 w-16 items-center justify-center rounded-full border-4',
+												'flex h-14 w-14 items-center justify-center rounded-full border-4 sm:h-16 sm:w-16',
 												item.current
 													? 'from-primary to-secondary border-primary/30 shadow-primary/20 bg-linear-to-br shadow-xl'
 													: 'bg-base-100 border-base-300',
@@ -157,7 +157,7 @@ const cisfCardEntries = [
 										>
 											<span
 												class={[
-													'text-lg font-bold',
+													'text-base font-bold sm:text-lg',
 													item.current ? 'text-primary-content' : 'text-base-content/60',
 												].join(' ')}
 											>
@@ -175,7 +175,7 @@ const cisfCardEntries = [
 									</div>
 									<div
 										class={[
-											'timeline-end timeline-box bg-base-100/60 p-6 transition-all',
+											'timeline-end timeline-box bg-base-100/60 w-full p-4 transition-all sm:p-6',
 											item.current
 												? 'border-primary/30 shadow-primary/5 shadow-lg'
 												: 'hover:border-primary/20',
@@ -217,15 +217,15 @@ const cisfCardEntries = [
 									<li class="opacity-80">
 										<hr class="bg-base-300" />
 										<div class="timeline-start">
-											<div class="border-base-300 bg-base-100 flex h-16 w-16 items-center justify-center rounded-full border-4 border-dashed shadow-xs">
-												<span class="text-base-content/40 text-xl font-bold">≈</span>
+											<div class="border-base-300 bg-base-100 flex h-14 w-14 items-center justify-center rounded-full border-4 border-dashed shadow-xs sm:h-16 sm:w-16">
+												<span class="text-base-content/40 text-lg font-bold sm:text-xl">≈</span>
 											</div>
 										</div>
 										<div class="timeline-middle">
 											<div class="border-base-300 bg-base-100 h-4 w-4 rounded-full border-2 border-dashed" />
 										</div>
-										<div class="timeline-end timeline-box border-base-300/80 bg-base-100/50 border-dashed p-4 shadow-xs">
-											<div class="text-base-content/60 flex items-center gap-2">
+										<div class="timeline-end timeline-box border-base-300/80 bg-base-100/50 w-full border-dashed p-4 shadow-xs">
+											<div class="text-base-content/60 flex flex-wrap items-center gap-2">
 												<span class="font-mono text-xs font-semibold">
 													{about.historyPauseYears || '2021 – 2022'}
 												</span>
@@ -312,11 +312,22 @@ const cisfCardEntries = [
 		<Fragment slot="actions">
 			<a
 				href={contactLink.href}
-				class="btn btn-primary btn-lg shadow-primary/25 hover:shadow-primary/40 gap-2 shadow-xl"
+				class="btn btn-primary shadow-primary/25 hover:shadow-primary/40 inline-flex h-auto min-h-12 max-w-full items-center justify-center gap-2 px-5 py-3 text-sm leading-snug shadow-xl sm:px-8 sm:text-base md:text-lg"
 			>
-				<Mail class="size-5" />
-				{about.ctaButton}
+				<Mail class="size-5 shrink-0" />
+				<span>{about.ctaButton}</span>
 			</a>
 		</Fragment>
 	</CTASection>
 </PageLayout>
+
+<style>
+	.history-timeline > li {
+		--timeline-col-start: 4.5rem;
+	}
+	@media (min-width: 768px) {
+		.history-timeline > li {
+			--timeline-col-start: minmax(0, 1fr);
+		}
+	}
+</style>
