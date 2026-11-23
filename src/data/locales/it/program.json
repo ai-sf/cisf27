@@ -7,7 +7,7 @@
   "program": {
     "0": {
       "day": "Lunedì",
-      "date": "19 Aprile",
+      "date": "19 aprile",
       "sections": {
         "0": {
           "title": "Accoglienza e Registrazione"
@@ -33,7 +33,7 @@
     },
     "1": {
       "day": "Martedì — Storia",
-      "date": "20 Aprile",
+      "date": "20 aprile",
       "sections": {
         "0": {
           "title": "Visite ai Laboratori",
@@ -58,7 +58,7 @@
     },
     "2": {
       "day": "Mercoledì — Giorno Associativo",
-      "date": "21 Aprile",
+      "date": "21 aprile",
       "sections": {
         "0": {
           "title": "Parallel Sessions",
@@ -84,7 +84,7 @@
     },
     "3": {
       "day": "Giovedì — Energia e Innovazione",
-      "date": "22 Aprile",
+      "date": "22 aprile",
       "sections": {
         "0": {
           "title": "Tavola Rotonda",
@@ -110,7 +110,7 @@
     },
     "4": {
       "day": "Venerdì — Lavoro",
-      "date": "23 Aprile",
+      "date": "23 aprile",
       "sections": {
         "0": {
           "title": "Giochi di Società"

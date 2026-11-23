@@ -7,7 +7,7 @@
   "cisfBadge": "CISF",
   "cisfHeading": "What is ",
   "cisfGradientWord": "CISF",
-  "cisfEditions": "Each edition brings students to a new Italian city, offering them the opportunity to immerse in local culture and the host committee while engaging in high-level scientific sessions.",
+  "cisfEditions": "Each edition brings students to a new Italian city, offering them the opportunity to immerse themselves in local culture and the host committee while engaging in high-level scientific sessions.",
   "historyBadge": "History",
   "historyHeading": "Past ",
   "historyGradientWord": "Editions",
@@ -16,7 +16,7 @@
   "historyPauseLabel": "Editions hiatus",
   "committeeBadge": "Committee",
   "committeeHeading": "The ",
-  "committeeGradientWord": "Organizing Committee",
+  "committeeGradientWord": "Organising Committee",
   "committeeSubtitle": "The people making CISF27 possible",
   "ctaHeading": "Have ",
   "ctaGradientWord": "Questions?",
@@ -29,7 +29,7 @@
     },
     "laboratori": {
       "title": "Laboratory Tours",
-      "description": "Visit centers of scientific excellence"
+      "description": "Visit centres of scientific excellence"
     },
     "sociali": {
       "title": "Social Events",

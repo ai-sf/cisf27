@@ -2,7 +2,7 @@
 import { Image } from 'astro:assets';
 import { EllipsisVertical, Ellipsis, Globe, ChevronDown } from '@lucide/astro';
 import { resolveIcon } from '../utils/helpers';
-import { getPageLinks, getPageLink } from '../data/pageLinks.ts';
+import { getPageLinks, getPageLink, resolveHref } from '../data/pageLinks.ts';
 import { getCmsData } from '../data/cms';
 import cisfLogo from '../assets/images/logo.png';
 import { switchLocalePath, languages, getLocale } from '../utils/i18n';
@@ -15,6 +15,7 @@ const { conference, nav } = getCmsData(locale);
 const pageLinks = getPageLinks(locale);
 const homeLink = getPageLink('home', locale);
 const contactLink = getPageLink('contact', locale);
+const registerHref = resolveHref('/iscrizione'); // must be valid for all locales
 
 const currentLanguage = languages.find((l) => l.code === locale) || {
 	code: locale,
@@ -66,13 +67,15 @@ const RegisterIcon = resolveIcon(nav.registerIcon);
 								class={[
 									'btn',
 									isActive(link.href) ? 'btn-primary btn-soft' : 'btn-ghost',
-									i > 3
-										? 'hidden xl:inline-flex'
-										: i > 1
-											? 'hidden lg:inline-flex'
-											: i > 0
-												? 'hidden md:inline-flex'
-												: '',
+									i > 5
+										? 'hidden 2xl:inline-flex'
+										: i > 3
+											? 'hidden xl:inline-flex'
+											: i > 1
+												? 'hidden lg:inline-flex'
+												: i > 0
+													? 'hidden md:inline-flex'
+													: '',
 								].join(' ')}
 							>
 								{Icon && <Icon class="size-4" />}
@@ -85,7 +88,7 @@ const RegisterIcon = resolveIcon(nav.registerIcon);
 
 			<li>
 				<button
-					class="btn btn-ghost xl:hidden"
+					class="btn btn-ghost 2xl:hidden"
 					popovertarget="desktop-nav-popover"
 					style="anchor-name:--desktop-nav-anchor"
 				>
@@ -145,7 +148,7 @@ const RegisterIcon = resolveIcon(nav.registerIcon);
 			{nav.sponsor}
 		</a>
 		<a
-			href={`${homeLink.href}#registrati`}
+			href={registerHref}
 			class="btn btn-primary btn-outline btn-sm sm:btn-md shadow-primary/20 hover:shadow-primary/40 card-interactive shadow-lg"
 		>
 			{RegisterIcon && <RegisterIcon class="size-4" />}
@@ -170,15 +173,17 @@ const RegisterIcon = resolveIcon(nav.registerIcon);
 						class={[
 							'btn',
 							isActive(link.href) ? 'btn-primary btn-soft' : 'btn-ghost',
-							i > 3
-								? 'xl:hidden'
-								: i > 1
-									? 'lg:hidden'
-									: i > 0
-										? 'md:hidden'
-										: i === 0
-											? 'hidden'
-											: '',
+							i > 5
+								? '2xl:hidden'
+								: i > 3
+									? 'xl:hidden'
+									: i > 1
+										? 'lg:hidden'
+										: i > 0
+											? 'md:hidden'
+											: i === 0
+												? 'hidden'
+												: '',
 						].join(' ')}
 					>
 						{Icon && <Icon class="size-4" />}
@@ -271,7 +276,7 @@ const RegisterIcon = resolveIcon(nav.registerIcon);
 	</li>
 	<li>
 		<a
-			href={`${homeLink.href}#registrati`}
+			href={registerHref}
 			class="btn btn-primary btn-outline btn-sm shadow-primary/20 mx-2 shadow-lg"
 		>
 			{RegisterIcon && <RegisterIcon class="size-4" />}

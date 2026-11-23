@@ -63,6 +63,13 @@ const {
 			<p class="text-base-content/60 mx-auto max-w-2xl text-base sm:text-lg">
 				{subtitle}
 			</p>
+			{
+				Astro.slots.has('default') && (
+					<div class="mt-8">
+						<slot />
+					</div>
+				)
+			}
 		</div>
 	</div>
 </section>
