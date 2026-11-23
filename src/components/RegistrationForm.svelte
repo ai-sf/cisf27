@@ -3624,9 +3624,7 @@
 								class="mt-2 rounded-lg border border-emerald-200 bg-emerald-50/80 px-3 py-2 text-[11px] leading-relaxed text-emerald-950"
 							>
 								🔒 <strong>Obbligatorio «Sì»:</strong> nella <strong>Pagina 1</strong> hai indicato
-								di ricoprire un ruolo associativo speciale nazionale (<em
-									>{specialNationalRoleLabel}</em
-								>), che presuppone l'iscrizione attiva ad AISF. Se hai selezionato quel ruolo per
+								di ricoprire un ruolo associativo speciale nazionale [<em>{specialNationalRoleLabel}</em>], che presuppone l'iscrizione attiva ad AISF. Se hai selezionato quel ruolo per
 								errore, torna alla Pagina 1 per modificarlo.
 							</div>
 						{:else}
