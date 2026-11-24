@@ -23,7 +23,3 @@ pnpm-debug.log*
 # jetbrains setting folder
 .idea/
 .vscode/
-
-# internal operational playbooks & private backend scripts (local only — NEVER commit to public repo!)
-docs/PLAYBOOK_LANCIO_CISF27.html
-docs/private/
