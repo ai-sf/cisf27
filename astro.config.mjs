@@ -44,6 +44,9 @@ const fallback = Object.fromEntries(
 export default defineConfig({
 	vite: {
 		plugins: [tailwindcss()],
+		optimizeDeps: {
+			include: ['@lucide/svelte', 'sortablejs', 'katex'],
+		},
 	},
 	site: 'https://ai-sf.it',
 	base: '/cisf27',

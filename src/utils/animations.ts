@@ -25,7 +25,7 @@ function initReveal(): void {
 				}
 			}
 		},
-		{ threshold: 0.15 }
+		{ threshold: 0.02 }
 	);
 
 	for (const el of all) {

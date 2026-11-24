@@ -4,6 +4,7 @@ import { committeeRoleGlob, localizedCommitteeRoleGlob, peopleJson, getCmsData }
 export interface Person {
 	name: string;
 	role: string;
+	roleId?: string;
 	image?: ImageMetadata;
 	roleDescription?: string;
 	email?: string;
@@ -47,6 +48,7 @@ export function getPeople(locale?: string): Person[] {
 		return {
 			name: p.name ?? '',
 			role: roleInfo?.label ?? roleKey,
+			roleId: p.role,
 			image: p.image ? resolveImage(committeeImages, p.image) : undefined,
 			roleDescription: roleInfo?.description,
 			email: p.email,

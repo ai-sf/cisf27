@@ -45,6 +45,11 @@ export const tesiLink: PageLink = {
 	href: resolveHref(p.tesi?.href ?? '/tesi'),
 	icon: resolveIcon(p.tesi?.icon),
 };
+export const criteriLink: PageLink = {
+	name: p.criteri?.name ?? '',
+	href: resolveHref(p.criteri?.href ?? '/criteri'),
+	icon: resolveIcon(p.criteri?.icon),
+};
 export const contactLink: PageLink = {
 	name: p.contact?.name ?? '',
 	href: resolveHref(p.contact?.href ?? '/contatto'),
@@ -57,6 +62,7 @@ export const pageLinks: PageLink[] = [
 	programLink,
 	structuresLink,
 	tesiLink,
+	criteriLink,
 	aboutLink,
 	contactLink,
 ] as const;
@@ -91,6 +97,11 @@ export function getPageLinks(locale: string = 'it'): PageLink[] {
 			icon: tesiLink.icon,
 		},
 		{
+			name: pl.criteri?.name ?? criteriLink.name,
+			href: resolveHref(pl.criteri?.href ?? p.criteri?.href ?? '/criteri', locale),
+			icon: criteriLink.icon,
+		},
+		{
 			name: pl.about?.name ?? aboutLink.name,
 			href: resolveHref(pl.about?.href ?? p.about?.href ?? '/chi-siamo', locale),
 			icon: aboutLink.icon,
@@ -104,7 +115,16 @@ export function getPageLinks(locale: string = 'it'): PageLink[] {
 }
 
 export function getPageLink(
-	id: 'home' | 'about' | 'program' | 'structures' | 'sponsor' | 'tesi' | 'contact' | string,
+	id:
+		| 'home'
+		| 'about'
+		| 'sponsor'
+		| 'criteri'
+		| 'program'
+		| 'structures'
+		| 'contact'
+		| 'tesi'
+		| string,
 	locale: string = 'it'
 ): PageLink {
 	if (!locale || locale === 'it') {
@@ -121,6 +141,8 @@ export function getPageLink(
 				return sponsorLink;
 			case 'tesi':
 				return tesiLink;
+			case 'criteri':
+				return criteriLink;
 			case 'contact':
 				return contactLink;
 			default:
@@ -128,7 +150,7 @@ export function getPageLink(
 		}
 	}
 	const links = getPageLinks(locale);
-	const ids = ['home', 'sponsor', 'program', 'structures', 'tesi', 'about', 'contact'];
+	const ids = ['home', 'sponsor', 'program', 'structures', 'tesi', 'criteri', 'about', 'contact'];
 	const idx = ids.indexOf(id);
 	return idx !== -1 ? links[idx] : { name: id, href: resolveHref(id, locale) };
 }

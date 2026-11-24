@@ -5,5 +5,6 @@
   "structures": { "name": "Strutture", "icon": "hotel", "href": "/strutture" },
   "sponsor": { "name": "Sponsor", "icon": "handshake", "href": "/sponsor" },
   "tesi": { "name": "Tesi", "icon": "book-open", "href": "/tesi" },
+  "criteri": { "name": "Criteri", "icon": "shield", "href": "/criteri" },
   "contact": { "name": "Contatto", "icon": "mail", "href": "/contatto" }
 }

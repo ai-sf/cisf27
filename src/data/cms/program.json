@@ -8,7 +8,7 @@
     {
       "id": "lunedi",
       "day": "Lunedì",
-      "date": "19 Aprile",
+      "date": "19 aprile",
       "sections": [
         {
           "time": "09:00 - 15:00",
@@ -40,7 +40,7 @@
     {
       "id": "martedi",
       "day": "Martedì — Storia",
-      "date": "20 Aprile",
+      "date": "20 aprile",
       "sections": [
         {
           "time": "08:00 - 12:00",
@@ -70,7 +70,7 @@
     {
       "id": "mercoledi",
       "day": "Mercoledì — Giorno Associativo",
-      "date": "21 Aprile",
+      "date": "21 aprile",
       "sections": [
         {
           "time": "09:00 - 13:00",
@@ -101,7 +101,7 @@
     {
       "id": "giovedi",
       "day": "Giovedì — Energia e Innovazione",
-      "date": "22 Aprile",
+      "date": "22 aprile",
       "sections": [
         {
           "time": "10:00 - 12:30",
@@ -131,7 +131,7 @@
     {
       "id": "venerdi",
       "day": "Venerdì — Lavoro",
-      "date": "23 Aprile",
+      "date": "23 aprile",
       "sections": [
         {
           "time": "10:00 - 11:30",

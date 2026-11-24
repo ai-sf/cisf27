@@ -1,0 +1,279 @@
+{
+  "pageTitle": "Selection Criteria & Code of Ethics",
+  "pageDescription": "Official selection criteria, participation guidelines, and Code of Ethics adopted by the CISF27 Bologna Organising Committee (19–23 April 2027).",
+  "documents": {
+    "criteriaPdf": {
+      "heroLabel": "Download Official Selection Criteria PDF (IT)",
+      "shortLabel": "Download Full Selection Criteria PDF (IT)",
+      "ctaLabel": "Criteria PDF (IT)"
+    },
+    "ethicsPdf": {
+      "heroLabel": "Download Official Code of Ethics PDF (IT)",
+      "sectionLabel": "Download Official Code of Ethics PDF (IT)",
+      "ctaLabel": "Code of Ethics PDF (IT)"
+    }
+  },
+  "hero": {
+    "label": "Transparency & Values · CISF27 Bologna",
+    "heading": "Selection Criteria & Code of Ethics",
+    "subtitle": "All official documents approved by the CISF27 Organising Committee (OC) and overseen by the AISF Executive Committee (EC), freely accessible and downloadable even outside the application form.",
+    "applyBtn": "Go to Application Form (IT)",
+    "jumpCriteria": "Jump to Criteria",
+    "jumpEthics": "Jump to Code of Ethics",
+    "jumpContacts": "Confidential Contacts",
+    "languageNoticeTitle": "Language notice:",
+    "languageNoticeText": "All links to the official PDFs (Selection Criteria & Code of Ethics) and the application form point to their Italian-language versions. Because CISF27 is conducted entirely in Italian without translations, a sufficient (at least passive) knowledge of Italian is required to participate.",
+    "quickStats": {
+      "0": {
+        "statValue": "170",
+        "label": "Open call spots",
+        "detail": "150 Combo Bologna + 20 independent"
+      },
+      "1": {
+        "statValue": "5 / 8",
+        "label": "Minimum LC quotas",
+        "detail": "5 per LC · 8 for AISF Calabria"
+      },
+      "2": {
+        "statValue": "7 days",
+        "label": "Payment deadline",
+        "detail": "With a single official waiting-list round"
+      },
+      "3": {
+        "statValue": "100%",
+        "label": "Ethics & Non-Profit",
+        "detail": "Safe Space · #Plastic-freER · No weapons"
+      }
+    }
+  },
+  "selectionSection": {
+    "badge": "Section 1 · Public Criteria",
+    "heading": "Summary of the ",
+    "gradientWord": "Selection Criteria",
+    "intro": "CISF27 will take place in Bologna from 19 to 23 April 2027. Below are the official criteria that the Organising Committee will apply should applications exceed the available spots.",
+    "accommodationCard": {
+      "title": "170 Participants & Accommodation at Combo Bologna",
+      "subtitle": "Official spot allocation and room types",
+      "badge": "19–23 April 2027",
+      "withStay": {
+        "count": "150",
+        "title": "with guaranteed accommodation",
+        "description": "At Combo Bologna, in rooms all with private bathrooms: 18 quadruple, 10 triple, and 24 double rooms (some with double beds). You may express preferences regarding room type, gender, and roommates (accommodated subject to logistics)."
+      },
+      "withoutStay": {
+        "count": "20",
+        "title": "independent accommodation",
+        "description": "With a reduced registration fee, participants arrange their own stay independently. Out of these 20 spots, 5 are reserved for Bologna LC Auxiliaries with a guaranteed spot, selected via a dedicated call (tentatively between December 2026 and January 2027)."
+      },
+      "extraQuota": {
+        "title": "Extra quota (in addition to the 170 participants):",
+        "beforeLink": "all members of the ",
+        "linkText": "Organising Committee (OC)",
+        "afterLink": " and the winner of the Fisicaffè Editorial Board Open Call, for whom the OC guarantees accommodation at Combo Bologna and a waived fee."
+      }
+    },
+    "automaticallyAdmitted": {
+      "title": "Automatically Admitted",
+      "subtitle": "Automatically pass the selection process",
+      "ocItem": {
+        "title": "Members of the Organising Committee (OC)",
+        "beforeLink": ", listed in the ",
+        "linkText": "“About Us”",
+        "afterLink": " section;"
+      },
+      "items": {
+        "0": "Members of the AISF Executive Committee (EC);",
+        "1": "Presidents of AISF Local Committees (LCs);",
+        "2": "5 members of the Fisicaffè Commission designated to the OC by the EC in agreement with the Commission itself;"
+      },
+      "winnerItem": {
+        "title": "Winner of the Fisicaffè Editorial Board Open Call",
+        "text": ", with a free registration fee and guaranteed accommodation at Combo Bologna (outside the 150 quota)."
+      }
+    },
+    "minQuotasCard": {
+      "title": "Minimum LC Quotas & AISF Calabria",
+      "description": "Regardless of size and number of applications, every Local Committee is guaranteed a minimum quota of 5 participants (President included). If fewer than 5 applications are received from an LC, all are accepted (unless grounds for rejection apply).",
+      "supportTitle": "Support for CISF28:",
+      "supportText": "the AISF Calabria Local Committee is reserved at least 8 spots to support the organisation of the next edition."
+    },
+    "proportionalityCard": {
+      "title": "Proportionality of Applications",
+      "description": "To allocate the available spots for each Local Committee beyond its minimum quota, one of the most important criteria is proportionality to the number of applications submitted.",
+      "tipTitle": "OC tip:",
+      "tipText": "the more applications come from your LC, the more spots are assigned to your Committee — encourage everyone in your Department to apply!"
+    },
+    "parityCard": {
+      "title": "Gender Parity & Language",
+      "description": "The Organising Committee is actively committed to achieving gender parity among selected participants, fully protecting every gender identity.",
+      "languageTitle": "Italian language:",
+      "languageText": "the Conference is held entirely in Italian and no translations will be available — a sufficient (at least passive) knowledge of Italian is required. Official PDFs and the application form are also in Italian only."
+    },
+    "academicCard": {
+      "title": "Academic Levels & External Applicants",
+      "subtitle": "Who can participate in CISF27",
+      "levels": {
+        "0": { "label": "Bachelor's Degree" },
+        "1": { "label": "Master's Degree" },
+        "2": { "label": "PhD Students" },
+        "3": { "label": "High schools excluded" }
+      },
+      "distributionText": "The distribution of participants will not be uniform with respect to age/year of enrolment in degree programmes: taking into account the composition of the various LCs, attendance at past CISF editions, the EC's associative goals, and the OC's approach, certain cohorts will be favoured over others, though not decisively.",
+      "externalTitle": "External applicants:",
+      "externalText": "applications from people not enrolled in a Physics, Astronomy, Materials Science degree (or similar, with reference to the degree programmes of Bologna's Department of Physics and Astronomy “Augusto Righi”) or PhD programme will be evaluated on a case-by-case basis by the OC."
+    },
+    "factorsCard": {
+      "title": "Application & Motivation Factors",
+      "subtitle": "Qualitative elements considered by the Organising Committee",
+      "factors": {
+        "0": "Number of participations in previous CISF editions and other AISF events;",
+        "1": "Active involvement in one's Local Committee (LC), in the Board of Presidents, and in organising local and national events;",
+        "2": "Willingness to give a parallel session (talk) during the Conference;",
+        "3": "Curiosity towards the various scientific, cultural, and associative aspects of the Conference;",
+        "4": "Genuine enthusiasm expressed in one's creative motivation."
+      }
+    },
+    "rejectionCard": {
+      "title": "Automatic & Irrevocable Grounds for Rejection",
+      "subtitle": "The Organising Committee will automatically and irrevocably reject any application in which even one of the following conditions occurs:",
+      "causes": {
+        "0": {
+          "title": "Evident use of Artificial Intelligence",
+          "desc": "The motivation is produced with clear and evident passive use of AI, lacking genuine personal contribution."
+        },
+        "1": {
+          "title": "False or misleading statements",
+          "desc": "Any falsehood regarding personal details, associative roles, Local Committee activities, or previous participations."
+        },
+        "2": {
+          "title": "Hate speech, threats, or propaganda",
+          "desc": "Insults, threats, hate speech of any kind, propaganda messages, slurs, and any statement contrary to the AISF Statute and the OC Code of Ethics."
+        },
+        "3": {
+          "title": "Failure to register with AISF on time",
+          "desc": "The selected applicant is not duly registered as an AISF member by no later than the CISF27 registration fee payment deadline."
+        }
+      }
+    },
+    "paymentsCard": {
+      "title": "AISF Membership, Payments & Refunds",
+      "subtitle": "Binding deadlines and withdrawal management",
+      "items": {
+        "0": {
+          "title": "Mandatory AISF membership:",
+          "text": "anyone not yet enrolled at the time of selection must join by paying the membership fee, in addition to the CISF27 registration fee."
+        },
+        "1": {
+          "title": "Payment within 7 days (1 week):",
+          "text": "selected participants must complete payment no later than one week after notification from the OC."
+        },
+        "2": {
+          "title": "A single official waiting-list round:",
+          "text": "in case of missed payment, ONE SINGLE official waiting-list round will follow in the subsequent days (any extraordinary rounds will be announced on official channels but are not guaranteed)."
+        },
+        "3": {
+          "title": "Refund policy:",
+          "text": "once paid, the registration (or membership) fee is non-refundable under any circumstances. However, the OC offers to act as an intermediary between withdrawing participants and those admitted from the waiting list."
+        }
+      }
+    },
+    "guaranteesCard": {
+      "title": "Guarantees, Accessibility & Notices",
+      "subtitle": "National oversight and protection of all personal needs",
+      "accessibilityTitle": "Allergies, dietary needs, and accessibility",
+      "accessibilityText": "We encourage you to indicate allergies, intolerances, dietary preferences, and any physical or logistical needs in your application to make CISF27 fully inclusive and accessible. In no way do such disclosures affect selection.",
+      "ecOversightTitle": "Executive Committee oversight:",
+      "ecOversightBeforeEmail": "to guarantee the selection process, you can always request further information on the criteria from the OC (",
+      "ecOversightAfterEmail": ") and the AISF Executive Committee (EC), which oversees every step.",
+      "safeguardTitle": "Safeguard clause:",
+      "safeguardText": "the OC reserves the right to make technical or organisational adjustments if needed, while strictly adhering to the declared criteria."
+    }
+  },
+  "ethicsSection": {
+    "badge": "Section 2 · Principles & Values",
+    "heading": "The Code of Ethics of ",
+    "gradientWord": "CISF27 Bologna",
+    "intro": "The real principles resolved and adopted by the Organising Committee — in alignment with the AISF APS Statute, the AISF Strategic Plan, and the IAPS Code of Conduct — binding on participants, OC, speakers, guests, sponsors, and suppliers.",
+    "confidentialBtn": "Confidential Reporting Channels",
+    "plasticFreeLogoAlt": "Emilia-Romagna Regional #Plastic-freER Strategy Logo",
+    "plasticFreeCaption": "Official adherence to the regional strategy for reducing plastics in the environment.",
+    "pillars": {
+      "0": {
+        "title": "Inclusivity, Equality & Accessibility",
+        "badge": "CISF belongs to everyone",
+        "description": "CISF27 operates without discrimination of any kind (Art. 14 AISF Statute) to break down social, economic, academic, and physical barriers. Active commitment to gender equality, protection of every identity, respectful language, guaranteed accessibility, and a non-profit spirit with subsidised fees.",
+        "points": {
+          "0": "Gender equality and full respect for chosen identities and pronouns",
+          "1": "Allergies, disabilities, and logistical needs protected and neutral in selection",
+          "2": "100% non-profit conference with subsidised fees thanks to our partners"
+        }
+      },
+      "1": {
+        "title": "Safe Space & Zero Tolerance",
+        "badge": "AISF Statute · IAPS",
+        "description": "Everyone has the right to a safe, welcoming, and hostility-free environment both in scientific sessions and social moments. In line with the IAPS Code of Conduct, zero tolerance applies to discrimination, verbal, physical, or sexual harassment, intimidation, and hate speech.",
+        "points": {
+          "0": "Consent is always free, active, informed, explicit, and revocable",
+          "1": "Immediate rejection of applications containing hate speech or threats",
+          "2": "Timely precautionary measures and coordination with Art. 17 AISF Statute"
+        }
+      },
+      "2": {
+        "title": "No Sponsors from the Arms & Defence Industry",
+        "badge": "Unanimous OC Resolution",
+        "description": "The Organising Committee has unanimously resolved to categorically refuse funding, sponsorships (financial or technical), and direct (“first-degree”) collaborations with companies in the arms industry, weapons production, or directly implicated in armed conflicts.",
+        "points": {
+          "0": "Strict exclusion of partners directly tied to warfare and weapons",
+          "1": "Collegial and transparent evaluation of indirect relationships",
+          "2": "Full scientific, cultural, and associative independence from sponsors"
+        }
+      },
+      "3": {
+        "title": "Environmental Sustainability #Plastic-freER",
+        "badge": "Emilia-Romagna Region",
+        "description": "With the official patronage of the Emilia-Romagna Region, CISF27 joins the regional #Plastic-freER strategy to eliminate single-use plastics and promote responsible practices throughout the entire conference week.",
+        "points": {
+          "0": "No single-use plastics at coffee breaks, lunches, dinners, and events",
+          "1": "Reusable water bottles, sustainable tableware, and waste reduction",
+          "2": "Sustainable urban mobility in Bologna with TPER public transport passes for participants"
+        }
+      },
+      "4": {
+        "title": "Non-Partisanship & Institutional Neutrality",
+        "badge": "AISF Strategic Plan",
+        "description": "AISF and CISF27 are strictly non-partisan and non-denominational, independent from political parties, movements, and lobby groups, to safeguard freedom of participation, scientific pluralism, and the unity of the student community.",
+        "points": {
+          "0": "Refusal of direct political funding and affiliations",
+          "1": "Ban on partisan propaganda in applications and conference venues",
+          "2": "Free and democratic scientific dialogue on science and society"
+        }
+      },
+      "5": {
+        "title": "Transparency, Integrity & Guarantees",
+        "badge": "AISF EC Oversight",
+        "description": "Every selection rule, ethical principle, and organisational decision is made public and verifiable. The national AISF Executive Committee (EC) oversees the entire process to guarantee fairness, equity, and intellectual integrity.",
+        "points": {
+          "0": "Selection Criteria and Code of Ethics freely accessible",
+          "1": "Right to request clarifications from the OC and the EC",
+          "2": "Transparent non-profit management and protection against any retaliation"
+        }
+      }
+    },
+    "confidentialBox": {
+      "badge": "Protected Listening & Zero Retaliation",
+      "heading": "Confidential Channels of the General Coordinators",
+      "description": "Anyone who experiences, witnesses, or becomes aware of a violation of the Code of Ethics — during the application process, the Conference, or on digital channels — may write in strict confidence to the CISF27 General Coordinators.",
+      "guaranteeTitle": "Guaranteed confidentiality:",
+      "guaranteeText": "every report is handled with the utmost discretion and an absolute ban on retaliation. In case of a potential conflict of interest involving OC members, you can always contact the national AISF Executive Committee (EC) or the Board of Arbitrators (Collegio dei Probiviri, Art. 17 AISF Statute) directly."
+    }
+  },
+  "cta": {
+    "heading": "Ready to apply for ",
+    "gradientWord": "CISF27",
+    "headingSuffix": "?",
+    "subtitle": "Have you reviewed the public selection criteria and do you share the values of our Code of Ethics? Complete the application form or download the official documents to read them carefully.",
+    "languageNote": "Note: the application form and official PDFs are in Italian only, as a sufficient (at least passive) knowledge of Italian is required for the Conference.",
+    "applyBtn": "Go to Application Form (IT)",
+    "contactBtn": "Contact Us"
+  }
+}

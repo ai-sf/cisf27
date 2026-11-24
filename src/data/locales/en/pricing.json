@@ -1,16 +1,16 @@
 {
   "0": {
     "plan": "With accommodation",
-    "price": "120€",
+    "price": "€120",
     "features": {
-      "0": "TBD"
+      "0": "TBC"
     }
   },
   "1": {
     "plan": "Without accommodation",
-    "price": "70€",
+    "price": "€70",
     "features": {
-      "0": "TBD"
+      "0": "TBC"
     }
   }
 }

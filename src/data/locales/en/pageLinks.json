@@ -6,7 +6,7 @@
     "name": "About Us"
   },
   "program": {
-    "name": "Program"
+    "name": "Programme"
   },
   "structures": {
     "name": "Venues"
@@ -15,7 +15,10 @@
     "name": "Sponsors"
   },
   "tesi": {
-    "name": "Thesis"
+    "name": "Talks"
+  },
+  "criteri": {
+    "name": "Criteria"
   },
   "contact": {
     "name": "Contact"

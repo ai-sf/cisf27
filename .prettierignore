@@ -27,3 +27,7 @@ src/data/cms/*
 # Localization files
 src/data/locales/**
 project.inlang/**
+
+# Internal operational playbooks & private backend scripts (local only)
+docs/PLAYBOOK_LANCIO_CISF27.html
+docs/private/

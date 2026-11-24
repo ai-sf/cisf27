@@ -1,5 +1,5 @@
 {
-  "heroHeading": "The Program",
+  "heroHeading": "The Programme",
   "heroSubtitle": "5 days of science, culture, and networking in Bologna",
   "locationBadge": "Venue",
   "locationHeading": "Where CISF27 Takes ",
@@ -7,14 +7,14 @@
   "program": {
     "0": {
       "day": "Monday",
-      "date": "April 19",
+      "date": "19 April",
       "sections": {
         "0": {
           "title": "Welcome and Registration"
         },
         "1": {
           "title": "Opening Ceremony",
-          "description": "CISF27 kicks off: introduction by the Organizing Committee, presentation of the theme, and a keynote address by an esteemed professor. Also our first chance to thank our key partners."
+          "description": "CISF27 kicks off: introduction by the Organising Committee, presentation of the theme, and a keynote address by an esteemed professor. Also our first chance to thank our key partners."
         },
         "2": {
           "title": "Coffee Break"
@@ -33,7 +33,7 @@
     },
     "1": {
       "day": "Tuesday — History",
-      "date": "April 20",
+      "date": "20 April",
       "sections": {
         "0": {
           "title": "Laboratory Visits",
@@ -58,7 +58,7 @@
     },
     "2": {
       "day": "Wednesday — Association Day",
-      "date": "April 21",
+      "date": "21 April",
       "sections": {
         "0": {
           "title": "Parallel Sessions",
@@ -84,7 +84,7 @@
     },
     "3": {
       "day": "Thursday — Energy and Innovation",
-      "date": "April 22",
+      "date": "22 April",
       "sections": {
         "0": {
           "title": "Round Table",
@@ -110,7 +110,7 @@
     },
     "4": {
       "day": "Friday — Careers",
-      "date": "April 23",
+      "date": "23 April",
       "sections": {
         "0": {
           "title": "Board Games"
@@ -124,13 +124,13 @@
         },
         "3": {
           "title": "Closing Ceremony",
-          "description": "Final review looking back at the highlights that made CISF27 unforgettable, and acknowledgments to everyone who contributed."
+          "description": "Final review looking back at the highlights that made CISF27 unforgettable, and acknowledgements to everyone who contributed."
         }
       }
     }
   },
   "goToDay": "Go to day",
-  "goToStructure": "Go to structure",
+  "goToStructure": "Go to venue",
   "eventsCountLabel": "events",
   "openInMaps": "Open in Google Maps"
 }
