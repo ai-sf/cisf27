@@ -62,7 +62,8 @@ export const pageLinks: PageLink[] = [
 	programLink,
 	structuresLink,
 	tesiLink,
-	criteriLink,
+	// TO-DO: uncomment after official criteria confirmation
+	// 	criteriLink,
 	aboutLink,
 	contactLink,
 ] as const;
