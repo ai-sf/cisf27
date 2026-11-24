@@ -1413,16 +1413,15 @@
 </script>
 
 <div
-	class="cisf-registration-root w-full overflow-x-hidden"
+	class="cisf-registration-root text-base-content w-full overflow-x-hidden"
 	data-cisf-hydrated={hydrated ? 'true' : 'false'}
-	style="color-scheme: light;"
 >
 	<!-- HERO BANNER -->
 	<section class="mx-auto max-w-4xl px-4 pt-8 pb-3 text-center">
 		<div
-			class="badge-bologna mb-3 inline-flex items-center gap-2 rounded-full px-3.5 py-1 text-xs font-bold tracking-wider uppercase"
+			class="badge badge-primary badge-soft border-primary/25 text-secondary mb-3 gap-2 rounded-full px-3.5 py-1 text-xs font-bold tracking-wider uppercase"
 		>
-			<svg class="h-3.5 w-3.5 text-[#9e2a2b]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+			<svg class="h-3.5 w-3.5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
 				<path
 					stroke-linecap="round"
 					stroke-linejoin="round"
@@ -1434,10 +1433,10 @@
 		</div>
 
 		<h1
-			class="font-playfair-display text-3xl font-extrabold tracking-tight text-[#540b0e] sm:text-5xl"
+			class="font-playfair-display text-3xl font-extrabold tracking-tight text-secondary sm:text-5xl"
 		>
 			Candidatura <span
-				class="bg-linear-to-r from-[#9e2a2b] via-[#c95d3b] to-[#e09f3e] bg-clip-text text-transparent"
+				class="bg-linear-to-r from-primary via-accent to-warning bg-clip-text text-transparent"
 				>CISF27</span
 			>
 		</h1>
@@ -1451,7 +1450,7 @@
 		<div
 			class="mt-3 inline-flex max-w-full flex-wrap items-center justify-center gap-2 rounded-xl border border-gray-200 bg-white/90 px-4 py-2 text-xs text-gray-700 shadow-2xs"
 		>
-			<span class="font-bold text-[#9e2a2b]">🇮🇹 Lingua ufficiale: Italiano</span>
+			<span class="font-bold text-primary">🇮🇹 Lingua ufficiale: Italiano</span>
 			<span class="hidden text-gray-300 sm:inline">|</span>
 			<span>
 				La Conferenza sarà interamente tenuta in lingua italiana senza traduzioni:
@@ -1473,7 +1472,7 @@
 				<button
 					type="button"
 					onclick={exitTestingMode}
-					class="btn btn-xs min-h-[36px] shrink-0 self-end border border-purple-300 bg-white font-bold text-purple-900 hover:bg-purple-100 sm:self-center"
+					class="btn btn-xs min-h-9 shrink-0 self-end border border-purple-300 bg-white font-bold text-purple-900 hover:bg-purple-100 sm:self-center"
 				>
 					<LogOut class="size-3.5" />
 					Esci da modalità test
@@ -1498,7 +1497,7 @@
 						<button
 							type="button"
 							onclick={() => (confirmClearDraft = true)}
-							class="btn btn-xs min-h-[36px] border border-blue-300 bg-white text-blue-900 hover:bg-blue-100"
+							class="btn btn-xs min-h-9 border border-blue-300 bg-white text-blue-900 hover:bg-blue-100"
 						>
 							<Trash2 class="size-3.5" />
 							Svuota bozza
@@ -1508,14 +1507,14 @@
 						<button
 							type="button"
 							onclick={clearSavedDraft}
-							class="btn btn-xs btn-error min-h-[36px] text-white"
+							class="btn btn-xs btn-error min-h-9 text-white"
 						>
 							Sì, svuota
 						</button>
 						<button
 							type="button"
 							onclick={() => (confirmClearDraft = false)}
-							class="btn btn-xs min-h-[36px] border border-gray-300 bg-white text-gray-700 hover:bg-gray-100"
+							class="btn btn-xs min-h-9 border border-gray-300 bg-white text-gray-700 hover:bg-gray-100"
 						>
 							Annulla
 						</button>
@@ -1532,7 +1531,7 @@
 						class="absolute top-1/2 left-0 z-0 h-1 w-full -translate-y-1/2 rounded bg-gray-200"
 					></div>
 					<div
-						class="absolute top-1/2 left-0 z-0 h-1 -translate-y-1/2 rounded bg-[#9e2a2b] transition-all duration-300"
+						class="absolute top-1/2 left-0 z-0 h-1 -translate-y-1/2 rounded bg-primary transition-all duration-300"
 						style="width: {(currentStep / (totalSteps - 1)) * 100}%"
 					></div>
 
@@ -1541,12 +1540,12 @@
 							type="button"
 							onclick={() => goToStep(step.index)}
 							aria-current={currentStep === step.index ? 'step' : undefined}
-							class="group relative z-10 flex min-h-[44px] min-w-[44px] cursor-pointer flex-col items-center justify-center focus:outline-hidden"
+							class="group relative z-10 flex min-h-11 min-w-11 cursor-pointer flex-col items-center justify-center focus:outline-hidden"
 						>
 							<div
 								class="flex h-9 w-9 items-center justify-center rounded-full border-2 text-xs font-bold transition group-hover:scale-105 {currentStep ===
 								step.index
-									? 'border-white bg-[#9e2a2b] text-white shadow-md'
+									? 'border-base-100 bg-primary text-primary-content shadow-md'
 									: step.index < currentStep
 										? 'border-white bg-emerald-600 text-white shadow-xs'
 										: 'border-gray-300 bg-white text-gray-600 shadow-xs'}"
@@ -1559,7 +1558,7 @@
 							</div>
 							<span
 								class="mt-1.5 hidden text-[11px] sm:block {currentStep === step.index
-									? 'font-bold text-[#540b0e]'
+									? 'font-bold text-secondary'
 									: step.index < currentStep
 										? 'font-semibold text-emerald-800'
 										: 'font-semibold text-gray-500'}"
@@ -1573,7 +1572,7 @@
 				<!-- Mobile active step label -->
 				<div class="mt-2.5 flex justify-center sm:hidden">
 					<span
-						class="inline-flex items-center gap-1.5 rounded-full border border-[#9e2a2b]/25 bg-white px-3.5 py-1 text-xs font-bold text-[#540b0e] shadow-2xs"
+						class="inline-flex items-center gap-1.5 rounded-full border border-primary/25 bg-white px-3.5 py-1 text-xs font-bold text-secondary shadow-2xs"
 					>
 						Step {currentStep + 1} di {totalSteps} — {REGISTRATION_STEPS[currentStep].fullLabel}
 					</span>
@@ -1588,12 +1587,12 @@
 			{#if gateState === 'loading'}
 				<!-- STATO: CARICAMENTO GATEKEEPER -->
 				<div
-					class="cisf-card mx-auto mb-8 max-w-2xl p-8 text-center sm:p-12"
+					class="rounded-2xl border border-primary/20 bg-base-100 shadow-lg mx-auto mb-8 max-w-2xl p-8 text-center sm:p-12"
 					role="status"
 					aria-live="polite"
 				>
-					<span class="loading loading-spinner loading-lg text-[#9e2a2b]"></span>
-					<p class="mt-4 text-sm font-bold text-[#540b0e] sm:text-base">
+					<span class="loading loading-spinner loading-lg text-primary"></span>
+					<p class="mt-4 text-sm font-bold text-secondary sm:text-base">
 						Verifica stato candidature in corso...
 					</p>
 					<p class="mt-1 text-xs text-gray-500">
@@ -1611,7 +1610,7 @@
 							<button
 								type="button"
 								onclick={() => void loadGateStatus()}
-								class="btn btn-sm mt-3 min-h-[40px] rounded-xl border border-[#9e2a2b] bg-white px-4 text-xs font-bold text-[#9e2a2b] hover:bg-red-50"
+								class="btn btn-primary btn-outline btn-sm mt-3 min-h-10 rounded-xl px-4 text-xs font-bold"
 							>
 								<RotateCcw class="size-3.5" />
 								Riprova subito
@@ -1622,7 +1621,7 @@
 						id="cisf-hydration-fallback"
 						class="mt-5 hidden rounded-xl border border-red-200 bg-red-50/90 p-4 text-xs text-red-950"
 					>
-						<p class="font-bold text-[#9e2a2b]">
+						<p class="font-bold text-primary">
 							Il caricamento del modulo sembra bloccato nel browser.
 						</p>
 						<p class="mt-1 text-[11px] leading-relaxed text-red-900">
@@ -1633,7 +1632,7 @@
 							id="cisf-hydration-reload-btn"
 							type="button"
 							onclick={() => window.location.reload()}
-							class="btn btn-primary btn-sm mt-3 min-h-[40px] rounded-xl px-4 text-xs font-bold text-white"
+							class="btn btn-primary btn-sm mt-3 min-h-10 rounded-xl px-4 text-xs font-bold text-white"
 						>
 							Ricarica la pagina
 						</button>
@@ -1641,13 +1640,16 @@
 				</div>
 			{:else if gateState === 'error'}
 				<!-- STATO: ERRORE VERIFICA GATEKEEPER -->
-				<div class="cisf-card mx-auto mb-8 max-w-2xl p-6 text-center sm:p-10" role="alert">
+				<div
+					class="rounded-2xl border border-primary/20 bg-base-100 shadow-lg mx-auto mb-8 max-w-2xl p-6 text-center sm:p-10"
+					role="alert"
+				>
 					<div
 						class="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-2xl bg-red-100 text-red-700"
 					>
 						<AlertTriangle class="size-7" />
 					</div>
-					<h2 class="font-playfair-display text-2xl font-bold text-[#540b0e] sm:text-3xl">
+					<h2 class="font-playfair-display text-2xl font-bold text-secondary sm:text-3xl">
 						Impossibile verificare lo stato delle candidature
 					</h2>
 					<p class="mx-auto mt-3 max-w-lg text-xs leading-relaxed text-gray-700 sm:text-sm">
@@ -1658,14 +1660,14 @@
 						<button
 							type="button"
 							onclick={() => void loadGateStatus()}
-							class="btn btn-primary min-h-[44px] rounded-xl px-6 text-xs font-bold text-white shadow-sm"
+							class="btn btn-primary min-h-11 rounded-xl px-6 text-xs font-bold text-white shadow-sm"
 						>
 							<RotateCcw class="size-4" />
 							Riprova
 						</button>
 						<a
 							href="mailto:cisf27@ai-sf.it"
-							class="btn min-h-[44px] rounded-xl border border-gray-300 bg-white px-5 text-xs font-bold text-[#540b0e] hover:bg-gray-50"
+							class="btn min-h-11 rounded-xl border border-gray-300 bg-white px-5 text-xs font-bold text-secondary hover:bg-gray-50"
 						>
 							Scrivi a cisf27@ai-sf.it
 						</a>
@@ -1673,21 +1675,23 @@
 				</div>
 			{:else if gateState === 'before_open'}
 				<!-- STATO: CONTO ALLA ROVESCIA APERTURA AUTOMATICA -->
-				<div class="cisf-card mx-auto mb-8 max-w-3xl p-6 text-center sm:p-10">
+				<div
+					class="rounded-2xl border border-primary/20 bg-base-100 shadow-lg mx-auto mb-8 max-w-3xl p-6 text-center sm:p-10"
+				>
 					<div
 						class="mx-auto mb-4 inline-flex items-center gap-2 rounded-full border border-amber-300 bg-amber-50 px-3.5 py-1 text-xs font-bold text-amber-900"
 					>
-						<Clock class="size-3.5 text-[#9e2a2b]" />
+						<Clock class="size-3.5 text-primary" />
 						Apertura programmata
 					</div>
-					<h2 class="font-playfair-display text-2xl font-extrabold text-[#540b0e] sm:text-3xl">
+					<h2 class="font-playfair-display text-2xl font-extrabold text-secondary sm:text-3xl">
 						Le candidature CISF27 apriranno presto!
 					</h2>
 
 					{#if formattedOpenAtRome}
 						<p class="mt-3 text-sm font-semibold text-gray-800 sm:text-base">
 							Apertura ufficiale:
-							<span class="font-extrabold text-[#9e2a2b]">{formattedOpenAtRome}</span>
+							<span class="font-extrabold text-primary">{formattedOpenAtRome}</span>
 							<span class="text-xs font-medium text-gray-500">(ora italiana)</span>
 						</p>
 					{/if}
@@ -1698,9 +1702,9 @@
 							aria-label="Conto alla rovescia apertura candidature"
 						>
 							<div
-								class="rounded-2xl border border-[#9e2a2b]/20 bg-[#faf7f2] px-2 py-3.5 shadow-2xs"
+								class="rounded-2xl border border-primary/20 bg-base-200/60 px-2 py-3.5 shadow-2xs"
 							>
-								<div class="font-mono text-2xl font-extrabold text-[#540b0e] sm:text-4xl">
+								<div class="font-mono text-2xl font-extrabold text-secondary sm:text-4xl">
 									{countdownParts.days}
 								</div>
 								<div class="mt-1 text-[10px] font-bold tracking-wider text-gray-600 uppercase">
@@ -1708,9 +1712,9 @@
 								</div>
 							</div>
 							<div
-								class="rounded-2xl border border-[#9e2a2b]/20 bg-[#faf7f2] px-2 py-3.5 shadow-2xs"
+								class="rounded-2xl border border-primary/20 bg-base-200/60 px-2 py-3.5 shadow-2xs"
 							>
-								<div class="font-mono text-2xl font-extrabold text-[#540b0e] sm:text-4xl">
+								<div class="font-mono text-2xl font-extrabold text-secondary sm:text-4xl">
 									{countdownParts.hours}
 								</div>
 								<div class="mt-1 text-[10px] font-bold tracking-wider text-gray-600 uppercase">
@@ -1718,9 +1722,9 @@
 								</div>
 							</div>
 							<div
-								class="rounded-2xl border border-[#9e2a2b]/20 bg-[#faf7f2] px-2 py-3.5 shadow-2xs"
+								class="rounded-2xl border border-primary/20 bg-base-200/60 px-2 py-3.5 shadow-2xs"
 							>
-								<div class="font-mono text-2xl font-extrabold text-[#540b0e] sm:text-4xl">
+								<div class="font-mono text-2xl font-extrabold text-secondary sm:text-4xl">
 									{countdownParts.minutes}
 								</div>
 								<div class="mt-1 text-[10px] font-bold tracking-wider text-gray-600 uppercase">
@@ -1728,9 +1732,9 @@
 								</div>
 							</div>
 							<div
-								class="rounded-2xl border border-[#9e2a2b]/20 bg-[#faf7f2] px-2 py-3.5 shadow-2xs"
+								class="rounded-2xl border border-primary/20 bg-base-200/60 px-2 py-3.5 shadow-2xs"
 							>
-								<div class="font-mono text-2xl font-extrabold text-[#9e2a2b] sm:text-4xl">
+								<div class="font-mono text-2xl font-extrabold text-primary sm:text-4xl">
 									{countdownParts.seconds}
 								</div>
 								<div class="mt-1 text-[10px] font-bold tracking-wider text-gray-600 uppercase">
@@ -1758,7 +1762,7 @@
 							href={criteriPdfUrl}
 							target="_blank"
 							rel="noopener noreferrer"
-							class="btn btn-primary btn-sm min-h-[44px] rounded-xl px-4 text-xs font-bold text-white"
+							class="btn btn-primary btn-sm min-h-11 rounded-xl px-4 text-xs font-bold text-white"
 						>
 							<FileText class="size-4" />
 							PDF Criteri Ufficiali
@@ -1767,14 +1771,14 @@
 							href={codiceEticoPdfUrl}
 							target="_blank"
 							rel="noopener noreferrer"
-							class="btn btn-sm min-h-[44px] rounded-xl border border-[#540b0e] bg-white px-4 text-xs font-bold text-[#540b0e] hover:bg-red-50"
+							class="btn btn-secondary btn-outline btn-sm min-h-11 rounded-xl px-4 text-xs font-bold"
 						>
 							<FileText class="size-4" />
 							PDF Codice Etico
 						</a>
 						<a
 							href={criteriPageUrl}
-							class="btn btn-sm min-h-[44px] rounded-xl border border-[#9e2a2b]/40 bg-red-50/60 px-4 text-xs font-bold text-[#540b0e] hover:bg-red-100/70"
+							class="btn btn-primary btn-soft btn-sm border-primary/30 text-secondary hover:text-primary-content min-h-11 rounded-xl px-4 text-xs font-bold"
 						>
 							<ExternalLink class="size-4" />
 							Pagina Criteri &amp; Etica
@@ -1783,13 +1787,15 @@
 				</div>
 			{:else if gateState === 'closed'}
 				<!-- STATO: CANDIDATURE CHIUSE -->
-				<div class="cisf-card mx-auto mb-8 max-w-3xl p-6 text-center sm:p-10">
+				<div
+					class="rounded-2xl border border-primary/20 bg-base-100 shadow-lg mx-auto mb-8 max-w-3xl p-6 text-center sm:p-10"
+				>
 					<div
-						class="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-2xl bg-red-100 text-[#9e2a2b]"
+						class="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-2xl bg-red-100 text-primary"
 					>
 						<Calendar class="size-7" />
 					</div>
-					<h2 class="font-playfair-display text-2xl font-extrabold text-[#540b0e] sm:text-3xl">
+					<h2 class="font-playfair-display text-2xl font-extrabold text-secondary sm:text-3xl">
 						Candidature CISF27 Chiuse
 					</h2>
 					<p class="mx-auto mt-2 max-w-xl text-xs leading-relaxed text-gray-700 sm:text-sm">
@@ -1803,7 +1809,7 @@
 					<div
 						class="mx-auto mt-6 max-w-2xl rounded-2xl border border-amber-200 bg-amber-50/75 p-5 text-left text-xs leading-relaxed text-amber-950 sm:text-sm"
 					>
-						<h3 class="mb-2.5 text-sm font-extrabold text-[#540b0e]">Prossime tappe ufficiali</h3>
+						<h3 class="mb-2.5 text-sm font-extrabold text-secondary">Prossime tappe ufficiali</h3>
 						<ul class="list-inside list-disc space-y-1.5 text-gray-800">
 							<li>
 								<strong>Esiti a gennaio 2027:</strong> il Comitato Organizzatore valuterà le motivazioni
@@ -1824,7 +1830,7 @@
 					<div class="mt-6 flex flex-wrap items-center justify-center gap-2.5">
 						<a
 							href={criteriPageUrl}
-							class="btn btn-sm min-h-[44px] rounded-xl border border-[#9e2a2b]/40 bg-red-50/60 px-4 text-xs font-bold text-[#540b0e] hover:bg-red-100/70"
+							class="btn btn-primary btn-soft btn-sm border-primary/30 text-secondary hover:text-primary-content min-h-11 rounded-xl px-4 text-xs font-bold"
 						>
 							<ExternalLink class="size-4" />
 							Pagina Criteri &amp; Etica
@@ -1833,7 +1839,7 @@
 							href={criteriPdfUrl}
 							target="_blank"
 							rel="noopener noreferrer"
-							class="btn btn-sm min-h-[44px] rounded-xl border border-[#9e2a2b] bg-white px-4 text-xs font-bold text-[#9e2a2b] hover:bg-red-50"
+							class="btn btn-primary btn-outline btn-sm min-h-11 rounded-xl px-4 text-xs font-bold"
 						>
 							<FileText class="size-4" />
 							PDF Criteri Ufficiali
@@ -1842,7 +1848,7 @@
 							href={codiceEticoPdfUrl}
 							target="_blank"
 							rel="noopener noreferrer"
-							class="btn btn-sm min-h-[44px] rounded-xl border border-[#540b0e] bg-white px-4 text-xs font-bold text-[#540b0e] hover:bg-red-50"
+							class="btn btn-secondary btn-outline btn-sm min-h-11 rounded-xl px-4 text-xs font-bold"
 						>
 							<FileText class="size-4" />
 							PDF Codice Etico
@@ -1852,21 +1858,23 @@
 					<p class="mt-6 text-xs text-gray-600">
 						Hai bisogno di assistenza o devi segnalare una rettifica a una candidatura già inviata?
 						Scrivi al Comitato Organizzatore:
-						<a href="mailto:cisf27@ai-sf.it" class="font-bold text-[#9e2a2b] underline"
+						<a href="mailto:cisf27@ai-sf.it" class="font-bold text-primary underline"
 							>cisf27@ai-sf.it</a
 						>
 					</p>
 				</div>
 			{:else if gateState === 'testing'}
 				<!-- STATO: MODALITÀ TESTING (BLOCCATA PER IL PUBBLICO, SBLOCCABILE DAI TESTER) -->
-				<div class="cisf-card mx-auto mb-8 max-w-3xl p-6 text-center sm:p-10">
+				<div
+					class="rounded-2xl border border-primary/20 bg-base-100 shadow-lg mx-auto mb-8 max-w-3xl p-6 text-center sm:p-10"
+				>
 					<div
 						class="mx-auto mb-4 inline-flex items-center gap-2 rounded-full border border-amber-300 bg-amber-50 px-3.5 py-1 text-xs font-bold text-amber-900"
 					>
-						<Clock class="size-3.5 text-[#9e2a2b]" />
+						<Clock class="size-3.5 text-primary" />
 						In preparazione
 					</div>
-					<h2 class="font-playfair-display text-2xl font-extrabold text-[#540b0e] sm:text-3xl">
+					<h2 class="font-playfair-display text-2xl font-extrabold text-secondary sm:text-3xl">
 						Le candidature apriranno presto
 					</h2>
 					<p class="mx-auto mt-3 max-w-xl text-xs leading-relaxed text-gray-700 sm:text-sm">
@@ -1880,7 +1888,7 @@
 							href={criteriPdfUrl}
 							target="_blank"
 							rel="noopener noreferrer"
-							class="btn btn-primary btn-sm min-h-[44px] rounded-xl px-4 text-xs font-bold text-white"
+							class="btn btn-primary btn-sm min-h-11 rounded-xl px-4 text-xs font-bold text-white"
 						>
 							<FileText class="size-4" />
 							PDF Criteri Ufficiali
@@ -1889,14 +1897,14 @@
 							href={codiceEticoPdfUrl}
 							target="_blank"
 							rel="noopener noreferrer"
-							class="btn btn-sm min-h-[44px] rounded-xl border border-[#540b0e] bg-white px-4 text-xs font-bold text-[#540b0e] hover:bg-red-50"
+							class="btn btn-secondary btn-outline btn-sm min-h-11 rounded-xl px-4 text-xs font-bold"
 						>
 							<FileText class="size-4" />
 							PDF Codice Etico
 						</a>
 						<a
 							href={criteriPageUrl}
-							class="btn btn-sm min-h-[44px] rounded-xl border border-[#9e2a2b]/40 bg-red-50/60 px-4 text-xs font-bold text-[#540b0e] hover:bg-red-100/70"
+							class="btn btn-primary btn-soft btn-sm border-primary/30 text-secondary hover:text-primary-content min-h-11 rounded-xl px-4 text-xs font-bold"
 						>
 							<ExternalLink class="size-4" />
 							Pagina Criteri &amp; Etica
@@ -1909,7 +1917,7 @@
 							<button
 								type="button"
 								onclick={() => (showTesterAccess = true)}
-								class="btn btn-ghost btn-xs min-h-[36px] text-xs font-semibold text-gray-500 hover:bg-gray-100 hover:text-gray-800"
+								class="btn btn-ghost btn-xs min-h-9 text-xs font-semibold text-gray-500 hover:bg-gray-100 hover:text-gray-800"
 							>
 								<Lock class="size-3.5" />
 								Accesso area test
@@ -1952,12 +1960,12 @@
 										oninput={() => (passcodeError = null)}
 										disabled={verifyingPasscode}
 										placeholder="Passphrase testing..."
-										class="input input-bordered min-h-[44px] flex-1 rounded-xl border-purple-300 bg-white text-xs text-gray-900 sm:text-sm"
+										class="input input-bordered min-h-11 flex-1 rounded-xl border-purple-300 bg-white text-xs text-gray-900 sm:text-sm"
 									/>
 									<button
 										type="submit"
 										disabled={verifyingPasscode}
-										class="btn min-h-[44px] rounded-xl border-0 bg-purple-700 px-5 text-xs font-bold text-white hover:bg-purple-800 disabled:opacity-60"
+										class="btn min-h-11 rounded-xl border-0 bg-purple-700 px-5 text-xs font-bold text-white hover:bg-purple-800 disabled:opacity-60"
 									>
 										{#if verifyingPasscode}
 											<span class="loading loading-spinner loading-xs"></span>
@@ -1983,7 +1991,7 @@
 		<!-- SCHERMATA 1 / STEP 0: CRITERI DI SELEZIONE, REGOLAMENTO & QUOTA     -->
 		<!-- =================================================================== -->
 		{#if showWizard && currentStep === 0}
-			<div class="cisf-card mb-8 p-5 sm:p-10">
+			<div class="rounded-2xl border border-primary/20 bg-base-100 shadow-lg mb-8 p-5 sm:p-10">
 				<!-- DISCLAIMER TEMPO STIMATO & SALVATAGGIO AUTOMATICO -->
 				<div
 					class="mb-6 flex items-start gap-3 rounded-xl border border-amber-300/80 bg-linear-to-r from-amber-50/90 to-orange-50/70 p-4 text-xs leading-relaxed text-amber-950 shadow-2xs sm:text-sm"
@@ -2005,7 +2013,7 @@
 							01
 						</div>
 						<div>
-							<h2 class="font-playfair-display text-2xl font-bold text-[#540b0e] sm:text-3xl">
+							<h2 class="font-playfair-display text-2xl font-bold text-secondary sm:text-3xl">
 								Criteri di Selezione &amp; Tipologia Quota
 							</h2>
 							<p class="text-xs text-gray-600 sm:text-sm">
@@ -2017,7 +2025,7 @@
 						<button
 							type="button"
 							onclick={() => (showCriteriModal = true)}
-							class="btn btn-sm min-h-[44px] border border-amber-300 bg-amber-50 text-xs font-bold text-amber-900 hover:bg-amber-100"
+							class="btn btn-sm min-h-11 border border-amber-300 bg-amber-50 text-xs font-bold text-amber-900 hover:bg-amber-100"
 						>
 							<FileText class="size-4 text-amber-700" />
 							Sintesi &amp; Codice Etico
@@ -2026,7 +2034,7 @@
 							href={criteriPdfUrl}
 							target="_blank"
 							rel="noopener noreferrer"
-							class="btn btn-sm min-h-[44px] border border-[#9e2a2b] bg-white text-xs font-bold text-[#9e2a2b] hover:bg-red-50"
+							class="btn btn-primary btn-outline btn-sm min-h-11 text-xs font-bold"
 						>
 							<svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
 								<path
@@ -2042,7 +2050,7 @@
 							href={codiceEticoPdfUrl}
 							target="_blank"
 							rel="noopener noreferrer"
-							class="btn btn-sm min-h-[44px] border border-[#540b0e] bg-white text-xs font-bold text-[#540b0e] hover:bg-red-50"
+							class="btn btn-secondary btn-outline btn-sm min-h-11 text-xs font-bold"
 						>
 							<svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
 								<path
@@ -2060,7 +2068,7 @@
 				<!-- HIGHLIGHTS VISIVI A GRIGLIA -->
 				<div class="mb-6 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
 					<div class="rounded-xl border border-gray-200 bg-white p-4">
-						<div class="mb-1 flex items-center gap-2 text-sm font-bold text-[#9e2a2b]">
+						<div class="mb-1 flex items-center gap-2 text-sm font-bold text-primary">
 							<svg class="h-4 w-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
 								<path
 									stroke-linecap="round"
@@ -2079,7 +2087,7 @@
 					</div>
 
 					<div class="rounded-xl border border-gray-200 bg-white p-4">
-						<div class="mb-1 flex items-center gap-2 text-sm font-bold text-[#540b0e]">
+						<div class="mb-1 flex items-center gap-2 text-sm font-bold text-secondary">
 							<svg class="h-4 w-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
 								<path
 									stroke-linecap="round"
@@ -2116,7 +2124,7 @@
 					</div>
 
 					<div class="rounded-xl border border-gray-200 bg-white p-4">
-						<div class="mb-1 flex items-center gap-2 text-sm font-bold text-[#c95d3b]">
+						<div class="mb-1 flex items-center gap-2 text-sm font-bold text-accent">
 							<svg class="h-4 w-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
 								<path
 									stroke-linecap="round"
@@ -2184,11 +2192,11 @@
 							href={`${criteriPageUrl}#codice-etico`}
 							target="_blank"
 							rel="noopener noreferrer"
-							class="font-bold text-[#9e2a2b] underline">Codice Etico ufficiale</a
+							class="font-bold text-primary underline">Codice Etico ufficiale</a
 						>
 						è consultabile pubblicamente sul sito della conferenza.
 					</div>
-					<div class="font-semibold text-[#540b0e] not-italic">
+					<div class="font-semibold text-secondary not-italic">
 						† La persona vincitrice dell'Open Call della Redazione di Fisicaffè riceverà d'ufficio
 						un posto a CISF non conteggiato nei 170 partecipanti.
 					</div>
@@ -2206,7 +2214,7 @@
 						id="select-ruolo-speciale"
 						bind:value={ruoloSpeciale}
 						onchange={() => clearFieldError('ruolo_speciale')}
-						class="select select-bordered min-h-[44px] w-full rounded-xl bg-white text-xs text-gray-900 sm:text-sm {errors.ruolo_speciale
+						class="select select-bordered min-h-11 w-full rounded-xl bg-white text-xs text-gray-900 sm:text-sm {errors.ruolo_speciale
 							? 'border-red-600 ring-1 ring-red-600'
 							: 'border-gray-300'}"
 					>
@@ -2231,7 +2239,7 @@
 							: ''}"
 					>
 						<label
-							class="flex min-h-[52px] cursor-pointer items-center gap-2.5 rounded-xl border-2 p-3 font-bold transition {maggiorenne ===
+							class="flex min-h-13 cursor-pointer items-center gap-2.5 rounded-xl border-2 p-3 font-bold transition {maggiorenne ===
 							'si'
 								? 'border-emerald-500 bg-emerald-50 text-emerald-950'
 								: 'border-gray-200 bg-white text-gray-800 hover:border-emerald-400'}"
@@ -2248,7 +2256,7 @@
 						</label>
 
 						<label
-							class="flex min-h-[52px] cursor-pointer items-center gap-2.5 rounded-xl border-2 p-3 font-bold transition {maggiorenne ===
+							class="flex min-h-13 cursor-pointer items-center gap-2.5 rounded-xl border-2 p-3 font-bold transition {maggiorenne ===
 							'no'
 								? 'border-red-600 bg-red-50 text-red-950'
 								: 'border-gray-200 bg-white text-gray-800 hover:border-red-400'}"
@@ -2283,8 +2291,7 @@
 									contatta il Comitato Organizzatore scrivendo a
 									<a
 										href="mailto:cisf27@ai-sf.it"
-										class="font-bold text-[#9e2a2b] underline hover:text-[#540b0e]"
-										>cisf27@ai-sf.it</a
+										class="font-bold text-primary underline hover:text-secondary">cisf27@ai-sf.it</a
 									>.
 								</p>
 							</div>
@@ -2298,7 +2305,7 @@
 
 				<!-- Cause di Rigetto Immediato e Irrevocabile -->
 				<div class="mb-6 rounded-xl border border-red-200 bg-red-50/80 p-5">
-					<div class="mb-2 flex items-center gap-2 text-sm font-bold text-[#9e2a2b]">
+					<div class="mb-2 flex items-center gap-2 text-sm font-bold text-primary">
 						<AlertTriangle class="size-5 shrink-0 text-red-700" />
 						Cause di Rigetto Immediato e Irrevocabile (Criteri Ufficiali)
 					</div>
@@ -2336,7 +2343,7 @@
 				<!-- Dichiarazione di Presa Visione Criteri -->
 				<div class="mb-6" data-field-id="check_criteri">
 					<label
-						class="flex min-h-[44px] cursor-pointer items-start gap-3 rounded-xl border bg-white p-4 shadow-2xs transition hover:bg-gray-50/60 {errors.check_criteri
+						class="flex min-h-11 cursor-pointer items-start gap-3 rounded-xl border bg-white p-4 shadow-2xs transition hover:bg-gray-50/60 {errors.check_criteri
 							? 'border-red-600 ring-1 ring-red-600'
 							: 'border-gray-200'}"
 					>
@@ -2354,14 +2361,14 @@
 								target="_blank"
 								rel="noopener noreferrer"
 								onclick={(e) => e.stopPropagation()}
-								class="font-bold text-[#9e2a2b] underline">Criteri di Selezione CISF27</a
+								class="font-bold text-primary underline">Criteri di Selezione CISF27</a
 							>, delle scadenze e del
 							<a
 								href={`${criteriPageUrl}#codice-etico`}
 								target="_blank"
 								rel="noopener noreferrer"
 								onclick={(e) => e.stopPropagation()}
-								class="font-bold text-[#9e2a2b] underline">Codice Etico</a
+								class="font-bold text-primary underline">Codice Etico</a
 							>.
 						</span>
 					</label>
@@ -2372,17 +2379,17 @@
 
 				<!-- SCELTA TIPOLOGIA DI CANDIDATURA (ALLOGGIO & QUOTA) -->
 				<div class="mb-6 border-t border-gray-200 pt-5" data-field-id="tipologia_quota">
-					<h3 class="mb-2 flex items-center gap-2 text-base font-bold text-[#540b0e]">
+					<h3 class="mb-2 flex items-center gap-2 text-base font-bold text-secondary">
 						<span>🏷️</span> Seleziona la Tipologia di Partecipazione Desiderata
 					</h3>
 					<div
-						class="mb-5 flex items-start gap-3 rounded-xl border border-[#e7e0d6] bg-[#faf7f2]/90 p-4 text-xs text-stone-800 shadow-xs sm:text-sm"
+						class="mb-5 flex items-start gap-3 rounded-xl border border-base-300 bg-base-200/60 p-4 text-xs text-stone-800 shadow-xs sm:text-sm"
 					>
 						<span class="mt-0.5 shrink-0 text-lg leading-none select-none" aria-hidden="true"
 							>👉🏼</span
 						>
 						<div class="leading-relaxed">
-							<span class="font-bold text-[#6e3b24]">Form Unificato con opzione Flessibile:</span>
+							<span class="font-bold text-secondary">Form Unificato con opzione Flessibile:</span>
 							Puoi candidarti direttamente per una delle due tariffe o scegliere l'opzione
 							<strong>"Indifferente / Flessibile"</strong> per dare massima libertà al CO e aumentare
 							le tue probabilità di selezione!
@@ -2396,9 +2403,9 @@
 					>
 						<!-- Opzione 1: Con Alloggio -->
 						<label
-							class="relative flex cursor-pointer flex-col rounded-2xl border-2 bg-white p-5 shadow-xs transition hover:border-[#540b0e] {tipologiaQuota ===
+							class="relative flex cursor-pointer flex-col rounded-2xl border-2 bg-white p-5 shadow-xs transition hover:border-secondary {tipologiaQuota ===
 							'con_letto'
-								? 'border-[#9e2a2b] bg-red-50/20'
+								? 'border-primary bg-red-50/20'
 								: 'border-gray-200'}"
 						>
 							<input
@@ -2411,27 +2418,27 @@
 							/>
 							<div class="mb-2 flex items-center justify-between">
 								<span
-									class="rounded-full bg-red-100 px-2.5 py-0.5 text-xs font-bold tracking-wider text-[#9e2a2b] uppercase"
+									class="rounded-full bg-red-100 px-2.5 py-0.5 text-xs font-bold tracking-wider text-primary uppercase"
 									>150 Posti</span
 								>
 								<span
 									class="flex h-5 w-5 items-center justify-center rounded-full border-2 {tipologiaQuota ===
 									'con_letto'
-										? 'border-[#9e2a2b] bg-[#9e2a2b]'
+										? 'border-primary bg-primary'
 										: 'border-gray-300 bg-white'}"
 								>
 									<span class="h-2 w-2 rounded-full bg-white"></span>
 								</span>
 							</div>
-							<div class="mb-1 text-xl font-bold text-[#540b0e]">Con Alloggio</div>
-							<div class="mb-2 text-2xl font-extrabold text-[#9e2a2b]">€120</div>
+							<div class="mb-1 text-xl font-bold text-secondary">Con Alloggio</div>
+							<div class="mb-2 text-2xl font-extrabold text-primary">€120</div>
 							<p class="mt-1 flex-1 text-xs text-gray-600">
 								Pernottamento incluso per tutte le 4 notti presso il <strong>Combo Bologna</strong>
 								(camere doppie, triple, quadruple con bagno privato).
 							</p>
 							<div class="mt-4 flex items-baseline justify-between border-t border-gray-100 pt-3">
 								<span class="text-xs font-medium text-gray-500">Formula All-Inclusive</span>
-								<span class="text-xs font-bold text-[#9e2a2b]">Combo</span>
+								<span class="text-xs font-bold text-primary">Combo</span>
 							</div>
 						</label>
 
@@ -2464,7 +2471,7 @@
 									<span class="h-2 w-2 rounded-full bg-white"></span>
 								</span>
 							</div>
-							<div class="mb-1 text-xl font-bold text-[#540b0e]">Senza Alloggio</div>
+							<div class="mb-1 text-xl font-bold text-secondary">Senza Alloggio</div>
 							<div class="mb-2 text-2xl font-extrabold text-amber-700">€70</div>
 							<p class="mt-1 flex-1 text-xs text-gray-600">
 								Partecipazione a tutti gli eventi, conferenze e kit con pernottamento autonomo (20
@@ -2535,7 +2542,7 @@
 								Pur essendo flessibile, quale sarebbe la tua preferenza ideale di massima?
 							</p>
 							<div class="flex flex-col gap-2.5 sm:flex-row sm:flex-wrap sm:gap-6">
-								<label class="flex min-h-[44px] cursor-pointer items-center gap-2 text-gray-800">
+								<label class="flex min-h-11 cursor-pointer items-center gap-2 text-gray-800">
 									<input
 										type="radio"
 										name="sub_preferenza"
@@ -2546,7 +2553,7 @@
 									/>
 									<span>Preferirei <span class="font-bold">con</span> alloggio</span>
 								</label>
-								<label class="flex min-h-[44px] cursor-pointer items-center gap-2 text-gray-800">
+								<label class="flex min-h-11 cursor-pointer items-center gap-2 text-gray-800">
 									<input
 										type="radio"
 										name="sub_preferenza"
@@ -2557,7 +2564,7 @@
 									/>
 									<span>Preferirei <span class="font-bold">senza</span> alloggio</span>
 								</label>
-								<label class="flex min-h-[44px] cursor-pointer items-center gap-2 text-gray-800">
+								<label class="flex min-h-11 cursor-pointer items-center gap-2 text-gray-800">
 									<input
 										type="radio"
 										name="sub_preferenza"
@@ -2591,7 +2598,7 @@
 						materiale involontario, contatta tempestivamente il CO all'indirizzo
 						<a
 							href="mailto:cisf27@ai-sf.it"
-							class="font-bold text-[#540b0e] underline hover:text-[#9e2a2b]">cisf27@ai-sf.it</a
+							class="font-bold text-secondary underline hover:text-primary">cisf27@ai-sf.it</a
 						>
 						per rettificare i dati!
 					</div>
@@ -2612,7 +2619,7 @@
 						type="button"
 						disabled={maggiorenne === 'no'}
 						onclick={() => goToStep(1)}
-						class="btn btn-primary min-h-[48px] rounded-xl px-6 text-sm font-bold text-white shadow-md disabled:cursor-not-allowed disabled:bg-gray-300 disabled:text-gray-600 disabled:shadow-none"
+						class="btn btn-primary min-h-12 rounded-xl px-6 text-sm font-bold text-white shadow-md disabled:cursor-not-allowed disabled:bg-gray-300 disabled:text-gray-600 disabled:shadow-none"
 					>
 						Continua: Ma tu... chi sei?!
 						<ArrowRight class="size-4" />
@@ -2630,7 +2637,7 @@
 		<!-- SCHERMATA 2 / STEP 1: LETTERA MOTIVAZIONALE & PROPOSTA CREATIVA     -->
 		<!-- =================================================================== -->
 		{#if showWizard && currentStep === 1}
-			<div class="cisf-card mb-8 p-5 sm:p-10">
+			<div class="rounded-2xl border border-primary/20 bg-base-100 shadow-lg mb-8 p-5 sm:p-10">
 				<div class="mb-6 flex items-center gap-3">
 					<div
 						class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-purple-100 text-sm font-bold text-purple-900"
@@ -2638,7 +2645,7 @@
 						02
 					</div>
 					<div>
-						<h2 class="font-playfair-display text-2xl font-bold text-[#540b0e] sm:text-3xl">
+						<h2 class="font-playfair-display text-2xl font-bold text-secondary sm:text-3xl">
 							Motivazione Creativa &amp; Proposta di Talk
 						</h2>
 						<p class="text-xs text-gray-600 sm:text-sm">
@@ -2762,9 +2769,9 @@
 					<div class="grid grid-cols-2 gap-2.5 text-xs sm:grid-cols-4">
 						{#each [{ val: 'testo', label: '✍🏼 Lettera' }, { val: 'video', label: '🎥 Video' }, { val: 'audio', label: '🎙️ Mini-Podcast' }, { val: 'canvas', label: '🎨 Canvas' }] as fmt (fmt.val)}
 							<label
-								class="flex min-h-[44px] cursor-pointer items-center gap-2 rounded-xl border bg-white px-3 py-2.5 font-semibold text-gray-800 transition hover:border-[#9e2a2b] {tipoLettera ===
+								class="flex min-h-11 cursor-pointer items-center gap-2 rounded-xl border bg-white px-3 py-2.5 font-semibold text-gray-800 transition hover:border-primary {tipoLettera ===
 								fmt.val
-									? 'border-[#9e2a2b] bg-red-50/25 text-[#540b0e]'
+									? 'border-primary bg-red-50/25 text-secondary'
 									: 'border-gray-300'}"
 							>
 								<input
@@ -2793,7 +2800,7 @@
 				>
 					{#if tipoLettera === 'testo'}
 						<div class="space-y-1.5">
-							<div class="flex items-center gap-1.5 text-sm font-bold text-[#540b0e]">
+							<div class="flex items-center gap-1.5 text-sm font-bold text-secondary">
 								<span>✍🏼</span> Lettera: Misura Umana &amp; "Zona Aurea"
 							</div>
 							<p class="leading-relaxed">
@@ -2807,7 +2814,7 @@
 							<div
 								class="mt-2 flex flex-wrap items-center justify-between gap-2 rounded-lg border border-amber-300/60 bg-white/90 p-2.5"
 							>
-								<span class="font-bold text-[#9e2a2b]">✨ Zona Aurea consigliata:</span>
+								<span class="font-bold text-primary">✨ Zona Aurea consigliata:</span>
 								<span class="font-bold text-gray-800"
 									>350 – 700 parole (~1 facciata standard A4)</span
 								>
@@ -2815,7 +2822,7 @@
 						</div>
 					{:else if tipoLettera === 'video'}
 						<div class="space-y-1.5">
-							<div class="flex items-center gap-1.5 text-sm font-bold text-[#540b0e]">
+							<div class="flex items-center gap-1.5 text-sm font-bold text-secondary">
 								<span>🎥</span> Video: Naturalezza &amp; Durata Ideale
 							</div>
 							<p class="leading-relaxed">
@@ -2825,13 +2832,13 @@
 							<div
 								class="mt-2 flex flex-wrap items-center justify-between gap-2 rounded-lg border border-amber-300/60 bg-white/90 p-2.5"
 							>
-								<span class="font-bold text-[#9e2a2b]">✨ Zona Aurea consigliata:</span>
+								<span class="font-bold text-primary">✨ Zona Aurea consigliata:</span>
 								<span class="font-bold text-gray-800">1:30 – 3:00 minuti</span>
 							</div>
 						</div>
 					{:else if tipoLettera === 'audio'}
 						<div class="space-y-1.5">
-							<div class="flex items-center gap-1.5 text-sm font-bold text-[#540b0e]">
+							<div class="flex items-center gap-1.5 text-sm font-bold text-secondary">
 								<span>🎙️</span> Audio / Podcast: Ritmo &amp; Calore della Voce
 							</div>
 							<p class="leading-relaxed">
@@ -2841,13 +2848,13 @@
 							<div
 								class="mt-2 flex flex-wrap items-center justify-between gap-2 rounded-lg border border-amber-300/60 bg-white/90 p-2.5"
 							>
-								<span class="font-bold text-[#9e2a2b]">✨ Zona Aurea consigliata:</span>
+								<span class="font-bold text-primary">✨ Zona Aurea consigliata:</span>
 								<span class="font-bold text-gray-800">2:00 – 4:00 minuti</span>
 							</div>
 						</div>
 					{:else}
 						<div class="space-y-1.5">
-							<div class="flex items-center gap-1.5 text-sm font-bold text-[#540b0e]">
+							<div class="flex items-center gap-1.5 text-sm font-bold text-secondary">
 								<span>🎨</span> Tavola Grafica / Canvas: Sintesi Visiva &amp; Cura
 							</div>
 							<p class="leading-relaxed">
@@ -2857,7 +2864,7 @@
 							<div
 								class="mt-2 flex flex-wrap items-center justify-between gap-2 rounded-lg border border-amber-300/60 bg-white/90 p-2.5"
 							>
-								<span class="font-bold text-[#9e2a2b]">✨ Zona Aurea consigliata:</span>
+								<span class="font-bold text-primary">✨ Zona Aurea consigliata:</span>
 								<span class="font-bold text-gray-800"
 									>1 – 2 tavole / 5 – 8 slide ad alta densità visiva o testuale</span
 								>
@@ -2884,7 +2891,7 @@
 				<!-- UPLOAD FILE CREATIVO -->
 				<div class="mb-6" data-field-id="motivazione_required">
 					<div data-field-id="motivazione_file">
-						<label for="input-file-motivazione" class="mb-2 block text-sm font-bold text-[#540b0e]">
+						<label for="input-file-motivazione" class="mb-2 block text-sm font-bold text-secondary">
 							Carica la tua Motivazione Creativa
 							<span class="text-[11px] font-semibold text-gray-500">
 								{isAutoAdmissionRole
@@ -2903,12 +2910,12 @@
 							ondragleave={() => (motivazioneDragOver = false)}
 							ondrop={handleMotivazioneDrop}
 							class="rounded-2xl border-2 border-dashed p-6 text-center transition {motivazioneDragOver
-								? 'border-[#9e2a2b] bg-red-50/40'
+								? 'border-primary bg-red-50/40'
 								: errors.motivazione_file || errors.motivazione_required
 									? 'border-red-600 bg-red-50/20'
 									: motivazioneFile
 										? 'border-emerald-500 bg-emerald-50/30'
-										: 'border-[#9e2a2b]/40 bg-white hover:border-[#9e2a2b]'}"
+										: 'border-primary/40 bg-white hover:border-primary'}"
 						>
 							<input
 								bind:this={motivazioneInputEl}
@@ -2924,7 +2931,7 @@
 								<Upload
 									class="mx-auto mb-2 size-10 {motivazioneFile
 										? 'text-emerald-600'
-										: 'text-[#9e2a2b]/60'}"
+										: 'text-primary/60'}"
 								/>
 								{#if motivazioneFile}
 									<p class="text-sm font-extrabold break-all text-emerald-800">
@@ -2953,7 +2960,7 @@
 									<strong>Link esterno</strong> qui sotto (es. Google Drive, YouTube non in elenco, Canva).
 								</p>
 								<span
-									class="mt-3 inline-flex min-h-[44px] items-center justify-center rounded-xl border px-4 py-2 text-xs font-bold {motivazioneFile
+									class="mt-3 inline-flex min-h-11 items-center justify-center rounded-xl border px-4 py-2 text-xs font-bold {motivazioneFile
 										? 'border-emerald-300 bg-emerald-100 text-emerald-900'
 										: 'border-gray-300 bg-gray-100 text-gray-800 hover:bg-gray-200'}"
 								>
@@ -2966,7 +2973,7 @@
 									<button
 										type="button"
 										onclick={() => handleMotivazioneFile(null)}
-										class="btn btn-xs min-h-[36px] border border-red-200 bg-white text-red-700 hover:bg-red-50"
+										class="btn btn-xs min-h-9 border border-red-200 bg-white text-red-700 hover:bg-red-50"
 									>
 										<X class="size-3.5" />
 										Rimuovi allegato
@@ -3012,7 +3019,7 @@
 							clearFieldError('motivazione_required');
 						}}
 						placeholder="https://... (Sito web, Google Drive, YouTube non in elenco, Canva, GitHub...)"
-						class="input input-bordered min-h-[44px] w-full rounded-xl bg-white text-xs text-gray-900 sm:text-sm {errors.link_progetto
+						class="input input-bordered min-h-11 w-full rounded-xl bg-white text-xs text-gray-900 sm:text-sm {errors.link_progetto
 							? 'border-red-600 ring-1 ring-red-600'
 							: 'border-gray-300'}"
 					/>
@@ -3027,7 +3034,7 @@
 
 				<!-- PARALLEL SESSION & SCIENTIFIC TALK PROPOSAL -->
 				<div class="mb-6 rounded-xl border border-amber-200 bg-amber-50/50 p-4 sm:p-5">
-					<label class="flex min-h-[44px] cursor-pointer items-start gap-3">
+					<label class="flex min-h-11 cursor-pointer items-start gap-3">
 						<input
 							type="checkbox"
 							id="check-parallel"
@@ -3041,7 +3048,7 @@
 							class="checkbox checkbox-primary checkbox-sm mt-1 border-gray-400 bg-white checked:border-primary checked:bg-primary"
 						/>
 						<div>
-							<span class="text-xs font-bold text-[#540b0e] sm:text-sm">
+							<span class="text-xs font-bold text-secondary sm:text-sm">
 								Sarei disponibile a presentare una Parallel Session o un Talk Scientifico durante la
 								conferenza (Facoltativo)
 							</span>
@@ -3058,7 +3065,7 @@
 							<div data-field-id="parallel_readiness">
 								<label
 									for="select-parallel-readiness"
-									class="mb-1 block text-xs font-bold text-[#540b0e]"
+									class="mb-1 block text-xs font-bold text-secondary"
 								>
 									Stato attuale della proposta di intervento:
 								</label>
@@ -3066,7 +3073,7 @@
 									id="select-parallel-readiness"
 									bind:value={parallelReadiness}
 									onchange={() => clearFieldError('parallel_readiness')}
-									class="select select-bordered min-h-[44px] w-full rounded-xl bg-white text-xs text-gray-900 sm:text-sm {errors.parallel_readiness
+									class="select select-bordered min-h-11 w-full rounded-xl bg-white text-xs text-gray-900 sm:text-sm {errors.parallel_readiness
 										? 'border-red-600 ring-1 ring-red-600'
 										: 'border-amber-300'}"
 								>
@@ -3093,7 +3100,7 @@
 							<div data-field-id="parallel_title">
 								<label
 									for="input-parallel-title"
-									class="mb-1 block text-xs font-bold text-[#540b0e]"
+									class="mb-1 block text-xs font-bold text-secondary"
 								>
 									Titolo provvisorio del Talk / Parallel Session:
 								</label>
@@ -3103,7 +3110,7 @@
 									bind:value={parallelTitle}
 									oninput={() => clearFieldError('parallel_title')}
 									placeholder="Es. Modellizzazione stocastica di sistemi complessi / Fisica dei rivelatori di particelle..."
-									class="input input-bordered min-h-[44px] w-full rounded-xl bg-white text-xs text-gray-900 sm:text-sm {errors.parallel_title
+									class="input input-bordered min-h-11 w-full rounded-xl bg-white text-xs text-gray-900 sm:text-sm {errors.parallel_title
 										? 'border-red-600 ring-1 ring-red-600'
 										: 'border-amber-300'}"
 								/>
@@ -3115,7 +3122,7 @@
 							<div data-field-id="parallel_abstract">
 								<label
 									for="input-parallel-abstract"
-									class="mb-1 block text-xs font-bold text-[#540b0e]"
+									class="mb-1 block text-xs font-bold text-secondary"
 								>
 									Abstract sintetico o riassunto di massima dell'intervento:
 								</label>
@@ -3151,11 +3158,11 @@
 									/>
 									<label
 										for="input-talk-file"
-										class="btn btn-sm min-h-[44px] cursor-pointer rounded-xl px-4 text-xs font-bold shadow-2xs transition peer-focus-visible:ring-2 peer-focus-visible:ring-[#9e2a2b] peer-focus-visible:ring-offset-1 {errors.talk_file
+										class="btn btn-sm min-h-11 cursor-pointer rounded-xl px-4 text-xs font-bold shadow-2xs transition peer-focus-visible:ring-2 peer-focus-visible:ring-primary peer-focus-visible:ring-offset-1 {errors.talk_file
 											? 'border-red-600 bg-red-50/40 text-red-900 hover:bg-red-50'
 											: talkFile
 												? 'border-emerald-300 bg-emerald-50 text-emerald-900 hover:bg-emerald-100'
-												: 'border-amber-300 bg-white text-[#540b0e] hover:border-[#9e2a2b] hover:bg-amber-50/70'}"
+												: 'border-amber-300 bg-white text-secondary hover:border-primary hover:bg-amber-50/70'}"
 									>
 										<Upload class="size-4 shrink-0" />
 										{#if talkFile}
@@ -3178,7 +3185,7 @@
 											<button
 												type="button"
 												onclick={() => handleTalkFile(null)}
-												class="btn btn-xs min-h-[36px] shrink-0 rounded-lg border border-red-200 bg-white text-red-700 hover:bg-red-50"
+												class="btn btn-xs min-h-9 shrink-0 rounded-lg border border-red-200 bg-white text-red-700 hover:bg-red-50"
 											>
 												<X class="size-3.5" />
 												Rimuovi
@@ -3209,7 +3216,7 @@
 						materiale involontario, contatta tempestivamente il CO all'indirizzo
 						<a
 							href="mailto:cisf27@ai-sf.it"
-							class="font-bold text-[#540b0e] underline hover:text-[#9e2a2b]">cisf27@ai-sf.it</a
+							class="font-bold text-secondary underline hover:text-primary">cisf27@ai-sf.it</a
 						>
 						per rettificare i dati!
 					</div>
@@ -3229,7 +3236,7 @@
 					<button
 						type="button"
 						onclick={() => goToStep(0)}
-						class="btn min-h-[48px] rounded-xl border border-gray-300 bg-white px-5 text-xs font-bold text-gray-700 hover:bg-gray-100"
+						class="btn min-h-12 rounded-xl border border-gray-300 bg-white px-5 text-xs font-bold text-gray-700 hover:bg-gray-100"
 					>
 						<ArrowLeft class="size-4" />
 						Indietro: Criteri &amp; Quota
@@ -3237,7 +3244,7 @@
 					<button
 						type="button"
 						onclick={() => goToStep(2)}
-						class="btn btn-primary min-h-[48px] rounded-xl px-6 text-sm font-bold text-white shadow-md"
+						class="btn btn-primary min-h-12 rounded-xl px-6 text-sm font-bold text-white shadow-md"
 					>
 						Continua: Anagrafica &amp; Percorso
 						<ArrowRight class="size-4" />
@@ -3250,15 +3257,15 @@
 		<!-- SCHERMATA 3 / STEP 2: DATI ANAGRAFICI, ACCADEMICI & RUOLI AISF      -->
 		<!-- =================================================================== -->
 		{#if showWizard && currentStep === 2}
-			<div class="cisf-card mb-8 p-5 sm:p-10">
+			<div class="rounded-2xl border border-primary/20 bg-base-100 shadow-lg mb-8 p-5 sm:p-10">
 				<div class="mb-6 flex items-center gap-3">
 					<div
-						class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-red-100 text-sm font-bold text-[#9e2a2b]"
+						class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-red-100 text-sm font-bold text-primary"
 					>
 						03
 					</div>
 					<div>
-						<h2 class="font-playfair-display text-2xl font-bold text-[#540b0e] sm:text-3xl">
+						<h2 class="font-playfair-display text-2xl font-bold text-secondary sm:text-3xl">
 							Dati Anagrafici &amp; Esperienze Associative
 						</h2>
 						<p class="text-xs text-gray-600 sm:text-sm">
@@ -3280,7 +3287,7 @@
 							oninput={() => clearFieldError('nome')}
 							placeholder="Es. Laura"
 							autocomplete="given-name"
-							class="input input-bordered min-h-[44px] w-full rounded-xl bg-white text-xs text-gray-900 sm:text-sm {errors.nome
+							class="input input-bordered min-h-11 w-full rounded-xl bg-white text-xs text-gray-900 sm:text-sm {errors.nome
 								? 'border-red-600 ring-1 ring-red-600'
 								: 'border-gray-300'}"
 						/>
@@ -3300,7 +3307,7 @@
 							oninput={() => clearFieldError('cognome')}
 							placeholder="Es. Bassi"
 							autocomplete="family-name"
-							class="input input-bordered min-h-[44px] w-full rounded-xl bg-white text-xs text-gray-900 sm:text-sm {errors.cognome
+							class="input input-bordered min-h-11 w-full rounded-xl bg-white text-xs text-gray-900 sm:text-sm {errors.cognome
 								? 'border-red-600 ring-1 ring-red-600'
 								: 'border-gray-300'}"
 						/>
@@ -3323,7 +3330,7 @@
 							oninput={() => clearFieldError('email')}
 							placeholder="laura.bassi@yahoo.it"
 							autocomplete="email"
-							class="input input-bordered min-h-[44px] w-full rounded-xl bg-white text-xs text-gray-900 sm:text-sm {errors.email
+							class="input input-bordered min-h-11 w-full rounded-xl bg-white text-xs text-gray-900 sm:text-sm {errors.email
 								? 'border-red-600 ring-1 ring-red-600'
 								: 'border-gray-300'}"
 						/>
@@ -3348,12 +3355,12 @@
 							placeholder={cfAtipico ? 'Codice fiscale estero / atipico' : 'Es. BSSLRA01A41A944X'}
 							autocomplete="off"
 							spellcheck="false"
-							class="input input-bordered min-h-[44px] w-full rounded-xl bg-white font-mono text-xs tracking-wider text-gray-900 uppercase sm:text-sm {errors.codice_fiscale
+							class="input input-bordered min-h-11 w-full rounded-xl bg-white font-mono text-xs tracking-wider text-gray-900 uppercase sm:text-sm {errors.codice_fiscale
 								? 'border-red-600 ring-1 ring-red-600'
 								: 'border-gray-300'}"
 						/>
 						<label
-							class="mt-2 flex min-h-[36px] cursor-pointer items-center gap-2 text-[11px] text-gray-700"
+							class="mt-2 flex min-h-9 cursor-pointer items-center gap-2 text-[11px] text-gray-700"
 						>
 							<input
 								type="checkbox"
@@ -3378,8 +3385,7 @@
 									2027), scrivi a
 									<a
 										href="mailto:cisf27@ai-sf.it"
-										class="font-bold text-[#9e2a2b] underline hover:text-[#540b0e]"
-										>cisf27@ai-sf.it</a
+										class="font-bold text-primary underline hover:text-secondary">cisf27@ai-sf.it</a
 									>.
 								</div>
 							</div>
@@ -3396,14 +3402,14 @@
 							<label for="input-soprannome" class="block text-xs font-bold text-gray-700">
 								Soprannome per il Badge (Facoltativo)
 							</label>
-							<span class="text-[10px] font-bold text-[#c95d3b] uppercase">Nuovo!</span>
+							<span class="text-[10px] font-bold text-accent uppercase">Nuovo!</span>
 						</div>
 						<input
 							type="text"
 							id="input-soprannome"
 							bind:value={soprannome}
 							placeholder="Come vuoi essere chiamatə alla conferenza?"
-							class="input input-bordered min-h-[44px] w-full rounded-xl border-amber-300 bg-white text-xs text-gray-900 sm:text-sm"
+							class="input input-bordered min-h-11 w-full rounded-xl border-amber-300 bg-white text-xs text-gray-900 sm:text-sm"
 						/>
 						<span class="mt-1 block text-[11px] text-gray-500">
 							Verrà stampato sul badge accanto al tuo nome.
@@ -3419,7 +3425,7 @@
 							id="input-pronomi"
 							bind:value={pronomi}
 							placeholder="Es. lui, lei, lə, they/them/theirs..."
-							class="input input-bordered min-h-[44px] w-full rounded-xl border-gray-300 bg-white text-xs text-gray-900 sm:text-sm"
+							class="input input-bordered min-h-11 w-full rounded-xl border-gray-300 bg-white text-xs text-gray-900 sm:text-sm"
 						/>
 						<span class="mt-1 block text-[11px] text-gray-500">
 							Come preferisci che ci si rivolga a te?
@@ -3441,9 +3447,9 @@
 					<div class="mb-3 grid grid-cols-2 gap-2 text-xs font-medium sm:grid-cols-5">
 						{#each [{ val: 'Donna', label: 'Donna (F)', span: '' }, { val: 'Uomo', label: 'Uomo (M)', span: '' }, { val: 'Non-binario', label: 'Non-binariə', span: '' }, { val: 'Altro', label: 'Altro', span: '' }, { val: 'Preferisco non dirlo', label: 'Preferisco non dirlo', span: 'col-span-2 sm:col-span-1' }] as g (g.val)}
 							<label
-								class="{g.span} flex min-h-[44px] cursor-pointer items-center gap-2 rounded-lg border bg-white p-2.5 text-gray-800 transition-colors hover:border-gray-400 {genere ===
+								class="{g.span} flex min-h-11 cursor-pointer items-center gap-2 rounded-lg border bg-white p-2.5 text-gray-800 transition-colors hover:border-gray-400 {genere ===
 								g.val
-									? 'border-[#9e2a2b] bg-red-50/25 font-bold'
+									? 'border-primary bg-red-50/25 font-bold'
 									: 'border-gray-200'}"
 							>
 								<input
@@ -3468,10 +3474,10 @@
 
 					{#if genere === 'Altro'}
 						<div
-							class="mb-3 space-y-1.5 rounded-lg border border-[#9e2a2b]/40 bg-white p-3.5 shadow-xs"
+							class="mb-3 space-y-1.5 rounded-lg border border-primary/40 bg-white p-3.5 shadow-xs"
 							data-field-id="genere_specifica"
 						>
-							<label for="input-genere-altro" class="block text-xs font-bold text-[#540b0e]">
+							<label for="input-genere-altro" class="block text-xs font-bold text-secondary">
 								Specifica la tua identità di genere:
 							</label>
 							<input
@@ -3480,7 +3486,7 @@
 								bind:value={genereSpecifica}
 								oninput={() => clearFieldError('genere_specifica')}
 								placeholder="Es. Agender, Genderfluid..."
-								class="input input-bordered min-h-[44px] w-full rounded-lg bg-white text-xs text-gray-900 sm:text-sm {errors.genere_specifica
+								class="input input-bordered min-h-11 w-full rounded-lg bg-white text-xs text-gray-900 sm:text-sm {errors.genere_specifica
 									? 'border-red-600 ring-1 ring-red-600'
 									: 'border-gray-300'}"
 							/>
@@ -3502,7 +3508,7 @@
 
 				<!-- 2. PERCORSO ACCADEMICO -->
 				<div class="mb-6 border-t border-gray-200 pt-5">
-					<h3 class="mb-3 text-sm font-bold tracking-wider text-[#540b0e] uppercase">
+					<h3 class="mb-3 text-sm font-bold tracking-wider text-secondary uppercase">
 						Percorso Accademico &amp; Livello di Studio
 					</h3>
 					<div class="mb-4 grid grid-cols-1 gap-4 sm:grid-cols-2">
@@ -3516,7 +3522,7 @@
 								bind:value={ateneo}
 								oninput={() => clearFieldError('ateneo')}
 								placeholder="Es. Università della Calabria"
-								class="input input-bordered min-h-[44px] w-full rounded-xl bg-white text-xs text-gray-900 sm:text-sm {errors.ateneo
+								class="input input-bordered min-h-11 w-full rounded-xl bg-white text-xs text-gray-900 sm:text-sm {errors.ateneo
 									? 'border-red-600 ring-1 ring-red-600'
 									: 'border-gray-300'}"
 							/>
@@ -3535,7 +3541,7 @@
 								bind:value={corsoLaurea}
 								oninput={() => clearFieldError('corso_laurea')}
 								placeholder="Es. Laurea in Astronomia, LM in Fisica del Sistema Terra..."
-								class="input input-bordered min-h-[44px] w-full rounded-xl bg-white text-xs text-gray-900 sm:text-sm {errors.corso_laurea
+								class="input input-bordered min-h-11 w-full rounded-xl bg-white text-xs text-gray-900 sm:text-sm {errors.corso_laurea
 									? 'border-red-600 ring-1 ring-red-600'
 									: 'border-gray-300'}"
 							/>
@@ -3553,7 +3559,7 @@
 							id="select-livello-studio"
 							bind:value={livelloStudio}
 							onchange={() => clearFieldError('livello_studio')}
-							class="select select-bordered min-h-[44px] w-full rounded-xl bg-white text-xs text-gray-900 sm:text-sm {errors.livello_studio
+							class="select select-bordered min-h-11 w-full rounded-xl bg-white text-xs text-gray-900 sm:text-sm {errors.livello_studio
 								? 'border-red-600 ring-1 ring-red-600'
 								: 'border-gray-300'}"
 						>
@@ -3577,7 +3583,7 @@
 							bind:value={curriculum}
 							oninput={() => clearFieldError('curriculum')}
 							placeholder="Es. Advanced Methods in Particle Physics, Magnetoidrodinamica tra Io e Giove..."
-							class="input input-bordered min-h-[44px] w-full rounded-xl bg-white text-xs text-gray-900 sm:text-sm {errors.curriculum
+							class="input input-bordered min-h-11 w-full rounded-xl bg-white text-xs text-gray-900 sm:text-sm {errors.curriculum
 								? 'border-red-600 ring-1 ring-red-600'
 								: 'border-gray-300'}"
 						/>
@@ -3589,7 +3595,7 @@
 
 				<!-- 3. APPARTENENZA AISF & RUOLI ASSOCIATIVI -->
 				<div class="mb-6 border-t border-gray-200 pt-5">
-					<h3 class="mb-3 text-sm font-bold tracking-wider text-[#540b0e] uppercase">
+					<h3 class="mb-3 text-sm font-bold tracking-wider text-secondary uppercase">
 						Appartenenza ad AISF &amp; Incarichi Istituzionali
 					</h3>
 
@@ -3602,7 +3608,7 @@
 							bind:value={iscrittoAisf}
 							disabled={hasSpecialNationalRole}
 							onchange={() => clearFieldError('iscritto_aisf')}
-							class="select select-bordered min-h-[44px] w-full rounded-xl text-xs sm:text-sm {hasSpecialNationalRole
+							class="select select-bordered min-h-11 w-full rounded-xl text-xs sm:text-sm {hasSpecialNationalRole
 								? 'cursor-not-allowed border-emerald-300 bg-emerald-50/70 font-semibold text-emerald-950 disabled:border-emerald-300 disabled:bg-emerald-50/70 disabled:text-emerald-950 disabled:opacity-100'
 								: errors.iscritto_aisf
 									? 'border-red-600 bg-white text-gray-900 ring-1 ring-red-600'
@@ -3624,7 +3630,9 @@
 								class="mt-2 rounded-lg border border-emerald-200 bg-emerald-50/80 px-3 py-2 text-[11px] leading-relaxed text-emerald-950"
 							>
 								🔒 <strong>Obbligatorio «Sì»:</strong> nella <strong>Pagina 1</strong> hai indicato
-								di ricoprire un ruolo associativo speciale nazionale [<em>{specialNationalRoleLabel}</em>], che presuppone l'iscrizione attiva ad AISF. Se hai selezionato quel ruolo per
+								di ricoprire un ruolo associativo speciale nazionale [<em
+									>{specialNationalRoleLabel}</em
+								>], che presuppone l'iscrizione attiva ad AISF. Se hai selezionato quel ruolo per
 								errore, torna alla Pagina 1 per modificarlo.
 							</div>
 						{:else}
@@ -3651,7 +3659,7 @@
 									id="select-comitato-locale"
 									bind:value={comitatoLocale}
 									onchange={() => clearFieldError('comitato_locale')}
-									class="select select-bordered min-h-[44px] w-full rounded-xl bg-white text-xs text-gray-900 sm:text-sm {errors.comitato_locale
+									class="select select-bordered min-h-11 w-full rounded-xl bg-white text-xs text-gray-900 sm:text-sm {errors.comitato_locale
 										? 'border-red-600 ring-1 ring-red-600'
 										: 'border-gray-300'}"
 								>
@@ -3673,7 +3681,7 @@
 									id="select-neo-iscritto"
 									bind:value={neoIscritto}
 									onchange={() => clearFieldError('neo_iscritto')}
-									class="select select-bordered min-h-[44px] w-full rounded-xl bg-white text-xs text-gray-900 sm:text-sm {errors.neo_iscritto
+									class="select select-bordered min-h-11 w-full rounded-xl bg-white text-xs text-gray-900 sm:text-sm {errors.neo_iscritto
 										? 'border-red-600 ring-1 ring-red-600'
 										: 'border-gray-300'}"
 								>
@@ -3711,12 +3719,12 @@
 						<!-- DETTAGLIO WORKING GROUP (se ruoloSpeciale === 'working_group') -->
 						{#if showWgDetailField}
 							<div
-								class="mb-4 rounded-xl border border-[#9e2a2b]/30 bg-red-50/30 p-4"
+								class="mb-4 rounded-xl border border-primary/30 bg-red-50/30 p-4"
 								data-field-id="dettaglio_wg"
 							>
 								<label
 									for="input-dettaglio-wg"
-									class="mb-1.5 block text-xs font-bold text-[#540b0e]"
+									class="mb-1.5 block text-xs font-bold text-secondary"
 								>
 									Specifica il Working Group nazionale di cui fai parte:
 								</label>
@@ -3726,7 +3734,7 @@
 									bind:value={dettaglioWg}
 									oninput={() => clearFieldError('dettaglio_wg')}
 									placeholder="Es. WG PR, WG Eventi, WG IT..."
-									class="input input-bordered min-h-[44px] w-full rounded-xl bg-white text-xs text-gray-900 sm:text-sm {errors.dettaglio_wg
+									class="input input-bordered min-h-11 w-full rounded-xl bg-white text-xs text-gray-900 sm:text-sm {errors.dettaglio_wg
 										? 'border-red-600 ring-1 ring-red-600'
 										: 'border-gray-300'}"
 								/>
@@ -3749,7 +3757,7 @@
 										clearFieldError('next_leaders');
 										clearFieldError('next_leaders_link');
 									}}
-									class="select select-bordered min-h-[44px] w-full rounded-xl bg-white text-xs text-gray-900 sm:text-sm {errors.next_leaders
+									class="select select-bordered min-h-11 w-full rounded-xl bg-white text-xs text-gray-900 sm:text-sm {errors.next_leaders
 										? 'border-red-600 ring-1 ring-red-600'
 										: 'border-gray-300'}"
 								>
@@ -3766,7 +3774,7 @@
 								<div data-field-id="next_leaders_link">
 									<label
 										for="input-next-leaders-link"
-										class="mb-1 block text-xs font-bold text-[#540b0e]"
+										class="mb-1 block text-xs font-bold text-secondary"
 									>
 										Titolo e/o link all'articolo Next Leaders (per verifica):
 									</label>
@@ -3776,7 +3784,7 @@
 										bind:value={nextLeadersLink}
 										oninput={() => clearFieldError('next_leaders_link')}
 										placeholder="Titolo dell'articolo e/o link"
-										class="input input-bordered min-h-[44px] w-full rounded-xl bg-white text-xs text-gray-900 sm:text-sm {errors.next_leaders_link
+										class="input input-bordered min-h-11 w-full rounded-xl bg-white text-xs text-gray-900 sm:text-sm {errors.next_leaders_link
 											? 'border-red-600 ring-1 ring-red-600'
 											: 'border-gray-300'}"
 									/>
@@ -3818,7 +3826,7 @@
 
 						<!-- 4. Partecipazioni Pregresse -->
 						<div class="mb-6 border-t border-gray-200 pt-5">
-							<h3 class="mb-2 text-sm font-bold tracking-wider text-[#540b0e] uppercase">
+							<h3 class="mb-2 text-sm font-bold tracking-wider text-secondary uppercase">
 								Partecipazioni ad Eventi Nazionali o Internazionali (AISF / IAPS)
 							</h3>
 							<p class="mb-4 text-xs text-gray-600">
@@ -3837,7 +3845,7 @@
 											clearFieldError('part_aisf');
 											clearFieldError('elenco_partecipazioni');
 										}}
-										class="select select-bordered min-h-[44px] w-full rounded-xl bg-white text-xs text-gray-900 {errors.part_aisf
+										class="select select-bordered min-h-11 w-full rounded-xl bg-white text-xs text-gray-900 {errors.part_aisf
 											? 'border-red-600 ring-1 ring-red-600'
 											: 'border-gray-300'}"
 									>
@@ -3862,7 +3870,7 @@
 											clearFieldError('part_iaps');
 											clearFieldError('elenco_partecipazioni');
 										}}
-										class="select select-bordered min-h-[44px] w-full rounded-xl bg-white text-xs text-gray-900 {errors.part_iaps
+										class="select select-bordered min-h-11 w-full rounded-xl bg-white text-xs text-gray-900 {errors.part_iaps
 											? 'border-red-600 ring-1 ring-red-600'
 											: 'border-gray-300'}"
 									>
@@ -3887,7 +3895,7 @@
 											clearFieldError('org_aisf');
 											clearFieldError('elenco_partecipazioni');
 										}}
-										class="select select-bordered min-h-[44px] w-full rounded-xl bg-white text-xs text-gray-900 {errors.org_aisf
+										class="select select-bordered min-h-11 w-full rounded-xl bg-white text-xs text-gray-900 {errors.org_aisf
 											? 'border-red-600 ring-1 ring-red-600'
 											: 'border-gray-300'}"
 									>
@@ -3950,7 +3958,7 @@
 						materiale involontario, contatta tempestivamente il CO all'indirizzo
 						<a
 							href="mailto:cisf27@ai-sf.it"
-							class="font-bold text-[#540b0e] underline hover:text-[#9e2a2b]">cisf27@ai-sf.it</a
+							class="font-bold text-secondary underline hover:text-primary">cisf27@ai-sf.it</a
 						>
 						per rettificare i dati!
 					</div>
@@ -3970,7 +3978,7 @@
 					<button
 						type="button"
 						onclick={() => goToStep(1)}
-						class="btn min-h-[48px] rounded-xl border border-gray-300 bg-white px-5 text-xs font-bold text-gray-700 hover:bg-gray-100"
+						class="btn min-h-12 rounded-xl border border-gray-300 bg-white px-5 text-xs font-bold text-gray-700 hover:bg-gray-100"
 					>
 						<ArrowLeft class="size-4" />
 						Indietro: Motivazione &amp; Talk
@@ -3978,7 +3986,7 @@
 					<button
 						type="button"
 						onclick={() => goToStep(3)}
-						class="btn btn-primary min-h-[48px] rounded-xl px-6 text-sm font-bold text-white shadow-md"
+						class="btn btn-primary min-h-12 rounded-xl px-6 text-sm font-bold text-white shadow-md"
 					>
 						Continua: Temi &amp; Fisse
 						<ArrowRight class="size-4" />
@@ -3991,7 +3999,7 @@
 		<!-- SCHERMATA 4 / STEP 3: PILASTRI TEMATICI & QUIZ QUIRKY VISITE/LAB    -->
 		<!-- =================================================================== -->
 		{#if showWizard && currentStep === 3}
-			<div class="cisf-card mb-8 p-5 sm:p-10">
+			<div class="rounded-2xl border border-primary/20 bg-base-100 shadow-lg mb-8 p-5 sm:p-10">
 				<div class="mb-4 flex items-center gap-3">
 					<div
 						class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-amber-100 text-sm font-bold text-amber-900"
@@ -3999,7 +4007,7 @@
 						04
 					</div>
 					<div>
-						<h2 class="font-playfair-display text-2xl font-bold text-[#540b0e] sm:text-3xl">
+						<h2 class="font-playfair-display text-2xl font-bold text-secondary sm:text-3xl">
 							Le Traiettorie della Fisica: Quanto ti gasano? 🐂
 						</h2>
 						<p class="text-xs text-gray-600 sm:text-sm">
@@ -4009,21 +4017,23 @@
 				</div>
 
 				<!-- 4 PILASTRI UFFICIALI CISF27 -->
-				<h3 class="mb-3 flex items-center gap-2 text-base font-bold text-[#540b0e]">
+				<h3 class="mb-3 flex items-center gap-2 text-base font-bold text-secondary">
 					<span>🏛️</span> I 4 Pilastri Ufficiali di CISF27
 				</h3>
 
-				{#each [{ key: 'storia' as PillarKey, num: 'Pilastro 1', title: 'Storia, Impatto & Responsabilità Comunitaria', desc: 'Dalle figure storiche bolognesi (Laura Bassi, Guglielmo Marconi, ecc.) al ruolo etico e sociale del fisico nella comunità.', colorHex: '#9e2a2b', tagClass: 'text-[#9e2a2b]', badgeClass: 'bg-red-100 text-[#9e2a2b]' }, { key: 'energia' as PillarKey, num: 'Pilastro 2', title: 'Energia, Clima & Sostenibilità', desc: 'Transizione energetica, fusione nucleare, rinnovabili, atmosfera e il contributo scientifico verso un futuro sostenibile.', colorHex: '#d97706', tagClass: 'text-amber-700', badgeClass: 'bg-amber-100 text-amber-800' }, { key: 'lavoro' as PillarKey, num: 'Pilastro 3', title: 'Lavoro, Carriera & Opportunità Future', desc: 'Tavole rotonde con aziende, figure di spicco nel mondo industriale, programmazione, data science, brevetti e spin-off.', colorHex: '#059669', tagClass: 'text-emerald-700', badgeClass: 'bg-emerald-100 text-emerald-800' }, { key: 'ricerca' as PillarKey, num: 'Pilastro 4', title: 'Ricerca di Frontiera & Centri del Territorio', desc: 'Fisica fondamentale, HPC scientifico, ottica quantistica e cooperazione con i grandi poli scientifici felsinei.', colorHex: '#9333ea', tagClass: 'text-purple-700', badgeClass: 'bg-purple-100 text-purple-800' }] as pillar (pillar.key)}
+				{#each [{ key: 'storia' as PillarKey, num: 'Pilastro 1', title: 'Storia, Impatto & Responsabilità Comunitaria', desc: 'Dalle figure storiche bolognesi (Laura Bassi, Guglielmo Marconi, ecc.) al ruolo etico e sociale del fisico nella comunità.', rangeClass: 'range-primary', tagClass: 'text-primary', badgeClass: 'badge-primary badge-soft' }, { key: 'energia' as PillarKey, num: 'Pilastro 2', title: 'Energia, Clima & Sostenibilità', desc: 'Transizione energetica, fusione nucleare, rinnovabili, atmosfera e il contributo scientifico verso un futuro sostenibile.', rangeClass: 'range-warning', tagClass: 'text-warning', badgeClass: 'badge-warning badge-soft' }, { key: 'lavoro' as PillarKey, num: 'Pilastro 3', title: 'Lavoro, Carriera & Opportunità Future', desc: 'Tavole rotonde con aziende, figure di spicco nel mondo industriale, programmazione, data science, brevetti e spin-off.', rangeClass: 'range-success', tagClass: 'text-success', badgeClass: 'badge-success badge-soft' }, { key: 'ricerca' as PillarKey, num: 'Pilastro 4', title: 'Ricerca di Frontiera & Centri del Territorio', desc: 'Fisica fondamentale, HPC scientifico, ottica quantistica e cooperazione con i grandi poli scientifici felsinei.', rangeClass: 'range-info', tagClass: 'text-info', badgeClass: 'badge-info badge-soft' }] as pillar (pillar.key)}
 					<div class="mb-5 rounded-xl border border-gray-200 bg-white p-4 shadow-2xs">
 						<div class="mb-3 flex flex-wrap items-start justify-between gap-2">
 							<div class="min-w-0 flex-1">
 								<span class="text-xs font-bold tracking-wider uppercase {pillar.tagClass}">
 									{pillar.num}
 								</span>
-								<h4 class="text-base font-bold text-[#540b0e]">{pillar.title}</h4>
+								<h4 class="text-base font-bold text-secondary">{pillar.title}</h4>
 								<p class="text-xs text-gray-600">{pillar.desc}</p>
 							</div>
-							<span class="shrink-0 rounded-full px-2.5 py-1 text-xs font-bold {pillar.badgeClass}">
+							<span
+								class="badge shrink-0 rounded-full px-2.5 py-1 text-xs font-bold {pillar.badgeClass}"
+							>
 								{GASO_LABELS[pillars[pillar.key]]}
 							</span>
 						</div>
@@ -4039,9 +4049,7 @@
 									step="1"
 									bind:value={pillars[pillar.key]}
 									oninput={onQuizInteraction}
-									style="--fill-color: {pillar.colorHex}; --fill-pct: {(pillars[pillar.key] / 4) *
-										100}%;"
-									class="cisf-pillar-slider h-6 w-full cursor-pointer"
+									class="range range-sm w-full {pillar.rangeClass}"
 								/>
 							</div>
 							<div
@@ -4059,12 +4067,12 @@
 				<div class="mt-8 border-t-2 border-dashed border-gray-200 pt-6">
 					<div class="mb-2 flex flex-wrap items-center justify-between gap-2">
 						<h3
-							class="font-playfair-display flex items-center gap-2 text-lg font-bold text-[#540b0e]"
+							class="font-playfair-display flex items-center gap-2 text-lg font-bold text-secondary"
 						>
 							<span>🔮</span> Il Mini-Quiz Quirky: Che fisica scorre nelle tue vene?
 						</h3>
 						<span
-							class="rounded-full border border-red-200 bg-red-100 px-3 py-1 text-[11px] font-bold text-[#9e2a2b]"
+							class="rounded-full border border-red-200 bg-red-100 px-3 py-1 text-[11px] font-bold text-primary"
 						>
 							Secret Matcher
 						</span>
@@ -4088,20 +4096,20 @@
 					>
 						<div class="mb-2 flex items-center justify-between gap-2">
 							<span
-								class="rounded bg-red-100 px-2 py-0.5 text-[10px] font-extrabold tracking-wider text-[#9e2a2b] uppercase"
+								class="rounded bg-red-100 px-2 py-0.5 text-[10px] font-extrabold tracking-wider text-primary uppercase"
 								>Scenario 01 • Notte Fonda</span
 							>
 							<span class="text-[10px] font-semibold text-gray-400">Reazione istintiva</span>
 						</div>
-						<div class="mb-2.5 text-xs font-bold text-[#540b0e] sm:text-sm">
+						<div class="mb-2.5 text-xs font-bold text-secondary sm:text-sm">
 							1. Qual è la tua reazione naturale davanti a un apparecchio che emette strani sibili e
 							scintille intermittenti alle due di notte?
 						</div>
 						<div class="space-y-2 text-xs">
 							<label
-								class="flex min-h-[44px] cursor-pointer items-start gap-2.5 rounded-lg border p-2.5 transition hover:bg-gray-50 {quizRadios.q1 ===
+								class="flex min-h-11 cursor-pointer items-start gap-2.5 rounded-lg border p-2.5 transition hover:bg-gray-50 {quizRadios.q1 ===
 								'astro,app'
-									? 'border-[#9e2a2b] bg-red-50/25'
+									? 'border-primary bg-red-50/25'
 									: 'border-transparent hover:border-gray-200'}"
 							>
 								<input
@@ -4121,9 +4129,9 @@
 								>
 							</label>
 							<label
-								class="flex min-h-[44px] cursor-pointer items-start gap-2.5 rounded-lg border p-2.5 transition hover:bg-gray-50 {quizRadios.q1 ===
+								class="flex min-h-11 cursor-pointer items-start gap-2.5 rounded-lg border p-2.5 transition hover:bg-gray-50 {quizRadios.q1 ===
 								'hpc,comp'
-									? 'border-[#9e2a2b] bg-red-50/25'
+									? 'border-primary bg-red-50/25'
 									: 'border-transparent hover:border-gray-200'}"
 							>
 								<input
@@ -4143,9 +4151,9 @@
 								>
 							</label>
 							<label
-								class="flex min-h-[44px] cursor-pointer items-start gap-2.5 rounded-lg border p-2.5 transition hover:bg-gray-50 {quizRadios.q1 ===
+								class="flex min-h-11 cursor-pointer items-start gap-2.5 rounded-lg border p-2.5 transition hover:bg-gray-50 {quizRadios.q1 ===
 								'part,teo'
-									? 'border-[#9e2a2b] bg-red-50/25'
+									? 'border-primary bg-red-50/25'
 									: 'border-transparent hover:border-gray-200'}"
 							>
 								<input
@@ -4167,9 +4175,9 @@
 								>
 							</label>
 							<label
-								class="flex min-h-[44px] cursor-pointer items-start gap-2.5 rounded-lg border p-2.5 transition hover:bg-gray-50 {quizRadios.q1 ===
+								class="flex min-h-11 cursor-pointer items-start gap-2.5 rounded-lg border p-2.5 transition hover:bg-gray-50 {quizRadios.q1 ===
 								'env,geo_atm'
-									? 'border-[#9e2a2b] bg-red-50/25'
+									? 'border-primary bg-red-50/25'
 									: 'border-transparent hover:border-gray-200'}"
 							>
 								<input
@@ -4189,9 +4197,9 @@
 								>
 							</label>
 							<label
-								class="flex min-h-[44px] cursor-pointer items-start gap-2.5 rounded-lg border p-2.5 transition hover:bg-gray-50 {quizRadios.q1 ===
+								class="flex min-h-11 cursor-pointer items-start gap-2.5 rounded-lg border p-2.5 transition hover:bg-gray-50 {quizRadios.q1 ===
 								'mat,cond'
-									? 'border-[#9e2a2b] bg-red-50/25'
+									? 'border-primary bg-red-50/25'
 									: 'border-transparent hover:border-gray-200'}"
 							>
 								<input
@@ -4211,9 +4219,9 @@
 								>
 							</label>
 							<label
-								class="flex min-h-[44px] cursor-pointer items-start gap-2.5 rounded-lg border p-2.5 transition hover:bg-gray-50 {quizRadios.q1 ===
+								class="flex min-h-11 cursor-pointer items-start gap-2.5 rounded-lg border p-2.5 transition hover:bg-gray-50 {quizRadios.q1 ===
 								'did,geo_oce'
-									? 'border-[#9e2a2b] bg-red-50/25'
+									? 'border-primary bg-red-50/25'
 									: 'border-transparent hover:border-gray-200'}"
 							>
 								<input
@@ -4234,9 +4242,9 @@
 								>
 							</label>
 							<label
-								class="flex min-h-[44px] cursor-pointer items-start gap-2.5 rounded-lg border p-2.5 transition hover:bg-gray-50 {quizRadios.q1 ===
+								class="flex min-h-11 cursor-pointer items-start gap-2.5 rounded-lg border p-2.5 transition hover:bg-gray-50 {quizRadios.q1 ===
 								'bio,geo_sol'
-									? 'border-[#9e2a2b] bg-red-50/25'
+									? 'border-primary bg-red-50/25'
 									: 'border-transparent hover:border-gray-200'}"
 							>
 								<input
@@ -4275,16 +4283,16 @@
 							>
 							<span class="text-[10px] font-bold text-amber-800">+1000 Aura Check</span>
 						</div>
-						<div class="mb-2.5 text-xs font-bold text-[#540b0e] sm:text-sm">
+						<div class="mb-2.5 text-xs font-bold text-secondary sm:text-sm">
 							2. Non pensarci più di 2 secondi: quale di questi concetti ti dà immediatamente +1000
 							punti aura appena lo senti nominare nei corridoi?
 						</div>
 						<div class="grid grid-cols-2 gap-2 text-xs sm:grid-cols-4">
 							{#each [{ val: 'teo,part', label: '✨ Rottura spontanea di simmetria' }, { val: 'hpc,cond', label: '🧠 Supremazia quantistica & Qubit' }, { val: 'astro,teo', label: '🕳️ Orizzonte degli eventi & Quasar' }, { val: 'cond,mat', label: '💎 Superconduttori & Grafene twistato' }, { val: 'geo_atm,geo_oce,env', label: '🌊 Cicloni extratropicali & Correnti abissali' }, { val: 'bio,app', label: '🧬 Adroterapia & Reti neurali biologiche' }, { val: 'geo_sol,comp', label: '🌋 Faglie sismiche & Attrattori strani' }, { val: 'did,comp', label: '📜 Paradossi epistemologici & Storia' }] as opt (opt.val)}
 								<label
-									class="flex min-h-[52px] cursor-pointer items-center justify-center rounded-xl border p-2.5 text-center font-bold transition hover:border-[#9e2a2b] {quizRadios.q2 ===
+									class="flex min-h-13 cursor-pointer items-center justify-center rounded-xl border p-2.5 text-center font-bold transition hover:border-primary {quizRadios.q2 ===
 									opt.val
-										? 'border-[#9e2a2b] bg-red-50 text-[#540b0e] ring-1 ring-[#9e2a2b]'
+										? 'border-primary bg-red-50 text-secondary ring-1 ring-primary'
 										: 'border-gray-200 bg-white text-gray-800'}"
 								>
 									<input
@@ -4316,22 +4324,22 @@
 					>
 						<div class="mb-2 flex items-center justify-between gap-2">
 							<span
-								class="rounded bg-red-100 px-2 py-0.5 text-[10px] font-extrabold tracking-wider text-[#9e2a2b] uppercase"
+								class="rounded bg-red-100 px-2 py-0.5 text-[10px] font-extrabold tracking-wider text-primary uppercase"
 								>Scenario 03 • Sotto i Portici</span
 							>
 							<span class="text-[10px] font-semibold text-gray-400"
 								>Setup sperimentale d'emergenza</span
 							>
 						</div>
-						<div class="mb-2.5 text-xs font-bold text-[#540b0e] sm:text-sm">
+						<div class="mb-2.5 text-xs font-bold text-secondary sm:text-sm">
 							3. Un varco spazio-temporale grande quanto una tigella si apre sotto i Portici di
 							Bologna per 10 minuti. Che esperimento piazzi al volo?
 						</div>
 						<div class="space-y-2 text-xs">
 							<label
-								class="flex min-h-[44px] cursor-pointer items-start gap-2.5 rounded-lg border p-2.5 transition hover:bg-gray-50 {quizRadios.q3 ===
+								class="flex min-h-11 cursor-pointer items-start gap-2.5 rounded-lg border p-2.5 transition hover:bg-gray-50 {quizRadios.q3 ===
 								'part,app'
-									? 'border-[#9e2a2b] bg-red-50/25'
+									? 'border-primary bg-red-50/25'
 									: 'border-transparent hover:border-gray-200'}"
 							>
 								<input
@@ -4351,9 +4359,9 @@
 								>
 							</label>
 							<label
-								class="flex min-h-[44px] cursor-pointer items-start gap-2.5 rounded-lg border p-2.5 transition hover:bg-gray-50 {quizRadios.q3 ===
+								class="flex min-h-11 cursor-pointer items-start gap-2.5 rounded-lg border p-2.5 transition hover:bg-gray-50 {quizRadios.q3 ===
 								'hpc,teo'
-									? 'border-[#9e2a2b] bg-red-50/25'
+									? 'border-primary bg-red-50/25'
 									: 'border-transparent hover:border-gray-200'}"
 							>
 								<input
@@ -4374,9 +4382,9 @@
 								>
 							</label>
 							<label
-								class="flex min-h-[44px] cursor-pointer items-start gap-2.5 rounded-lg border p-2.5 transition hover:bg-gray-50 {quizRadios.q3 ===
+								class="flex min-h-11 cursor-pointer items-start gap-2.5 rounded-lg border p-2.5 transition hover:bg-gray-50 {quizRadios.q3 ===
 								'astro,geo_sol'
-									? 'border-[#9e2a2b] bg-red-50/25'
+									? 'border-primary bg-red-50/25'
 									: 'border-transparent hover:border-gray-200'}"
 							>
 								<input
@@ -4397,9 +4405,9 @@
 								>
 							</label>
 							<label
-								class="flex min-h-[44px] cursor-pointer items-start gap-2.5 rounded-lg border p-2.5 transition hover:bg-gray-50 {quizRadios.q3 ===
+								class="flex min-h-11 cursor-pointer items-start gap-2.5 rounded-lg border p-2.5 transition hover:bg-gray-50 {quizRadios.q3 ===
 								'geo_atm,geo_oce'
-									? 'border-[#9e2a2b] bg-red-50/25'
+									? 'border-primary bg-red-50/25'
 									: 'border-transparent hover:border-gray-200'}"
 							>
 								<input
@@ -4420,9 +4428,9 @@
 								>
 							</label>
 							<label
-								class="flex min-h-[44px] cursor-pointer items-start gap-2.5 rounded-lg border p-2.5 transition hover:bg-gray-50 {quizRadios.q3 ===
+								class="flex min-h-11 cursor-pointer items-start gap-2.5 rounded-lg border p-2.5 transition hover:bg-gray-50 {quizRadios.q3 ===
 								'did,comp'
-									? 'border-[#9e2a2b] bg-red-50/25'
+									? 'border-primary bg-red-50/25'
 									: 'border-transparent hover:border-gray-200'}"
 							>
 								<input
@@ -4443,9 +4451,9 @@
 								>
 							</label>
 							<label
-								class="flex min-h-[44px] cursor-pointer items-start gap-2.5 rounded-lg border p-2.5 transition hover:bg-gray-50 {quizRadios.q3 ===
+								class="flex min-h-11 cursor-pointer items-start gap-2.5 rounded-lg border p-2.5 transition hover:bg-gray-50 {quizRadios.q3 ===
 								'mat,cond'
-									? 'border-[#9e2a2b] bg-red-50/25'
+									? 'border-primary bg-red-50/25'
 									: 'border-transparent hover:border-gray-200'}"
 							>
 								<input
@@ -4465,9 +4473,9 @@
 								>
 							</label>
 							<label
-								class="flex min-h-[44px] cursor-pointer items-start gap-2.5 rounded-lg border p-2.5 transition hover:bg-gray-50 {quizRadios.q3 ===
+								class="flex min-h-11 cursor-pointer items-start gap-2.5 rounded-lg border p-2.5 transition hover:bg-gray-50 {quizRadios.q3 ===
 								'bio,env'
-									? 'border-[#9e2a2b] bg-red-50/25'
+									? 'border-primary bg-red-50/25'
 									: 'border-transparent hover:border-gray-200'}"
 							>
 								<input
@@ -4505,12 +4513,12 @@
 								>🎚️ Blitz 04 • Slider Cosmico</span
 							>
 							<span
-								class="rounded-full bg-[#9e2a2b] px-2.5 py-0.5 text-[11px] font-bold text-white"
+								class="bg-primary text-primary-content rounded-full px-2.5 py-0.5 text-[11px] font-bold"
 							>
 								{SCALE_SLIDER_CONFIG[quizScaleVal]?.label}
 							</span>
 						</div>
-						<div class="mb-2 text-xs font-bold text-[#540b0e] sm:text-sm">
+						<div class="mb-2 text-xs font-bold text-secondary sm:text-sm">
 							4. Trascina lo zoom sull'ordine di grandezza spaziale che ti fa battere più forte il
 							cuore quando studi un sistema fisico:
 						</div>
@@ -4538,7 +4546,7 @@
 										clearFieldError('quiz_q4');
 										onQuizInteraction();
 									}}
-									class="cisf-slider my-2 h-6 w-full cursor-pointer"
+									class="range range-primary range-sm my-2 w-full [--range-fill:0]"
 								/>
 							</div>
 							<div class="mt-1 grid grid-cols-6 text-center text-[10px] font-bold text-gray-600">
@@ -4588,21 +4596,21 @@
 					>
 						<div class="mb-2 flex items-center justify-between gap-2">
 							<span
-								class="rounded bg-red-100 px-2 py-0.5 text-[10px] font-extrabold tracking-wider text-[#9e2a2b] uppercase"
+								class="rounded bg-red-100 px-2 py-0.5 text-[10px] font-extrabold tracking-wider text-primary uppercase"
 								>Scenario 05 • Dinamica da Buffet</span
 							>
 							<span class="text-[10px] font-semibold text-gray-400">170 fisici vs Crescentine</span>
 						</div>
-						<div class="mb-2.5 text-xs font-bold text-[#540b0e] sm:text-sm">
+						<div class="mb-2.5 text-xs font-bold text-secondary sm:text-sm">
 							5. Al buffet della conferenza con 170 fisici affamati davanti a vassoi di lasagne e
 							crescentine calde, qual è la tua postura intellettuale?
 						</div>
 						<div class="space-y-2 text-xs">
 							{#each [{ val: 'hpc,cond', letter: 'A)', text: 'Simulo al volo la calca al buffet come un gas di fermioni fortemente correlati su reticolo (modello di Hubbard), calcolando via codice il cammino minimo verso la teglia!' }, { val: 'astro,geo_atm', letter: 'B)', text: "Mi posiziono nel fuoco acustico della sala e sfrutto i moti convettivi del vapore delle lasagne per triangolare l'arrivo delle teglie appena sfornate." }, { val: 'part,teo', letter: 'C)', text: "Approccio quantistico-relativistico: ogni crescentina è in sovrapposizione coerente di stati finché l'operatore forchetta non fa collassare la funzione d'onda nel mio piatto." }, { val: 'env,geo_oce', letter: 'D)', text: "Analizzo il bilancio energetico, l'impronta idrica e carbonica della filiera e il suo impatto sul ciclo idrologico e marino, verificando la sostenibilità termodinamica del catering." }, { val: 'did,app', letter: 'E)', text: 'Un esperimento di reologia applicata: dimostro il comportamento dei fluidi non-newtoniani spalmando lo squacquerone tra gli applausi dei tavoli vicini!' }, { val: 'mat,geo_sol', letter: 'F)', text: 'Studio la transizione vetrosa, la porosità alveolare e il modulo di taglio elastico della crosta croccante in funzione del gradiente di raffreddamento.' }, { val: 'bio,comp', letter: 'G)', text: 'Osservo la cinetica metabolica della folla e la transizione di fase di swarming collettivo (effetto stormo) attorno alla sorgente calorica primaria.' }] as opt (opt.val)}
 								<label
-									class="flex min-h-[44px] cursor-pointer items-start gap-2.5 rounded-lg border p-2.5 transition hover:bg-gray-50 {quizRadios.q5 ===
+									class="flex min-h-11 cursor-pointer items-start gap-2.5 rounded-lg border p-2.5 transition hover:bg-gray-50 {quizRadios.q5 ===
 									opt.val
-										? 'border-[#9e2a2b] bg-red-50/25'
+										? 'border-primary bg-red-50/25'
 										: 'border-transparent hover:border-gray-200'}"
 								>
 									<input
@@ -4639,16 +4647,16 @@
 							>
 							<span class="text-[10px] font-bold text-amber-800">Scegli la tua reliquia</span>
 						</div>
-						<div class="mb-2.5 text-xs font-bold text-[#540b0e] sm:text-sm">
+						<div class="mb-2.5 text-xs font-bold text-secondary sm:text-sm">
 							6. Devi affrontare un'intera settimana chiusə in dipartimento: puoi portare con te un
 							solo "Totem sacro". Quale scegli?
 						</div>
 						<div class="grid grid-cols-1 gap-2.5 text-xs sm:grid-cols-3">
 							{#each [{ val: 'app,part,cond', title: '🔧 Nastro Kapton, Saldatore & BNC', desc: 'Se non ha cavi coassiali, vuoto ultra-spinto e rumore elettronico da schermare non mi diverto.' }, { val: 'hpc,comp,astro', title: '💻 Terminale SSH & GPU Cluster', desc: 'Script Python/C++, nodi di calcolo parallelo che macinano nella notte e grafici da plottare.' }, { val: 'teo,did', title: '🖍️ Gessi Hagoromo & Lavagna', desc: 'Tensori, integrali sui cammini, caffè amaro e accesi dibattiti sui fondamenti concettuali.' }, { val: 'geo_sol,geo_atm,geo_oce,env', title: '🌍 Sensori Lidar, Boe & Sismografi', desc: 'Il mio laboratorio è il pianeta intero: crosta terrestre, correnti marine e dinamica atmosferica.' }, { val: 'mat,cond,bio', title: '🔬 Pinzette Ottiche & Camera Pulita', desc: 'Manipolare singoli fotoni, nanostrutture, film sottili e sistemi biofisici su scala micrometrica.' }, { val: 'astro,part,did', title: '🔭 Cupola, Parabola & Cielo Stellato', desc: "Scrutare l'universo profondo, i raggi cosmici e raccontare le meraviglie del cosmo a chiunque." }] as opt (opt.val)}
 								<label
-									class="flex min-h-[60px] cursor-pointer items-start gap-2.5 rounded-xl border p-3 transition hover:border-[#9e2a2b] {quizRadios.q6 ===
+									class="flex min-h-15 cursor-pointer items-start gap-2.5 rounded-xl border p-3 transition hover:border-primary {quizRadios.q6 ===
 									opt.val
-										? 'border-[#9e2a2b] bg-red-50/30 ring-1 ring-[#9e2a2b]'
+										? 'border-primary bg-red-50/30 ring-1 ring-primary'
 										: 'border-gray-200 bg-white'}"
 								>
 									<input
@@ -4663,7 +4671,7 @@
 										class="radio radio-primary radio-sm mt-0.5 border-gray-400 bg-white checked:border-primary"
 									/>
 									<div>
-										<div class="font-bold text-[#540b0e]">{opt.title}</div>
+										<div class="font-bold text-secondary">{opt.title}</div>
 										<div class="text-[11px] text-gray-600">{opt.desc}</div>
 									</div>
 								</label>
@@ -4683,22 +4691,22 @@
 					>
 						<div class="mb-2 flex items-center justify-between gap-2">
 							<span
-								class="rounded bg-red-100 px-2 py-0.5 text-[10px] font-extrabold tracking-wider text-[#9e2a2b] uppercase"
+								class="rounded bg-red-100 px-2 py-0.5 text-[10px] font-extrabold tracking-wider text-primary uppercase"
 								>Scenario 07 • Vita da Fuorisede</span
 							>
 							<span class="text-[10px] font-semibold text-gray-400"
 								>Pioggia &amp; Autobus fantasma</span
 							>
 						</div>
-						<div class="mb-2.5 text-xs font-bold text-[#540b0e] sm:text-sm">
+						<div class="mb-2.5 text-xs font-bold text-secondary sm:text-sm">
 							7. Lunedì mattina di diluvio universale a Bologna, lezione tra 15 minuti e l'autobus
 							sul tabellone elettronico evapora nel nulla. Che fai?
 						</div>
 						<div class="space-y-2 text-xs">
 							<label
-								class="flex min-h-[44px] cursor-pointer items-start gap-2.5 rounded-lg border p-2.5 transition hover:bg-gray-50 {quizRadios.q7 ===
+								class="flex min-h-11 cursor-pointer items-start gap-2.5 rounded-lg border p-2.5 transition hover:bg-gray-50 {quizRadios.q7 ===
 								'astro,teo'
-									? 'border-[#9e2a2b] bg-red-50/25'
+									? 'border-primary bg-red-50/25'
 									: 'border-transparent hover:border-gray-200'}"
 							>
 								<input
@@ -4719,9 +4727,9 @@
 								>
 							</label>
 							<label
-								class="flex min-h-[44px] cursor-pointer items-start gap-2.5 rounded-lg border p-2.5 transition hover:bg-gray-50 {quizRadios.q7 ===
+								class="flex min-h-11 cursor-pointer items-start gap-2.5 rounded-lg border p-2.5 transition hover:bg-gray-50 {quizRadios.q7 ===
 								'hpc,comp'
-									? 'border-[#9e2a2b] bg-red-50/25'
+									? 'border-primary bg-red-50/25'
 									: 'border-transparent hover:border-gray-200'}"
 							>
 								<input
@@ -4741,9 +4749,9 @@
 								>
 							</label>
 							<label
-								class="flex min-h-[44px] cursor-pointer items-start gap-2.5 rounded-lg border p-2.5 transition hover:bg-gray-50 {quizRadios.q7 ===
+								class="flex min-h-11 cursor-pointer items-start gap-2.5 rounded-lg border p-2.5 transition hover:bg-gray-50 {quizRadios.q7 ===
 								'part,app'
-									? 'border-[#9e2a2b] bg-red-50/25'
+									? 'border-primary bg-red-50/25'
 									: 'border-transparent hover:border-gray-200'}"
 							>
 								<input
@@ -4763,9 +4771,9 @@
 								>
 							</label>
 							<label
-								class="flex min-h-[44px] cursor-pointer items-start gap-2.5 rounded-lg border p-2.5 transition hover:bg-gray-50 {quizRadios.q7 ===
+								class="flex min-h-11 cursor-pointer items-start gap-2.5 rounded-lg border p-2.5 transition hover:bg-gray-50 {quizRadios.q7 ===
 								'geo_atm,env'
-									? 'border-[#9e2a2b] bg-red-50/25'
+									? 'border-primary bg-red-50/25'
 									: 'border-transparent hover:border-gray-200'}"
 							>
 								<input
@@ -4786,9 +4794,9 @@
 								>
 							</label>
 							<label
-								class="flex min-h-[44px] cursor-pointer items-start gap-2.5 rounded-lg border p-2.5 transition hover:bg-gray-50 {quizRadios.q7 ===
+								class="flex min-h-11 cursor-pointer items-start gap-2.5 rounded-lg border p-2.5 transition hover:bg-gray-50 {quizRadios.q7 ===
 								'mat,cond'
-									? 'border-[#9e2a2b] bg-red-50/25'
+									? 'border-primary bg-red-50/25'
 									: 'border-transparent hover:border-gray-200'}"
 							>
 								<input
@@ -4808,9 +4816,9 @@
 								>
 							</label>
 							<label
-								class="flex min-h-[44px] cursor-pointer items-start gap-2.5 rounded-lg border p-2.5 transition hover:bg-gray-50 {quizRadios.q7 ===
+								class="flex min-h-11 cursor-pointer items-start gap-2.5 rounded-lg border p-2.5 transition hover:bg-gray-50 {quizRadios.q7 ===
 								'bio,geo_sol'
-									? 'border-[#9e2a2b] bg-red-50/25'
+									? 'border-primary bg-red-50/25'
 									: 'border-transparent hover:border-gray-200'}"
 							>
 								<input
@@ -4831,9 +4839,9 @@
 								>
 							</label>
 							<label
-								class="flex min-h-[44px] cursor-pointer items-start gap-2.5 rounded-lg border p-2.5 transition hover:bg-gray-50 {quizRadios.q7 ===
+								class="flex min-h-11 cursor-pointer items-start gap-2.5 rounded-lg border p-2.5 transition hover:bg-gray-50 {quizRadios.q7 ===
 								'did,geo_oce'
-									? 'border-[#9e2a2b] bg-red-50/25'
+									? 'border-primary bg-red-50/25'
 									: 'border-transparent hover:border-gray-200'}"
 							>
 								<input
@@ -4873,16 +4881,16 @@
 							>
 							<span class="text-[10px] font-bold text-amber-800">Estetica Matematica</span>
 						</div>
-						<div class="mb-2.5 text-xs font-bold text-[#540b0e] sm:text-sm">
+						<div class="mb-2.5 text-xs font-bold text-secondary sm:text-sm">
 							8. Quale di queste espressioni ti provoca un brivido estetico immediato (e magari ti
 							tatueresti)?
 						</div>
 						<div class="grid grid-cols-1 gap-2.5 text-xs sm:grid-cols-2 lg:grid-cols-3">
 							<!-- Card 1 -->
 							<label
-								class="flex min-h-[84px] cursor-pointer flex-col items-center justify-center rounded-xl border p-3 text-center transition hover:border-[#9e2a2b] {quizRadios.q8 ===
+								class="flex min-h-21 cursor-pointer flex-col items-center justify-center rounded-xl border p-3 text-center transition hover:border-primary {quizRadios.q8 ===
 								'part,teo'
-									? 'border-[#9e2a2b] bg-red-50/35 ring-1 ring-[#9e2a2b]'
+									? 'border-primary bg-red-50/35 ring-1 ring-primary'
 									: 'border-gray-200 bg-white'}"
 							>
 								<input
@@ -4897,7 +4905,7 @@
 									class="sr-only"
 								/>
 								<div
-									class="mb-1.5 max-w-full overflow-x-auto text-xs font-bold text-[#540b0e] sm:text-sm"
+									class="mb-1.5 max-w-full overflow-x-auto text-xs font-bold text-secondary sm:text-sm"
 								>
 									<MathFormula
 										expr={'\\mathcal{L} = \\bar{\\psi}(i\\gamma^\\mu D_\\mu - m)\\psi - \\frac{1}{4}F_{\\mu\\nu}F^{\\mu\\nu}'}
@@ -4910,9 +4918,9 @@
 
 							<!-- Card 2 -->
 							<label
-								class="flex min-h-[84px] cursor-pointer flex-col items-center justify-center rounded-xl border p-3 text-center transition hover:border-[#9e2a2b] {quizRadios.q8 ===
+								class="flex min-h-21 cursor-pointer flex-col items-center justify-center rounded-xl border p-3 text-center transition hover:border-primary {quizRadios.q8 ===
 								'astro,teo'
-									? 'border-[#9e2a2b] bg-red-50/35 ring-1 ring-[#9e2a2b]'
+									? 'border-primary bg-red-50/35 ring-1 ring-primary'
 									: 'border-gray-200 bg-white'}"
 							>
 								<input
@@ -4927,7 +4935,7 @@
 									class="sr-only"
 								/>
 								<div
-									class="mb-1.5 max-w-full overflow-x-auto text-xs font-bold text-[#540b0e] sm:text-sm"
+									class="mb-1.5 max-w-full overflow-x-auto text-xs font-bold text-secondary sm:text-sm"
 								>
 									<MathFormula
 										expr={'R_{\\mu\\nu} - \\frac{1}{2}Rg_{\\mu\\nu} + \\Lambda g_{\\mu\\nu} = \\frac{8\\pi G}{c^4}T_{\\mu\\nu}'}
@@ -4940,9 +4948,9 @@
 
 							<!-- Card 3 -->
 							<label
-								class="flex min-h-[84px] cursor-pointer flex-col items-center justify-center rounded-xl border p-3 text-center transition hover:border-[#9e2a2b] {quizRadios.q8 ===
+								class="flex min-h-21 cursor-pointer flex-col items-center justify-center rounded-xl border p-3 text-center transition hover:border-primary {quizRadios.q8 ===
 								'geo_atm,geo_oce,env'
-									? 'border-[#9e2a2b] bg-red-50/35 ring-1 ring-[#9e2a2b]'
+									? 'border-primary bg-red-50/35 ring-1 ring-primary'
 									: 'border-gray-200 bg-white'}"
 							>
 								<input
@@ -4957,7 +4965,7 @@
 									class="sr-only"
 								/>
 								<div
-									class="mb-1.5 max-w-full overflow-x-auto text-xs font-bold text-[#540b0e] sm:text-sm"
+									class="mb-1.5 max-w-full overflow-x-auto text-xs font-bold text-secondary sm:text-sm"
 								>
 									<MathFormula
 										expr={'\\frac{D\\mathbf{u}}{Dt} + 2\\mathbf{\\Omega}\\times\\mathbf{u} = -\\frac{1}{\\rho}\\nabla p + \\mathbf{g} + \\nu\\nabla^2\\mathbf{u}'}
@@ -4970,9 +4978,9 @@
 
 							<!-- Card 4 -->
 							<label
-								class="flex min-h-[84px] cursor-pointer flex-col items-center justify-center rounded-xl border p-3 text-center transition hover:border-[#9e2a2b] {quizRadios.q8 ===
+								class="flex min-h-21 cursor-pointer flex-col items-center justify-center rounded-xl border p-3 text-center transition hover:border-primary {quizRadios.q8 ===
 								'cond,mat,hpc'
-									? 'border-[#9e2a2b] bg-red-50/35 ring-1 ring-[#9e2a2b]'
+									? 'border-primary bg-red-50/35 ring-1 ring-primary'
 									: 'border-gray-200 bg-white'}"
 							>
 								<input
@@ -4987,7 +4995,7 @@
 									class="sr-only"
 								/>
 								<div
-									class="mb-1.5 flex max-w-full flex-col items-center gap-1 overflow-x-auto text-xs font-bold text-[#540b0e] sm:text-sm"
+									class="mb-1.5 flex max-w-full flex-col items-center gap-1 overflow-x-auto text-xs font-bold text-secondary sm:text-sm"
 								>
 									<MathFormula expr={'\\hat{H}|\\Psi\\rangle = E|\\Psi\\rangle'} />
 									<MathFormula expr="|\psi\rangle = \alpha|0\rangle + \beta|1\rangle" />
@@ -4997,9 +5005,9 @@
 
 							<!-- Card 5 -->
 							<label
-								class="flex min-h-[84px] cursor-pointer flex-col items-center justify-center rounded-xl border p-3 text-center transition hover:border-[#9e2a2b] {quizRadios.q8 ===
+								class="flex min-h-21 cursor-pointer flex-col items-center justify-center rounded-xl border p-3 text-center transition hover:border-primary {quizRadios.q8 ===
 								'comp,bio,did'
-									? 'border-[#9e2a2b] bg-red-50/35 ring-1 ring-[#9e2a2b]'
+									? 'border-primary bg-red-50/35 ring-1 ring-primary'
 									: 'border-gray-200 bg-white'}"
 							>
 								<input
@@ -5014,7 +5022,7 @@
 									class="sr-only"
 								/>
 								<div
-									class="mb-1.5 max-w-full overflow-x-auto text-xs font-bold text-[#540b0e] sm:text-sm"
+									class="mb-1.5 max-w-full overflow-x-auto text-xs font-bold text-secondary sm:text-sm"
 								>
 									<MathFormula expr="S = -k_B \displaystyle\sum_i p_i \ln p_i" />
 								</div>
@@ -5025,9 +5033,9 @@
 
 							<!-- Card 6 (FIXED: two cleanly stacked KaTeX lines, zero bare &) -->
 							<label
-								class="flex min-h-[84px] cursor-pointer flex-col items-center justify-center rounded-xl border p-3 text-center transition hover:border-[#9e2a2b] {quizRadios.q8 ===
+								class="flex min-h-21 cursor-pointer flex-col items-center justify-center rounded-xl border p-3 text-center transition hover:border-primary {quizRadios.q8 ===
 								'app,geo_sol,cond'
-									? 'border-[#9e2a2b] bg-red-50/35 ring-1 ring-[#9e2a2b]'
+									? 'border-primary bg-red-50/35 ring-1 ring-primary'
 									: 'border-gray-200 bg-white'}"
 							>
 								<input
@@ -5042,7 +5050,7 @@
 									class="sr-only"
 								/>
 								<div
-									class="mb-1.5 flex max-w-full flex-col items-center gap-1 overflow-x-auto text-xs font-bold text-[#540b0e] sm:text-sm"
+									class="mb-1.5 flex max-w-full flex-col items-center gap-1 overflow-x-auto text-xs font-bold text-secondary sm:text-sm"
 								>
 									<MathFormula
 										expr={'\\nabla \\times \\mathbf{B} = \\mu_0\\mathbf{J} + \\mu_0\\varepsilon_0\\frac{\\partial \\mathbf{E}}{\\partial t}'}
@@ -5070,20 +5078,20 @@
 					>
 						<div class="mb-2 flex items-center justify-between gap-2">
 							<span
-								class="rounded bg-red-100 px-2 py-0.5 text-[10px] font-extrabold tracking-wider text-[#9e2a2b] uppercase"
+								class="rounded bg-red-100 px-2 py-0.5 text-[10px] font-extrabold tracking-wider text-primary uppercase"
 								>Scenario 09 • Il Rigore Violato</span
 							>
 							<span class="text-[10px] font-semibold text-gray-400">Dramma in aula</span>
 						</div>
-						<div class="mb-2.5 text-xs font-bold text-[#540b0e] sm:text-sm">
+						<div class="mb-2.5 text-xs font-bold text-secondary sm:text-sm">
 							9. Durante un seminario il relatore piazza alla lavagna un'approssimazione brutale che
 							viola tre teoremi fondamentali. Come reagisci?
 						</div>
 						<div class="space-y-2 text-xs">
 							<label
-								class="flex min-h-[44px] cursor-pointer items-start gap-2.5 rounded-lg border p-2.5 transition hover:bg-gray-50 {quizRadios.q9 ===
+								class="flex min-h-11 cursor-pointer items-start gap-2.5 rounded-lg border p-2.5 transition hover:bg-gray-50 {quizRadios.q9 ===
 								'hpc,app'
-									? 'border-[#9e2a2b] bg-red-50/25'
+									? 'border-primary bg-red-50/25'
 									: 'border-transparent hover:border-gray-200'}"
 							>
 								<input
@@ -5103,9 +5111,9 @@
 								>
 							</label>
 							<label
-								class="flex min-h-[44px] cursor-pointer items-start gap-2.5 rounded-lg border p-2.5 transition hover:bg-gray-50 {quizRadios.q9 ===
+								class="flex min-h-11 cursor-pointer items-start gap-2.5 rounded-lg border p-2.5 transition hover:bg-gray-50 {quizRadios.q9 ===
 								'astro,geo_oce'
-									? 'border-[#9e2a2b] bg-red-50/25'
+									? 'border-primary bg-red-50/25'
 									: 'border-transparent hover:border-gray-200'}"
 							>
 								<input
@@ -5127,9 +5135,9 @@
 								>
 							</label>
 							<label
-								class="flex min-h-[44px] cursor-pointer items-start gap-2.5 rounded-lg border p-2.5 transition hover:bg-gray-50 {quizRadios.q9 ===
+								class="flex min-h-11 cursor-pointer items-start gap-2.5 rounded-lg border p-2.5 transition hover:bg-gray-50 {quizRadios.q9 ===
 								'teo,part'
-									? 'border-[#9e2a2b] bg-red-50/25'
+									? 'border-primary bg-red-50/25'
 									: 'border-transparent hover:border-gray-200'}"
 							>
 								<input
@@ -5152,9 +5160,9 @@
 								>
 							</label>
 							<label
-								class="flex min-h-[44px] cursor-pointer items-start gap-2.5 rounded-lg border p-2.5 transition hover:bg-gray-50 {quizRadios.q9 ===
+								class="flex min-h-11 cursor-pointer items-start gap-2.5 rounded-lg border p-2.5 transition hover:bg-gray-50 {quizRadios.q9 ===
 								'comp,env,geo_atm'
-									? 'border-[#9e2a2b] bg-red-50/25'
+									? 'border-primary bg-red-50/25'
 									: 'border-transparent hover:border-gray-200'}"
 							>
 								<input
@@ -5175,9 +5183,9 @@
 								>
 							</label>
 							<label
-								class="flex min-h-[44px] cursor-pointer items-start gap-2.5 rounded-lg border p-2.5 transition hover:bg-gray-50 {quizRadios.q9 ===
+								class="flex min-h-11 cursor-pointer items-start gap-2.5 rounded-lg border p-2.5 transition hover:bg-gray-50 {quizRadios.q9 ===
 								'did,geo_sol'
-									? 'border-[#9e2a2b] bg-red-50/25'
+									? 'border-primary bg-red-50/25'
 									: 'border-transparent hover:border-gray-200'}"
 							>
 								<input
@@ -5198,9 +5206,9 @@
 								>
 							</label>
 							<label
-								class="flex min-h-[44px] cursor-pointer items-start gap-2.5 rounded-lg border p-2.5 transition hover:bg-gray-50 {quizRadios.q9 ===
+								class="flex min-h-11 cursor-pointer items-start gap-2.5 rounded-lg border p-2.5 transition hover:bg-gray-50 {quizRadios.q9 ===
 								'cond,mat,bio'
-									? 'border-[#9e2a2b] bg-red-50/25'
+									? 'border-primary bg-red-50/25'
 									: 'border-transparent hover:border-gray-200'}"
 							>
 								<input
@@ -5244,7 +5252,7 @@
 								{POSTURE_SLIDER_CONFIG[quizPostureVal]?.label}
 							</span>
 						</div>
-						<div class="mb-2 text-xs font-bold text-[#540b0e] sm:text-sm">
+						<div class="mb-2 text-xs font-bold text-secondary sm:text-sm">
 							10. Dove si colloca il tuo baricentro naturale tra astrazione formale pura,
 							simulazione computazionale e smanettamento sperimentale?
 						</div>
@@ -5272,7 +5280,7 @@
 										clearFieldError('quiz_q10');
 										onQuizInteraction();
 									}}
-									class="cisf-slider my-2 h-6 w-full cursor-pointer"
+									class="range range-primary range-sm my-2 w-full [--range-fill:0]"
 								/>
 							</div>
 							<div
@@ -5305,23 +5313,23 @@
 					>
 						<div class="mb-2 flex items-center justify-between gap-2">
 							<span
-								class="rounded bg-red-100 px-2 py-0.5 text-[10px] font-extrabold tracking-wider text-[#9e2a2b] uppercase"
+								class="rounded bg-red-100 px-2 py-0.5 text-[10px] font-extrabold tracking-wider text-primary uppercase"
 								>Scenario 11 • Notte Bolognese</span
 							>
 							<span class="text-[10px] font-semibold text-gray-400"
 								>Dibattito filosofico-scientifico</span
 							>
 						</div>
-						<div class="mb-2.5 text-xs font-bold text-[#540b0e] sm:text-sm">
+						<div class="mb-2.5 text-xs font-bold text-secondary sm:text-sm">
 							11. Ore 23:45 tra Via del Pratello e Via Petroni con un bicchiere in mano. Su cosa
 							finisci immancabilmente a dibattere coi colleghi?
 						</div>
 						<div class="space-y-2 text-xs">
 							{#each [{ val: 'astro,geo_sol,geo_oce', letter: 'A)', text: "L'abitabilità degli oceani sub-glaciali delle lune gioviane, la geologia planetaria e il segnale delle prime onde gravitazionali cosmologiche." }, { val: 'hpc,comp', letter: 'B)', text: 'Se la coscienza sia un fenomeno emergente in una rete neurale complessa o se siamo dentro una simulazione quantistica a scala di Planck.' }, { val: 'part,teo', letter: 'C)', text: 'Come scovare la materia oscura nei rivelatori sotterranei, la gerarchia delle masse dei neutrini e il futuro della fisica oltre il Modello Standard.' }, { val: 'env,geo_atm,geo_oce', letter: 'D)', text: 'I punti di non ritorno climatici (tipping points), il rallentamento della circolazione termoalina oceanica e la transizione energetica globale.' }, { val: 'did,app', letter: 'E)', text: "Come spiegare l'entanglement e l'ottica ondulatoria al tavolo accanto usando solo il tappo di metallo, una lente e i riflessi dei lampioni felsinei!" }, { val: 'bio,mat,cond', letter: 'F)', text: 'La biofisica del cervello, i nanorobot medicali a guida magnetica e come progettare nuovi materiali quantistici per rivoluzionare la tecnologia.' }] as opt (opt.val)}
 								<label
-									class="flex min-h-[44px] cursor-pointer items-start gap-2.5 rounded-lg border p-2.5 transition hover:bg-gray-50 {quizRadios.q11 ===
+									class="flex min-h-11 cursor-pointer items-start gap-2.5 rounded-lg border p-2.5 transition hover:bg-gray-50 {quizRadios.q11 ===
 									opt.val
-										? 'border-[#9e2a2b] bg-red-50/25'
+										? 'border-primary bg-red-50/25'
 										: 'border-transparent hover:border-gray-200'}"
 								>
 									<input
@@ -5358,15 +5366,15 @@
 							>
 							<span class="text-[10px] font-bold text-amber-800">Ultimo colpo di gaso!</span>
 						</div>
-						<div class="mb-2.5 text-xs font-bold text-[#540b0e] sm:text-sm">
+						<div class="mb-2.5 text-xs font-bold text-secondary sm:text-sm">
 							12. Se potessi sbloccare istantaneamente una "vista speciale" sulla natura, quale
 							sceglieresti?
 						</div>
 						<div class="grid grid-cols-1 gap-2 text-xs sm:grid-cols-2 lg:grid-cols-3">
 							<label
-								class="flex min-h-[52px] cursor-pointer items-center gap-2 rounded-xl border p-2.5 font-semibold transition hover:border-[#9e2a2b] {quizRadios.q12 ===
+								class="flex min-h-13 cursor-pointer items-center gap-2 rounded-xl border p-2.5 font-semibold transition hover:border-primary {quizRadios.q12 ===
 								'part,teo,astro'
-									? 'border-[#9e2a2b] bg-red-50 text-[#540b0e]'
+									? 'border-primary bg-red-50 text-secondary'
 									: 'border-gray-200 bg-white text-gray-800'}"
 							>
 								<input
@@ -5383,9 +5391,9 @@
 								<span>👁️ Vedere a occhio nudo fluttuazioni di vuoto, neutrini e raggi cosmici</span>
 							</label>
 							<label
-								class="flex min-h-[52px] cursor-pointer items-center gap-2 rounded-xl border p-2.5 font-semibold transition hover:border-[#9e2a2b] {quizRadios.q12 ===
+								class="flex min-h-13 cursor-pointer items-center gap-2 rounded-xl border p-2.5 font-semibold transition hover:border-primary {quizRadios.q12 ===
 								'cond,mat,app'
-									? 'border-[#9e2a2b] bg-red-50 text-[#540b0e]'
+									? 'border-primary bg-red-50 text-secondary'
 									: 'border-gray-200 bg-white text-gray-800'}"
 							>
 								<input
@@ -5404,9 +5412,9 @@
 								>
 							</label>
 							<label
-								class="flex min-h-[52px] cursor-pointer items-center gap-2 rounded-xl border p-2.5 font-semibold transition hover:border-[#9e2a2b] {quizRadios.q12 ===
+								class="flex min-h-13 cursor-pointer items-center gap-2 rounded-xl border p-2.5 font-semibold transition hover:border-primary {quizRadios.q12 ===
 								'geo_sol,geo_atm,geo_oce,env'
-									? 'border-[#9e2a2b] bg-red-50 text-[#540b0e]'
+									? 'border-primary bg-red-50 text-secondary'
 									: 'border-gray-200 bg-white text-gray-800'}"
 							>
 								<input
@@ -5426,9 +5434,9 @@
 								>
 							</label>
 							<label
-								class="flex min-h-[52px] cursor-pointer items-center gap-2 rounded-xl border p-2.5 font-semibold transition hover:border-[#9e2a2b] {quizRadios.q12 ===
+								class="flex min-h-13 cursor-pointer items-center gap-2 rounded-xl border p-2.5 font-semibold transition hover:border-primary {quizRadios.q12 ===
 								'bio,comp'
-									? 'border-[#9e2a2b] bg-red-50 text-[#540b0e]'
+									? 'border-primary bg-red-50 text-secondary'
 									: 'border-gray-200 bg-white text-gray-800'}"
 							>
 								<input
@@ -5448,9 +5456,9 @@
 								>
 							</label>
 							<label
-								class="flex min-h-[52px] cursor-pointer items-center gap-2 rounded-xl border p-2.5 font-semibold transition hover:border-[#9e2a2b] {quizRadios.q12 ===
+								class="flex min-h-13 cursor-pointer items-center gap-2 rounded-xl border p-2.5 font-semibold transition hover:border-primary {quizRadios.q12 ===
 								'hpc,comp,teo'
-									? 'border-[#9e2a2b] bg-red-50 text-[#540b0e]'
+									? 'border-primary bg-red-50 text-secondary'
 									: 'border-gray-200 bg-white text-gray-800'}"
 							>
 								<input
@@ -5470,9 +5478,9 @@
 								>
 							</label>
 							<label
-								class="flex min-h-[52px] cursor-pointer items-center gap-2 rounded-xl border p-2.5 font-semibold transition hover:border-[#9e2a2b] {quizRadios.q12 ===
+								class="flex min-h-13 cursor-pointer items-center gap-2 rounded-xl border p-2.5 font-semibold transition hover:border-primary {quizRadios.q12 ===
 								'did,astro,app'
-									? 'border-[#9e2a2b] bg-red-50 text-[#540b0e]'
+									? 'border-primary bg-red-50 text-secondary'
 									: 'border-gray-200 bg-white text-gray-800'}"
 							>
 								<input
@@ -5509,7 +5517,7 @@
 						>
 							<div>
 								<h4
-									class="font-playfair-display flex items-center gap-2 text-base font-extrabold text-[#540b0e]"
+									class="font-playfair-display flex items-center gap-2 text-base font-extrabold text-secondary"
 								>
 									<span>🎯</span> Matching Tematico Visite (14 Macro-Aree)
 								</h4>
@@ -5564,7 +5572,7 @@
 								{@const affinityPct = Math.min(99, Math.max(45, Math.round(50 + nScore * 49)))}
 								<div
 									data-area-id={area.id}
-									class="flex items-center justify-between gap-2 rounded-xl border border-gray-200 bg-white p-2.5 shadow-2xs transition hover:border-[#9e2a2b]/50 sm:gap-3 sm:p-3"
+									class="flex items-center justify-between gap-2 rounded-xl border border-gray-200 bg-white p-2.5 shadow-2xs transition hover:border-primary/50 sm:gap-3 sm:p-3"
 								>
 									<div class="flex min-w-0 flex-1 items-center gap-2 sm:gap-3">
 										<!-- Dedicated 6-dot Drag Handle (touch-none ONLY on handle so page scrolls cleanly) -->
@@ -5572,7 +5580,7 @@
 											type="button"
 											title="Trascina per riordinare"
 											aria-label="Trascina {area.name} per cambiare posizione"
-											class="drag-handle flex h-11 w-9 shrink-0 cursor-grab touch-none items-center justify-center rounded-lg border border-gray-200 bg-gray-50 text-gray-500 hover:bg-gray-100 hover:text-[#9e2a2b] active:cursor-grabbing"
+											class="drag-handle flex h-11 w-9 shrink-0 cursor-grab touch-none items-center justify-center rounded-lg border border-gray-200 bg-gray-50 text-gray-500 hover:bg-gray-100 hover:text-primary active:cursor-grabbing"
 										>
 											<GripVertical class="size-4" />
 										</button>
@@ -5582,9 +5590,9 @@
 											1
 												? 'bg-amber-500 font-extrabold text-white'
 												: rank === 2
-													? 'bg-[#9e2a2b] font-bold text-white'
+													? 'bg-primary text-primary-content font-bold'
 													: rank === 3
-														? 'bg-[#540b0e] font-bold text-white'
+														? 'bg-secondary text-secondary-content font-bold'
 														: 'bg-gray-200 font-bold text-gray-700'}"
 										>
 											{rank}°
@@ -5592,7 +5600,7 @@
 
 										<div class="min-w-0 flex-1">
 											<div class="flex flex-wrap items-center gap-1.5">
-												<span class="text-xs font-bold text-[#540b0e] sm:text-sm">
+												<span class="text-xs font-bold text-secondary sm:text-sm">
 													{area.icon}
 													{area.name}
 												</span>
@@ -5620,7 +5628,7 @@
 											onclick={() => moveThematicItem(index, -1)}
 											disabled={index === 0}
 											aria-label="Sposta su {area.name}"
-											class="flex h-9 w-8 items-center justify-center rounded-lg border border-gray-300 bg-white text-xs font-bold text-gray-700 transition hover:border-[#9e2a2b]/50 hover:bg-red-50/30 disabled:opacity-30"
+											class="flex h-9 w-8 items-center justify-center rounded-lg border border-gray-300 bg-white text-xs font-bold text-gray-700 transition hover:border-primary/50 hover:bg-red-50/30 disabled:opacity-30"
 										>
 											▲
 										</button>
@@ -5629,7 +5637,7 @@
 											onclick={() => moveThematicItem(index, 1)}
 											disabled={index === displayedAreas.length - 1}
 											aria-label="Sposta giù {area.name}"
-											class="flex h-9 w-8 items-center justify-center rounded-lg border border-gray-300 bg-white text-xs font-bold text-gray-700 transition hover:border-[#9e2a2b]/50 hover:bg-red-50/30 disabled:opacity-30"
+											class="flex h-9 w-8 items-center justify-center rounded-lg border border-gray-300 bg-white text-xs font-bold text-gray-700 transition hover:border-primary/50 hover:bg-red-50/30 disabled:opacity-30"
 										>
 											▼
 										</button>
@@ -5662,7 +5670,7 @@
 									type="button"
 									onclick={acceptMatchingRanking}
 									disabled={!canAcceptRanking}
-									class="btn btn-sm min-h-[44px] rounded-xl border-0 bg-emerald-700 px-4 text-xs font-bold text-white shadow-sm hover:bg-emerald-800 disabled:cursor-not-allowed disabled:bg-gray-300 disabled:text-gray-600 disabled:shadow-none"
+									class="btn btn-sm min-h-11 rounded-xl border-0 bg-emerald-700 px-4 text-xs font-bold text-white shadow-sm hover:bg-emerald-800 disabled:cursor-not-allowed disabled:bg-gray-300 disabled:text-gray-600 disabled:shadow-none"
 								>
 									<Check class="size-4" />
 									{matchingAccepted && canAcceptRanking
@@ -5673,7 +5681,7 @@
 									<button
 										type="button"
 										onclick={restoreQuizOrder}
-										class="btn btn-sm min-h-[44px] rounded-xl border border-purple-300 bg-purple-50 px-3 text-xs font-bold text-purple-900 hover:bg-purple-100"
+										class="btn btn-sm min-h-11 rounded-xl border border-purple-300 bg-purple-50 px-3 text-xs font-bold text-purple-900 hover:bg-purple-100"
 									>
 										<RotateCcw class="size-3.5" />
 										Ripristina ordine quiz
@@ -5729,7 +5737,7 @@
 						materiale involontario, contatta tempestivamente il CO all'indirizzo
 						<a
 							href="mailto:cisf27@ai-sf.it"
-							class="font-bold text-[#540b0e] underline hover:text-[#9e2a2b]">cisf27@ai-sf.it</a
+							class="font-bold text-secondary underline hover:text-primary">cisf27@ai-sf.it</a
 						>
 						per rettificare i dati!
 					</div>
@@ -5749,7 +5757,7 @@
 					<button
 						type="button"
 						onclick={() => goToStep(2)}
-						class="btn min-h-[48px] rounded-xl border border-gray-300 bg-white px-5 text-xs font-bold text-gray-700 hover:bg-gray-100"
+						class="btn min-h-12 rounded-xl border border-gray-300 bg-white px-5 text-xs font-bold text-gray-700 hover:bg-gray-100"
 					>
 						<ArrowLeft class="size-4" />
 						Indietro: Anagrafica &amp; Percorso
@@ -5757,7 +5765,7 @@
 					<button
 						type="button"
 						onclick={() => goToStep(4)}
-						class="btn btn-primary min-h-[48px] rounded-xl px-6 text-sm font-bold text-white shadow-md"
+						class="btn btn-primary min-h-12 rounded-xl px-6 text-sm font-bold text-white shadow-md"
 					>
 						Continua: Logistica &amp; Benessere
 						<ArrowRight class="size-4" />
@@ -5770,7 +5778,7 @@
 		<!-- SCHERMATA 5 / STEP 4: LOGISTICA INCLUSIVA, CAMERE & SAFE SPACE      -->
 		<!-- =================================================================== -->
 		{#if showWizard && currentStep === 4}
-			<div class="cisf-card mb-8 p-5 sm:p-10">
+			<div class="rounded-2xl border border-primary/20 bg-base-100 shadow-lg mb-8 p-5 sm:p-10">
 				<div class="mb-4 flex items-center gap-3">
 					<div
 						class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-green-100 text-sm font-bold text-green-900"
@@ -5778,7 +5786,7 @@
 						05
 					</div>
 					<div>
-						<h2 class="font-playfair-display text-2xl font-bold text-[#540b0e] sm:text-3xl">
+						<h2 class="font-playfair-display text-2xl font-bold text-secondary sm:text-3xl">
 							Logistica &amp; Benessere
 						</h2>
 						<p class="text-xs text-gray-600 sm:text-sm">
@@ -5826,7 +5834,7 @@
 								durante l'evento percepisci qualunque disagio, puoi rivolgerti in
 								<strong>totale riservatezza e discrezione</strong> direttamente a
 								<strong>Francesco Isgrò</strong>
-								(<a href="tel:+393345243386" class="font-semibold text-[#9e2a2b] underline"
+								(<a href="tel:+393345243386" class="font-semibold text-primary underline"
 									>+39 334 524 3386</a
 								>
 								• <strong>tg</strong>
@@ -5834,14 +5842,14 @@
 									href="https://t.me/franceee05"
 									target="_blank"
 									rel="noopener noreferrer"
-									class="font-semibold text-[#9e2a2b] underline">@franceee05</a
+									class="font-semibold text-primary underline">@franceee05</a
 								>
 								•
 								<a
 									href="mailto:francesco.isgro@ai-sf.it"
-									class="font-semibold text-[#9e2a2b] underline">francesco.isgro@ai-sf.it</a
+									class="font-semibold text-primary underline">francesco.isgro@ai-sf.it</a
 								>) e <strong>Alessandro D'Agostino</strong>
-								(<a href="tel:+393287727112" class="font-semibold text-[#9e2a2b] underline"
+								(<a href="tel:+393287727112" class="font-semibold text-primary underline"
 									>+39 328 772 7112</a
 								>
 								• <strong>tg</strong>
@@ -5849,12 +5857,12 @@
 									href="https://t.me/aledag0"
 									target="_blank"
 									rel="noopener noreferrer"
-									class="font-semibold text-[#9e2a2b] underline">@aledag0</a
+									class="font-semibold text-primary underline">@aledag0</a
 								>
 								•
 								<a
 									href="mailto:alessandro.dagostino@ai-sf.it"
-									class="font-semibold text-[#9e2a2b] underline">alessandro.dagostino@ai-sf.it</a
+									class="font-semibold text-primary underline">alessandro.dagostino@ai-sf.it</a
 								>).
 							</div>
 						</div>
@@ -5863,9 +5871,9 @@
 					<!-- 1. Preferenze Alloggio & Camere (NASCOSTA SE tipologiaQuota === 'senza_letto') -->
 					{#if showAccommodationCard}
 						<div class="rounded-xl border border-emerald-200/80 bg-white/95 p-5 shadow-2xs">
-							<h4 class="mb-2 flex items-center gap-2 text-base font-bold text-[#540b0e]">
+							<h4 class="mb-2 flex items-center gap-2 text-base font-bold text-secondary">
 								<svg
-									class="h-5 w-5 shrink-0 text-[#9e2a2b]"
+									class="h-5 w-5 shrink-0 text-primary"
 									fill="none"
 									stroke="currentColor"
 									viewBox="0 0 24 24"
@@ -5905,7 +5913,7 @@
 											clearFieldError('disponibilita_matrimoniale');
 											clearFieldError('matrimoniale_nominativo');
 										}}
-										class="select select-bordered min-h-[44px] w-full rounded-xl bg-white text-xs text-gray-900 sm:text-sm {errors.disponibilita_matrimoniale
+										class="select select-bordered min-h-11 w-full rounded-xl bg-white text-xs text-gray-900 sm:text-sm {errors.disponibilita_matrimoniale
 											? 'border-red-600 ring-1 ring-red-600'
 											: 'border-gray-300'}"
 									>
@@ -5937,7 +5945,7 @@
 									>
 										<label
 											for="input-matrimoniale-nominativo"
-											class="block text-xs font-bold text-[#540b0e]"
+											class="block text-xs font-bold text-secondary"
 										>
 											{#if disponibilitaMatrimoniale === 'disponibile_solo_persona_specifica'}
 												Indica il nominativo e l'ateneo della persona specifica con cui vuoi
@@ -5953,7 +5961,7 @@
 											bind:value={matrimonialeNominativo}
 											oninput={() => clearFieldError('matrimoniale_nominativo')}
 											placeholder="Nome, Cognome e Università (la persona deve indicarti a sua volta nel proprio form)"
-											class="input input-bordered min-h-[44px] w-full rounded-lg bg-white text-xs text-gray-900 sm:text-sm {errors.matrimoniale_nominativo
+											class="input input-bordered min-h-11 w-full rounded-lg bg-white text-xs text-gray-900 sm:text-sm {errors.matrimoniale_nominativo
 												? 'border-red-600 ring-1 ring-red-600'
 												: 'border-red-300'}"
 										/>
@@ -5983,10 +5991,10 @@
 									>
 										{#each ['Doppia', 'Tripla', 'Quadrupla'] as roomType (roomType)}
 											<label
-												class="flex min-h-[44px] cursor-pointer items-center gap-2.5 rounded-xl border bg-white p-3 text-gray-800 hover:border-gray-300 {camereAccettate.includes(
+												class="flex min-h-11 cursor-pointer items-center gap-2.5 rounded-xl border bg-white p-3 text-gray-800 hover:border-gray-300 {camereAccettate.includes(
 													roomType
 												)
-													? 'border-[#9e2a2b] bg-red-50/20 font-semibold'
+													? 'border-primary bg-red-50/20 font-semibold'
 													: 'border-gray-200'}"
 											>
 												<input
@@ -6016,7 +6024,7 @@
 											id="select-compagni"
 											bind:value={preferenzaCompagni}
 											onchange={() => clearFieldError('preferenza_compagni')}
-											class="select select-bordered min-h-[44px] w-full rounded-xl bg-white text-xs text-gray-900 sm:text-sm {errors.preferenza_compagni
+											class="select select-bordered min-h-11 w-full rounded-xl bg-white text-xs text-gray-900 sm:text-sm {errors.preferenza_compagni
 												? 'border-red-600 ring-1 ring-red-600'
 												: 'border-gray-300'}"
 										>
@@ -6047,7 +6055,7 @@
 											id="input-coinquilini-specifici"
 											bind:value={coinquiliniSpecifici}
 											placeholder="Es. Mario Rossi (Torino), Anna Bianchi (Pisa)..."
-											class="input input-bordered min-h-[44px] w-full rounded-xl border-gray-300 bg-white text-xs text-gray-900 sm:text-sm"
+											class="input input-bordered min-h-11 w-full rounded-xl border-gray-300 bg-white text-xs text-gray-900 sm:text-sm"
 										/>
 										<span class="mt-1 block text-[11px] text-gray-500">
 											<u>Nota coinquilini</u>: a differenza del letto matrimoniale, per la stanza
@@ -6062,7 +6070,7 @@
 
 					<!-- 2. Regime Alimentare Principale -->
 					<div class="rounded-xl border border-emerald-200/80 bg-white/95 p-5 shadow-2xs">
-						<h4 class="mb-2 flex items-center gap-2 text-base font-bold text-[#540b0e]">
+						<h4 class="mb-2 flex items-center gap-2 text-base font-bold text-secondary">
 							<svg
 								class="h-5 w-5 shrink-0 text-emerald-700"
 								fill="none"
@@ -6098,7 +6106,7 @@
 										clearFieldError('regime_alimentare');
 										clearFieldError('regime_altro');
 									}}
-									class="select select-bordered min-h-[44px] w-full rounded-xl bg-white text-xs text-gray-900 sm:text-sm {errors.regime_alimentare
+									class="select select-bordered min-h-11 w-full rounded-xl bg-white text-xs text-gray-900 sm:text-sm {errors.regime_alimentare
 										? 'border-red-600 ring-1 ring-red-600'
 										: 'border-gray-300'}"
 								>
@@ -6118,7 +6126,7 @@
 								<div data-field-id="regime_altro">
 									<label
 										for="input-regime-altro"
-										class="mb-1 block text-xs font-bold text-[#540b0e]"
+										class="mb-1 block text-xs font-bold text-secondary"
 									>
 										Specifica regime alimentare speciale:
 									</label>
@@ -6128,7 +6136,7 @@
 										bind:value={regimeAltro}
 										oninput={() => clearFieldError('regime_altro')}
 										placeholder="Es. Pescetariano, dieta specifica..."
-										class="input input-bordered min-h-[44px] w-full rounded-xl bg-white text-xs text-gray-900 sm:text-sm {errors.regime_altro
+										class="input input-bordered min-h-11 w-full rounded-xl bg-white text-xs text-gray-900 sm:text-sm {errors.regime_altro
 											? 'border-red-600 ring-1 ring-red-600'
 											: 'border-gray-300'}"
 									/>
@@ -6145,7 +6153,7 @@
 						class="rounded-xl border border-emerald-200/80 bg-white/95 p-5 shadow-2xs"
 						data-field-id="allergie_presenti"
 					>
-						<h4 class="mb-1 flex items-center gap-2 text-base font-bold text-[#540b0e]">
+						<h4 class="mb-1 flex items-center gap-2 text-base font-bold text-secondary">
 							<span>⚠️</span> Allergie, Condizioni Cliniche, e Intolleranze Metaboliche o da Contatto
 						</h4>
 						<p class="mb-3 text-xs text-gray-600">
@@ -6159,7 +6167,7 @@
 									: ''}"
 							>
 								<label
-									class="flex min-h-[52px] cursor-pointer items-center gap-2.5 rounded-xl border-2 p-3 font-bold transition {allergiePresenti ===
+									class="flex min-h-13 cursor-pointer items-center gap-2.5 rounded-xl border-2 p-3 font-bold transition {allergiePresenti ===
 									'no'
 										? 'border-emerald-500 bg-emerald-50 text-emerald-950'
 										: 'border-gray-200 bg-white text-gray-800 hover:border-emerald-400'}"
@@ -6181,10 +6189,10 @@
 								</label>
 
 								<label
-									class="flex min-h-[52px] cursor-pointer items-center gap-2.5 rounded-xl border-2 p-3 font-bold transition {allergiePresenti ===
+									class="flex min-h-13 cursor-pointer items-center gap-2.5 rounded-xl border-2 p-3 font-bold transition {allergiePresenti ===
 									'si'
-										? 'border-[#9e2a2b] bg-red-50/40 text-[#540b0e]'
-										: 'border-gray-200 bg-white text-gray-800 hover:border-[#9e2a2b]'}"
+										? 'border-primary bg-red-50/40 text-secondary'
+										: 'border-gray-200 bg-white text-gray-800 hover:border-primary'}"
 								>
 									<input
 										type="radio"
@@ -6207,7 +6215,7 @@
 								<div data-field-id="allergie_elenco">
 									<label
 										for="input-allergie-elenco"
-										class="mb-1 block text-xs font-bold text-[#540b0e]"
+										class="mb-1 block text-xs font-bold text-secondary"
 									>
 										Indica specificamente allergie, intolleranze o patologie metaboliche:
 									</label>
@@ -6232,7 +6240,7 @@
 								<div data-field-id="allergie_gravita">
 									<label
 										for="select-allergie-gravita"
-										class="mb-1 block text-xs font-bold text-[#540b0e]"
+										class="mb-1 block text-xs font-bold text-secondary"
 									>
 										Livello di gravità massimo delle reazioni:
 									</label>
@@ -6240,7 +6248,7 @@
 										id="select-allergie-gravita"
 										bind:value={allergieGravita}
 										onchange={() => clearFieldError('allergie_gravita')}
-										class="select select-bordered min-h-[44px] w-full rounded-lg bg-white text-xs text-gray-900 sm:text-sm {errors.allergie_gravita
+										class="select select-bordered min-h-11 w-full rounded-lg bg-white text-xs text-gray-900 sm:text-sm {errors.allergie_gravita
 											? 'border-red-600 ring-1 ring-red-600'
 											: 'border-red-300'}"
 									>
@@ -6265,7 +6273,7 @@
 								<div data-field-id="allergie_precauzioni">
 									<label
 										for="textarea-allergie-precauzioni"
-										class="mb-1 block text-xs font-bold text-[#540b0e]"
+										class="mb-1 block text-xs font-bold text-secondary"
 									>
 										Dettagli specifici o precauzioni vitali richieste (es. anche inalazione o
 										traccia, no contaminazione incrociata):
@@ -6291,7 +6299,7 @@
 
 					<!-- 4. Altre Note Sanitarie (Facoltativo) -->
 					<div class="rounded-xl border border-emerald-200/80 bg-white/95 p-5 shadow-2xs">
-						<h4 class="mb-1 flex items-center gap-2 text-base font-bold text-[#540b0e]">
+						<h4 class="mb-1 flex items-center gap-2 text-base font-bold text-secondary">
 							<span>🩺</span> Altre Note Sanitarie o Condizioni Mediche (Facoltativo / Spazio Aperto)
 						</h4>
 						<p class="mb-2 text-xs text-gray-600">
@@ -6311,7 +6319,7 @@
 
 					<!-- 5. Accessibilità (Facoltativo) -->
 					<div class="rounded-xl border border-emerald-200/80 bg-white/95 p-5 shadow-2xs">
-						<h4 class="mb-2 flex items-center gap-2 text-base font-bold text-[#540b0e]">
+						<h4 class="mb-2 flex items-center gap-2 text-base font-bold text-secondary">
 							<svg
 								class="h-5 w-5 shrink-0 text-blue-700"
 								fill="none"
@@ -6366,7 +6374,7 @@
 						materiale involontario, contatta tempestivamente il CO all'indirizzo
 						<a
 							href="mailto:cisf27@ai-sf.it"
-							class="font-bold text-[#540b0e] underline hover:text-[#9e2a2b]">cisf27@ai-sf.it</a
+							class="font-bold text-secondary underline hover:text-primary">cisf27@ai-sf.it</a
 						>
 						per rettificare i dati!
 					</div>
@@ -6386,7 +6394,7 @@
 					<button
 						type="button"
 						onclick={() => goToStep(3)}
-						class="btn min-h-[48px] rounded-xl border border-gray-300 bg-white px-5 text-xs font-bold text-gray-700 hover:bg-gray-100"
+						class="btn min-h-12 rounded-xl border border-gray-300 bg-white px-5 text-xs font-bold text-gray-700 hover:bg-gray-100"
 					>
 						<ArrowLeft class="size-4" />
 						Indietro: Temi &amp; Fisse
@@ -6394,7 +6402,7 @@
 					<button
 						type="button"
 						onclick={() => goToStep(5)}
-						class="btn btn-primary min-h-[48px] rounded-xl px-6 text-sm font-bold text-white shadow-md"
+						class="btn btn-primary min-h-12 rounded-xl px-6 text-sm font-bold text-white shadow-md"
 					>
 						Continua: Commento &amp; Invio
 						<ArrowRight class="size-4" />
@@ -6407,7 +6415,7 @@
 		<!-- SCHERMATA 6 / STEP 5: REVISIONE FINALE, CONSENSI & INVIO            -->
 		<!-- =================================================================== -->
 		{#if showWizard && currentStep === 5}
-			<div class="cisf-card mb-8 p-5 sm:p-10">
+			<div class="rounded-2xl border border-primary/20 bg-base-100 shadow-lg mb-8 p-5 sm:p-10">
 				<div class="mb-6 flex items-center gap-3">
 					<div
 						class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-red-100 text-sm font-bold text-red-900"
@@ -6415,7 +6423,7 @@
 						06
 					</div>
 					<div>
-						<h2 class="font-playfair-display text-2xl font-bold text-[#540b0e] sm:text-3xl">
+						<h2 class="font-playfair-display text-2xl font-bold text-secondary sm:text-3xl">
 							Commento Finale &amp; Invio Candidatura
 						</h2>
 						<p class="text-xs text-gray-600 sm:text-sm">
@@ -6427,7 +6435,7 @@
 				<!-- COMMENTO FINALE CON CONTATORE CARATTERI -->
 				<div class="mb-6 rounded-2xl border border-amber-200 bg-amber-50/70 p-4">
 					<div class="mb-1 flex items-center justify-between gap-2">
-						<label for="final-comment-input" class="block text-xs font-bold text-[#540b0e]">
+						<label for="final-comment-input" class="block text-xs font-bold text-secondary">
 							Commento finale libero per il Comitato Organizzatore (Facoltativo)
 						</label>
 						<span class="font-mono text-[11px] text-gray-600">
@@ -6461,7 +6469,7 @@
 							<span class="block text-[10px] font-medium text-gray-400 uppercase"
 								>Candidatə &amp; Contatto</span
 							>
-							<strong class="text-sm text-[#540b0e]">
+							<strong class="text-sm text-secondary">
 								{nome || '—'}
 								{cognome || ''}
 							</strong>
@@ -6474,14 +6482,14 @@
 							<span class="block text-[10px] font-medium text-gray-400 uppercase"
 								>Tipologia Quota Richiesta</span
 							>
-							<strong class="text-sm text-[#540b0e]">{summaryQuotaText}</strong>
+							<strong class="text-sm text-secondary">{summaryQuotaText}</strong>
 						</div>
 
 						<div class="rounded-xl border border-gray-200 bg-white p-3">
 							<span class="block text-[10px] font-medium text-gray-400 uppercase"
 								>Motivazione Creativa</span
 							>
-							<strong class="text-sm text-[#540b0e]">
+							<strong class="text-sm text-secondary">
 								{#if motivazioneFile}
 									📎 {motivazioneFile.name} ({formatBytesToMB(motivazioneFile.size)} MB)
 								{:else if linkProgetto.trim()}
@@ -6498,7 +6506,7 @@
 							<span class="block text-[10px] font-medium text-gray-400 uppercase"
 								>Proposta Parallel / Talk</span
 							>
-							<strong class="text-sm text-[#540b0e]">{summaryParallelText}</strong>
+							<strong class="text-sm text-secondary">{summaryParallelText}</strong>
 						</div>
 
 						<div class="rounded-xl border border-gray-200 bg-white p-3 sm:col-span-2">
@@ -6508,7 +6516,7 @@
 							<div class="mt-1 flex flex-wrap gap-1.5">
 								{#each displayedAreas.slice(0, 3) as area, i (area.id)}
 									<span
-										class="inline-flex items-center gap-1 rounded-full bg-amber-100 px-2.5 py-0.5 text-[11px] font-bold text-[#540b0e]"
+										class="inline-flex items-center gap-1 rounded-full bg-amber-100 px-2.5 py-0.5 text-[11px] font-bold text-secondary"
 									>
 										{i + 1}° {area.icon}
 										{area.name}
@@ -6527,7 +6535,7 @@
 					<div class="grid grid-cols-1 gap-3 text-xs sm:grid-cols-3">
 						<div class="flex items-start gap-2">
 							<span
-								class="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-[#9e2a2b] text-[10px] font-bold text-white"
+								class="bg-primary text-primary-content flex h-5 w-5 shrink-0 items-center justify-center rounded-full text-[10px] font-bold"
 								>1</span
 							>
 							<span
@@ -6537,7 +6545,7 @@
 						</div>
 						<div class="flex items-start gap-2">
 							<span
-								class="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-[#9e2a2b] text-[10px] font-bold text-white"
+								class="bg-primary text-primary-content flex h-5 w-5 shrink-0 items-center justify-center rounded-full text-[10px] font-bold"
 								>2</span
 							>
 							<span
@@ -6547,7 +6555,7 @@
 						</div>
 						<div class="flex items-start gap-2">
 							<span
-								class="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-[#9e2a2b] text-[10px] font-bold text-white"
+								class="bg-primary text-primary-content flex h-5 w-5 shrink-0 items-center justify-center rounded-full text-[10px] font-bold"
 								>3</span
 							>
 							<span
@@ -6573,7 +6581,7 @@
 						materiale involontario, contatta tempestivamente il CO all'indirizzo
 						<a
 							href="mailto:cisf27@ai-sf.it"
-							class="font-bold text-[#540b0e] underline hover:text-[#9e2a2b]">cisf27@ai-sf.it</a
+							class="font-bold text-secondary underline hover:text-primary">cisf27@ai-sf.it</a
 						>
 						per rettificare i dati!
 					</div>
@@ -6585,7 +6593,7 @@
 				>
 					<div data-field-id="check_privacy">
 						<label
-							class="flex min-h-[44px] cursor-pointer items-start gap-3 rounded-lg p-2 {errors.check_privacy
+							class="flex min-h-11 cursor-pointer items-start gap-3 rounded-lg p-2 {errors.check_privacy
 								? 'bg-red-50 ring-1 ring-red-600'
 								: ''}"
 						>
@@ -6605,8 +6613,7 @@
 									href="https://ai-sf.it/Informativa_Privacy_AISF.pdf"
 									target="_blank"
 									rel="noopener noreferrer"
-									class="font-bold text-[#9e2a2b] underline"
-									>ai-sf.it/Informativa_Privacy_AISF.pdf</a
+									class="font-bold text-primary underline">ai-sf.it/Informativa_Privacy_AISF.pdf</a
 								>
 								e acconsento al trattamento dei dati ai soli fini della selezione e gestione della CISF27.
 							</span>
@@ -6618,7 +6625,7 @@
 
 					<div data-field-id="check_veridicita">
 						<label
-							class="flex min-h-[44px] cursor-pointer items-start gap-3 rounded-lg p-2 {errors.check_veridicita
+							class="flex min-h-11 cursor-pointer items-start gap-3 rounded-lg p-2 {errors.check_veridicita
 								? 'bg-red-50 ring-1 ring-red-600'
 								: ''}"
 						>
@@ -6643,7 +6650,7 @@
 									target="_blank"
 									rel="noopener noreferrer"
 									onclick={(e) => e.stopPropagation()}
-									class="font-bold text-[#9e2a2b] underline">codice etico associativo</a
+									class="font-bold text-primary underline">codice etico associativo</a
 								>.
 							</span>
 						</label>
@@ -6654,7 +6661,7 @@
 
 					<div data-field-id="check_pagamento">
 						<label
-							class="flex min-h-[44px] cursor-pointer items-start gap-3 rounded-lg p-2 {errors.check_pagamento
+							class="flex min-h-11 cursor-pointer items-start gap-3 rounded-lg p-2 {errors.check_pagamento
 								? 'bg-red-50 ring-1 ring-red-600'
 								: ''}"
 						>
@@ -6689,7 +6696,7 @@
 						aria-live="polite"
 					>
 						<div class="mb-2 flex items-center gap-2 font-bold">
-							<span class="loading loading-spinner loading-sm text-[#9e2a2b]"></span>
+							<span class="loading loading-spinner loading-sm text-primary"></span>
 							<span
 								>{submitStage ||
 									'Caricamento allegati e registrazione in corso... non chiudere la pagina'}</span
@@ -6735,7 +6742,7 @@
 								type="button"
 								onclick={handleFinalSubmit}
 								disabled={submitting}
-								class="btn btn-sm btn-error min-h-[44px] rounded-xl font-bold text-white"
+								class="btn btn-sm btn-error min-h-11 rounded-xl font-bold text-white"
 							>
 								<RotateCcw class="size-4" />
 								Riprova invio
@@ -6749,7 +6756,7 @@
 						type="button"
 						disabled={submitting}
 						onclick={() => goToStep(4)}
-						class="btn min-h-[48px] rounded-xl border border-gray-300 bg-white px-5 text-xs font-bold text-gray-700 hover:bg-gray-100"
+						class="btn min-h-12 rounded-xl border border-gray-300 bg-white px-5 text-xs font-bold text-gray-700 hover:bg-gray-100"
 					>
 						<ArrowLeft class="size-4" />
 						Indietro: Logistica Safe
@@ -6759,7 +6766,7 @@
 						type="button"
 						disabled={submitting}
 						onclick={handleFinalSubmit}
-						class="btn min-h-[52px] rounded-xl border-0 bg-linear-to-r from-[#9e2a2b] via-[#c95d3b] to-[#e09f3e] px-8 text-sm font-extrabold text-white shadow-lg transition hover:opacity-95 hover:shadow-xl disabled:opacity-60 sm:text-base"
+						class="btn from-primary via-accent to-warning text-primary-content min-h-13 rounded-xl border-0 bg-linear-to-r px-8 text-sm font-extrabold shadow-lg transition hover:opacity-95 hover:shadow-xl disabled:opacity-60 sm:text-base"
 					>
 						{#if submitting}
 							<span class="loading loading-spinner loading-sm"></span>
@@ -6784,7 +6791,7 @@
 			aria-labelledby="modal-success-title"
 		>
 			<div
-				class="cisf-card max-h-[92vh] w-full max-w-lg overflow-y-auto bg-white p-6 text-center shadow-2xl sm:p-8"
+				class="border-primary/20 bg-base-100 max-h-[92vh] w-full max-w-lg overflow-y-auto rounded-2xl border p-6 text-center shadow-2xl sm:p-8"
 			>
 				{#if successReceipt.isTest}
 					<div
@@ -6818,13 +6825,13 @@
 						Codice Ricevuta Ufficiale
 					</span>
 					<div class="flex items-center gap-2">
-						<span class="font-mono text-2xl font-extrabold tracking-widest text-[#540b0e]">
+						<span class="font-mono text-2xl font-extrabold tracking-widest text-secondary">
 							{successReceipt.candidateId}
 						</span>
 						<button
 							type="button"
 							onclick={() => successReceipt && copyReceiptId(successReceipt.candidateId)}
-							class="btn btn-xs min-h-[36px] border border-emerald-300 bg-white text-emerald-900 hover:bg-emerald-100"
+							class="btn btn-xs min-h-9 border border-emerald-300 bg-white text-emerald-900 hover:bg-emerald-100"
 							title="Copia codice ricevuta"
 						>
 							{#if copiedReceipt}
@@ -6842,7 +6849,7 @@
 					<div
 						class="mb-4 rounded-xl border border-gray-200 bg-gray-50 p-3 text-left text-[11px] text-gray-700"
 					>
-						<div class="mb-1.5 font-bold text-[#540b0e]">
+						<div class="mb-1.5 font-bold text-secondary">
 							📦 File archiviati sui server AISF (prova SHA-256):
 						</div>
 						<ul class="space-y-1.5">
@@ -6896,7 +6903,7 @@
 				<button
 					type="button"
 					onclick={closeSuccessAndRestart}
-					class="btn btn-primary min-h-[48px] w-full rounded-xl text-xs font-bold text-white"
+					class="btn btn-primary min-h-12 w-full rounded-xl text-xs font-bold text-white"
 				>
 					Chiudi e Torna all'Inizio
 				</button>
@@ -6915,7 +6922,7 @@
 			aria-labelledby="modal-criteri-title"
 		>
 			<div
-				class="cisf-card max-h-[90vh] w-full max-w-3xl overflow-y-auto bg-white p-6 shadow-2xl sm:p-8"
+				class="border-primary/20 bg-base-100 max-h-[90vh] w-full max-w-3xl overflow-y-auto rounded-2xl border p-6 shadow-2xl sm:p-8"
 			>
 				<div class="mb-4 flex items-center justify-between border-b border-gray-200 pb-4">
 					<div class="flex items-center gap-3">
@@ -6927,7 +6934,7 @@
 						<div>
 							<h3
 								id="modal-criteri-title"
-								class="font-playfair-display text-xl font-bold text-[#540b0e]"
+								class="font-playfair-display text-xl font-bold text-secondary"
 							>
 								Criteri di Selezione Pubblici &amp; Codice Etico AISF
 							</h3>
@@ -6940,7 +6947,7 @@
 						type="button"
 						onclick={() => (showCriteriModal = false)}
 						aria-label="Chiudi finestra criteri"
-						class="btn btn-sm btn-ghost min-h-[40px] min-w-[40px] rounded-lg bg-gray-100 text-gray-700 hover:bg-gray-200"
+						class="btn btn-sm btn-ghost min-h-10 min-w-10 rounded-lg bg-gray-100 text-gray-700 hover:bg-gray-200"
 					>
 						✕
 					</button>
@@ -6953,13 +6960,13 @@
 							href={criteriPageUrl}
 							target="_blank"
 							rel="noopener noreferrer"
-							class="font-bold text-[#540b0e] underline">ai-sf.it/cisf27/criteri</a
+							class="font-bold text-secondary underline">ai-sf.it/cisf27/criteri</a
 						>) e i documenti completi in PDF (Criteri di Selezione e Codice Etico) sono scaricabili
 						direttamente senza necessità di accedere al modulo di iscrizione.
 					</div>
 
 					<h4
-						class="font-playfair-display border-b border-gray-100 pt-2 text-base font-bold text-[#540b0e]"
+						class="font-playfair-display border-b border-gray-100 pt-2 text-base font-bold text-secondary"
 					>
 						1. Informazioni Generali CISF27
 					</h4>
@@ -6977,7 +6984,7 @@
 					</p>
 
 					<h4
-						class="font-playfair-display border-b border-gray-100 pt-2 text-base font-bold text-[#540b0e]"
+						class="font-playfair-display border-b border-gray-100 pt-2 text-base font-bold text-secondary"
 					>
 						2. Aventi Diritto &amp; Criteri per i Comitati Locali
 					</h4>
@@ -7007,13 +7014,13 @@
 							di genere tra i partecipanti selezionati.
 						</li>
 					</ul>
-					<p class="-mt-2 text-[11px] font-semibold text-[#540b0e] italic">
+					<p class="-mt-2 text-[11px] font-semibold text-secondary italic">
 						* La persona vincitrice dell'Open Call della Redazione di Fisicaffè riceverà d'ufficio
 						un posto a CISF non conteggiato nei 170 partecipanti.
 					</p>
 
 					<h4
-						class="font-playfair-display border-b border-gray-100 pt-2 text-base font-bold text-[#540b0e]"
+						class="font-playfair-display border-b border-gray-100 pt-2 text-base font-bold text-secondary"
 					>
 						3. Cause di Rigetto della Candidatura
 					</h4>
@@ -7034,7 +7041,7 @@
 					</ul>
 
 					<h4
-						class="font-playfair-display border-b border-gray-100 pt-2 text-base font-bold text-[#540b0e]"
+						class="font-playfair-display border-b border-gray-100 pt-2 text-base font-bold text-secondary"
 					>
 						4. Quote, Pagamenti &amp; Politica Rimborsi
 					</h4>
@@ -7053,7 +7060,7 @@
 					</p>
 
 					<h4
-						class="font-playfair-display border-b border-gray-100 pt-2 text-base font-bold text-[#540b0e]"
+						class="font-playfair-display border-b border-gray-100 pt-2 text-base font-bold text-secondary"
 					>
 						5. Codice Etico &amp; Safe Space AISF
 					</h4>
@@ -7063,7 +7070,7 @@
 							href={`${criteriPageUrl}#codice-etico`}
 							target="_blank"
 							rel="noopener noreferrer"
-							class="font-bold text-[#9e2a2b] underline">Codice Etico di CISF27</a
+							class="font-bold text-primary underline">Codice Etico di CISF27</a
 						>
 						(inclusività, Safe Space, no sponsor dall'industria bellica/armi, sostenibilità
 						<em>#Plastic-freER</em>, apartiticità e trasparenza) è consultabile pubblicamente e
@@ -7072,7 +7079,7 @@
 					</p>
 
 					<h4
-						class="font-playfair-display border-b border-gray-100 pt-2 text-base font-bold text-[#540b0e]"
+						class="font-playfair-display border-b border-gray-100 pt-2 text-base font-bold text-secondary"
 					>
 						6. Clausola di Salvaguardia
 					</h4>
@@ -7091,7 +7098,7 @@
 							href={criteriPdfUrl}
 							target="_blank"
 							rel="noopener noreferrer"
-							class="btn btn-primary btn-sm min-h-[44px] rounded-xl text-xs font-bold text-white"
+							class="btn btn-primary btn-sm min-h-11 rounded-xl text-xs font-bold text-white"
 						>
 							Scarica PDF Ufficiale dei Criteri
 						</a>
@@ -7099,7 +7106,7 @@
 							href={codiceEticoPdfUrl}
 							target="_blank"
 							rel="noopener noreferrer"
-							class="btn btn-secondary btn-sm min-h-[44px] rounded-xl text-xs font-bold text-white"
+							class="btn btn-secondary btn-sm min-h-11 rounded-xl text-xs font-bold text-white"
 						>
 							Scarica PDF Codice Etico
 						</a>
@@ -7107,7 +7114,7 @@
 							href={criteriPageUrl}
 							target="_blank"
 							rel="noopener noreferrer"
-							class="btn btn-sm min-h-[44px] rounded-xl border border-[#9e2a2b]/40 bg-red-50/60 text-xs font-bold text-[#540b0e] hover:bg-red-100/70"
+							class="btn btn-primary btn-soft btn-sm border-primary/30 text-secondary hover:text-primary-content min-h-11 rounded-xl text-xs font-bold"
 						>
 							Pagina Criteri &amp; Etica
 						</a>
@@ -7115,7 +7122,7 @@
 					<button
 						type="button"
 						onclick={() => (showCriteriModal = false)}
-						class="btn btn-sm min-h-[44px] rounded-xl border border-gray-300 bg-white text-xs font-bold text-gray-700 hover:bg-gray-100"
+						class="btn btn-sm min-h-11 rounded-xl border border-gray-300 bg-white text-xs font-bold text-gray-700 hover:bg-gray-100"
 					>
 						Chiudi Finestra
 					</button>
@@ -7124,119 +7131,3 @@
 		</div>
 	{/if}
 </div>
-
-<style>
-	.cisf-registration-root {
-		color-scheme: light;
-		color: #1e2530;
-	}
-
-	.cisf-card {
-		background: rgba(255, 255, 255, 0.96);
-		border: 1px solid rgba(158, 42, 43, 0.22);
-		border-radius: 1.25rem;
-		box-shadow: 0 10px 30px -10px rgba(84, 11, 14, 0.08);
-	}
-
-	.badge-bologna {
-		background: linear-gradient(135deg, rgba(158, 42, 43, 0.12) 0%, rgba(224, 159, 62, 0.15) 100%);
-		border: 1px solid rgba(158, 42, 43, 0.25);
-		color: #540b0e;
-	}
-
-	/* Pillar sliders with progressive color fill on the left and clean white on the right */
-	input[type='range'].cisf-pillar-slider {
-		-webkit-appearance: none;
-		appearance: none;
-		background: linear-gradient(
-			to right,
-			var(--fill-color, #9e2a2b) 0%,
-			var(--fill-color, #9e2a2b) var(--fill-pct, 50%),
-			#ffffff var(--fill-pct, 50%),
-			#ffffff 100%
-		);
-		border: 1.5px solid #d1d5db;
-		border-radius: 9999px;
-		height: 0.75rem;
-	}
-
-	input[type='range'].cisf-pillar-slider::-webkit-slider-runnable-track {
-		background: transparent;
-		border-radius: 9999px;
-		height: 0.65rem;
-	}
-
-	input[type='range'].cisf-pillar-slider::-moz-range-track {
-		background: transparent;
-		border-radius: 9999px;
-		height: 0.65rem;
-	}
-
-	input[type='range'].cisf-pillar-slider::-webkit-slider-thumb {
-		-webkit-appearance: none;
-		appearance: none;
-		width: 1.25rem;
-		height: 1.25rem;
-		border-radius: 9999px;
-		background: var(--fill-color, #9e2a2b);
-		border: 2px solid #ffffff;
-		box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
-		margin-top: -0.3rem;
-		cursor: pointer;
-	}
-
-	input[type='range'].cisf-pillar-slider::-moz-range-thumb {
-		width: 1.25rem;
-		height: 1.25rem;
-		border-radius: 9999px;
-		background: var(--fill-color, #9e2a2b);
-		border: 2px solid #ffffff;
-		box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
-		cursor: pointer;
-	}
-
-	/* Quiz Blitz 04 & 10 sliders (uniform crisp white track) */
-	input[type='range'].cisf-slider {
-		-webkit-appearance: none;
-		appearance: none;
-		background: #ffffff;
-		border: 1.5px solid #d1d5db;
-		border-radius: 9999px;
-		height: 0.75rem;
-	}
-
-	input[type='range'].cisf-slider::-webkit-slider-runnable-track {
-		background: #ffffff;
-		border-radius: 9999px;
-		height: 0.65rem;
-	}
-
-	input[type='range'].cisf-slider::-moz-range-track {
-		background: #ffffff;
-		border-radius: 9999px;
-		height: 0.65rem;
-	}
-
-	input[type='range'].cisf-slider::-webkit-slider-thumb {
-		-webkit-appearance: none;
-		appearance: none;
-		width: 1.2rem;
-		height: 1.2rem;
-		border-radius: 9999px;
-		background: #9e2a2b;
-		border: 2px solid #ffffff;
-		box-shadow: 0 1px 4px rgba(0, 0, 0, 0.28);
-		margin-top: -0.27rem;
-		cursor: pointer;
-	}
-
-	input[type='range'].cisf-slider::-moz-range-thumb {
-		width: 1.2rem;
-		height: 1.2rem;
-		border-radius: 9999px;
-		background: #9e2a2b;
-		border: 2px solid #ffffff;
-		box-shadow: 0 1px 4px rgba(0, 0, 0, 0.28);
-		cursor: pointer;
-	}
-</style>
