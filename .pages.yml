@@ -1098,6 +1098,24 @@ content:
             type: string
             label: Collegamento
             readonly: true
+      - name: criteri
+        type: object
+        label: Criteri
+        fields:
+          - name: name
+            type: string
+            label: Nome
+          - name: icon
+            type: reference
+            label: Icona
+            options:
+              collection: icon-options
+              value: '{lucideId}'
+              label: '{label}'
+          - name: href
+            type: string
+            label: Collegamento
+            readonly: true
       - name: contact
         type: object
         label: Contatto
@@ -1360,6 +1378,502 @@ content:
       - name: defaultMessage
         type: string
         label: Messaggio Predefinito
+
+  - name: criteria
+    label: Criteri e Codice Etico
+    type: file
+    path: src/data/cms/criteria.json
+    format: json
+    fields:
+      - name: pageTitle
+        type: string
+        label: Titolo Pagina
+      - name: pageDescription
+        type: text
+        label: Descrizione Pagina
+      - name: documents
+        type: object
+        label: Documenti PDF Ufficiali
+        fields:
+          - name: criteriaPdf
+            type: object
+            label: PDF Criteri di Selezione
+            fields:
+              - name: downloadUrl
+                type: string
+                label: Percorso / URL PDF
+              - name: heroLabel
+                type: string
+                label: Etichetta Hero
+              - name: shortLabel
+                type: string
+                label: Etichetta Breve
+              - name: ctaLabel
+                type: string
+                label: Etichetta CTA
+          - name: ethicsPdf
+            type: object
+            label: PDF Codice Etico
+            fields:
+              - name: downloadUrl
+                type: string
+                label: Percorso / URL PDF
+              - name: heroLabel
+                type: string
+                label: Etichetta Hero
+              - name: sectionLabel
+                type: string
+                label: Etichetta Sezione
+              - name: ctaLabel
+                type: string
+                label: Etichetta CTA
+      - name: hero
+        type: object
+        label: Hero
+        fields:
+          - name: label
+            type: string
+            label: Badge
+          - name: heading
+            type: string
+            label: Titolo
+          - name: subtitle
+            type: text
+            label: Sottotitolo
+          - name: applyBtn
+            type: string
+            label: Bottone Candidatura
+          - name: jumpCriteria
+            type: string
+            label: Link Criteri
+          - name: jumpEthics
+            type: string
+            label: Link Codice Etico
+          - name: jumpContacts
+            type: string
+            label: Link Contatti
+          - name: languageNoticeTitle
+            type: string
+            label: Titolo Avviso Lingua
+          - name: languageNoticeText
+            type: text
+            label: Testo Avviso Lingua
+          - name: quickStats
+            type: object
+            label: Statistiche Rapide
+            list: true
+            fields:
+              - name: id
+                type: string
+                label: ID
+              - name: statValue
+                type: string
+                label: Valore
+              - name: label
+                type: string
+                label: Etichetta
+              - name: detail
+                type: string
+                label: Dettaglio
+      - name: selectionSection
+        type: object
+        label: Sezione Criteri di Selezione
+        fields:
+          - name: badge
+            type: string
+            label: Badge
+          - name: heading
+            type: string
+            label: Titolo
+          - name: gradientWord
+            type: string
+            label: Parola Gradient
+          - name: intro
+            type: text
+            label: Introduzione
+          - name: accommodationCard
+            type: object
+            label: Card Partecipanti & Alloggio
+            fields:
+              - name: title
+                type: string
+                label: Titolo
+              - name: subtitle
+                type: string
+                label: Sottotitolo
+              - name: badge
+                type: string
+                label: Badge
+              - name: withStay
+                type: object
+                label: Con Alloggio
+                fields:
+                  - name: count
+                    type: string
+                    label: Numero
+                  - name: title
+                    type: string
+                    label: Titolo
+                  - name: description
+                    type: text
+                    label: Descrizione
+              - name: withoutStay
+                type: object
+                label: Alloggio Autonomo
+                fields:
+                  - name: count
+                    type: string
+                    label: Numero
+                  - name: title
+                    type: string
+                    label: Titolo
+                  - name: description
+                    type: text
+                    label: Descrizione
+              - name: extraQuota
+                type: object
+                label: Extra Quota
+                fields:
+                  - name: title
+                    type: string
+                    label: Titolo
+                  - name: beforeLink
+                    type: string
+                    label: Testo prima del link
+                  - name: linkText
+                    type: string
+                    label: Testo link
+                  - name: afterLink
+                    type: text
+                    label: Testo dopo il link
+          - name: automaticallyAdmitted
+            type: object
+            label: Card Ammessi di Diritto
+            fields:
+              - name: title
+                type: string
+                label: Titolo
+              - name: subtitle
+                type: string
+                label: Sottotitolo
+              - name: ocItem
+                type: object
+                label: Voce CO
+                fields:
+                  - name: title
+                    type: string
+                    label: Titolo
+                  - name: beforeLink
+                    type: string
+                    label: Testo prima del link
+                  - name: linkText
+                    type: string
+                    label: Testo link
+                  - name: afterLink
+                    type: string
+                    label: Testo dopo il link
+              - name: items
+                type: string
+                label: Altre Voci
+                list: true
+              - name: winnerItem
+                type: object
+                label: Voce Open Call Fisicaffè
+                fields:
+                  - name: title
+                    type: string
+                    label: Titolo
+                  - name: text
+                    type: string
+                    label: Testo
+          - name: minQuotasCard
+            type: object
+            label: Card Quote Minime LC
+            fields:
+              - name: title
+                type: string
+                label: Titolo
+              - name: description
+                type: text
+                label: Descrizione
+              - name: supportTitle
+                type: string
+                label: Titolo Sostegno
+              - name: supportText
+                type: text
+                label: Testo Sostegno
+          - name: proportionalityCard
+            type: object
+            label: Card Proporzionalità
+            fields:
+              - name: title
+                type: string
+                label: Titolo
+              - name: description
+                type: text
+                label: Descrizione
+              - name: tipTitle
+                type: string
+                label: Titolo Consiglio
+              - name: tipText
+                type: text
+                label: Testo Consiglio
+          - name: parityCard
+            type: object
+            label: Card Parità & Lingua
+            fields:
+              - name: title
+                type: string
+                label: Titolo
+              - name: description
+                type: text
+                label: Descrizione
+              - name: languageTitle
+                type: string
+                label: Titolo Lingua
+              - name: languageText
+                type: text
+                label: Testo Lingua
+          - name: academicCard
+            type: object
+            label: Card Fasce Accademiche & Esterni
+            fields:
+              - name: title
+                type: string
+                label: Titolo
+              - name: subtitle
+                type: string
+                label: Sottotitolo
+              - name: levels
+                type: object
+                label: Livelli
+                list: true
+                fields:
+                  - name: label
+                    type: string
+                    label: Etichetta
+                  - name: excluded
+                    type: boolean
+                    label: Escluso
+              - name: distributionText
+                type: text
+                label: Testo Distribuzione
+              - name: externalTitle
+                type: string
+                label: Titolo Esterni
+              - name: externalText
+                type: text
+                label: Testo Esterni
+          - name: factorsCard
+            type: object
+            label: Card Fattori di Valutazione
+            fields:
+              - name: title
+                type: string
+                label: Titolo
+              - name: subtitle
+                type: string
+                label: Sottotitolo
+              - name: factors
+                type: string
+                label: Fattori
+                list: true
+          - name: rejectionCard
+            type: object
+            label: Card Cause di Rigetto
+            fields:
+              - name: title
+                type: string
+                label: Titolo
+              - name: subtitle
+                type: text
+                label: Sottotitolo
+              - name: causes
+                type: object
+                label: Cause
+                list: true
+                fields:
+                  - name: title
+                    type: string
+                    label: Titolo
+                  - name: desc
+                    type: text
+                    label: Descrizione
+          - name: paymentsCard
+            type: object
+            label: Card Pagamenti & Rimborsi
+            fields:
+              - name: title
+                type: string
+                label: Titolo
+              - name: subtitle
+                type: string
+                label: Sottotitolo
+              - name: items
+                type: object
+                label: Voci
+                list: true
+                fields:
+                  - name: title
+                    type: string
+                    label: Titolo
+                  - name: text
+                    type: text
+                    label: Testo
+                  - name: isAlert
+                    type: boolean
+                    label: Avviso Critico
+          - name: guaranteesCard
+            type: object
+            label: Card Garanzie & Accessibilità
+            fields:
+              - name: title
+                type: string
+                label: Titolo
+              - name: subtitle
+                type: string
+                label: Sottotitolo
+              - name: accessibilityTitle
+                type: string
+                label: Titolo Accessibilità
+              - name: accessibilityText
+                type: text
+                label: Testo Accessibilità
+              - name: ecOversightTitle
+                type: string
+                label: Titolo Supervisione EC
+              - name: ecOversightBeforeEmail
+                type: string
+                label: Testo prima dell'email
+              - name: ecOversightAfterEmail
+                type: string
+                label: Testo dopo dell'email
+              - name: safeguardTitle
+                type: string
+                label: Titolo Clausola di Salvaguardia
+              - name: safeguardText
+                type: text
+                label: Testo Clausola di Salvaguardia
+      - name: ethicsSection
+        type: object
+        label: Sezione Codice Etico
+        fields:
+          - name: badge
+            type: string
+            label: Badge
+          - name: heading
+            type: string
+            label: Titolo
+          - name: gradientWord
+            type: string
+            label: Parola Gradient
+          - name: intro
+            type: text
+            label: Introduzione
+          - name: confidentialBtn
+            type: string
+            label: Bottone Canali Riservati
+          - name: plasticFreeLogoAlt
+            type: string
+            label: Alt Logo Plastic-freER
+          - name: plasticFreeCaption
+            type: text
+            label: Didascalia Plastic-freER
+          - name: pillars
+            type: object
+            label: Pilastri Etici
+            list: true
+            fields:
+              - name: id
+                type: string
+                label: ID
+              - name: icon
+                type: reference
+                label: Icona
+                options:
+                  collection: icon-options
+                  value: '{lucideId}'
+                  label: '{label}'
+              - name: color
+                type: reference
+                label: Colore
+                options:
+                  collection: color-options
+                  value: '{tailwindId}'
+                  label: '{label}'
+              - name: hasPlasticFreeLogo
+                type: boolean
+                label: Mostra Logo Plastic-freER
+              - name: title
+                type: string
+                label: Titolo
+              - name: badge
+                type: string
+                label: Badge
+              - name: description
+                type: text
+                label: Descrizione
+              - name: points
+                type: string
+                label: Punti Chiave
+                list: true
+          - name: confidentialBox
+            type: object
+            label: Box Contatti Riservati
+            fields:
+              - name: badge
+                type: string
+                label: Badge
+              - name: heading
+                type: string
+                label: Titolo
+              - name: description
+                type: text
+                label: Descrizione
+              - name: guaranteeTitle
+                type: string
+                label: Titolo Garanzia
+              - name: guaranteeText
+                type: text
+                label: Testo Garanzia
+      - name: cta
+        type: object
+        label: CTA Finale
+        fields:
+          - name: heading
+            type: string
+            label: Titolo
+          - name: gradientWord
+            type: string
+            label: Parola Gradient
+          - name: headingSuffix
+            type: string
+            label: Suffisso Titolo
+          - name: subtitle
+            type: text
+            label: Sottotitolo
+          - name: languageNote
+            type: text
+            label: Nota Lingua
+          - name: applyBtn
+            type: string
+            label: Bottone Candidatura
+          - name: contactBtn
+            type: string
+            label: Bottone Contatto
+
+  - name: registration
+    label: Pagina Candidatura
+    type: file
+    path: src/data/cms/registration.json
+    format: json
+    fields:
+      - name: pageTitle
+        type: string
+        label: Titolo Pagina
+      - name: pageDescription
+        type: text
+        label: Descrizione Pagina
 
 media:
   - name: partner-images

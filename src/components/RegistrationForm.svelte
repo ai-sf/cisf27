@@ -62,14 +62,32 @@
 		type SavedFileReceipt,
 	} from '../utils/registrationForm';
 
+	const defaultBase = import.meta.env.BASE_URL.replace(/\/$/, '');
+
 	let {
-		criteriPdfUrl = '/cisf27/docs/Criteri_di_selezione_CISF27.pdf',
-		codiceEticoPdfUrl = '/cisf27/docs/Codice_Etico_CISF27.pdf',
-		criteriPageUrl = '/cisf27/criteri',
+		criteriPdfUrl = `${defaultBase}/docs/Criteri_di_selezione_CISF27.pdf`,
+		codiceEticoPdfUrl = `${defaultBase}/docs/Codice_Etico_CISF27.pdf`,
+		criteriPageUrl = `${defaultBase}/criteri`,
+		criteriPublicUrlLabel = 'ai-sf.it/cisf27/criteri',
+		conferenceTitle = 'CISF27',
+		conferenceLocation = 'Bologna',
+		conferenceDates = '19–23 aprile 2027',
+		contactEmail = 'cisf27@ai-sf.it',
+		priceWithAccommodation = '€120',
+		priceWithoutAccommodation = '€70',
+		accommodationName = 'Combo Bologna',
 	}: {
 		criteriPdfUrl?: string;
 		codiceEticoPdfUrl?: string;
 		criteriPageUrl?: string;
+		criteriPublicUrlLabel?: string;
+		conferenceTitle?: string;
+		conferenceLocation?: string;
+		conferenceDates?: string;
+		contactEmail?: string;
+		priceWithAccommodation?: string;
+		priceWithoutAccommodation?: string;
+		accommodationName?: string;
 	} = $props();
 
 	const totalSteps = REGISTRATION_STEPS.length;
@@ -309,15 +327,17 @@
 	const canAcceptRanking = $derived(quizResult.answeredCount === 12);
 
 	const summaryQuotaText = $derived.by(() => {
-		if (tipologiaQuota === 'con_letto') return 'Con Alloggio Garantito — €120 (Combo Bologna)';
-		if (tipologiaQuota === 'senza_letto') return 'Senza Alloggio — €70 (Autonomo)';
+		if (tipologiaQuota === 'con_letto')
+			return `Con Alloggio Garantito — ${priceWithAccommodation} (${accommodationName})`;
+		if (tipologiaQuota === 'senza_letto')
+			return `Senza Alloggio — ${priceWithoutAccommodation} (Autonomo)`;
 		if (tipologiaQuota === 'indifferente') {
 			const subMap: Record<string, string> = {
 				pref_con_letto: 'preferenza con alloggio',
 				pref_senza_letto: 'preferenza senza alloggio',
 				pref_pura: '100% indifferente',
 			};
-			return `Indifferente / Flessibile (€120 o €70 — ${subMap[subPreferenza] ?? 'flessibile'})`;
+			return `Indifferente / Flessibile (${priceWithAccommodation} o ${priceWithoutAccommodation} — ${subMap[subPreferenza] ?? 'flessibile'})`;
 		}
 		return 'Non selezionata';
 	});
@@ -1382,12 +1402,12 @@
 			} else {
 				submitError =
 					result.error ??
-					'Si è verificato un errore imprevisto durante l’invio. I tuoi dati non sono stati persi: riprova oppure scrivi a cisf27@ai-sf.it.';
+					`Si è verificato un errore imprevisto durante l’invio. I tuoi dati non sono stati persi: riprova oppure scrivi a ${contactEmail}.`;
 			}
 		} catch (err) {
 			submitError =
 				(err as Error).message ||
-				'Errore durante la preparazione o trasmissione della candidatura. Riprova o contatta cisf27@ai-sf.it.';
+				`Errore durante la preparazione o trasmissione della candidatura. Riprova o contatta ${contactEmail}.`;
 		} finally {
 			submitting = false;
 		}
@@ -1429,7 +1449,7 @@
 					d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
 				/>
 			</svg>
-			Bologna • 19–23 aprile 2027
+			{conferenceLocation} • {conferenceDates}
 		</div>
 
 		<h1
@@ -1437,7 +1457,7 @@
 		>
 			Candidatura <span
 				class="bg-linear-to-r from-primary via-accent to-warning bg-clip-text text-transparent"
-				>CISF27</span
+				>{conferenceTitle}</span
 			>
 		</h1>
 		<p class="mx-auto mt-2 max-w-2xl text-base font-medium text-gray-600 sm:text-lg">
@@ -1666,10 +1686,10 @@
 							Riprova
 						</button>
 						<a
-							href="mailto:cisf27@ai-sf.it"
+							href={`mailto:${contactEmail}`}
 							class="btn min-h-11 rounded-xl border border-gray-300 bg-white px-5 text-xs font-bold text-secondary hover:bg-gray-50"
 						>
-							Scrivi a cisf27@ai-sf.it
+							Scrivi a {contactEmail}
 						</a>
 					</div>
 				</div>
@@ -1800,8 +1820,11 @@
 					</h2>
 					<p class="mx-auto mt-2 max-w-xl text-xs leading-relaxed text-gray-700 sm:text-sm">
 						Il periodo di raccolta delle candidature per la
-						<strong>Conferenza Italiana degli Studenti di Fisica — CISF27 Bologna</strong> è
-						terminato{#if formattedCloseAtRome}
+						<strong
+							>Conferenza Italiana degli Studenti di Fisica — {conferenceTitle}
+							{conferenceLocation}</strong
+						>
+						è terminato{#if formattedCloseAtRome}
 							&nbsp;(chiusura: <strong>{formattedCloseAtRome}</strong>, ora italiana){/if}. Grazie
 						di cuore a tuttə per l'entusiasmo!
 					</p>
@@ -1858,8 +1881,8 @@
 					<p class="mt-6 text-xs text-gray-600">
 						Hai bisogno di assistenza o devi segnalare una rettifica a una candidatura già inviata?
 						Scrivi al Comitato Organizzatore:
-						<a href="mailto:cisf27@ai-sf.it" class="font-bold text-primary underline"
-							>cisf27@ai-sf.it</a
+						<a href={`mailto:${contactEmail}`} class="font-bold text-primary underline"
+							>{contactEmail}</a
 						>
 					</p>
 				</div>
@@ -1879,8 +1902,8 @@
 					</h2>
 					<p class="mx-auto mt-3 max-w-xl text-xs leading-relaxed text-gray-700 sm:text-sm">
 						Stiamo ultimando gli ultimi dettagli del portale di iscrizione per
-						<strong>CISF27 Bologna (19–23 aprile 2027)</strong>. Nel frattempo puoi già consultare i
-						documenti ufficiali per preparare la tua motivazione!
+						<strong>{conferenceTitle} {conferenceLocation} ({conferenceDates})</strong>. Nel
+						frattempo puoi già consultare i documenti ufficiali per preparare la tua motivazione!
 					</p>
 
 					<div class="mt-6 flex flex-wrap items-center justify-center gap-2.5">
@@ -2290,8 +2313,8 @@
 									prima dell'inizio della conferenza (19 aprile 2027) o per situazioni particolari,
 									contatta il Comitato Organizzatore scrivendo a
 									<a
-										href="mailto:cisf27@ai-sf.it"
-										class="font-bold text-primary underline hover:text-secondary">cisf27@ai-sf.it</a
+										href={`mailto:${contactEmail}`}
+										class="font-bold text-primary underline hover:text-secondary">{contactEmail}</a
 									>.
 								</p>
 							</div>
@@ -2431,9 +2454,11 @@
 								</span>
 							</div>
 							<div class="mb-1 text-xl font-bold text-secondary">Con Alloggio</div>
-							<div class="mb-2 text-2xl font-extrabold text-primary">€120</div>
+							<div class="mb-2 text-2xl font-extrabold text-primary">{priceWithAccommodation}</div>
 							<p class="mt-1 flex-1 text-xs text-gray-600">
-								Pernottamento incluso per tutte le 4 notti presso il <strong>Combo Bologna</strong>
+								Pernottamento incluso per tutte le 4 notti presso il <strong
+									>{accommodationName}</strong
+								>
 								(camere doppie, triple, quadruple con bagno privato).
 							</p>
 							<div class="mt-4 flex items-baseline justify-between border-t border-gray-100 pt-3">
@@ -2472,7 +2497,9 @@
 								</span>
 							</div>
 							<div class="mb-1 text-xl font-bold text-secondary">Senza Alloggio</div>
-							<div class="mb-2 text-2xl font-extrabold text-amber-700">€70</div>
+							<div class="mb-2 text-2xl font-extrabold text-amber-700">
+								{priceWithoutAccommodation}
+							</div>
 							<p class="mt-1 flex-1 text-xs text-gray-600">
 								Partecipazione a tutti gli eventi, conferenze e kit con pernottamento autonomo (20
 								posti totali: 15 a bando nazionale + 5 riservati agli Ausiliari dell'LC Bologna a
@@ -2514,7 +2541,9 @@
 								</span>
 							</div>
 							<div class="mb-1 text-xl font-bold text-emerald-950">Indifferente</div>
-							<div class="mb-2 text-lg font-bold text-gray-700">€120 o €70</div>
+							<div class="mb-2 text-lg font-bold text-gray-700">
+								{priceWithAccommodation} o {priceWithoutAccommodation}
+							</div>
 							<p class="mt-1 flex-1 text-xs text-emerald-900/85">
 								Accetti indifferentemente entrambe le soluzioni: il CO assegnerà la tariffa in base
 								alle disponibilità residue per accogliere il massimo numero di partecipanti.
@@ -2597,8 +2626,8 @@
 						>. Se durante la compilazione o dopo l'invio ti accorgi di aver commesso un errore
 						materiale involontario, contatta tempestivamente il CO all'indirizzo
 						<a
-							href="mailto:cisf27@ai-sf.it"
-							class="font-bold text-secondary underline hover:text-primary">cisf27@ai-sf.it</a
+							href={`mailto:${contactEmail}`}
+							class="font-bold text-secondary underline hover:text-primary">{contactEmail}</a
 						>
 						per rettificare i dati!
 					</div>
@@ -3215,8 +3244,8 @@
 						>. Se durante la compilazione o dopo l'invio ti accorgi di aver commesso un errore
 						materiale involontario, contatta tempestivamente il CO all'indirizzo
 						<a
-							href="mailto:cisf27@ai-sf.it"
-							class="font-bold text-secondary underline hover:text-primary">cisf27@ai-sf.it</a
+							href={`mailto:${contactEmail}`}
+							class="font-bold text-secondary underline hover:text-primary">{contactEmail}</a
 						>
 						per rettificare i dati!
 					</div>
@@ -3384,8 +3413,8 @@
 									il codice inserito oppure, per casi particolari (es. 18 anni compiuti prima del 19 aprile
 									2027), scrivi a
 									<a
-										href="mailto:cisf27@ai-sf.it"
-										class="font-bold text-primary underline hover:text-secondary">cisf27@ai-sf.it</a
+										href={`mailto:${contactEmail}`}
+										class="font-bold text-primary underline hover:text-secondary">{contactEmail}</a
 									>.
 								</div>
 							</div>
@@ -3957,8 +3986,8 @@
 						>. Se durante la compilazione o dopo l'invio ti accorgi di aver commesso un errore
 						materiale involontario, contatta tempestivamente il CO all'indirizzo
 						<a
-							href="mailto:cisf27@ai-sf.it"
-							class="font-bold text-secondary underline hover:text-primary">cisf27@ai-sf.it</a
+							href={`mailto:${contactEmail}`}
+							class="font-bold text-secondary underline hover:text-primary">{contactEmail}</a
 						>
 						per rettificare i dati!
 					</div>
@@ -5736,8 +5765,8 @@
 						>. Se durante la compilazione o dopo l'invio ti accorgi di aver commesso un errore
 						materiale involontario, contatta tempestivamente il CO all'indirizzo
 						<a
-							href="mailto:cisf27@ai-sf.it"
-							class="font-bold text-secondary underline hover:text-primary">cisf27@ai-sf.it</a
+							href={`mailto:${contactEmail}`}
+							class="font-bold text-secondary underline hover:text-primary">{contactEmail}</a
 						>
 						per rettificare i dati!
 					</div>
@@ -5885,13 +5914,13 @@
 										d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"
 									/>
 								</svg>
-								Preferenze Alloggio &amp; Camere (Combo Bologna)
+								Preferenze Alloggio &amp; Camere ({accommodationName})
 							</h4>
 							<p class="mb-4 text-xs text-gray-600">
-								Il <strong>Combo Bologna</strong> dispone di 24 doppie, 10 triple e 18 quadruple,
-								tutte con bagno en-suite. I potenziali letti matrimoniali disponibili nella
-								struttura comprendono fino a 6 quadruple (con un letto matrimoniale e due letti a
-								castello) e 3 doppie.
+								Il <strong>{accommodationName}</strong> dispone di 24 doppie, 10 triple e 18
+								quadruple, tutte con bagno en-suite. I potenziali letti matrimoniali disponibili
+								nella struttura comprendono fino a 6 quadruple (con un letto matrimoniale e due
+								letti a castello) e 3 doppie.
 								<em
 									>Tutte le preferenze logistiche verranno accolte nei limiti del possibile in base
 									alle disponibilità strutturali.</em
@@ -6373,8 +6402,8 @@
 						>. Se durante la compilazione o dopo l'invio ti accorgi di aver commesso un errore
 						materiale involontario, contatta tempestivamente il CO all'indirizzo
 						<a
-							href="mailto:cisf27@ai-sf.it"
-							class="font-bold text-secondary underline hover:text-primary">cisf27@ai-sf.it</a
+							href={`mailto:${contactEmail}`}
+							class="font-bold text-secondary underline hover:text-primary">{contactEmail}</a
 						>
 						per rettificare i dati!
 					</div>
@@ -6580,8 +6609,8 @@
 						>. Se durante la compilazione o dopo l'invio ti accorgi di aver commesso un errore
 						materiale involontario, contatta tempestivamente il CO all'indirizzo
 						<a
-							href="mailto:cisf27@ai-sf.it"
-							class="font-bold text-secondary underline hover:text-primary">cisf27@ai-sf.it</a
+							href={`mailto:${contactEmail}`}
+							class="font-bold text-secondary underline hover:text-primary">{contactEmail}</a
 						>
 						per rettificare i dati!
 					</div>
@@ -6734,7 +6763,7 @@
 						<p class="leading-relaxed">{submitError}</p>
 						<p class="mt-2 text-red-900">
 							Se il problema persiste, scrivi subito al Comitato Organizzatore all'indirizzo
-							<a href="mailto:cisf27@ai-sf.it" class="font-bold underline">cisf27@ai-sf.it</a>
+							<a href={`mailto:${contactEmail}`} class="font-bold underline">{contactEmail}</a>
 							indicando questo messaggio di errore.
 						</p>
 						<div class="mt-3">
@@ -6813,8 +6842,9 @@
 					Candidatura Registrata con Successo!
 				</h3>
 				<p class="mb-4 text-xs leading-relaxed text-gray-600 sm:text-sm">
-					Grazie per aver inviato la tua candidatura per <strong>CISF27 Bologna</strong>! Conserva
-					il tuo codice ricevuta univoco qui sotto:
+					Grazie per aver inviato la tua candidatura per <strong
+						>{conferenceTitle} {conferenceLocation}</strong
+					>! Conserva il tuo codice ricevuta univoco qui sotto:
 				</p>
 
 				<!-- CODICE RICEVUTA UNIVOCO CISF27-XXX -->
@@ -6960,7 +6990,7 @@
 							href={criteriPageUrl}
 							target="_blank"
 							rel="noopener noreferrer"
-							class="font-bold text-secondary underline">ai-sf.it/cisf27/criteri</a
+							class="font-bold text-secondary underline">{criteriPublicUrlLabel}</a
 						>) e i documenti completi in PDF (Criteri di Selezione e Codice Etico) sono scaricabili
 						direttamente senza necessità di accedere al modulo di iscrizione.
 					</div>
@@ -6971,11 +7001,12 @@
 						1. Informazioni Generali CISF27
 					</h4>
 					<p>
-						CISF27 si terrà a Bologna dal <strong>19 al 23 aprile 2027</strong> e ospiterà 170
-						partecipanti (+ membri del Comitato Organizzatore): 150 con alloggio garantito presso il
-						<strong>Combo Bologna</strong> (ostello con camere doppie, triple e quadruple, tutte con bagno
-						privato) e 20 con alloggio autonomo a tariffa agevolata, di cui 5 Ausiliari dell'LC Bologna
-						con posto garantito, selezionatə tramite un concorso a parte.
+						{conferenceTitle} si terrà a {conferenceLocation} (<strong>{conferenceDates}</strong>) e
+						ospiterà 170 partecipanti (+ membri del Comitato Organizzatore): 150 con alloggio
+						garantito presso il
+						<strong>{accommodationName}</strong> (ostello con camere doppie, triple e quadruple, tutte
+						con bagno privato) e 20 con alloggio autonomo a tariffa agevolata, di cui 5 Ausiliari dell'LC
+						Bologna con posto garantito, selezionatə tramite un concorso a parte.
 					</p>
 					<p>
 						La Conferenza sarà interamente tenuta in lingua italiana e non saranno disponibili

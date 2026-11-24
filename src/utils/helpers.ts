@@ -59,3 +59,17 @@ export function resolveImage(
 ): ImageMetadata {
 	return path ? (images[path] ?? placeholderImg) : placeholderImg;
 }
+
+export function resolveAssetHref(
+	rawUrl: string,
+	baseUrl: string = import.meta.env.BASE_URL
+): string {
+	if (rawUrl.startsWith('http://') || rawUrl.startsWith('https://')) {
+		return rawUrl;
+	}
+	const cleanBase = baseUrl.replace(/\/$/, '');
+	if (cleanBase && rawUrl.startsWith(cleanBase)) {
+		return rawUrl;
+	}
+	return `${cleanBase}${rawUrl.startsWith('/') ? '' : '/'}${rawUrl}`;
+}

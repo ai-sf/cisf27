@@ -2,21 +2,58 @@
 import 'katex/dist/katex.min.css';
 import PageLayout from '../layouts/PageLayout.astro';
 import RegistrationForm from '../components/RegistrationForm.svelte';
+import { getCmsData, getLocale } from '../data/cms';
+import { getPageLink } from '../data/pageLinks.ts';
+import { getPeople } from '../data/people.ts';
+import { getStructureById } from '../data/structures.ts';
+import { resolveAssetHref } from '../utils/helpers';
 
-const base = import.meta.env.BASE_URL.replace(/\/$/, '');
-const criteriPdfUrl = `${base}/docs/Criteri_di_selezione_CISF27.pdf`;
-const codiceEticoPdfUrl = `${base}/docs/Codice_Etico_CISF27.pdf`;
-const criteriPageUrl = `${base}/criteri`;
+const locale = getLocale(Astro);
+const { registration, criteria } = getCmsData(locale);
+// RegistrationForm UI copy is Italian-only; load shared IT conference/pricing/structure data cleanly
+const { conference: confIt, pricing: pricingIt } = getCmsData('it');
+
+const criteriPdfUrl = resolveAssetHref(
+	criteria.documents?.criteriaPdf?.downloadUrl ?? '/docs/Criteri_di_selezione_CISF27.pdf'
+);
+const codiceEticoPdfUrl = resolveAssetHref(
+	criteria.documents?.ethicsPdf?.downloadUrl ?? '/docs/Codice_Etico_CISF27.pdf'
+);
+const criteriLink = getPageLink('criteri', 'it');
+const criteriPageUrl = criteriLink.href;
+const siteHost = Astro.site ? Astro.site.host : 'ai-sf.it';
+const criteriPublicUrlLabel = `${siteHost}${criteriPageUrl}`;
+
+const contactEmail =
+	getPeople('it').find((p) => p.roleId === 'contatto-principale')?.email ?? 'cisf27@ai-sf.it';
+const comboStructure = getStructureById('combo', 'it');
+
+const conferenceTitle = confIt.title ?? 'CISF27';
+const conferenceLocation = confIt.location ?? 'Bologna';
+const conferenceDates = confIt.fullDates ?? '19–23 aprile 2027';
+const priceWithAccommodation = pricingIt[0]?.price ?? '€120';
+const priceWithoutAccommodation = pricingIt[1]?.price ?? '€70';
+const accommodationName = comboStructure?.label ?? 'Combo Bologna';
 ---
 
-<PageLayout
-	title="Candidatura"
-	description="Modulo ufficiale di candidatura per la Conferenza Italiana degli Studenti di Fisica — CISF27 Bologna (19–23 aprile 2027)."
->
+<PageLayout title={registration.pageTitle} description={registration.pageDescription}>
 	<div
 		class="bg-base-200/50 from-primary/5 to-warning/5 min-h-screen w-full overflow-x-hidden bg-linear-to-br via-transparent pb-28 sm:pb-20"
 	>
-		<RegistrationForm client:load {criteriPdfUrl} {codiceEticoPdfUrl} {criteriPageUrl} />
+		<RegistrationForm
+			client:load
+			{criteriPdfUrl}
+			{codiceEticoPdfUrl}
+			{criteriPageUrl}
+			{criteriPublicUrlLabel}
+			{conferenceTitle}
+			{conferenceLocation}
+			{conferenceDates}
+			{contactEmail}
+			{priceWithAccommodation}
+			{priceWithoutAccommodation}
+			{accommodationName}
+		/>
 	</div>
 </PageLayout>
 

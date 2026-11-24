@@ -21,6 +21,8 @@ import type partnersBase from './partners.json';
 import type peopleBase from './people.json';
 import type pageLinksBase from './pageLinks.json';
 import type statsBase from './stats.json';
+import type criteriaBase from './criteria.json';
+import type registrationBase from './registration.json';
 
 // Eagerly import base CMS json files (Italian source of truth)
 const baseModules = import.meta.glob<Record<string, unknown>>('./*.json', {
@@ -105,6 +107,8 @@ export function getCmsData(locale: string = 'it') {
 	const pe = getCatalog('people', locale);
 	const pl = getCatalog('pageLinks', locale);
 	const stt = getCatalog('stats', locale);
+	const cr = getCatalog('criteria', locale);
+	const reg = getCatalog('registration', locale);
 
 	return {
 		conference: conf as CmsData<typeof conferenceBase>,
@@ -137,6 +141,10 @@ export function getCmsData(locale: string = 'it') {
 		pageLinksData: pl as CmsData<typeof pageLinksBase>,
 		stats: stt as CmsData<typeof statsBase>,
 		statsData: stt as CmsData<typeof statsBase>,
+		criteria: cr as CmsData<typeof criteriaBase>,
+		criteriaData: cr as CmsData<typeof criteriaBase>,
+		registration: reg as CmsData<typeof registrationBase>,
+		registrationData: reg as CmsData<typeof registrationBase>,
 	};
 }
 
@@ -164,6 +172,10 @@ export const partnersData = base.partnersData;
 export const peopleJson = base.peopleJson;
 export const pageLinksData = base.pageLinksData;
 export const statsData = base.statsData;
+export const criteria = base.criteria;
+export const criteriaData = base.criteriaData;
+export const registration = base.registration;
+export const registrationData = base.registrationData;
 
 export const partnerCategoryGlob = import.meta.glob<{
 	default: { id?: string; label?: string; icon?: string; color?: string };

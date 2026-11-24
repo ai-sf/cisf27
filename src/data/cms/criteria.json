@@ -1,0 +1,313 @@
+{
+  "pageTitle": "Criteri di Selezione & Codice Etico",
+  "pageDescription": "Criteri di selezione ufficiali, modalità di partecipazione e Codice Etico adottato dal Comitato Organizzatore di CISF27 Bologna (19–23 aprile 2027).",
+  "documents": {
+    "criteriaPdf": {
+      "downloadUrl": "/docs/Criteri_di_selezione_CISF27.pdf",
+      "heroLabel": "Scarica il PDF Ufficiale dei Criteri di Selezione",
+      "shortLabel": "Scarica il PDF Integrale dei Criteri",
+      "ctaLabel": "PDF Criteri"
+    },
+    "ethicsPdf": {
+      "downloadUrl": "/docs/Codice_Etico_CISF27.pdf",
+      "heroLabel": "Scarica il PDF Codice Etico Ufficiale",
+      "sectionLabel": "Scarica il PDF del Codice Etico Ufficiale",
+      "ctaLabel": "PDF Codice Etico"
+    }
+  },
+  "hero": {
+    "label": "Trasparenza & Valori · CISF27 Bologna",
+    "heading": "Criteri di Selezione e Codice Etico",
+    "subtitle": "Tutti i documenti ufficiali approvati dal Comitato Organizzatore CISF27 e supervisionati dal Comitato Esecutivo AISF, liberamente consultabili e scaricabili anche al di fuori del modulo di candidatura.",
+    "applyBtn": "Vai al Modulo di Candidatura",
+    "jumpCriteria": "Vai ai Criteri",
+    "jumpEthics": "Vai al Codice Etico",
+    "jumpContacts": "Contatti Riservati",
+    "languageNoticeTitle": "Nota linguistica:",
+    "languageNoticeText": "CISF27 si svolge interamente in lingua italiana senza traduzioni; tutti i documenti ufficiali in PDF e il modulo di candidatura sono redatti esclusivamente in italiano.",
+    "quickStats": [
+      {
+        "id": "spots",
+        "statValue": "170",
+        "label": "Partecipanti a bando",
+        "detail": "150 Combo Bologna + 20 autonomi"
+      },
+      {
+        "id": "quotas",
+        "statValue": "5 / 8",
+        "label": "Quote minime LC",
+        "detail": "5 per ogni LC · 8 per AISF Calabria"
+      },
+      {
+        "id": "deadline",
+        "statValue": "7 gg",
+        "label": "Termine pagamento",
+        "detail": "Con un solo ripescaggio ufficiale"
+      },
+      {
+        "id": "ethics",
+        "statValue": "100%",
+        "label": "Etica & No-Profit",
+        "detail": "Safe Space · #Plastic-freER · No armi"
+      }
+    ]
+  },
+  "selectionSection": {
+    "badge": "Sezione 1 · Criteri Pubblici",
+    "heading": "Sintesi dei ",
+    "gradientWord": "Criteri di Selezione",
+    "intro": "CISF27 si terrà a Bologna dal 19 al 23 aprile 2027. Di seguito i criteri ufficiali che il Comitato Organizzatore applicherà laddove le candidature superino i posti disponibili.",
+    "accommodationCard": {
+      "title": "170 Partecipanti & Alloggio al Combo Bologna",
+      "subtitle": "Suddivisione ufficiale dei posti e tipologia camere",
+      "badge": "19–23 aprile 2027",
+      "withStay": {
+        "count": "150",
+        "title": "con alloggio garantito",
+        "description": "Presso il Combo Bologna, in camere tutte con bagno privato: 18 quadruple, 10 triple e 24 doppie (alcune con letti matrimoniali). È possibile esprimere preferenze su tipologia di camera, genere e compagnə di stanza (accolte compatibilmente con la logistica)."
+      },
+      "withoutStay": {
+        "count": "20",
+        "title": "alloggio autonomo",
+        "description": "A fronte di una quota d'iscrizione ridotta, pernottano in struttura di propria scelta in autonomia. Di questi 20 posti, 5 sono riservati agli Ausiliari dell'LC Bologna con posto garantito, selezionati tramite bando dedicato (indicativamente tra dicembre 2026 e gennaio 2027)."
+      },
+      "extraQuota": {
+        "title": "Extra quota (in aggiunta ai 170 partecipanti):",
+        "beforeLink": "tutti i membri del ",
+        "linkText": "Comitato Organizzatore (CO)",
+        "afterLink": " e la persona vincitrice dell'Open Call della Redazione di Fisicaffè, alla quale il CO garantisce alloggio al Combo Bologna e quota gratuita."
+      }
+    },
+    "automaticallyAdmitted": {
+      "title": "Ammessi di Diritto",
+      "subtitle": "Passano automaticamente la selezione",
+      "ocItem": {
+        "title": "Membri del Comitato Organizzatore (CO)",
+        "beforeLink": ", indicati nella sezione ",
+        "linkText": "«Chi siamo»",
+        "afterLink": ";"
+      },
+      "items": [
+        "Membri del Comitato Esecutivo (EC) di AISF;",
+        "Presidenti dei Comitati Locali (LC) AISF;",
+        "5 membri della Commissione Fisicaffè indicati al CO da EC in accordo con la Commissione stessa;"
+      ],
+      "winnerItem": {
+        "title": "Persona vincitrice dell'Open Call della Redazione di Fisicaffè",
+        "text": ", con quota d'iscrizione gratuita e alloggio garantito al Combo Bologna (fuori dai 150)."
+      }
+    },
+    "minQuotasCard": {
+      "title": "Quote Minime LC & AISF Calabria",
+      "description": "Ogni Comitato Locale ha garantita, indipendentemente da dimensione e candidature, una quota minima di 5 partecipanti (Presidente compresə). Se da un LC pervengono meno di 5 candidature, sono tutte accolte (salvo cause di rigetto).",
+      "supportTitle": "Sostegno a CISF28:",
+      "supportText": "al Comitato Locale di AISF Calabria sono riservati almeno 8 posti per supportare l'organizzazione della prossima edizione."
+    },
+    "proportionalityCard": {
+      "title": "Proporzionalità delle Candidature",
+      "description": "Per assegnare i posti disponibili per ciascun Comitato Locale oltre la quota minima, uno dei criteri di maggiore importanza è la proporzionalità rispetto al numero di candidature presentate.",
+      "tipTitle": "Consiglio del CO:",
+      "tipText": "più candidature arrivano dal tuo LC, più posti vengono assegnati al tuo Comitato — incoraggia ognunə nel tuo Dipartimento a candidarsi!"
+    },
+    "parityCard": {
+      "title": "Parità di Genere & Lingua",
+      "description": "Il Comitato Organizzatore si impegna attivamente a raggiungere la parità di genere tra le persone selezionate, tutelando pienamente ogni identità di genere.",
+      "languageTitle": "Lingua italiana:",
+      "languageText": "la Conferenza è interamente tenuta in italiano e non saranno disponibili traduzioni — è richiesta una buona conoscenza della lingua."
+    },
+    "academicCard": {
+      "title": "Fasce Accademiche & Esterni",
+      "subtitle": "Chi può partecipare a CISF27",
+      "levels": [
+        { "label": "Laurea Triennale", "excluded": false },
+        { "label": "Laurea Magistrale", "excluded": false },
+        { "label": "Dottorandi", "excluded": false },
+        { "label": "Escluse scuole superiori", "excluded": true }
+      ],
+      "distributionText": "La distribuzione di partecipazioni non sarà omogenea in funzione dell'età/anno di iscrizione ai corsi di laurea: tenendo conto della composizione dei vari LC, delle partecipazioni alle scorse CISF, degli obiettivi associativi di EC e della linea adottata dal CO, verranno favorite alcune fasce rispetto ad altre, seppur non in maniera decisiva.",
+      "externalTitle": "Candidature di esterni:",
+      "externalText": "le domande di persone non iscritte a un CdL di Fisica, Astronomia, Scienze dei Materiali (e simili, con riferimento ai corsi del Dipartimento di Fisica e Astronomia «Augusto Righi» di Bologna) o a un programma di dottorato saranno valutate caso per caso dal CO."
+    },
+    "factorsCard": {
+      "title": "Fattori nella Candidatura & Motivazione",
+      "subtitle": "Elementi qualitativi considerati dal Comitato Organizzatore",
+      "factors": [
+        "Numero di partecipazioni a CISF precedenti e ad altri eventi AISF;",
+        "Partecipazione attiva nel proprio Comitato Locale (LC), nel Consiglio di Presidenza e nell’organizzazione di eventi locali e nazionali;",
+        "Disponibilità a tenere una parallel session (talk) durante la Conferenza;",
+        "Curiosità verso i vari aspetti scientifici, culturali e associativi della Conferenza;",
+        "Entusiasmo autentico emerso nella propria motivazione creativa."
+      ]
+    },
+    "rejectionCard": {
+      "title": "Cause di Rigetto Automatico e Irrevocabile",
+      "subtitle": "Il Comitato Organizzatore rigetterà automaticamente e irrevocabilmente ogni candidatura in cui si verifichi anche una sola delle seguenti condizioni:",
+      "causes": [
+        {
+          "title": "Utilizzo evidente di Intelligenza Artificiale",
+          "desc": "La motivazione è creata con chiaro ed evidente utilizzo passivo di IA, privo di autentico apporto personale."
+        },
+        {
+          "title": "Dichiarazioni false o mendaci",
+          "desc": "Qualunque falsità su dati anagrafici, ruoli associativi, attività nel Comitato Locale o partecipazioni pregresse."
+        },
+        {
+          "title": "Contenuti d'odio, minacce o propaganda",
+          "desc": "Insulti, minacce, messaggi di odio di ogni tipo, messaggi di propaganda, ingiurie e ogni affermazione in contrasto con lo Statuto AISF e il Codice Etico del CO."
+        },
+        {
+          "title": "Mancata iscrizione ad AISF nei termini",
+          "desc": "La persona selezionata non risulti regolarmente iscritta ad AISF al massimo entro i termini previsti per il pagamento della quota CISF27."
+        }
+      ]
+    },
+    "paymentsCard": {
+      "title": "Iscrizione AISF, Pagamenti & Rimborsi",
+      "subtitle": "Scadenze vincolanti e gestione delle rinunce",
+      "items": [
+        {
+          "title": "Iscrizione ad AISF obbligatoria:",
+          "text": "chi non è iscrittə al momento della selezione ha l'obbligo di iscriversi pagando il contributo associativo, da aggiungersi alla quota CISF27.",
+          "isAlert": false
+        },
+        {
+          "title": "Pagamento entro 7 giorni (1 settimana):",
+          "text": "le persone selezionate devono completare il pagamento entro e non oltre una settimana dalla comunicazione del CO.",
+          "isAlert": false
+        },
+        {
+          "title": "Un solo ripescaggio ufficiale:",
+          "text": "in caso di mancato pagamento, seguirà UN SOLO ripescaggio ufficiale nei giorni successivi (eventuali ripescaggi straordinari saranno comunicati sui canali ufficiali ma non sono garantiti).",
+          "isAlert": false
+        },
+        {
+          "title": "Politica rimborsi:",
+          "text": "la quota di iscrizione (o associativa), una volta versata, non è in nessun modo rimborsabile. Ad ogni modo, il CO si offre di fungere da intermediario tra rinunciatarə e ripescatə.",
+          "isAlert": true
+        }
+      ]
+    },
+    "guaranteesCard": {
+      "title": "Garanzie, Accessibilità & Avvertenze",
+      "subtitle": "Supervisione nazionale e tutela di tutte le esigenze personali",
+      "accessibilityTitle": "Allergie, esigenze alimentari e accessibilità",
+      "accessibilityText": "Ti invitiamo a indicare nella candidatura allergie, intolleranze, preferenze alimentari e qualsiasi necessità fisica o logistica per rendere CISF27 pienamente inclusiva e accessibile. In nessun modo tali segnalazioni influiscono sulla selezione.",
+      "ecOversightTitle": "Supervisione del Comitato Esecutivo:",
+      "ecOversightBeforeEmail": "a garanzia del processo di selezione, è sempre possibile richiedere ulteriori informazioni sui criteri al CO (",
+      "ecOversightAfterEmail": ") e al Comitato Esecutivo (EC) AISF, che supervisiona ogni passo.",
+      "safeguardTitle": "Clausola di salvaguardia:",
+      "safeguardText": "il CO si riserva la facoltà di effettuare eventuali aggiustamenti tecnici o organizzativi, pur attenendosi con rigore ai criteri dichiarati."
+    }
+  },
+  "ethicsSection": {
+    "badge": "Sezione 2 · Principi & Valori",
+    "heading": "Il Codice Etico di ",
+    "gradientWord": "CISF27 Bologna",
+    "intro": "I principi reali deliberati e adottati dal Comitato Organizzatore — in coerenza con lo Statuto APS di AISF, il Piano Strategico AISF e il Code of Conduct di IAPS — vincolanti per partecipanti, CO, relatori, ospiti, sponsor e fornitori.",
+    "confidentialBtn": "Canali di Segnalazione Riservati",
+    "plasticFreeLogoAlt": "Logo Strategia Regionale #Plastic-freER Emilia-Romagna",
+    "plasticFreeCaption": "Adesione ufficiale alla strategia regionale per la riduzione delle plastiche sull'ambiente.",
+    "pillars": [
+      {
+        "id": "inclusivity",
+        "icon": "heart-handshake",
+        "color": "primary",
+        "hasPlasticFreeLogo": false,
+        "title": "Inclusività, Parità & Accessibilità",
+        "badge": "La CISF è di tutti",
+        "description": "CISF27 opera senza alcuna discriminazione (Art. 14 Statuto AISF) per abbattere barriere sociali, economiche, accademiche e fisiche. Impegno attivo per la parità di genere, tutela di ogni identità, linguaggio rispettoso, accessibilità garantita e spirito no-profit con quote calmierate.",
+        "points": [
+          "Parità di genere e pieno rispetto di identità e pronomi scelti",
+          "Allergie, disabilità e necessità logistiche tutelate e neutre in selezione",
+          "Conferenza 100% no-profit con quote agevolate grazie ai partner"
+        ]
+      },
+      {
+        "id": "safe-space",
+        "icon": "shield-alert",
+        "color": "error",
+        "hasPlasticFreeLogo": false,
+        "title": "Safe Space & Tolleranza Zero",
+        "badge": "Statuto AISF · IAPS",
+        "description": "Ogni persona ha diritto a un ambiente sicuro, accogliente e privo di ostilità sia nelle sessioni scientifiche sia nei momenti sociali. In linea con il Code of Conduct IAPS, vige tolleranza zero verso discriminazioni, molestie verbali, fisiche o sessuali, intimidazioni e messaggi d’odio.",
+        "points": [
+          "Consenso sempre libero, attivo, informato, esplicito e revocabile",
+          "Rigetto immediato di candidature con contenuti d’odio o minacce",
+          "Misure cautelari tempestive e raccordo con Art. 17 Statuto AISF"
+        ]
+      },
+      {
+        "id": "no-arms",
+        "icon": "ban",
+        "color": "warning",
+        "hasPlasticFreeLogo": false,
+        "title": "No Sponsor da Industria Bellica & Armi",
+        "badge": "Delibera Unanime CO",
+        "description": "Il Comitato Organizzatore ha deliberato all’unanimità il rifiuto categorico di finanziamenti, sponsorizzazioni (economiche o tecniche) e collaborazioni dirette («di primo grado») con aziende dell’industria bellica, della produzione di armi o direttamente implicate in conflitti armati.",
+        "points": [
+          "Esclusione inderogabile di partner direttamente legati a guerra e armi",
+          "Valutazione collegiale e trasparente sulle relazioni indirette",
+          "Piena indipendenza scientifica, culturale e associativa dagli sponsor"
+        ]
+      },
+      {
+        "id": "sustainability",
+        "icon": "leaf",
+        "color": "success",
+        "hasPlasticFreeLogo": true,
+        "title": "Sostenibilità Ambientale #Plastic-freER",
+        "badge": "Regione Emilia-Romagna",
+        "description": "Con il patrocinio ufficiale della Regione Emilia-Romagna, CISF27 aderisce alla strategia regionale #Plastic-freER per azzerare la plastica monouso e promuovere comportamenti responsabili lungo tutta la settimana della conferenza.",
+        "points": [
+          "Stop plastica monouso in coffee break, pranzi, cene ed eventi",
+          "Borracce riutilizzabili, stoviglie sostenibili e lotta agli sprechi",
+          "Mobilità urbana sostenibile a Bologna con titoli TPER per i partecipanti"
+        ]
+      },
+      {
+        "id": "neutrality",
+        "icon": "scale",
+        "color": "info",
+        "hasPlasticFreeLogo": false,
+        "title": "Apartiticità & Neutralità Istituzionale",
+        "badge": "Piano Strategico AISF",
+        "description": "AISF e CISF27 sono rigorosamente apartitiche e aconfessionali, indipendenti da partiti, movimenti politici e gruppi di pressione, per tutelare la libertà di partecipazione, il pluralismo scientifico e l’unità della comunità studentesca.",
+        "points": [
+          "Rifiuto di finanziamenti e affiliazioni politiche dirette",
+          "Divieto di propaganda partitica nelle candidature e negli spazi",
+          "Confronto scientifico libero e democratico su scienza e società"
+        ]
+      },
+      {
+        "id": "transparency",
+        "icon": "eye",
+        "color": "secondary",
+        "hasPlasticFreeLogo": false,
+        "title": "Trasparenza, Integrità & Garanzie",
+        "badge": "Supervisione EC AISF",
+        "description": "Ogni regola di selezione, principio etico e scelta organizzativa è resa pubblica e verificabile. Il Comitato Esecutivo (EC) nazionale di AISF supervisiona l’intero percorso a garanzia di correttezza, equità e integrità intellettuale.",
+        "points": [
+          "Criteri e Codice Etico accessibili liberamente",
+          "Diritto di chiedere chiarimenti al CO e all'EC",
+          "Gestione trasparente no-profit e tutele contro qualsiasi ritorsione"
+        ]
+      }
+    ],
+    "confidentialBox": {
+      "badge": "Ascolto Protetto & Zero Ritorsioni",
+      "heading": "Canali Riservati dei Coordinatori Generali",
+      "description": "Chiunque subisca, osservi o venga a conoscenza di una violazione del Codice Etico — durante la candidatura, la Conferenza o sui canali digitali — può scrivere in via strettamente confidenziale ai Coordinatori Generali CISF27.",
+      "guaranteeTitle": "Riservatezza garantita:",
+      "guaranteeText": "ogni segnalazione viene presa in carico con massima discrezione e divieto assoluto di ritorsioni. In caso di potenziale conflitto di interesse che coinvolga membri del CO, è sempre possibile rivolgersi direttamente al Comitato Esecutivo (EC) nazionale di AISF o al Collegio dei Probiviri (Art. 17 Statuto AISF)."
+    }
+  },
+  "cta": {
+    "heading": "Prontə a candidarti a ",
+    "gradientWord": "CISF27",
+    "headingSuffix": "?",
+    "subtitle": "Hai consultato i criteri pubblici e condividi i valori del nostro Codice Etico? Compila il modulo di candidatura o scarica i documenti ufficiali per leggerli con calma.",
+    "languageNote": "Nota: il modulo di candidatura e i PDF ufficiali sono esclusivamente in italiano.",
+    "applyBtn": "Vai al Modulo di Candidatura",
+    "contactBtn": "Contattaci"
+  }
+}
