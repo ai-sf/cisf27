@@ -2,7 +2,9 @@
 import { Image } from 'astro:assets';
 import { EllipsisVertical, Ellipsis, Globe, ChevronDown } from '@lucide/astro';
 import { resolveIcon } from '../utils/helpers';
-import { getPageLinks, getPageLink, resolveHref } from '../data/pageLinks.ts';
+import { getPageLinks, getPageLink } from /** TO-DO: uncomment after test
+ * resolveHref
+ **/ '../data/pageLinks.ts';
 import { getCmsData } from '../data/cms';
 import cisfLogo from '../assets/images/logo.png';
 import { switchLocalePath, languages, getLocale } from '../utils/i18n';
@@ -15,7 +17,8 @@ const { conference, nav } = getCmsData(locale);
 const pageLinks = getPageLinks(locale);
 const homeLink = getPageLink('home', locale);
 const contactLink = getPageLink('contact', locale);
-const registerHref = resolveHref('/iscrizione'); // must be valid for all locales
+// TO-DO: uncomment after test
+//const registerHref = resolveHref('/iscrizione'); // must be valid for all locales
 
 const currentLanguage = languages.find((l) => l.code === locale) || {
 	code: locale,
@@ -40,7 +43,8 @@ const isActive = (page: string): boolean => {
 };
 
 const SponsorIcon = resolveIcon(nav.sponsorIcon);
-const RegisterIcon = resolveIcon(nav.registerIcon);
+// TO-DO: uncomment after test
+//const RegisterIcon = resolveIcon(nav.registerIcon);
 ---
 
 <!-- Desktop navigation -->
@@ -147,6 +151,7 @@ const RegisterIcon = resolveIcon(nav.registerIcon);
 			{SponsorIcon && <SponsorIcon class="size-4" />}
 			{nav.sponsor}
 		</a>
+		<!-- TO-DO: uncomment after test
 		<a
 			href={registerHref}
 			class="btn btn-primary btn-outline btn-sm sm:btn-md shadow-primary/20 hover:shadow-primary/40 card-interactive shadow-lg"
@@ -154,6 +159,7 @@ const RegisterIcon = resolveIcon(nav.registerIcon);
 			{RegisterIcon && <RegisterIcon class="size-4" />}
 			{nav.register}
 		</a>
+		-->
 	</div>
 </nav>
 
@@ -274,6 +280,7 @@ const RegisterIcon = resolveIcon(nav.registerIcon);
 			{nav.sponsor}
 		</a>
 	</li>
+	<!-- TO-DO: uncomment after test
 	<li>
 		<a
 			href={registerHref}
@@ -283,4 +290,5 @@ const RegisterIcon = resolveIcon(nav.registerIcon);
 			{nav.register}
 		</a>
 	</li>
+		-->
 </ul>

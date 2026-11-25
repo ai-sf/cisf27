@@ -17,7 +17,9 @@ import {
 	Mail,
 } from '@lucide/astro';
 import { resolveIcon } from '../utils/helpers';
-import { getPageLink, resolveHref } from '../data/pageLinks.ts';
+import { getPageLink } from /** TO-DO: uncomment after test
+ * resolveHref
+ **/ '../data/pageLinks.ts';
 import cisfLogo from '../assets/images/logo.png';
 import uniboPhotoImage from '../assets/images/structures/unibo.jpg';
 import SectionBadge from '../components/SectionBadge.astro';
@@ -43,7 +45,8 @@ const aboutLink = getPageLink('about', locale);
 const programLink = getPageLink('program', locale);
 const structuresLink = getPageLink('structures', locale);
 const contactLink = getPageLink('contact', locale);
-const registerHref = resolveHref('/iscrizione'); // must be valid for all locales
+// TO-DO: uncomment after test
+//const registerHref = resolveHref('/iscrizione'); // must be valid for all locales
 
 interface InfoCard {
 	href: string;
@@ -396,6 +399,7 @@ const aboutCardEntries = [
 				}
 			</div>
 
+			<!-- TO-DO: uncomment after test
 			<div class="text-center">
 				<a
 					href={registerHref}
@@ -408,6 +412,7 @@ const aboutCardEntries = [
 					{home.registrationNote}
 				</p>
 			</div>
+			-->
 		</div>
 	</section>
 
@@ -428,6 +433,7 @@ const aboutCardEntries = [
 			</p>
 		</Fragment>
 		<Fragment slot="actions">
+			<!-- TO-DO: uncomment after test
 			<a
 				href={registerHref}
 				class="btn btn-primary shadow-primary/25 hover:shadow-primary/40 card-interactive glow-hover inline-flex h-auto min-h-12 max-w-full items-center justify-center gap-2 px-5 py-3 text-sm leading-snug shadow-xl sm:px-8 sm:text-base md:text-lg"
@@ -435,6 +441,7 @@ const aboutCardEntries = [
 				<span>{home.ctaButton}</span>
 				<ArrowRight class="size-5 shrink-0" />
 			</a>
+			-->
 			<a
 				href={contactLink.href}
 				class="btn btn-outline hover:bg-primary/10 hover:border-primary hover:text-primary inline-flex h-auto min-h-12 max-w-full items-center justify-center gap-2 px-5 py-3 text-sm leading-snug sm:px-8 sm:text-base md:text-lg"
