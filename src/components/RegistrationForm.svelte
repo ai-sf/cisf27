@@ -1461,7 +1461,7 @@
 			>
 		</h1>
 		<p class="mx-auto mt-2 max-w-2xl text-base font-medium text-gray-600 sm:text-lg">
-			Conferenza Italiana degli Studenti di Fisica — <span class="font-bold text-gray-800"
+			Conferenza Italiana Studenti di Fisica — <span class="font-bold text-gray-800"
 				>AISF</span
 			>
 		</p>
@@ -1767,43 +1767,6 @@
 							(sincronizzato con il server).
 						</p>
 					{/if}
-
-					<div
-						class="mx-auto mt-6 max-w-2xl rounded-xl border border-amber-200 bg-amber-50/70 p-4 text-left text-xs leading-relaxed text-amber-950 sm:text-sm"
-					>
-						<strong>Nel frattempo, preparati al meglio!</strong> Consulta i Criteri di Selezione e il
-						Codice Etico ufficiali per iniziare a preparare con calma la tua motivazione creativa (lettera,
-						video, mini-podcast o canvas — ricordati di mantenerla anonima!) e un'eventuale proposta di
-						Parallel Session / Talk Scientifico.
-					</div>
-
-					<div class="mt-6 flex flex-wrap items-center justify-center gap-2.5">
-						<a
-							href={criteriPdfUrl}
-							target="_blank"
-							rel="noopener noreferrer"
-							class="btn btn-primary btn-sm min-h-11 rounded-xl px-4 text-xs font-bold text-white"
-						>
-							<FileText class="size-4" />
-							PDF Criteri Ufficiali
-						</a>
-						<a
-							href={codiceEticoPdfUrl}
-							target="_blank"
-							rel="noopener noreferrer"
-							class="btn btn-secondary btn-outline btn-sm min-h-11 rounded-xl px-4 text-xs font-bold"
-						>
-							<FileText class="size-4" />
-							PDF Codice Etico
-						</a>
-						<a
-							href={criteriPageUrl}
-							class="btn btn-primary btn-soft btn-sm border-primary/30 text-secondary hover:text-primary-content min-h-11 rounded-xl px-4 text-xs font-bold"
-						>
-							<ExternalLink class="size-4" />
-							Pagina Criteri &amp; Etica
-						</a>
-					</div>
 				</div>
 			{:else if gateState === 'closed'}
 				<!-- STATO: CANDIDATURE CHIUSE -->
@@ -1821,7 +1784,7 @@
 					<p class="mx-auto mt-2 max-w-xl text-xs leading-relaxed text-gray-700 sm:text-sm">
 						Il periodo di raccolta delle candidature per la
 						<strong
-							>Conferenza Italiana degli Studenti di Fisica — {conferenceTitle}
+							>Conferenza Italiana Studenti di Fisica — {conferenceTitle}
 							{conferenceLocation}</strong
 						>
 						è terminato{#if formattedCloseAtRome}
@@ -1901,38 +1864,8 @@
 						Le candidature apriranno presto
 					</h2>
 					<p class="mx-auto mt-3 max-w-xl text-xs leading-relaxed text-gray-700 sm:text-sm">
-						Stiamo ultimando gli ultimi dettagli del portale di iscrizione per
-						<strong>{conferenceTitle} {conferenceLocation} ({conferenceDates})</strong>. Nel
-						frattempo puoi già consultare i documenti ufficiali per preparare la tua motivazione!
+						Stiamo aggiustando gli ultimi dettagli del portale di iscrizione... <strong>Stay tuned!</strong>
 					</p>
-
-					<div class="mt-6 flex flex-wrap items-center justify-center gap-2.5">
-						<a
-							href={criteriPdfUrl}
-							target="_blank"
-							rel="noopener noreferrer"
-							class="btn btn-primary btn-sm min-h-11 rounded-xl px-4 text-xs font-bold text-white"
-						>
-							<FileText class="size-4" />
-							PDF Criteri Ufficiali
-						</a>
-						<a
-							href={codiceEticoPdfUrl}
-							target="_blank"
-							rel="noopener noreferrer"
-							class="btn btn-secondary btn-outline btn-sm min-h-11 rounded-xl px-4 text-xs font-bold"
-						>
-							<FileText class="size-4" />
-							PDF Codice Etico
-						</a>
-						<a
-							href={criteriPageUrl}
-							class="btn btn-primary btn-soft btn-sm border-primary/30 text-secondary hover:text-primary-content min-h-11 rounded-xl px-4 text-xs font-bold"
-						>
-							<ExternalLink class="size-4" />
-							Pagina Criteri &amp; Etica
-						</a>
-					</div>
 
 					<!-- AREA RISERVATA TESTER -->
 					<div class="mt-8 border-t border-gray-200/80 pt-5">
