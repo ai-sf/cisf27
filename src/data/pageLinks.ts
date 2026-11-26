@@ -97,11 +97,12 @@ export function getPageLinks(locale: string = 'it'): PageLink[] {
 			href: resolveHref(pl.tesi?.href ?? p.tesi?.href ?? '/tesi', locale),
 			icon: tesiLink.icon,
 		},
-		{
+		// TO-DO: uncomment after official criteria confirmation
+		/* {
 			name: pl.criteri?.name ?? criteriLink.name,
 			href: resolveHref(pl.criteri?.href ?? p.criteri?.href ?? '/criteri', locale),
 			icon: criteriLink.icon,
-		},
+		}, */
 		{
 			name: pl.about?.name ?? aboutLink.name,
 			href: resolveHref(pl.about?.href ?? p.about?.href ?? '/chi-siamo', locale),
@@ -151,7 +152,17 @@ export function getPageLink(
 		}
 	}
 	const links = getPageLinks(locale);
-	const ids = ['home', 'sponsor', 'program', 'structures', 'tesi', 'criteri', 'about', 'contact'];
+	const ids = [
+		'home',
+		'sponsor',
+		'program',
+		'structures',
+		'tesi',
+		// TO-DO: uncomment after official criteria confirmation
+		// 'criteri',
+		'about',
+		'contact',
+	];
 	const idx = ids.indexOf(id);
 	return idx !== -1 ? links[idx] : { name: id, href: resolveHref(id, locale) };
 }

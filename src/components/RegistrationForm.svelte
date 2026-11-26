@@ -1461,9 +1461,7 @@
 			>
 		</h1>
 		<p class="mx-auto mt-2 max-w-2xl text-base font-medium text-gray-600 sm:text-lg">
-			Conferenza Italiana Studenti di Fisica — <span class="font-bold text-gray-800"
-				>AISF</span
-			>
+			Conferenza Italiana Studenti di Fisica — <span class="font-bold text-gray-800">AISF</span>
 		</p>
 
 		<!-- Avviso Lingua Ufficiale -->
@@ -1864,7 +1862,9 @@
 						Le candidature apriranno presto
 					</h2>
 					<p class="mx-auto mt-3 max-w-xl text-xs leading-relaxed text-gray-700 sm:text-sm">
-						Stiamo aggiustando gli ultimi dettagli del portale di iscrizione... <strong>Stay tuned!</strong>
+						Stiamo aggiustando gli ultimi dettagli del portale di iscrizione... <strong
+							>Stay tuned!</strong
+						>
 					</p>
 
 					<!-- AREA RISERVATA TESTER -->
@@ -3983,7 +3983,7 @@
 					<span>🏛️</span> I 4 Pilastri Ufficiali di CISF27
 				</h3>
 
-				{#each [{ key: 'storia' as PillarKey, num: 'Pilastro 1', title: 'Storia, Impatto & Responsabilità Comunitaria', desc: 'Dalle figure storiche bolognesi (Laura Bassi, Guglielmo Marconi, ecc.) al ruolo etico e sociale del fisico nella comunità.', rangeClass: 'range-primary', tagClass: 'text-primary', badgeClass: 'badge-primary badge-soft' }, { key: 'energia' as PillarKey, num: 'Pilastro 2', title: 'Energia, Clima & Sostenibilità', desc: 'Transizione energetica, fusione nucleare, rinnovabili, atmosfera e il contributo scientifico verso un futuro sostenibile.', rangeClass: 'range-warning', tagClass: 'text-warning', badgeClass: 'badge-warning badge-soft' }, { key: 'lavoro' as PillarKey, num: 'Pilastro 3', title: 'Lavoro, Carriera & Opportunità Future', desc: 'Tavole rotonde con aziende, figure di spicco nel mondo industriale, programmazione, data science, brevetti e spin-off.', rangeClass: 'range-success', tagClass: 'text-success', badgeClass: 'badge-success badge-soft' }, { key: 'ricerca' as PillarKey, num: 'Pilastro 4', title: 'Ricerca di Frontiera & Centri del Territorio', desc: 'Fisica fondamentale, HPC scientifico, ottica quantistica e cooperazione con i grandi poli scientifici felsinei.', rangeClass: 'range-info', tagClass: 'text-info', badgeClass: 'badge-info badge-soft' }] as pillar (pillar.key)}
+				{#each [{ key: 'storia' as PillarKey, num: 'Pilastro 1', title: 'Storia, Impatto & Responsabilità Comunitaria', desc: 'Dalle figure storiche bolognesi (Laura Bassi, Guglielmo Marconi, ecc.) al ruolo etico e sociale del fisico nella comunità.', rangeClass: 'range-primary', tagClass: 'text-primary', badgeClass: 'badge-primary badge-soft' }, { key: 'energia' as PillarKey, num: 'Pilastro 2', title: 'Energia, Clima & Sostenibilità', desc: 'Transizione energetica, fusione nucleare, rinnovabili, atmosfera e il contributo scientifico verso un futuro sostenibile.', rangeClass: 'range-warning [--range-thumb:var(--color-base-100)]', tagClass: 'text-warning', badgeClass: 'badge-warning badge-soft' }, { key: 'lavoro' as PillarKey, num: 'Pilastro 3', title: 'Lavoro, Carriera & Opportunità Future', desc: 'Tavole rotonde con aziende, figure di spicco nel mondo industriale, programmazione, data science, brevetti e spin-off.', rangeClass: 'range-success', tagClass: 'text-success', badgeClass: 'badge-success badge-soft' }, { key: 'ricerca' as PillarKey, num: 'Pilastro 4', title: 'Ricerca di Frontiera & Centri del Territorio', desc: 'Fisica fondamentale, HPC scientifico, ottica quantistica e cooperazione con i grandi poli scientifici felsinei.', rangeClass: 'range-info', tagClass: 'text-info', badgeClass: 'badge-info badge-soft' }] as pillar (pillar.key)}
 					<div class="mb-5 rounded-xl border border-gray-200 bg-white p-4 shadow-2xs">
 						<div class="mb-3 flex flex-wrap items-start justify-between gap-2">
 							<div class="min-w-0 flex-1">
