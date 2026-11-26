@@ -1767,7 +1767,7 @@
 							(sincronizzato con il server).
 						</p>
 					{/if}
-
+					<!-- 
 					<div
 						class="mx-auto mt-6 max-w-2xl rounded-xl border border-amber-200 bg-amber-50/70 p-4 text-left text-xs leading-relaxed text-amber-950 sm:text-sm"
 					>
@@ -1776,7 +1776,7 @@
 						video, mini-podcast o canvas — ricordati di mantenerla anonima!) e un'eventuale proposta di
 						Parallel Session / Talk Scientifico.
 					</div>
-
+					
 					<div class="mt-6 flex flex-wrap items-center justify-center gap-2.5">
 						<a
 							href={criteriPdfUrl}
@@ -1804,6 +1804,7 @@
 							Pagina Criteri &amp; Etica
 						</a>
 					</div>
+					-->
 				</div>
 			{:else if gateState === 'closed'}
 				<!-- STATO: CANDIDATURE CHIUSE -->
