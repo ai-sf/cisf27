@@ -497,7 +497,7 @@ export async function submitRegistration(
 				},
 				body: JSON.stringify(payload),
 			},
-			120000
+			360000
 		);
 
 		if (!response.ok) {
