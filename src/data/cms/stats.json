@@ -51,13 +51,13 @@
     {
       "id": "comitati_nazionali",
       "number": "34",
-      "label": "Territorial Committee",
+      "label": "Comitati Territoriali",
       "icon": "map"
     },
     {
       "id": "comitati_locali_iaps",
       "number": "14",
-      "label": "Local Committee",
+      "label": "Comitati Locali",
       "icon": "map"
     },
     {
