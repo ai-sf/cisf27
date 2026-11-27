@@ -23,3 +23,11 @@ pnpm-debug.log*
 # jetbrains setting folder
 .idea/
 .vscode/
+
+# LaTeX auxiliary files
+*.aux
+*.fdb_latexmk
+*.fls
+*.log
+*.out
+*.synctex.gz

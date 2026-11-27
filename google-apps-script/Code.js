@@ -2,7 +2,7 @@
 const MAIN_RECIPIENT = 'cisf27@ai-sf.it';
 
 // Destinatari di fallback se l'oggetto non ha una mappatura specifica
-const FALLBACK_CC = ['francesco.isgrò@ai-sf.it', 'alessandro.dagostino@ai-sf.it'];
+const FALLBACK_CC = ['francesco.isgro@ai-sf.it', 'alessandro.dagostino@ai-sf.it'];
 
 // Mappa CC in base all'oggetto selezionato nel form
 const CC_MAP = {
@@ -13,8 +13,8 @@ const CC_MAP = {
 		'chiara.luppino@ai-sf.it',
 		'ludovica.rainero@ai-sf.it',
 	],
-	Iscrizione: ['francesco.isgrò@ai-sf.it', 'alessandro.dagostino@ai-sf.it'],
-	Altro: ['francesco.isgrò@ai-sf.it', 'alessandro.dagostino@ai-sf.it'],
+	Iscrizione: ['francesco.isgro@ai-sf.it', 'alessandro.dagostino@ai-sf.it'],
+	Altro: ['francesco.isgro@ai-sf.it', 'alessandro.dagostino@ai-sf.it'],
 };
 
 // Sinonimi per ciascun campo del form del sito per facilitare l'abbinamento con le domande del Google Form
