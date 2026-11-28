@@ -119,6 +119,8 @@ export interface EncodedAttachment {
 export interface RegistrationPayload {
 	// Gatekeeper (only populated in MODE=TESTING)
 	accessCode?: string;
+	// Anti-bot Cloudflare Turnstile single-use token (populated when PUBLIC_TURNSTILE_SITE_KEY is set)
+	turnstileToken?: string;
 
 	// Step 0
 	ruoloSpeciale: string;
@@ -550,7 +552,7 @@ export async function submitRegistration(
 			return {
 				success: false,
 				error:
-					'Timeout di connessione (oltre 120 secondi). Se avevi allegato un file pesante, verifica prima la tua casella email (anche Spam) per vedere se la candidatura è arrivata, altrimenti riduci la dimensione del file o usa un link esterno e riprova.',
+					'Timeout di connessione (oltre 360 secondi). Se avevi allegato un file pesante, verifica prima la tua casella email (anche Spam) per vedere se la candidatura è arrivata, altrimenti riduci la dimensione del file o usa un link esterno e riprova.',
 			};
 		}
 

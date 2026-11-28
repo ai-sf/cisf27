@@ -160,10 +160,12 @@ Per la guida completa sull'architettura, sincronizzazione automatica dei sottoca
 
 ## Variabili d'ambiente
 
-Il progetto necessita di una sola variabile d'ambiente, esposta al client:
+Il progetto utilizza le seguenti variabili d'ambiente esposte al client (vedi `.env.example`):
 
 ```sh
 PUBLIC_GOOGLE_SCRIPT_URL=https://script.google.com/macros/s/YOUR_DEPLOYMENT_ID/exec
+PUBLIC_REGISTRATION_SCRIPT_URL=https://script.google.com/macros/s/YOUR_REGISTRATION_DEPLOYMENT_ID/exec
+PUBLIC_TURNSTILE_SITE_KEY=YOUR_CLOUDFLARE_TURNSTILE_SITE_KEY
 ```
 
 **Setup:**
@@ -172,21 +174,15 @@ PUBLIC_GOOGLE_SCRIPT_URL=https://script.google.com/macros/s/YOUR_DEPLOYMENT_ID/e
 cp .env.example .env
 ```
 
-Modifica `.env` con l'URL del tuo deployment Google Apps Script (vedi sezione successiva).
+Modifica `.env` con gli URL dei deployment Google Apps Script e la Site Key pubblica di Cloudflare Turnstile.
 
-> `.env` è gitignorato. In produzione imposta la variabile d'ambiente nella dashboard della piattaforma di hosting.
+> `.env` è gitignorato. In produzione imposta le variabili d'ambiente nelle impostazioni di GitHub Actions / piattaforma di hosting.
 
 ---
 
 ## Google Apps Script (modulo contatti)
 
-Il backend del form contatti risiede in [`google-apps-script/`](google-apps-script/) e gestisce l'invio immediato di un'email formattata tramite `MailApp.sendEmail` all'indirizzo istituzionale **`cisf27@ai-sf.it`**, con impostazione automatica del `replyTo` del mittente e **CC dinamico** in base all'argomento selezionato:
-
-- **Sponsorizzazione** ➔ CC: `diego.ficarra@ai-sf.it`, `mariarosaria.sivo@ai-sf.it`
-- **Logistica** ➔ CC: `tomislav.vojvodic@ai-sf.it`
-- **Programma Scientifico** ➔ CC: `marta.grenno@ai-sf.it`, `chiara.luppino@ai-sf.it`, `ludovica.rainero@ai-sf.it`
-- **Iscrizione** ➔ CC: `francesco.isgrò@ai-sf.it`, `alessandro.dagostino@ai-sf.it`
-- **Altro / Fallback** ➔ CC: `francesco.isgrò@ai-sf.it`, `alessandro.dagostino@ai-sf.it`
+Il backend del form contatti risiede in [`google-apps-script/`](google-apps-script/) e gestisce la verifica anti-spam **Cloudflare Turnstile**, il rate-limiting e l'invio immediato di un'email formattata tramite `MailApp.sendEmail` all'indirizzo istituzionale **`cisf27@ai-sf.it`**, con impostazione automatica del `replyTo` del mittente e **CC dinamico** configurato tramite **Script Properties** (`CC_MAP_JSON` e `FALLBACK_CC`, senza esporre indirizzi personali nel codice sorgente).
 
 Se configurata la proprietà `FORM_ID`, i messaggi vengono inoltre archiviati come risposte in un Google Form di riserva.
 

@@ -124,7 +124,9 @@ function initCharStagger(): void {
 						const gradStyle = gradientBg
 							? `background:${gradientBg};background-size:${visibleChars * 100}% 100%;background-position:${charIndex++ * -100}% 0;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;`
 							: '';
-						return `<span style="display:inline-block;opacity:0;padding-bottom:0.2em;margin-bottom:-0.2em;--delay:${delay};${gradStyle}">${char}</span>`;
+						const safeChar =
+							char === '&' ? '&amp;' : char === '<' ? '&lt;' : char === '>' ? '&gt;' : char;
+						return `<span style="display:inline-block;opacity:0;padding-bottom:0.2em;margin-bottom:-0.2em;--delay:${delay};${gradStyle}">${safeChar}</span>`;
 					})
 					.join('');
 				return `<span style="display:inline-block;white-space:nowrap;padding-bottom:0.2em;margin-bottom:-0.2em">${chars}</span>`;

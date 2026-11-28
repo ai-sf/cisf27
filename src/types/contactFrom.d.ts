@@ -6,6 +6,7 @@ export interface FormPayload {
 	email: string;
 	oggetto: Oggetto;
 	messaggio: string;
+	turnstileToken?: string;
 }
 
 export interface SubmitResult {

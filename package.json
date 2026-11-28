@@ -18,6 +18,7 @@
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "format": "prettier .",
+    "format:check": "prettier . --check",
     "format:write": "prettier . --write",
     "flint": "pnpm run format:write && pnpm run lint:fix",
     "check": "pnpm run check:i18n && pnpm run flint && pnpm run typecheck",
