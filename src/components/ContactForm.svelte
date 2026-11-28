@@ -1,7 +1,12 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
 	import { Mail, ArrowRight, CircleCheck, CircleX, RotateCcw } from '@lucide/svelte';
-	import { contactForm, SCRIPT_URL } from '../utils/contactForm';
+	import { contactForm } from '../utils/contactForm';
+	import {
+		cleanupTurnstileContainer,
+		hasTurnstileConfigured,
+		obtainTurnstileToken,
+	} from '../utils/turnstile';
 	import type { FormPayload } from '../types/contactFrom';
 	import { contacts, errorContent } from '../data/cms';
 	import { SvelteURLSearchParams } from 'svelte/reactivity';
@@ -49,6 +54,12 @@
 	let submitting = $state(false);
 	let status = $state<Status>(null);
 	let formEl = $state<HTMLFormElement | null>(null);
+	let turnstileContainerEl = $state<HTMLDivElement | null>(null);
+
+	$effect(() => {
+		const el = turnstileContainerEl;
+		return () => cleanupTurnstileContainer(el);
+	});
 
 	const subjectValues = $derived<string[]>(
 		(tForm?.subjects as string[]) ?? (contacts.form?.subjects as string[]) ?? []
@@ -100,44 +111,57 @@
 
 	async function handleSubmit(e: SubmitEvent) {
 		e.preventDefault();
-		if (!oggetto) return;
+		if (!oggetto || submitting) return;
 
 		submitting = true;
 		status = null;
 
-		const idx = subjectValues.indexOf(oggetto);
-		const canonicalSubject = idx !== -1 ? CANONICAL_SUBJECTS[idx] : 'Altro';
-		const data: FormPayload = { nome, email, oggetto: canonicalSubject, messaggio };
-		const result = await contactForm(data, locale);
+		try {
+			let turnstileToken = '';
+			if (hasTurnstileConfigured()) {
+				turnstileToken = await obtainTurnstileToken(turnstileContainerEl, 'cisf27_contact');
+			}
 
-		if (result.success) {
-			status = {
-				variant: 'success',
-				heading: tForm?.successHeading ?? 'Messaggio inviato!',
-				message: tForm?.successMessage ?? 'Ti risponderemo al più presto.',
+			const idx = subjectValues.indexOf(oggetto);
+			const canonicalSubject = idx !== -1 ? CANONICAL_SUBJECTS[idx] : 'Altro';
+			const data: FormPayload = {
+				nome,
+				email,
+				oggetto: canonicalSubject,
+				messaggio,
+				...(turnstileToken ? { turnstileToken } : {}),
 			};
-		} else {
+			const result = await contactForm(data, locale);
+
+			if (result.success) {
+				status = {
+					variant: 'success',
+					heading: tForm?.successHeading ?? 'Messaggio inviato!',
+					message: tForm?.successMessage ?? 'Ti risponderemo al più presto.',
+				};
+			} else {
+				status = {
+					variant: 'error',
+					heading: tForm?.errorHeading ?? 'Qualcosa è andato storto',
+					message: result.error ?? errorContent.defaultMessage ?? 'Errore sconosciuto',
+				};
+			}
+		} catch (err) {
 			status = {
 				variant: 'error',
 				heading: tForm?.errorHeading ?? 'Qualcosa è andato storto',
-				message: result.error ?? errorContent.defaultMessage ?? 'Errore sconosciuto',
+				message: (err as Error).message || (errorContent.defaultMessage ?? 'Errore sconosciuto'),
 			};
+		} finally {
+			submitting = false;
 		}
-
-		submitting = false;
 	}
 </script>
 
 <div class="card card-border border-primary/30 bg-base-100/60 p-8">
 	<h2 class="card-title mb-6 text-2xl">{tForm?.formHeading}</h2>
 
-	<form
-		bind:this={formEl}
-		onsubmit={handleSubmit}
-		class="fieldset"
-		action={SCRIPT_URL}
-		method="POST"
-	>
+	<form bind:this={formEl} onsubmit={handleSubmit} class="fieldset">
 		{#if status}
 			<div class="animate-fade-in-up flex flex-col items-center gap-3 py-4 text-center">
 				<div
@@ -186,6 +210,7 @@
 					name="email"
 					type="email"
 					required
+					maxlength="254"
 					placeholder={tForm?.emailPlaceholder}
 					bind:value={email}
 					class="input validator focus:input-primary w-full"
@@ -216,12 +241,15 @@
 					id="messaggio"
 					name="messaggio"
 					required
+					maxlength="5000"
 					rows={5}
 					placeholder={tForm?.messagePlaceholder}
 					bind:value={messaggio}
 					class="textarea validator w-full focus:textarea-primary"></textarea>
 				<p class="validator-hint hidden">{tForm?.messageValidationHint}</p>
 			</fieldset>
+
+			<div bind:this={turnstileContainerEl} class="my-1 flex justify-center"></div>
 
 			<button type="submit" disabled={submitting} class="btn btn-primary glow-hover btn-block">
 				{#if submitting}

@@ -45,6 +45,7 @@ jobs:
         env:
           PUBLIC_GOOGLE_SCRIPT_URL: ${{ secrets.PUBLIC_GOOGLE_SCRIPT_URL || vars.PUBLIC_GOOGLE_SCRIPT_URL }}
           PUBLIC_REGISTRATION_SCRIPT_URL: ${{ secrets.PUBLIC_REGISTRATION_SCRIPT_URL || vars.PUBLIC_REGISTRATION_SCRIPT_URL }}
+          PUBLIC_TURNSTILE_SITE_KEY: ${{ secrets.PUBLIC_TURNSTILE_SITE_KEY || vars.PUBLIC_TURNSTILE_SITE_KEY }}
         run: pnpm run build
 
       - name: Upload Pages artifact

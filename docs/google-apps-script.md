@@ -6,17 +6,17 @@ Riceve le richieste di contatto inviate dal form del sito web, inoltra immediata
 
 ---
 
-## 1. Smistamento Email e Indirizzi CC
+## 1. Smistamento Email, Script Properties e Protezione Turnstile
 
-Tutte le email sono inviate a **`cisf27@ai-sf.it`**. A seconda dell'argomento selezionato nel form, lo script aggiunge automaticamente in copia conoscenza (CC) i responsabili specifici del comitato:
+Tutte le email sono inviate a **`cisf27@ai-sf.it`** (personalizzabile tramite `MAIN_RECIPIENT`). Per non esporre indirizzi nominali o chiavi segrete nel repository pubblico, lo smistamento CC e la protezione anti-bot sono configurati interamente in **Impostazioni progetto ➔ Proprietà script (`Script Properties`)**:
 
-| Argomento                 | Indirizzi in CC                                                                 |
-| :------------------------ | :------------------------------------------------------------------------------ |
-| **Sponsorizzazione**      | `diego.ficarra@ai-sf.it`, `mariarosaria.sivo@ai-sf.it`                          |
-| **Logistica**             | `tomislav.vojvodic@ai-sf.it`                                                    |
-| **Programma Scientifico** | `marta.grenno@ai-sf.it`, `chiara.luppino@ai-sf.it`, `ludovica.rainero@ai-sf.it` |
-| **Iscrizione**            | `francesco.isgrò@ai-sf.it`, `alessandro.dagostino@ai-sf.it`                     |
-| **Altro / Fallback**      | `francesco.isgrò@ai-sf.it`, `alessandro.dagostino@ai-sf.it`                     |
+| Proprietà Script       | Obbligatoria | Descrizione                                                                                                                           |
+| :--------------------- | :----------- | :------------------------------------------------------------------------------------------------------------------------------------ |
+| `TURNSTILE_SECRET_KEY` | Consigliata  | Chiave segreta di **Cloudflare Turnstile** per validare il token anti-bot lato server (`UrlFetchApp`).                                |
+| `CC_MAP_JSON`          | Opzionale    | Oggetto JSON con gli indirizzi in CC per categoria (`Sponsorizzazione`, `Logistica`, `Programma Scientifico`, `Iscrizione`, `Altro`). |
+| `FALLBACK_CC`          | Opzionale    | Indirizzi email di fallback in CC separati da virgola.                                                                                |
+| `MAIN_RECIPIENT`       | Opzionale    | Destinatario principale (default: `cisf27@ai-sf.it`).                                                                                 |
+| `FORM_ID`              | Opzionale    | ID del Google Form di riserva per salvare copia dei messaggi ricevuti.                                                                |
 
 ---
 

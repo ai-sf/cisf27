@@ -1,21 +1,36 @@
-// Indirizzo principale di destinazione
-const MAIN_RECIPIENT = 'cisf27@ai-sf.it';
+/**
+ * ============================================================================
+ * CISF27 — Backend Modulo Contatti (Google Apps Script, V8)
+ * ============================================================================
+ * Proprietà Script supportate (Impostazioni progetto -> Proprietà script):
+ *   - MAIN_RECIPIENT       : (Opzionale) Destinatario principale (default: cisf27@ai-sf.it)
+ *   - FALLBACK_CC          : (Opzionale) Lista email CC di fallback separate da virgola
+ *   - CC_MAP_JSON          : (Opzionale) JSON oggetto -> array/stringa email CC per smistamento
+ *   - TURNSTILE_SECRET_KEY : (Consigliato) Chiave segreta Cloudflare Turnstile anti-spam
+ *   - FORM_ID              : (Opzionale) ID o URL del Google Form di backup risposte
+ */
 
-// Destinatari di fallback se l'oggetto non ha una mappatura specifica
-const FALLBACK_CC = ['francesco.isgro@ai-sf.it', 'alessandro.dagostino@ai-sf.it'];
+const DEFAULT_MAIN_RECIPIENT = 'cisf27@ai-sf.it';
+const TURNSTILE_VERIFY_URL = 'https://challenges.cloudflare.com/turnstile/v0/siteverify';
 
-// Mappa CC in base all'oggetto selezionato nel form
-const CC_MAP = {
-	Sponsorizzazione: ['diego.ficarra@ai-sf.it', 'mariarosaria.sivo@ai-sf.it'],
-	Logistica: ['tomislav.vojvodic@ai-sf.it'],
-	'Programma Scientifico': [
-		'marta.grenno@ai-sf.it',
-		'chiara.luppino@ai-sf.it',
-		'ludovica.rainero@ai-sf.it',
-	],
-	Iscrizione: ['francesco.isgro@ai-sf.it', 'alessandro.dagostino@ai-sf.it'],
-	Altro: ['francesco.isgro@ai-sf.it', 'alessandro.dagostino@ai-sf.it'],
-};
+const MAX_RAW_BODY_CHARS = 25000;
+const MAX_NAME_CHARS = 256;
+const MAX_EMAIL_CHARS = 254;
+const MAX_SUBJECT_CHARS = 100;
+const MAX_MESSAGE_CHARS = 5000;
+
+const RATE_LIMIT_EMAIL_WINDOW_SEC = 900; // 15 min
+const RATE_LIMIT_EMAIL_MAX = 3;
+const RATE_LIMIT_GLOBAL_WINDOW_SEC = 600; // 10 min
+const RATE_LIMIT_GLOBAL_MAX = 25;
+
+const ALLOWED_SUBJECTS = [
+	'Iscrizione',
+	'Sponsorizzazione',
+	'Logistica',
+	'Programma Scientifico',
+	'Altro',
+];
 
 // Sinonimi per ciascun campo del form del sito per facilitare l'abbinamento con le domande del Google Form
 const FIELD_ALIASES = {
@@ -26,43 +41,10 @@ const FIELD_ALIASES = {
 };
 
 /**
- * Gestione richieste GET (usato anche per diagnostica da browser).
+ * Healthcheck minimale su GET (nessuna esposizione di indirizzi, ID o struttura interna).
  */
 function doGet() {
-	let formDiagnostics = null;
-	try {
-		const rawFormId = PropertiesService.getScriptProperties().getProperty('FORM_ID');
-		if (rawFormId) {
-			const cleanId = extractFormId(rawFormId);
-			const form = FormApp.openById(cleanId);
-			formDiagnostics = {
-				configured: true,
-				formId: cleanId,
-				title: form.getTitle(),
-				items: form.getItems().map((item) => ({
-					title: item.getTitle(),
-					type: String(item.getType()),
-				})),
-			};
-		} else {
-			formDiagnostics = {
-				configured: false,
-				message: 'FORM_ID non configurato nelle Script Properties.',
-			};
-		}
-	} catch (err) {
-		formDiagnostics = {
-			configured: true,
-			error: 'Errore durante accesso al Google Form: ' + String(err.message || err),
-		};
-	}
-
-	return jsonOutput({
-		status: 'active',
-		service: 'CISF27 Contact Form Webhook',
-		recipient: MAIN_RECIPIENT,
-		form: formDiagnostics,
-	});
+	return jsonOutput({ status: 'active' });
 }
 
 /**
@@ -70,34 +52,68 @@ function doGet() {
  */
 function doPost(e) {
 	try {
-		if (!e || !e.postData || !e.postData.contents) {
-			throw new Error('Nessun dato ricevuto nella richiesta');
+		if (!e || !e.postData || typeof e.postData.contents !== 'string' || !e.postData.contents) {
+			throw new Error('Nessun dato ricevuto nella richiesta.');
+		}
+
+		if (e.postData.contents.length > MAX_RAW_BODY_CHARS) {
+			throw new Error('Il messaggio supera la dimensione massima consentita.');
 		}
 
 		const data = parseRequestBody(e);
+		const props = PropertiesService.getScriptProperties();
 
-		const nome = (data.nome || '').trim();
-		const email = (data.email || '').trim();
-		const oggetto = (data.oggetto || '').trim();
-		const messaggio = (data.messaggio || '').trim();
+		// 1. Verifica anti-bot Cloudflare Turnstile (se TURNSTILE_SECRET_KEY è configurata)
+		verifyTurnstileToken_(
+			props.getProperty('TURNSTILE_SECRET_KEY'),
+			data.turnstileToken || data['cf-turnstile-response']
+		);
 
-		if (!nome || !email || !oggetto || !messaggio) {
+		// 2. Pulizia da \r, \n, \0 (anti Header Injection) e validazione rigorosa campi
+		const nome = stripControlAndHeaderChars_(data.nome);
+		const email = stripControlAndHeaderChars_(data.email);
+		const rawOggetto = stripControlAndHeaderChars_(data.oggetto);
+		const messaggio = String(data.messaggio || '')
+			.replace(/\u0000/g, '')
+			.trim();
+
+		if (!nome || !email || !rawOggetto || !messaggio) {
 			throw new Error(
 				'Campi obbligatori mancanti: nome, email, oggetto e messaggio sono richiesti.'
 			);
 		}
+		if (nome.length < 2 || nome.length > MAX_NAME_CHARS) {
+			throw new Error('Il nome inserito non rispetta la lunghezza consentita (2–256 caratteri).');
+		}
+		if (email.length > MAX_EMAIL_CHARS || !isValidSafeEmail_(email)) {
+			throw new Error('Indirizzo email non valido.');
+		}
+		if (rawOggetto.length > MAX_SUBJECT_CHARS) {
+			throw new Error('Oggetto non valido.');
+		}
+		if (messaggio.length < 2 || messaggio.length > MAX_MESSAGE_CHARS) {
+			throw new Error(
+				'Il messaggio deve essere compreso tra 2 e ' + MAX_MESSAGE_CHARS + ' caratteri.'
+			);
+		}
 
-		// Determina eventuali destinatari in CC (specifici per oggetto o fallback coordinatori)
-		const ccRecipients = CC_MAP[oggetto] || FALLBACK_CC;
+		// 3. Rate-limiting in CacheService per proteggere la quota giornaliera MailApp
+		enforceContactRateLimit_(email);
+
+		const canonicalOggetto = ALLOWED_SUBJECTS.indexOf(rawOggetto) !== -1 ? rawOggetto : 'Altro';
+		const routing = loadRoutingConfig_(props);
+		const ccRecipients = Object.prototype.hasOwnProperty.call(routing.ccMap, canonicalOggetto)
+			? routing.ccMap[canonicalOggetto]
+			: routing.fallbackCc;
 		const ccString = ccRecipients.join(', ');
 
-		const subject = `[CISF27 Contatto] ${oggetto} - ${nome}`;
+		const subject = `[CISF27 Contatto] ${canonicalOggetto} - ${nome}`;
 
 		const plainTextBody = `Nuovo messaggio ricevuto dal form contatti del sito CISF27:
 
 Nome e Cognome: ${nome}
 Email: ${email}
-Oggetto: ${oggetto}
+Oggetto: ${rawOggetto}
 
 Messaggio:
 ${messaggio}
@@ -121,7 +137,7 @@ Inviato tramite il modulo del sito https://ai-sf.it/cisf27`;
 					</tr>
 					<tr>
 						<td style="padding: 8px 0; font-weight: bold; color: #475569;">Oggetto:</td>
-						<td style="padding: 8px 0; color: #0f172a;"><span style="background-color: #f1f5f9; padding: 4px 8px; border-radius: 4px; font-weight: 500;">${escapeHtml(oggetto)}</span></td>
+						<td style="padding: 8px 0; color: #0f172a;"><span style="background-color: #f1f5f9; padding: 4px 8px; border-radius: 4px; font-weight: 500;">${escapeHtml(rawOggetto)}</span></td>
 					</tr>
 				</table>
 				<div style="background-color: #f8fafc; border-left: 4px solid #0284c7; padding: 16px; margin-bottom: 24px; border-radius: 4px;">
@@ -135,7 +151,7 @@ Inviato tramite il modulo del sito https://ai-sf.it/cisf27`;
 		`;
 
 		const mailOptions = {
-			to: MAIN_RECIPIENT,
+			to: routing.mainRecipient,
 			replyTo: email,
 			subject: subject,
 			body: plainTextBody,
@@ -146,14 +162,14 @@ Inviato tramite il modulo del sito https://ai-sf.it/cisf27`;
 			mailOptions.cc = ccString;
 		}
 
-		// 1. Invio email
+		// 4. Invio email
 		MailApp.sendEmail(mailOptions);
 
-		// 2. Opzionale: se presente FORM_ID, prova a salvare nel Google Form
+		// 5. Opzionale: se presente FORM_ID, prova a salvare nel Google Form
 		try {
-			const rawFormId = PropertiesService.getScriptProperties().getProperty('FORM_ID');
+			const rawFormId = props.getProperty('FORM_ID');
 			if (rawFormId) {
-				submitToForm(rawFormId, { nome, email, oggetto, messaggio });
+				submitToForm(rawFormId, { nome, email, oggetto: canonicalOggetto, messaggio });
 			}
 		} catch (formErr) {
 			console.error('Salvataggio form opzionale non riuscito:', formErr);
@@ -161,9 +177,146 @@ Inviato tramite il modulo del sito https://ai-sf.it/cisf27`;
 
 		return jsonOutput({ status: 'success' });
 	} catch (err) {
-		console.error('Errore gestione richiesta:', err);
+		console.error('Errore gestione richiesta contatti:', err);
 		return jsonOutput({ status: 'error', message: String(err.message || err) });
 	}
+}
+
+/**
+ * Verifica server-side del token Cloudflare Turnstile (attiva se TURNSTILE_SECRET_KEY è impostata).
+ */
+function verifyTurnstileToken_(rawSecret, rawToken) {
+	const secret = String(rawSecret || '').trim();
+	if (!secret) return;
+
+	const token = String(rawToken || '').trim();
+	if (!token || token.length > 4096) {
+		throw new Error(
+			'Verifica di sicurezza anti-bot mancante o scaduta. Ricarica la pagina o riprova.'
+		);
+	}
+
+	let res;
+	try {
+		res = UrlFetchApp.fetch(TURNSTILE_VERIFY_URL, {
+			method: 'post',
+			payload: {
+				secret: secret,
+				response: token,
+			},
+			muteHttpExceptions: true,
+		});
+	} catch (netErr) {
+		console.warn('Turnstile siteverify network outage (fail-open with rate-limit):', netErr);
+		return;
+	}
+
+	const code = res.getResponseCode();
+	if (code >= 500) {
+		console.warn('Turnstile siteverify HTTP ' + code + ' (fail-open with rate-limit).');
+		return;
+	}
+
+	let parsed = null;
+	try {
+		parsed = JSON.parse(res.getContentText());
+	} catch (parseErr) {
+		throw new Error('Risposta non valida dal servizio di verifica anti-bot. Riprova.');
+	}
+
+	if (!parsed || parsed.success !== true) {
+		console.warn('Turnstile verification rejected:', parsed && parsed['error-codes']);
+		throw new Error('Verifica di sicurezza anti-bot non superata o scaduta. Riprova.');
+	}
+}
+
+/**
+ * Rate-limiting leggero in CacheService per prevenire abusi della quota MailApp.
+ */
+function enforceContactRateLimit_(email) {
+	try {
+		const cache = CacheService.getScriptCache();
+		const digest = Utilities.computeDigest(Utilities.DigestAlgorithm.SHA_256, email.toLowerCase());
+		const emailHash = digest
+			.slice(0, 10)
+			.map((b) => ((b < 0 ? b + 256 : b) < 16 ? '0' : '') + (b < 0 ? b + 256 : b).toString(16))
+			.join('');
+
+		const emailKey = 'CISF27_CONTACT_RL_E_' + emailHash;
+		const globalKey = 'CISF27_CONTACT_RL_GLOBAL';
+
+		const emailCount = parseInt(cache.get(emailKey) || '0', 10) || 0;
+		if (emailCount >= RATE_LIMIT_EMAIL_MAX) {
+			throw new Error(
+				'Hai già inviato diversi messaggi negli ultimi minuti. Attendi qualche minuto prima di riprovare.'
+			);
+		}
+
+		const globalCount = parseInt(cache.get(globalKey) || '0', 10) || 0;
+		if (globalCount >= RATE_LIMIT_GLOBAL_MAX) {
+			throw new Error(
+				'Il modulo contatti sta ricevendo molte richieste in questo momento. Riprova tra qualche minuto oppure scrivi direttamente a cisf27@ai-sf.it.'
+			);
+		}
+
+		cache.put(emailKey, String(emailCount + 1), RATE_LIMIT_EMAIL_WINDOW_SEC);
+		cache.put(globalKey, String(globalCount + 1), RATE_LIMIT_GLOBAL_WINDOW_SEC);
+	} catch (rlErr) {
+		if (rlErr && String(rlErr.message || '').indexOf('minuti') !== -1) {
+			throw rlErr;
+		}
+		console.warn('Rate-limit cache warning:', rlErr);
+	}
+}
+
+/**
+ * Carica destinatario principale e mappa CC dalle Script Properties senza esporre indirizzi personali nel codice.
+ */
+function loadRoutingConfig_(props) {
+	const rawMain = stripControlAndHeaderChars_(props.getProperty('MAIN_RECIPIENT'));
+	const mainRecipient = isValidSafeEmail_(rawMain) ? rawMain : DEFAULT_MAIN_RECIPIENT;
+
+	const fallbackCc = parseEmailList_(props.getProperty('FALLBACK_CC'));
+	const ccMap = Object.create(null);
+
+	const rawMapJson = String(props.getProperty('CC_MAP_JSON') || '').trim();
+	if (rawMapJson) {
+		try {
+			const parsed = JSON.parse(rawMapJson);
+			if (parsed && typeof parsed === 'object' && !Array.isArray(parsed)) {
+				Object.keys(parsed).forEach((key) => {
+					const cleanKey = stripControlAndHeaderChars_(key);
+					if (cleanKey) {
+						ccMap[cleanKey] = parseEmailList_(parsed[key]);
+					}
+				});
+			}
+		} catch (err) {
+			console.warn('CC_MAP_JSON non valido nelle Script Properties:', err);
+		}
+	}
+
+	return {
+		mainRecipient: mainRecipient,
+		fallbackCc: fallbackCc,
+		ccMap: ccMap,
+	};
+}
+
+function parseEmailList_(val) {
+	if (!val) return [];
+	const items = Array.isArray(val) ? val : String(val).split(',');
+	return items.map((item) => stripControlAndHeaderChars_(item)).filter(isValidSafeEmail_);
+}
+
+function stripControlAndHeaderChars_(val) {
+	return String(val || '')
+		.replace(/[\r\n\u0000]+/g, ' ')
+		.trim();
+}
+
+function isValidSafeEmail_(email) {
+	return Boolean(email && /^[^\s@,;<>"]+@[^\s@,;<>"]+\.[^\s@,;<>"]{2,}$/.test(email));
 }
 
 /**
@@ -188,7 +341,7 @@ function extractFormId(raw) {
  */
 function normalizeTitle(title) {
 	return String(title || '')
-		.replace(/[\s\*\:\.\-\_\(\)\[\]]/g, '')
+		.replace(/[\s*:.\-_()[\]]/g, '')
 		.trim()
 		.toLowerCase();
 }
@@ -199,7 +352,6 @@ function normalizeTitle(title) {
 function findFormItem(formItems, fieldKey) {
 	const aliases = FIELD_ALIASES[fieldKey] || [fieldKey];
 
-	// 1. Match esatto normalizzato
 	for (let i = 0; i < formItems.length; i++) {
 		const itemTitle = normalizeTitle(formItems[i].getTitle());
 		if (aliases.includes(itemTitle)) {
@@ -207,7 +359,6 @@ function findFormItem(formItems, fieldKey) {
 		}
 	}
 
-	// 2. Match parziale (uno contiene l'altro)
 	for (let i = 0; i < formItems.length; i++) {
 		const itemTitle = normalizeTitle(formItems[i].getTitle());
 		for (let j = 0; j < aliases.length; j++) {
@@ -327,20 +478,29 @@ function parseRequestBody(e) {
 	const type = e.postData.type || '';
 
 	if (type.indexOf('application/x-www-form-urlencoded') !== -1) {
-		const data = {};
+		const data = Object.create(null);
 		contents.split('&').forEach((pair) => {
 			if (!pair) return;
-			const [key, value] = pair.split('=');
-			data[decodeURIComponent(key)] = decodeURIComponent((value || '').replace(/\+/g, ' '));
+			const eqIdx = pair.indexOf('=');
+			const rawKey = eqIdx >= 0 ? pair.slice(0, eqIdx) : pair;
+			const rawVal = eqIdx >= 0 ? pair.slice(eqIdx + 1) : '';
+			const key = decodeURIComponent(rawKey.replace(/\+/g, ' '));
+			if (key && key !== '__proto__' && key !== 'constructor' && key !== 'prototype') {
+				data[key] = decodeURIComponent(rawVal.replace(/\+/g, ' '));
+			}
 		});
 		return data;
 	}
 
-	return JSON.parse(contents);
+	const parsed = JSON.parse(contents);
+	if (!parsed || typeof parsed !== 'object' || Array.isArray(parsed)) {
+		throw new Error('Formato richiesta JSON non valido.');
+	}
+	return parsed;
 }
 
 function escapeHtml(text) {
-	return String(text)
+	return String(text || '')
 		.replace(/&/g, '&amp;')
 		.replace(/</g, '&lt;')
 		.replace(/>/g, '&gt;')
@@ -356,28 +516,34 @@ function jsonOutput(obj) {
 
 /**
  * Funzione di test e autorizzazione permessi (OAuth).
- * Esegui questa funzione dall'editor Apps Script (seleziona "authorizeScript" e clicca "Esegui" / "Run")
- * per sbloccare la schermata di autorizzazione OAuth sia per l'invio email che per l'accesso a Google Forms.
+ * Esegui questa funzione dall'editor Apps Script per sbloccare l'autorizzazione OAuth
+ * per MailApp, UrlFetchApp (Turnstile) e Google Forms.
  */
 function authorizeScript() {
+	const props = PropertiesService.getScriptProperties();
+	const routing = loadRoutingConfig_(props);
 	const quota = MailApp.getRemainingDailyQuota();
-	Logger.log('=== Verifica Autorizzazione CISF27 ===');
-	Logger.log('Destinatario principale: ' + MAIN_RECIPIENT);
-	Logger.log('Quota giornaliera email rimanente per questo account: ' + quota);
 
-	const rawFormId = PropertiesService.getScriptProperties().getProperty('FORM_ID');
+	// Tocca UrlFetchApp così Apps Script richiede lo scope external_request in fase di autorizzazione
+	if (typeof UrlFetchApp === 'undefined') {
+		throw new Error('UrlFetchApp non disponibile.');
+	}
+
+	Logger.log('=== Verifica Autorizzazione Modulo Contatti CISF27 ===');
+	Logger.log('Destinatario principale: ' + routing.mainRecipient);
+	Logger.log('Quota giornaliera email rimanente: ' + quota);
+	Logger.log(
+		'Turnstile configurato (TURNSTILE_SECRET_KEY): ' +
+			Boolean(String(props.getProperty('TURNSTILE_SECRET_KEY') || '').trim())
+	);
+	Logger.log('Categorie CC configurate (CC_MAP_JSON): ' + Object.keys(routing.ccMap).length);
+	Logger.log('Fallback CC configurati (FALLBACK_CC): ' + routing.fallbackCc.length);
+
+	const rawFormId = props.getProperty('FORM_ID');
 	if (rawFormId) {
 		const cleanId = extractFormId(rawFormId);
-		// Chiamata diretta senza try/catch: se mancano i permessi OAuth per Forms,
-		// Apps Script blocca l'esecuzione e mostra il pop-up "Autorizzazione richiesta".
 		const form = FormApp.openById(cleanId);
-		Logger.log(
-			'Google Form collegato con successo: "' + form.getTitle() + '" (ID: ' + cleanId + ')'
-		);
-		Logger.log('Domande rilevate nel form:');
-		form.getItems().forEach((it, i) => {
-			Logger.log('  ' + (i + 1) + '. [' + it.getType() + '] ' + it.getTitle());
-		});
+		Logger.log('Google Form collegato con successo: "' + form.getTitle() + '"');
 	} else {
 		Logger.log('Nessun FORM_ID configurato in Proprietà script (opzionale).');
 	}
@@ -387,7 +553,6 @@ function authorizeScript() {
 
 /**
  * Funzione di test per verificare il salvataggio nel form dall'editor di Apps Script.
- * Esegui questa funzione direttamente con "Esegui" per testare l'inserimento nel form e visualizzare i log.
  */
 function testFormSubmission() {
 	const rawFormId = PropertiesService.getScriptProperties().getProperty('FORM_ID');

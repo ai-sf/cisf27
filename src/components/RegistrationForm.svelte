@@ -61,6 +61,11 @@
 		type RegistrationPayload,
 		type SavedFileReceipt,
 	} from '../utils/registrationForm';
+	import {
+		cleanupTurnstileContainer,
+		hasTurnstileConfigured,
+		obtainTurnstileToken,
+	} from '../utils/turnstile';
 
 	const defaultBase = import.meta.env.BASE_URL.replace(/\/$/, '');
 
@@ -183,6 +188,12 @@
 		emailWarning?: string;
 	} | null>(null);
 	let copiedReceipt = $state(false);
+	let turnstileContainerEl = $state<HTMLDivElement | null>(null);
+
+	$effect(() => {
+		const el = turnstileContainerEl;
+		return () => cleanupTurnstileContainer(el);
+	});
 
 	// Step 0 fields
 	let ruoloSpeciale = $state('');
@@ -1285,11 +1296,19 @@
 				encodedTalk = await encodeFileToBase64(talkFile);
 			}
 
+			let turnstileToken = '';
+			if (hasTurnstileConfigured()) {
+				submitProgress = 68;
+				submitStage = 'Verifica anti-bot Cloudflare in corso...';
+				turnstileToken = await obtainTurnstileToken(turnstileContainerEl, 'cisf27_registration');
+			}
+
 			const orderedAreas = displayedAreas;
 			const payload: RegistrationPayload = {
 				...(gateState === 'testing' && testingUnlocked && testingAccessCode
 					? { accessCode: testingAccessCode }
 					: {}),
+				...(turnstileToken ? { turnstileToken } : {}),
 				ruoloSpeciale,
 				maggiorenne: maggiorenne === 'si',
 				ammissioneAutomatica: isAutoAdmissionRole,
@@ -1378,7 +1397,7 @@
 
 			submitProgress = 75;
 			submitStage =
-				'Caricamento allegati e registrazione in corso sui server Google Workspace AISF... non chiudere la pagina';
+				'Caricamento allegati e registrazione in corso sui server AISF... non chiudere la pagina e aspetta almeno 6 minuti!';
 
 			const result = await submitRegistration(payload);
 
@@ -6712,6 +6731,8 @@
 						</div>
 					</div>
 				{/if}
+
+				<div bind:this={turnstileContainerEl} class="my-2 flex justify-center"></div>
 
 				<div class="flex flex-wrap items-center justify-between gap-3 pt-2">
 					<button
